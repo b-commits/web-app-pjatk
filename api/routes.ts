@@ -1,15 +1,9 @@
-import { express }  from 'express';
-import { DEFAULT_SERVER_PORT } from './consts';
-import { DEFAULT_SERVER_URL } from './consts';
+import express, { Application, Request, Response, NextFunction} from 'express';
 
-const port = DEFAULT_SERVER_PORT; 
-const app = express();
+const app: Application = express();
 
-app.get( "/", ( req, res ) => {
-    res.send( "Hello world!" );
-} );
+app.get('/', (req: Request, res: Response, next: NextFunction) => {
+    res.send('Hello');
+})
 
-// start the Express server
-app.listen( port, () => {
-    console.log( `server started at ${ DEFAULT_SERVER_URL }${ port }` );
-} );
+app.listen(5000, () => console.log('Server running...'))

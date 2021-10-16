@@ -8,7 +8,7 @@ export const navList = css({
     paddingBottom: '55px',
 });
 
-export const crudLogo = css({
+export const lfgLogo = css({
     height: '80px',
     marginTop: '-38px',
     

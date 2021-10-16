@@ -14,6 +14,7 @@ export const Register: React.FC = () => {
           passwordConfirm: 'Password...',
         }}
         onSubmit={(data) => {
+          // todo form submit
           console.log(data);
         }}
       >

@@ -1,20 +1,22 @@
 import { css } from '@emotion/react';
 
-export const headerContainer = css({
-    marginBottom: '100px',
+export const navList = css({
+    paddingTop: '70px',
+    listStyleType: 'none',
+    display: 'flex',
+    justifyContent: 'space-around',
+    paddingBottom: '55px',
 });
 
-export const headerMenu = css({
-    marginTop: '20px',
-});
+export const crudLogo = css({
+    height: '80px',
+    marginTop: '-38px',
+    
+})
 
-const buttonBase = {
-    cursor: 'pointer',
-};
-
-export const headerButtonSelected = css({
-    ...buttonBase,
-    textDecoration: 'underline',
-});
-
-export const headerButton = css(buttonBase);
+export const navMain = css({
+    width: '80%',
+    marginLeft: '10%',
+    fontSize: 'x-large',
+    fontFamily: 'Roboto'
+})

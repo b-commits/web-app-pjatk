@@ -6,6 +6,7 @@ export const navList = css({
     display: 'flex',
     justifyContent: 'space-around',
     paddingBottom: '55px',
+    textDecoration: 'none'
 });
 
 export const lfgLogo = css({

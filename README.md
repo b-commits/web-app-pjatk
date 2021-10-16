@@ -6,6 +6,11 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 
+### `npm run dev`
+
+Runs the backend Express Server.\
+Open [http://localhost:5000](http://localhost:5000) to view it in the browser.
+
 ### `npm start`
 
 Runs the app in the development mode.\

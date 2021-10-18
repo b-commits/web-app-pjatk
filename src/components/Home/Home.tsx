@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import React from 'react';
+import React from "react";
 import {
   homeBanner,
   homeBannerContent,
@@ -14,7 +14,7 @@ import {
   listingImg,
   listingDesc,
   listingFooter,
-} from './Home.style';
+} from "./Home.style";
 
 export const Home: React.FC = () => {
   return (
@@ -36,7 +36,7 @@ export const Home: React.FC = () => {
                 <span css={blueText}>lfg-app</span> allows you to find teammates
                 for <span css={blueText}>any</span> online game out there. Sign
                 up now to browse through
-                <span css={blueText}>multiple listings</span> and connect with{' '}
+                <span css={blueText}>multiple listings</span> and connect with{" "}
                 <span css={blueText}>other people</span>.
               </p>
               <p>

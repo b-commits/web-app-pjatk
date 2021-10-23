@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
-import React from "react";
+import React from 'react';
+import { ListingItem } from './ListingItem';
 import {
   homeBanner,
   homeBannerContent,
@@ -8,13 +9,9 @@ import {
   blueText,
   smallText,
   homeMain,
-  listingItem,
-  listingHeader,
-  listingHeaderTitle,
-  listingImg,
-  listingDesc,
-  listingFooter,
-} from "./Home.style";
+} from './Home.style';
+
+const HOMEPAGE_NUM_LISTINGS = 6;
 
 export const Home: React.FC = () => {
   return (
@@ -36,13 +33,13 @@ export const Home: React.FC = () => {
                 <span css={blueText}>lfg-app</span> allows you to find teammates
                 for <span css={blueText}>any</span> online game out there. Sign
                 up now to browse through
-                <span css={blueText}>multiple listings</span> and connect with{" "}
+                <span css={blueText}> multiple listings</span> and connect with{' '}
                 <span css={blueText}>other people</span>.
               </p>
               <p>
-                <span css={blueText}>lfg-app</span> is very simple to use, so
-                we' are hoping you can spend some quality time playing with your
-                new buddies.
+                <span css={blueText}>lfg-app</span> is very simple to use, so we
+                are hoping you can spend some quality time playing with your new
+                buddies.
               </p>
             </div>
           </div>
@@ -50,179 +47,7 @@ export const Home: React.FC = () => {
       </div>
 
       <main css={homeMain}>
-        <div css={listingItem}>
-          <div>
-            <div css={listingHeader}>
-              <i className="fas fa-users"></i>
-              <span css={listingHeaderTitle}>
-                Listing X <br /> Stardew Valey
-              </span>
-              <i className="fas fa-share"></i>
-            </div>
-          </div>
-          <div css={listingImg}>
-            <img
-              alt=""
-              src="https://d-art.ppstatic.pl/kadry/k/r/1/51/a5/5e287d9223f8f_o_large.jpg"
-            />
-          </div>
-          <div css={listingDesc}>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga
-            mollitia reiciendis cum nostrum, unde exercitationem, libero
-            assumenda, temporibus vero est totam dolor delectus neque cupiditate
-            commodi facilis necessitatibus atque dicta.
-          </div>
-          <div css={listingFooter}>
-            <span css={blueText}>JOIN IN</span>
-            <span>&ensp;&ensp;&ensp;&ensp;&ensp;</span>
-            <span css={blueText}>HIDE</span>
-          </div>
-        </div>
-
-        <div css={listingItem}>
-          <div>
-            <div css={listingHeader}>
-              <i className="fas fa-users"></i>
-              <span css={listingHeaderTitle}>
-                Listing X <br /> Stardew Valey
-              </span>
-              <i className="fas fa-share"></i>
-            </div>
-          </div>
-          <div css={listingImg}>
-            <img
-              alt=""
-              src="https://d-art.ppstatic.pl/kadry/k/r/1/51/a5/5e287d9223f8f_o_large.jpg"
-            />
-          </div>
-          <div css={listingDesc}>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga
-            mollitia reiciendis cum nostrum, unde exercitationem, libero
-            assumenda, temporibus vero est totam dolor delectus neque cupiditate
-            commodi facilis necessitatibus atque dicta.
-          </div>
-          <div css={listingFooter}>
-            <span css={blueText}>JOIN IN</span>
-            <span>&ensp;&ensp;&ensp;&ensp;&ensp;</span>
-            <span css={blueText}>HIDE</span>
-          </div>
-        </div>
-
-        <div css={listingItem}>
-          <div>
-            <div css={listingHeader}>
-              <i className="fas fa-users"></i>
-              <span css={listingHeaderTitle}>
-                Listing X <br /> Stardew Valey
-              </span>
-              <i className="fas fa-share"></i>
-            </div>
-          </div>
-          <div css={listingImg}>
-            <img
-              alt=""
-              src="https://d-art.ppstatic.pl/kadry/k/r/1/51/a5/5e287d9223f8f_o_large.jpg"
-            />
-          </div>
-          <div css={listingDesc}>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga
-            mollitia reiciendis cum nostrum, unde exercitationem, libero
-            assumenda, temporibus vero est totam dolor delectus neque cupiditate
-            commodi facilis necessitatibus atque dicta.
-          </div>
-          <div css={listingFooter}>
-            <span css={blueText}>JOIN IN</span>
-            <span>&ensp;&ensp;&ensp;&ensp;&ensp;</span>
-            <span css={blueText}>HIDE</span>
-          </div>
-        </div>
-
-        <div css={listingItem}>
-          <div>
-            <div css={listingHeader}>
-              <i className="fas fa-users"></i>
-              <span css={listingHeaderTitle}>
-                Listing X <br /> Stardew Valey
-              </span>
-              <i className="fas fa-share"></i>
-            </div>
-          </div>
-          <div css={listingImg}>
-            <img
-              alt=""
-              src="https://d-art.ppstatic.pl/kadry/k/r/1/51/a5/5e287d9223f8f_o_large.jpg"
-            />
-          </div>
-          <div css={listingDesc}>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga
-            mollitia reiciendis cum nostrum, unde exercitationem, libero
-            assumenda, temporibus vero est totam dolor delectus neque cupiditate
-            commodi facilis necessitatibus atque dicta.
-          </div>
-          <div css={listingFooter}>
-            <span css={blueText}>JOIN IN</span>
-            <span>&ensp;&ensp;&ensp;&ensp;&ensp;</span>
-            <span css={blueText}>HIDE</span>
-          </div>
-        </div>
-
-        <div css={listingItem}>
-          <div>
-            <div css={listingHeader}>
-              <i className="fas fa-users"></i>
-              <span css={listingHeaderTitle}>
-                Listing X <br /> Stardew Valey
-              </span>
-              <i className="fas fa-share"></i>
-            </div>
-          </div>
-          <div css={listingImg}>
-            <img
-              alt=""
-              src="https://d-art.ppstatic.pl/kadry/k/r/1/51/a5/5e287d9223f8f_o_large.jpg"
-            />
-          </div>
-          <div css={listingDesc}>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga
-            mollitia reiciendis cum nostrum, unde exercitationem, libero
-            assumenda, temporibus vero est totam dolor delectus neque cupiditate
-            commodi facilis necessitatibus atque dicta.
-          </div>
-          <div css={listingFooter}>
-            <span css={blueText}>JOIN IN</span>
-            <span>&ensp;&ensp;&ensp;&ensp;&ensp;</span>
-            <span css={blueText}>HIDE</span>
-          </div>
-        </div>
-
-        <div css={listingItem}>
-          <div>
-            <div css={listingHeader}>
-              <i className="fas fa-users"></i>
-              <span css={listingHeaderTitle}>
-                Listing X <br /> Stardew Valey
-              </span>
-              <i className="fas fa-share"></i>
-            </div>
-          </div>
-          <div css={listingImg}>
-            <img
-              alt=""
-              src="https://d-art.ppstatic.pl/kadry/k/r/1/51/a5/5e287d9223f8f_o_large.jpg"
-            />
-          </div>
-          <div css={listingDesc}>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga
-            mollitia reiciendis cum nostrum, unde exercitationem, libero
-            assumenda, temporibus vero est totam dolor delectus neque cupiditate
-            commodi facilis necessitatibus atque dicta.
-          </div>
-          <div css={listingFooter}>
-            <span css={blueText}>JOIN IN</span>
-            <span>&ensp;&ensp;&ensp;&ensp;&ensp;</span>
-            <span css={blueText}>HIDE</span>
-          </div>
-        </div>
+        {Array(HOMEPAGE_NUM_LISTINGS).fill(<ListingItem />)}
       </main>
     </>
   );

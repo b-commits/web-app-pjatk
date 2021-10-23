@@ -1,10 +1,9 @@
 /** @jsxImportSource @emotion/react */
-import React from "react";
-import { Formik } from "formik";
-import { Button, Checkbox, TextField } from "@material-ui/core";
+import React from 'react';
+import { Formik } from 'formik';
+import { Button, Checkbox, TextField } from '@material-ui/core';
 import {
   bannerConentDesc,
-  bannerConentHeader,
   blueText,
   checkStyle,
   footerStyle,
@@ -13,7 +12,7 @@ import {
   mainBanner,
   mainBannerContent,
   smallText,
-} from "./Register.style";
+} from './Register.style';
 
 export const Register: React.FC = () => {
   return (
@@ -29,10 +28,10 @@ export const Register: React.FC = () => {
       <main css={homeMain}>
         <Formik
           initialValues={{
-            nickname: "Nickname...",
-            email: "E-mail...",
-            password: "Password...",
-            passwordConfirm: "Password...",
+            nickname: 'Nickname...',
+            email: 'E-mail...',
+            password: 'Password...',
+            passwordConfirm: 'Password...',
           }}
           onSubmit={(data) => {
             // todo form submit

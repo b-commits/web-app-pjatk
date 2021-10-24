@@ -6,4 +6,4 @@ class Listing extends Model {
   }
 }
 
-module.exports = Video;
+module.exports = Listing;

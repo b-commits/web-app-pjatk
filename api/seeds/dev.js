@@ -3,10 +3,10 @@ const faker = require('faker');
 exports.seed = async function (knex) {
   await knex('listing').insert([
     {
-      name: faker.name.findName(),
+      description: faker.commerce.productDescription(),
     },
     {
-      name: faker.name.findName(),
+      description: faker.commerce.productDescription(),
     },
   ]);
 
@@ -14,18 +14,22 @@ exports.seed = async function (knex) {
     {
       name: faker.name.findName(),
       email: faker.internet.email(),
-      channelId: 1,
+      password: faker.internet.password(),
+      listingId: 2,
     },
     {
       name: faker.name.findName(),
       email: faker.internet.email(),
+      password: faker.internet.password(),
+      listingId: 2,
     },
   ]);
 
   return knex('message').insert([
     {
-      title: 'message1',
-      channelId: 2,
+      title: faker.lorem.words(5),
+      content: faker.lorem.words(20),
+      userId: 2,
     },
   ]);
 };

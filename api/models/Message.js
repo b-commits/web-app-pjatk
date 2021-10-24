@@ -6,4 +6,4 @@ class Message extends Model {
   }
 }
 
-module.exports = Channel;
+module.exports = Message;

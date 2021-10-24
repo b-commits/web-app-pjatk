@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# Aplikacja web-app-pjatk.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+PJATK.
 
 ## Available Scripts
 

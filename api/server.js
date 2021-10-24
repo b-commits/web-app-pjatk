@@ -1,23 +1,15 @@
 const express = require('express');
 const dbSetup = require('./dbSetup');
 const dotenv = require('dotenv').config({ path: '../.env' });
-
-const User = require('./models/User');
+const users = require('./routes/users');
 
 dbSetup();
 const app = express();
+const PORT = process.env.PORT || 6000;
 
 app.use(express.json());
-app.listen(process.env.PORT, () =>
-  console.log(`Server running on port ${process.env.PORT}`)
-);
+app.use('/api/users', users);
 
-app.get('/user/:id', async (req, res, next) => {
-  try {
-    const { id } = req.params;
-    const user = await User.query().findById(id);
-    res.json(user);
-  } catch (err) {
-    console.error(err);
-  }
-});
+app.listen(process.env.PORT, () =>
+  console.log(`Server running on port ${PORT}.`)
+);

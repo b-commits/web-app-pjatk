@@ -24,7 +24,7 @@ exports.up = function (knex) {
 
 exports.down = function (knex) {
   return knex.schema
-    .dropTableIfExists('listing')
     .dropTableIfExists('user')
+    .dropTableIfExists('listing')
     .dropTableIfExists('message');
 };

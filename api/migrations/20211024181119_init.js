@@ -1,6 +1,6 @@
 exports.up = function (knex) {
   return knex.schema
-    .createTable('channel', (table) => {
+    .createTable('listing', (table) => {
       table.increments();
       table.string('name').notNullable();
       table.timestamps(true, true);
@@ -9,24 +9,24 @@ exports.up = function (knex) {
       table.increments();
       table.string('name').notNullable();
       table.string('email').notNullable().unique();
-      table.integer('channelId').references('id').inTable('channel');
+      table.integer('listingId').references('id').inTable('listing');
       table.timestamps(true, true);
     })
-    .createTable('video', (table) => {
+    .createTable('message', (table) => {
       table.increments();
       table.timestamps(true, true);
       table
         .integer('channelId')
         .notNullable()
         .references('id')
-        .inTable('channel');
+        .inTable('listing');
       table.string('title').notNullable;
     });
 };
 
 exports.down = function (knex) {
   return knex.schema
-    .dropTableIfExists('video')
+    .dropTableIfExists('listing')
     .dropTableIfExists('user')
-    .dropTableIfExists('channel');
+    .dropTableIfExists('message');
 };

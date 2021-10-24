@@ -1,7 +1,7 @@
 const faker = require('faker');
 
 exports.seed = async function (knex) {
-  await knex('channel').insert([
+  await knex('listing').insert([
     {
       name: faker.name.findName(),
     },
@@ -22,9 +22,9 @@ exports.seed = async function (knex) {
     },
   ]);
 
-  return knex('video').insert([
+  return knex('message').insert([
     {
-      title: 'video1',
+      title: 'message1',
       channelId: 2,
     },
   ]);

@@ -1,8 +1,8 @@
 const { Model } = require('objection');
 
-class Video extends Model {
+class Listing extends Model {
   static get tableName() {
-    return 'video';
+    return 'listing';
   }
 }
 

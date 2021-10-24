@@ -1,3 +1,7 @@
+/*
+  Inserts fake data to the migrated tables.
+  Run "npm run seed" from the root directory to populate the tables.
+*/
 const faker = require('faker');
 
 exports.seed = async function (knex) {

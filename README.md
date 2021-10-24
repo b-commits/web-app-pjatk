@@ -1,8 +1,3 @@
-# Aplikacja web-app-pjatk.
-
-PJATK.
-
-## Available Scripts
 
 In the project directory, you can run:
 

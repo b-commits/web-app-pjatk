@@ -30,63 +30,61 @@ export const Register: React.FC = () => {
 
   const [authorized, setAuthorized] = useState(false);
 
+  // todo fix redirect
   useEffect(() => {
     if (authorized) {
       return () => {
-        <Redirect to="/login"></Redirect>;
+        <Redirect to={{ pathname: '/login', state: { isAuthorized: true } }} />;
       };
     }
-  });
+  }, [authorized]);
 
-  const handleSubmit = () => {
-    setAuthorized(true);
-    // history.push('/login');
-  };
-
-  return (
-    <>
-      <RegisterBanner />
-      <main css={homeMain}>
-        <Formik
-          initialValues={initialValues}
-          validationSchema={validationSchema}
-          onSubmit={handleSubmit}
-        >
-          {({ dirty, isValid }) => {
-            return (
-              <Form>
-                <FormikField name="nickname" label="Nickname" required />
-                <FormikField name="email" label="E-mail" required />
-                <FormikField
-                  name="password"
-                  label="Password"
-                  type="password"
-                  required
-                />
-                <FormikField
-                  name="passwordConfirm"
-                  label="Confirm Password"
-                  type="password"
-                  required
-                />
-                <Checkbox color="primary" />{' '}
-                <label>I want to receive a monthly newsletter.</label>
-                <br />
-                <Checkbox color="primary" />
-                <label>I agree to terms and conditions.</label>
-                <br />
-                <Button
-                  color="primary"
-                  disabled={!dirty || !isValid}
-                  type="submit"
-                >
-                  Submit
-                </Button>
-              </Form>
-            );
-          }}
-        </Formik>
-      </main>
-    </>
-  );
+  if (authorized) return <Redirect to="/login"></Redirect>;
+  else
+    return (
+      <>
+        <RegisterBanner />
+        <main css={homeMain}>
+          <Formik
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={() => setAuthorized(true)}
+          >
+            {({ dirty, isValid }) => {
+              return (
+                <Form>
+                  <FormikField name="nickname" label="Nickname" required />
+                  <FormikField name="email" label="E-mail" required />
+                  <FormikField
+                    name="password"
+                    label="Password"
+                    type="password"
+                    required
+                  />
+                  <FormikField
+                    name="passwordConfirm"
+                    label="Confirm Password"
+                    type="password"
+                    required
+                  />
+                  <Checkbox color="primary" />{' '}
+                  <label>I want to receive a monthly newsletter.</label>
+                  <br />
+                  <Checkbox color="primary" />
+                  <label>I agree to terms and conditions.</label>
+                  <br />
+                  <Button
+                    color="primary"
+                    disabled={!dirty || !isValid}
+                    type="submit"
+                  >
+                    Submit
+                  </Button>
+                </Form>
+              );
+            }}
+          </Formik>
+        </main>
+      </>
+    );
 };

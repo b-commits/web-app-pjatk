@@ -7,19 +7,25 @@ import { homeMain } from '../Register/Register.style';
 import { validationSchema } from './LoginValidationSchema';
 
 interface FormValues {
-  email: string;
-  password: string;
+  email?: string;
+  password?: string;
+  isRedirect: boolean;
 }
 
 const initialValues: FormValues = {
   email: '',
   password: '',
+  isRedirect: false,
 };
 
-export const Login: React.FC = () => {
-  const handleSubmit = (values: FormValues): void => {
-    alert(JSON.stringify(values));
-  };
+const handleSubmit = (values: FormValues): void => {
+  alert(JSON.stringify(values));
+};
+
+export const Login: React.FC<FormValues> = ({ isRedirect }) => {
+  if (isRedirect) {
+    return <div>Wtf</div>;
+  }
 
   return (
     <>

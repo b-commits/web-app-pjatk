@@ -1,6 +1,12 @@
 const { knexSnakeCaseMappers } = require('objection');
 const dotenv = require('dotenv').config({ path: '../.env' });
 
+/**
+ * knexfile.js is a standard file that contains all of the configuration for the database.
+ * It can optionally provide different configuration for different environments.
+ * knexSnakeCaseMapper makes it so that the migarted table names follow the snakeCase pattern.
+ */
+
 module.exports = {
   development: {
     client: 'mssql',

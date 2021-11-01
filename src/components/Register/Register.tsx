@@ -1,97 +1,90 @@
 /** @jsxImportSource @emotion/react */
 import React from 'react';
-import { Formik } from 'formik';
-import { Button, Checkbox, TextField } from '@material-ui/core';
-import {
-  bannerConentDesc,
-  blueText,
-  checkStyle,
-  footerStyle,
-  homeMain,
-  listingItem,
-  mainBanner,
-  mainBannerContent,
-  smallText,
-} from './Register.style';
+import { Formik, Form } from 'formik';
+import FormikField from './FormikField';
+import { Button, Checkbox } from '@material-ui/core';
+import { RegisterBanner } from './RegisterBanner';
+import { homeMain } from './Register.style';
+import { validationSchema } from './RegistrationValidationSchema';
+import { useHistory } from 'react-router';
+import { Redirect } from 'react-router-dom';
+import { useState } from 'react';
+import { useEffect } from 'react';
+
+interface FormValues {
+  nickname: string;
+  email: string;
+  password: string;
+  passwordConfirm: string;
+}
+
+const initialValues: FormValues = {
+  nickname: '',
+  email: '',
+  password: '',
+  passwordConfirm: '',
+};
 
 export const Register: React.FC = () => {
+  let history = useHistory();
+
+  const [authorized, setAuthorized] = useState(false);
+
+  useEffect(() => {
+    if (authorized) {
+      return () => {
+        <Redirect to="/login"></Redirect>;
+      };
+    }
+  });
+
+  const handleSubmit = () => {
+    setAuthorized(true);
+    // history.push('/login');
+  };
+
   return (
     <>
-      <div css={mainBanner}>
-        <div css={mainBannerContent}>
-          <span css={smallText}>WE APPRECIATE YOUR INTEREST IN LFG-APP</span>
-          <h1>please fill out the form below</h1>
-          <div css={bannerConentDesc}></div>
-        </div>
-      </div>
-
+      <RegisterBanner />
       <main css={homeMain}>
         <Formik
-          initialValues={{
-            nickname: 'Nickname...',
-            email: 'E-mail...',
-            password: 'Password...',
-            passwordConfirm: 'Password...',
-          }}
-          onSubmit={(data) => {
-            // todo form submit
-            console.log(data);
-          }}
+          initialValues={initialValues}
+          validationSchema={validationSchema}
+          onSubmit={handleSubmit}
         >
-          {({ values, handleChange, handleBlur, handleSubmit }) => (
-            <form onSubmit={handleSubmit} css={homeMain}>
-              <div css={listingItem}>
-                <TextField
-                  name="nickname"
-                  placeholder="Nickname..."
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                />
-              </div>
-              <div css={listingItem}>
-                <TextField
-                  name="email"
-                  placeholder={values.email}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                />
-              </div>
-              <div css={listingItem}>
-                <TextField
-                  type="password"
+          {({ dirty, isValid }) => {
+            return (
+              <Form>
+                <FormikField name="nickname" label="Nickname" required />
+                <FormikField name="email" label="E-mail" required />
+                <FormikField
                   name="password"
-                  placeholder={values.password}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                />
-              </div>
-              <div css={listingItem}>
-                <TextField
+                  label="Password"
                   type="password"
-                  name="passwordConfirm"
-                  placeholder={values.passwordConfirm}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
+                  required
                 />
-              </div>
-
-              <ul css={footerStyle}>
-                <li css={checkStyle}>
-                  <Checkbox id="checkboxNewsletter" />
-                  <label>I want to receive a monthly newsletter</label>
-                </li>
-                <li css={checkStyle}>
-                  <Checkbox id="checkboxNewsletter" />
-                  <label>
-                    I agree to <span css={blueText}> terms and conditions</span>
-                  </label>
-                </li>
-              </ul>
-              <div css={mainBannerContent}>
-                <Button type="submit">SIGN UP</Button>
-              </div>
-            </form>
-          )}
+                <FormikField
+                  name="passwordConfirm"
+                  label="Confirm Password"
+                  type="password"
+                  required
+                />
+                <Checkbox color="primary" />{' '}
+                <label>I want to receive a monthly newsletter.</label>
+                <br />
+                <Checkbox color="primary" />
+                <label>I agree to terms and conditions.</label>
+                <br />
+                <Button
+                  color="primary"
+                  disabled={!dirty || !isValid}
+                  type="submit"
+                >
+                  Submit
+                </Button>
+              </Form>
+            );
+          }}
         </Formik>
       </main>
     </>

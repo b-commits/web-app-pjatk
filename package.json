@@ -13,11 +13,15 @@
     "@types/node": "^12.20.27",
     "@types/react": "^17.0.26",
     "@types/react-dom": "^17.0.9",
+    "bcrypt": "^5.0.1",
     "express": "^4.17.1",
     "faker": "^5.5.3",
+    "fetch": "^1.1.0",
     "formik": "^2.2.9",
     "knex": "^0.95.11",
     "mssql": "^7.2.1",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.3.2",
     "objection": "^2.2.17",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -26,7 +30,8 @@
     "react-scripts": "^4.0.3",
     "tedious": "^14.0.0",
     "typescript": "^4.4.3",
-    "web-vitals": "^1.1.2"
+    "web-vitals": "^1.1.2",
+    "yup": "^0.32.11"
   },
   "scripts": {
     "dev": "cd api && node server.js",

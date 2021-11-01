@@ -1,4 +1,6 @@
 exports.up = function (knex) {
+  knex.raw('DROP TABLE ');
+
   return knex.schema
     .createTable('listing', (table) => {
       table.increments();
@@ -7,7 +9,7 @@ exports.up = function (knex) {
     })
     .createTable('user', (table) => {
       table.increments();
-      table.string('name').notNullable();
+      table.string('nickname').notNullable();
       table.string('email').notNullable().unique();
       table.string('password').notNullable();
       table.integer('listingId').references('id').inTable('listing');

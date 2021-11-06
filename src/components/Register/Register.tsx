@@ -1,15 +1,14 @@
 /** @jsxImportSource @emotion/react */
 import React from 'react';
-import { Formik, Form } from 'formik';
 import FormikField from './FormikField';
+import { Formik, Form } from 'formik';
 import { Button, Checkbox } from '@material-ui/core';
 import { RegisterBanner } from './RegisterBanner';
 import { homeMain } from './Register.style';
 import { validationSchema } from './RegistrationValidationSchema';
-import { useHistory } from 'react-router';
 import { Redirect } from 'react-router-dom';
-import { useState } from 'react';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import { postUser } from './ApiCalls';
 
 interface FormValues {
   nickname: string;
@@ -26,9 +25,13 @@ const initialValues: FormValues = {
 };
 
 export const Register: React.FC = () => {
-  let history = useHistory();
-
   const [authorized, setAuthorized] = useState(false);
+
+  const handleRegistration = (values: FormValues) => {
+    console.log('post request sent');
+    setAuthorized(true);
+    postUser(values);
+  };
 
   // todo fix redirect
   useEffect(() => {
@@ -48,7 +51,7 @@ export const Register: React.FC = () => {
           <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
-            onSubmit={() => setAuthorized(true)}
+            onSubmit={(values) => handleRegistration(values)}
           >
             {({ dirty, isValid }) => {
               return (

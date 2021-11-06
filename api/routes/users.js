@@ -1,6 +1,7 @@
 const User = require('../models/User');
 const express = require('express');
 const bcrypt = require('bcrypt');
+const passport = require('passport');
 
 const router = express.Router();
 
@@ -31,21 +32,21 @@ router.post('/', async (req, res) => {
   @access   Public.  
 
 */
-router.post('/login', async (req, res) => {
-  const user = User.query().where({ password: req.body.password });
-  if (user == null) res.send('No user found.');
-  try {
-    if (await bcrypt.compare(req.body.password, user.password)) {
-      res.send('Logged in');
-    } else {
-      res.send('Invalid credentials');
-      res.redirect('/abc');
-    }
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ msg: 'Server error.' });
-  }
-});
+// router.post('/login', async (req, res) => {
+//   const user = User.query().where({ password: req.body.password });
+//   if (user == null) res.send('No user found.');
+//   try {
+//     if (await bcrypt.compare(req.body.password, user.password)) {
+//       res.send('Logged in');
+//     } else {
+//       res.send('Invalid credentials');
+//       res.redirect('/abc');
+//     }
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({ msg: 'Server error.' });
+//   }
+// });
 
 /*
     @route    GET api/users/:id
@@ -64,18 +65,15 @@ router.get('/:id', async (req, res, next) => {
 });
 
 /*
-    @route    GET api/users/getByEmail
-    @desc     Get user by email.
+    @route    POST api/users/login
+    @desc     Login user.
     @access   Public.
 */
-router.get('/getByEmail', async (req, res, next) => {
-  try {
-    const user = await User.query().where({ email: req.body.email });
-    res.json(user);
-  } catch (err) {
-    console.error(error);
-    res.status(400).json({ msg: 'Bad request' });
-  }
+router.post('/login', async (req, res, next) => {
+  passport.authenticate('local', {
+    successRedirect: '/dashboard',
+    failureRedirect: '/users/login',
+  })(req, res, next);
 });
 
 /*
@@ -84,7 +82,6 @@ router.get('/getByEmail', async (req, res, next) => {
     @access   Public.
 */
 router.get('/', async (req, res, next) => {
-  console.log(req);
   try {
     const users = await User.query();
     res.json(users);

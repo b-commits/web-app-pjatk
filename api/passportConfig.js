@@ -3,7 +3,6 @@ const User = require('./models/User');
 const bcrypt = require('bcrypt');
 
 module.exports = function (passport) {
-  console.log('RUNS...');
   passport.use(
     new LocalStrategy(
       { usernameField: 'email' },

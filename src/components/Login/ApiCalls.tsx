@@ -5,7 +5,7 @@ interface FormValues {
   password: string;
 }
 
-export const loginUser = async (User: FormValues) => {
+export const loginUser = async (User: FormValues): Promise<any> => {
   await axios({
     method: 'POST',
     url: 'http://localhost:5000/api/users/login',
@@ -14,5 +14,5 @@ export const loginUser = async (User: FormValues) => {
       email: User.email,
       password: User.password,
     },
-  });
+  }).then((res) => res.status);
 };

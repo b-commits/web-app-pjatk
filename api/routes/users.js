@@ -42,26 +42,13 @@ router.get('/:id', async (req, res, next) => {
   }
 });
 
-/* OLD
-    @route    POST api/users/login
-    @desc     Login user.
-    @access   Public.
-*/
-// router.post('/login', async (req, res, next) => {
-//   console.log('Sucessfully Authenticated...');
-//   passport.authenticate('local', {
-//     successRedirect: '/dashboard',
-//     failureRedirect: '/users/login',
-//   })(req, res, next);
-// });
-
 /*
     @route    POST api/users/login
     @desc     Log in a user.
 */
-router.post('/login', passport.authenticate('local'), (req, res) => {
-  console.log('Sucessfully Authenticated');
-  console.log(req);
+router.post('/login', passport.authenticate('local', {}), (req, res, next) => {
+  res.status(200).json({ msg: 'Sucessfully authenticated' });
+  console.log(req.user);
 });
 
 /*
@@ -69,8 +56,7 @@ router.post('/login', passport.authenticate('local'), (req, res) => {
     @desc     Get logged in user.
 */
 router.get('/login/currentUser', (req, res) => {
-  console.log('wtf');
-  res.send(req.user);
+  console.log(req.user);
 });
 
 /*

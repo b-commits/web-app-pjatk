@@ -29,8 +29,8 @@ export const Register: React.FC = () => {
 
   const handleRegistration = (values: FormValues) => {
     console.log('post request sent');
-    setAuthorized(true);
     postUser(values);
+    setAuthorized(true);
   };
 
   // todo fix redirect

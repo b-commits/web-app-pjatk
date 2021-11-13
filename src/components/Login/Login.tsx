@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import FormikField from '../Register/FormikField';
 import { Formik, Form } from 'formik';
 import { Button } from '@material-ui/core';
@@ -27,15 +27,7 @@ export const Login: React.FC = () => {
     });
   };
 
-  useEffect(() => {
-    console.log('runs...');
-    if (loggedIn) {
-      return () => {
-        <Redirect push to={{ pathname: '/profile' }} />;
-      };
-    }
-  }, [loggedIn]);
-
+  if (loggedIn) return <Redirect to="/profile"></Redirect>;
   return (
     <>
       <main css={homeMain}>

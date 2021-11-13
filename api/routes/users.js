@@ -2,7 +2,6 @@ const User = require('../models/User');
 const express = require('express');
 const bcrypt = require('bcrypt');
 const passport = require('passport');
-
 const router = express.Router();
 
 /*
@@ -19,6 +18,7 @@ router.post('/', async (req, res) => {
       email: req.body.email,
       password: hashedPassword,
     });
+    console.log('[SERVER] User Registered.');
     res.status(200).json({ msg: 'User added' });
   } catch (error) {
     console.error(error);
@@ -46,9 +46,8 @@ router.get('/:id', async (req, res, next) => {
     @route    POST api/users/login
     @desc     Log in a user.
 */
-router.post('/login', passport.authenticate('local', {}), (req, res, next) => {
+router.post('/login', passport.authenticate('local'), (req, res, next) => {
   res.status(200).json({ msg: 'Sucessfully authenticated' });
-  console.log(req.user);
 });
 
 /*

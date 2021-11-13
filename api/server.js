@@ -5,24 +5,32 @@ const dbSetup = require('./dbSetup');
 const cors = require('cors');
 const passport = require('passport');
 const users = require('./routes/users');
-require('./passportConfig.js')(passport);
+require('./passportConfig.js');
 
 dbSetup();
 const app = express();
 const port = process.env.SERVER_PORT;
 
 app.use(cors());
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
   session({
-    secret: 'secret',
+    secret: process.env.SESSION_SECRET,
     resave: true,
     saveUninitialized: true,
   })
 );
 app.use(passport.initialize());
 app.use(passport.session());
+app.use((req, res, next) => {
+  console.log(req.session);
+  console.log(req.sessionID);
+  console.log(req.user);
+  next();
+});
+
 app.use('/api/users', users);
 
 app.listen(port, () => {

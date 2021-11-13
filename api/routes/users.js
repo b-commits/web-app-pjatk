@@ -27,28 +27,6 @@ router.post('/', async (req, res) => {
 });
 
 /*
-  @route    POST api/users/login
-  @desc     Logs in a user.
-  @access   Public.  
-
-*/
-// router.post('/login', async (req, res) => {
-//   const user = User.query().where({ password: req.body.password });
-//   if (user == null) res.send('No user found.');
-//   try {
-//     if (await bcrypt.compare(req.body.password, user.password)) {
-//       res.send('Logged in');
-//     } else {
-//       res.send('Invalid credentials');
-//       res.redirect('/abc');
-//     }
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ msg: 'Server error.' });
-//   }
-// });
-
-/*
     @route    GET api/users/:id
     @desc     Get user by id.
     @access   Public.
@@ -59,21 +37,40 @@ router.get('/:id', async (req, res, next) => {
     const user = await User.query().findById(id);
     res.json(user);
   } catch (err) {
-    console.error(error);
+    console.error(err);
     res.status(400).json({ msg: 'Bad request' });
   }
 });
 
-/*
+/* OLD
     @route    POST api/users/login
     @desc     Login user.
     @access   Public.
 */
-router.post('/login', async (req, res, next) => {
-  passport.authenticate('local', {
-    successRedirect: '/dashboard',
-    failureRedirect: '/users/login',
-  })(req, res, next);
+// router.post('/login', async (req, res, next) => {
+//   console.log('Sucessfully Authenticated...');
+//   passport.authenticate('local', {
+//     successRedirect: '/dashboard',
+//     failureRedirect: '/users/login',
+//   })(req, res, next);
+// });
+
+/*
+    @route    POST api/users/login
+    @desc     Log in a user.
+*/
+router.post('/login', passport.authenticate('local'), (req, res) => {
+  console.log('Sucessfully Authenticated');
+  console.log(req);
+});
+
+/*
+    @route    GET api/users/user
+    @desc     Get logged in user.
+*/
+router.get('/login/currentUser', (req, res) => {
+  console.log('wtf');
+  res.send(req.user);
 });
 
 /*

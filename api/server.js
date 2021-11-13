@@ -6,6 +6,7 @@ const passport = require('passport');
 const dotenv = require('dotenv').config({ path: '../../env' });
 const users = require('./routes/users');
 const intializePassport = require('./passportConfig');
+const User = require('./models/User');
 require('./passportConfig.js')(passport);
 
 dbSetup();

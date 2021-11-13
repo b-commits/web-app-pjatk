@@ -5,21 +5,22 @@ import FormikField from '../Register/FormikField';
 import { Button } from '@material-ui/core';
 import { homeMain } from '../Register/Register.style';
 import { validationSchema } from './LoginValidationSchema';
+import { loginUser } from './ApiCalls';
 
 interface FormValues {
-  email?: string;
-  password?: string;
-  isRedirect: boolean;
+  email: string;
+  password: string;
+  isRedirect?: boolean;
 }
 
 const initialValues: FormValues = {
   email: '',
   password: '',
-  isRedirect: false,
 };
 
 const handleSubmit = (values: FormValues): void => {
   alert(JSON.stringify(values));
+  loginUser(values);
 };
 
 export const Login: React.FC<FormValues> = ({ isRedirect }) => {

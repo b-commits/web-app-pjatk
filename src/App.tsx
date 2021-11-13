@@ -7,6 +7,7 @@ import { Footer } from './components/Footer/Footer';
 import { About } from './components/About/About';
 import { Register } from './components/Register/Register';
 import { Login } from './components/Login/Login';
+import { Profile } from './components/Profile/Profile';
 
 export const App = () => {
   return (
@@ -18,6 +19,7 @@ export const App = () => {
           <Route path="/about" component={About} />
           <Route path="/register" component={Register} />
           <Route path="/login" component={Login} />
+          <Route path="/profile" component={Profile} />
         </Switch>
       </div>
       <Footer />

@@ -32,11 +32,13 @@ const strategy = new LocalStrategy({ usernameField: 'email' }, verifyCallback);
 passport.use(strategy);
 
 passport.serializeUser((user, done) => {
+  console.log(`Serialize user: ${user.id}`);
   done(null, user.id);
 });
 
 passport.deserializeUser((id, done) => {
+  console.log(`Deserialize id: ${id}`);
   const user = User.query().findById(id);
-  if (!user) return done(null, false, { message: MSG_GENERIC_ERROR });
-  return done(null, user);
+  if (user) return done(null, user);
+  else console.log('No user found...');
 });

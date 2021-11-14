@@ -27,15 +27,6 @@ router.post('/', async (req, res) => {
 });
 
 /*
-    @route    POST api/users/login
-    @desc     Log in a user using Passport.js local strategy config. 
-    @access   Public.
-*/
-router.post('/login', passport.authenticate('local'), (req, res, next) => {
-  res.status(200).json({ msg: 'Sucessfully authenticated' });
-});
-
-/*
     @route    GET api/users/:id
     @desc     Get user by id.
     @access   Public.
@@ -52,6 +43,15 @@ router.get('/:id', async (req, res, next) => {
 });
 
 /*
+    @route    POST api/users/login
+    @desc     Log in a user using Passport.js local strategy config. 
+    @access   Public.
+*/
+router.post('/login', passport.authenticate('local'), (req, res, next) => {
+  res.status(200).json({ msg: 'Sucessfully authenticated' });
+});
+
+/*
     @route    GET api/users
     @desc     Get all users.
     @access   Public.
@@ -61,7 +61,7 @@ router.get('/', async (req, res, next) => {
     const users = await User.query();
     res.json(users);
   } catch (err) {
-    console.error(error);
+    console.error(err);
     res.status(400).json({ msg: 'Bad request' });
   }
 });

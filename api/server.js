@@ -1,7 +1,7 @@
 const dotenv = require('dotenv').config({ path: '../../env' });
 const express = require('express');
 const session = require('express-session');
-const dbSetup = require('./config/dbSetup');
+const setupDB = require('./config/dbSetup');
 const cors = require('cors');
 const passport = require('passport');
 const users = require('./routes/users');
@@ -10,24 +10,30 @@ require('./config/passportConfig.js');
 const app = express();
 const port = process.env.SERVER_PORT;
 
-dbSetup();
-app.use(cors());
+setupDB();
+app.use(cors({ origin: true, credentials: true }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
-    resave: true,
+    resave: false,
     saveUninitialized: true,
+    cookie: {
+      /* 
+        This atribute is now needed in order to make cookies persist in the browser. 
+        We can set it to either 'strict' or 'lax'; 'lax' will allow the cookie to persist when the calls
+        are being made from an entirely different domain. Removing this option will cause the cookie to be deleted.
+      */
+      sameSite: 'strict',
+    },
   })
 );
 app.use(passport.initialize());
 app.use(passport.session());
 app.use((req, res, next) => {
-  res.json(req.sessionID);
   console.log(req.session);
   console.log(req.sessionID);
-  console.log(req.user);
   next();
 });
 

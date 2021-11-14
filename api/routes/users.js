@@ -2,6 +2,7 @@ const User = require('../models/User');
 const express = require('express');
 const bcrypt = require('bcrypt');
 const passport = require('passport');
+const { isAuthenticated } = require('../middleware/authentication');
 const router = express.Router();
 
 /*
@@ -18,10 +19,8 @@ router.post('/', async (req, res) => {
       email: req.body.email,
       password: hashedPassword,
     });
-    console.log('[SERVER] User Registered.');
     res.status(200).json({ msg: 'User added' });
   } catch (error) {
-    console.error(error);
     res.status(500).send('Server Error');
   }
 });
@@ -37,7 +36,6 @@ router.get('/:id', async (req, res, next) => {
     const user = await User.query().findById(id);
     res.json(user);
   } catch (err) {
-    console.error(err);
     res.status(400).json({ msg: 'Bad request' });
   }
 });
@@ -52,6 +50,26 @@ router.post('/login', passport.authenticate('local'), (req, res, next) => {
 });
 
 /*
+    @route    GET api/users/logout
+    @desc     Logs out a user using Passport.js logout() function
+              which delets the passport user header from the request. 
+    @access   Public.
+*/
+router.get('/logout', (req, res, next) => {
+  req.logout();
+  res.status(200).json({ msg: 'Sucessfully logged out' });
+});
+
+/*
+    @route    GET api/users/messages
+    @desc     Gets user private messages.
+    @access   Protected.
+*/
+router.get('/messages', isAuthenticated, (req, res, next) => {
+  res.send('Placeholder...');
+});
+
+/*
     @route    GET api/users
     @desc     Get all users.
     @access   Public.
@@ -61,7 +79,6 @@ router.get('/', async (req, res, next) => {
     const users = await User.query();
     res.json(users);
   } catch (err) {
-    console.error(err);
     res.status(400).json({ msg: 'Bad request' });
   }
 });

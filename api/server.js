@@ -5,6 +5,7 @@ const setupDB = require('./config/dbSetup');
 const cors = require('cors');
 const passport = require('passport');
 const users = require('./routes/users');
+const { debugSession } = require('./middleware/authentication');
 require('./config/passportConfig.js');
 
 const app = express();

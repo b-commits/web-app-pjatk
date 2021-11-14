@@ -6,7 +6,7 @@ const router = express.Router();
 
 /*
     @route    POST api/users
-    @desc     Registers a user.
+    @desc     Register a user.
     @access   Public.
 */
 router.post('/', async (req, res) => {
@@ -27,6 +27,15 @@ router.post('/', async (req, res) => {
 });
 
 /*
+    @route    POST api/users/login
+    @desc     Log in a user using Passport.js local strategy config. 
+    @access   Public.
+*/
+router.post('/login', passport.authenticate('local'), (req, res, next) => {
+  res.status(200).json({ msg: 'Sucessfully authenticated' });
+});
+
+/*
     @route    GET api/users/:id
     @desc     Get user by id.
     @access   Public.
@@ -40,22 +49,6 @@ router.get('/:id', async (req, res, next) => {
     console.error(err);
     res.status(400).json({ msg: 'Bad request' });
   }
-});
-
-/*
-    @route    POST api/users/login
-    @desc     Log in a user.
-*/
-router.post('/login', passport.authenticate('local'), (req, res, next) => {
-  res.status(200).json({ msg: 'Sucessfully authenticated' });
-});
-
-/*
-    @route    GET api/users/user
-    @desc     Get logged in user.
-*/
-router.get('/login/currentUser', (req, res) => {
-  console.log(req.user);
 });
 
 /*

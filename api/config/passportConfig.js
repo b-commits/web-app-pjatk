@@ -1,7 +1,11 @@
 const LocalStrategy = require('passport-local').Strategy;
 const passport = require('passport');
-const User = require('./models/User');
+const User = require('../models/User');
 const bcrypt = require('bcrypt');
+
+const MSG_EMAIL_NOT_REGISTERED = 'That email has not been registered yet';
+const MSG_PASSWORD_INCORRECT = 'Password incorrect';
+const MSG_GENERIC_ERROR = 'Something went wrong';
 
 const verifyCallback = (username, password, done) => {
   User.query()
@@ -9,7 +13,7 @@ const verifyCallback = (username, password, done) => {
     .then((user) => {
       if (!user) {
         return done(null, false, {
-          message: 'That email is not registered.',
+          message: MSG_EMAIL_NOT_REGISTERED,
         });
       }
       bcrypt.compare(password, user.password, (err, isMatch) => {
@@ -17,7 +21,7 @@ const verifyCallback = (username, password, done) => {
         if (isMatch) {
           return done(null, user);
         } else {
-          return done(null, false, { message: 'Password incorrect' });
+          return done(null, false, { message: MSG_PASSWORD_INCORRECT });
         }
       });
     });
@@ -28,13 +32,11 @@ const strategy = new LocalStrategy({ usernameField: 'email' }, verifyCallback);
 passport.use(strategy);
 
 passport.serializeUser((user, done) => {
-  console.log(`Serialize user: ${user.id}`);
   done(null, user.id);
 });
 
 passport.deserializeUser((id, done) => {
-  console.log(`Deserialize id: ${id}`);
   const user = User.query().findById(id);
-  if (user) return done(null, user);
-  else console.log('No user found...');
+  if (!user) return done(null, false, { message: MSG_GENERIC_ERROR });
+  return done(null, user);
 });

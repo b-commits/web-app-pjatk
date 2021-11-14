@@ -10,7 +10,7 @@ interface FormikFieldProps {
 }
 
 /*
-  This component is nothing else than a [Field] object from Formik library
+  This component is nothing else than a [Field] object from Formik library.
   It receives a MaterialUI's TextField so as to make it inherit MaterialUI TextField's css. 
 */
 const FormikField: React.FC<FormikFieldProps> = ({

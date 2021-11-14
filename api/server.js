@@ -1,18 +1,17 @@
 const dotenv = require('dotenv').config({ path: '../../env' });
 const express = require('express');
 const session = require('express-session');
-const dbSetup = require('./dbSetup');
+const dbSetup = require('./config/dbSetup');
 const cors = require('cors');
 const passport = require('passport');
 const users = require('./routes/users');
-require('./passportConfig.js');
+require('./config/passportConfig.js');
 
-dbSetup();
 const app = express();
 const port = process.env.SERVER_PORT;
 
+dbSetup();
 app.use(cors());
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
@@ -25,6 +24,7 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 app.use((req, res, next) => {
+  res.json(req.sessionID);
   console.log(req.session);
   console.log(req.sessionID);
   console.log(req.user);
@@ -34,5 +34,5 @@ app.use((req, res, next) => {
 app.use('/api/users', users);
 
 app.listen(port, () => {
-  console.log(`Server listening at http://localhost:${port}`);
+  console.log(`[server] listening at http://localhost:${port}.`);
 });

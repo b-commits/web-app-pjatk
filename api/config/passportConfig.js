@@ -11,9 +11,6 @@ const authCallback = (reqEmail, reqPassword, done) => {
   User.query()
     .findOne({ email: reqEmail })
     .then((user) => {
-      if (err) {
-        return done(err);
-      }
       if (!user) {
         return done(null, false, {
           message: MSG_EMAIL_NOT_REGISTERED,

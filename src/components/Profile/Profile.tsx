@@ -1,27 +1,12 @@
-/** @jsxImportSource @emotion/react */
 import React from 'react';
-import { profileWrap, profileHeader } from './Profile.style';
-import { UserDetails } from './UserDetails';
-import { ProfileContent } from './ProfileContent';
 
-//all graphics url-s are temporary
-export class Profile extends React.Component {
-  state = {
-    isUserOnline: false,
-  };
-
-  render() {
-    return (
-      <>
-        <div css={profileWrap}>
-          <div css={profileHeader}>
-            <div>
-              <UserDetails isUserOnline={this.state.isUserOnline} />
-            </div>
-          </div>
-          <ProfileContent />
-        </div>
-      </>
-    );
-  }
-}
+export const Profile: React.FC = () => {
+  return (
+    <div>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit accusamus
+      corporis doloremque voluptatem sed dolor architecto repudiandae natus
+      consectetur nemo velit, deserunt consequatur, tempora porro reprehenderit
+      placeat sapiente, qui corrupti.
+    </div>
+  );
+};

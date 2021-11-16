@@ -1,23 +1,19 @@
 import axios from 'axios';
 
 interface FormValues {
-  nickname: string;
   email: string;
   password: string;
 }
 
-export const findUser = async () => {
-  await axios
-    .get('/user?ID=12345')
-    .then(function (response) {
-      // handle success
-      console.log(response);
-    })
-    .catch(function (error) {
-      // handle error
-      console.log(error);
-    })
-    .then(function () {
-      // always executed
-    });
+export const loginUser = async (User: FormValues): Promise<any> => {
+  await axios({
+    method: 'POST',
+    withCredentials: true,
+    url: 'http://localhost:5000/api/users/login',
+    // todo: pass object?
+    data: {
+      email: User.email,
+      password: User.password,
+    },
+  }).then((res) => res.status);
 };

@@ -19,8 +19,8 @@ exports.up = function (knex) {
       table.increments();
       table.string('title').notNullable();
       table.string('content').notNullable();
-      table.timestamps(true, true);
       table.integer('userId').notNullable().references('id').inTable('user');
+      table.timestamps(true, true);
     });
 };
 

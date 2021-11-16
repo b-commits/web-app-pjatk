@@ -7,7 +7,7 @@ import { RegisterBanner } from './RegisterBanner';
 import { homeMain } from './Register.style';
 import { validationSchema } from './RegistrationValidationSchema';
 import { Redirect } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { postUser } from './ApiCalls';
 
 interface FormValues {
@@ -29,18 +29,9 @@ export const Register: React.FC = () => {
 
   const handleRegistration = (values: FormValues) => {
     console.log('post request sent');
-    setAuthorized(true);
     postUser(values);
+    setAuthorized(true);
   };
-
-  // todo fix redirect
-  useEffect(() => {
-    if (authorized) {
-      return () => {
-        <Redirect to={{ pathname: '/login', state: { isAuthorized: true } }} />;
-      };
-    }
-  }, [authorized]);
 
   if (authorized) return <Redirect to="/login"></Redirect>;
   else

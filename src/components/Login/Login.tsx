@@ -1,39 +1,40 @@
 /** @jsxImportSource @emotion/react */
-import React from 'react';
-import { Formik, Form } from 'formik';
+import React, { useState } from 'react';
 import FormikField from '../Register/FormikField';
+import { Formik, Form } from 'formik';
 import { Button } from '@material-ui/core';
 import { homeMain } from '../Register/Register.style';
+import { loginUser } from './ApiCalls';
+import { Redirect } from 'react-router-dom';
 import { validationSchema } from './LoginValidationSchema';
 
 interface FormValues {
-  email?: string;
-  password?: string;
-  isRedirect: boolean;
+  email: string;
+  password: string;
 }
 
 const initialValues: FormValues = {
   email: '',
   password: '',
-  isRedirect: false,
 };
 
-const handleSubmit = (values: FormValues): void => {
-  alert(JSON.stringify(values));
-};
+export const Login: React.FC = () => {
+  const [loggedIn, setLoggedIn] = useState(false);
 
-export const Login: React.FC<FormValues> = ({ isRedirect }) => {
-  if (isRedirect) {
-    return <div>Wtf</div>;
-  }
+  const handleLogin = (values: FormValues) => {
+    loginUser(values).then(() => {
+      setLoggedIn(true);
+    });
+  };
 
+  if (loggedIn) return <Redirect to="/profile"></Redirect>;
   return (
     <>
       <main css={homeMain}>
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
-          onSubmit={handleSubmit}
+          onSubmit={handleLogin}
         >
           {({ dirty, isValid }) => {
             return (

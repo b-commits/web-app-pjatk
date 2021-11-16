@@ -27,6 +27,18 @@ exports.seed = async function (knex) {
       password: faker.internet.password(),
       listingId: 2,
     },
+    {
+      name: faker.name.findName(),
+      email: faker.internet.email(),
+      password: faker.internet.password(),
+      listingId: 2,
+    },
+    {
+      name: faker.name.findName(),
+      email: faker.internet.email(),
+      password: faker.internet.password(),
+      listingId: 2,
+    },
   ]);
 
   return knex('message').insert([

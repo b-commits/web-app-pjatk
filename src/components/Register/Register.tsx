@@ -28,7 +28,6 @@ export const Register: React.FC = () => {
   const [authorized, setAuthorized] = useState(false);
 
   const handleRegistration = (values: FormValues) => {
-    console.log('post request sent');
     setAuthorized(true);
     postUser(values);
   };

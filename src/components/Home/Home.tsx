@@ -11,7 +11,7 @@ import {
   homeMain,
 } from './Home.style';
 
-const HOMEPAGE_NUM_LISTINGS: number = 6;
+const HOMEPAGE_NUM_LISTINGS = 6;
 
 export const Home: React.FC = () => {
   return (

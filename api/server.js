@@ -5,7 +5,6 @@ const setupDB = require('./config/dbSetup');
 const cors = require('cors');
 const passport = require('passport');
 const users = require('./routes/users');
-const { debugSession } = require('./middleware/authentication');
 require('./config/passportConfig.js');
 
 const app = express();
@@ -33,10 +32,8 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 app.use((req, res, next) => {
-  console.log('=========SERVER DEBUG=======');
   console.log(req.session);
   console.log(req.sessionID);
-  console.log('============================');
   next();
 });
 

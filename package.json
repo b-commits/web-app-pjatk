@@ -42,9 +42,9 @@
   },
   "scripts": {
     "dev": "cd api && nodemon server.js",
-    "seed": "cd api && npx knex seed:run --knexfile ./knexfile.js",
-    "make-seed": "cd api && npx knex seed:make dev --knexfile ./knexfile.js",
-    "migrate": "cd api && npx knex migrate:latest --knexfile ./knexfile.js",
+    "seed": "cd api/config && npx knex seed:run --knexfile ./knexfile.js",
+    "make-seed": "cd api/config && npx knex seed:make dev --knexfile ./knexfile.js",
+    "migrate": "cd api && npx knex migrate:latest --knexfile ./config/knexfile.js",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

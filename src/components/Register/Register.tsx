@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import React from 'react';
 import FormikField from './FormikField';
+import Alert from '@material-ui/lab/Alert';
 import { Formik, Form } from 'formik';
 import { Button, Checkbox } from '@material-ui/core';
 import { RegisterBanner } from './RegisterBanner';
@@ -26,13 +27,18 @@ const initialValues: FormValues = {
 
 export const Register: React.FC = () => {
   const [authorized, setAuthorized] = useState(false);
+  const [hasErrors, setErrors] = useState(false);
 
   const handleRegistration = (values: FormValues) => {
-    setAuthorized(true);
-    postUser(values);
+    postUser(values)
+      .then(() => {
+        setAuthorized(true);
+      })
+      .catch((error) => {
+        setErrors(true);
+      });
   };
 
-  // todo fix redirect
   useEffect(() => {
     if (authorized) {
       return () => {
@@ -86,6 +92,11 @@ export const Register: React.FC = () => {
               );
             }}
           </Formik>
+          {hasErrors && (
+            <Alert severity="error">
+              That email or password is already taken.
+            </Alert>
+          )}
         </main>
       </>
     );

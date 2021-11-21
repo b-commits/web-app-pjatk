@@ -21,7 +21,7 @@ router.post('/', async (req, res) => {
     });
     res.status(200).json({ msg: 'User added' });
   } catch (error) {
-    res.status(500).send('Server Error');
+    res.status(500).json({ msg: 'Server Error' });
   }
 });
 

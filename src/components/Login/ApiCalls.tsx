@@ -10,7 +10,6 @@ export const loginUser = async (User: FormValues): Promise<any> => {
     method: 'POST',
     withCredentials: true,
     url: 'http://localhost:5000/api/users/login',
-    // todo: pass object?
     data: {
       email: User.email,
       password: User.password,

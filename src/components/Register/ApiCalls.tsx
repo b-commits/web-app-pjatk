@@ -7,7 +7,7 @@ interface FormValues {
 }
 
 export const postUser = async ({ nickname, email, password }: FormValues) => {
-  await axios({
+  return await axios({
     method: 'POST',
     url: 'http://localhost:5000/api/users',
     data: {

@@ -39,14 +39,6 @@ export const Register: React.FC = () => {
       });
   };
 
-  useEffect(() => {
-    if (authorized) {
-      return () => {
-        <Redirect to={{ pathname: '/login', state: { isAuthorized: true } }} />;
-      };
-    }
-  }, [authorized]);
-
   if (authorized) return <Redirect to="/login"></Redirect>;
   else
     return (

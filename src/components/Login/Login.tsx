@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Formik, Form } from 'formik';
 import FormikField from '../Register/FormikField';
 import { Button } from '@material-ui/core';
@@ -7,6 +7,7 @@ import { homeMain } from '../Register/Register.style';
 import { validationSchema } from './LoginValidationSchema';
 import { loginUser } from './ApiCalls';
 import { Redirect } from 'react-router-dom';
+import { AuthContext } from '../../context/AuthContext';
 
 interface FormValues {
   email: string;
@@ -21,15 +22,23 @@ const initialValues: FormValues = {
 };
 
 export const Login: React.FC<FormValues> = () => {
+  const { authenticated, setAuthenticated } = useContext(AuthContext);
   const [loggedIn, setLoggedIn] = useState(false);
 
   const handleLogin = (values: FormValues) => {
     loginUser(values).then(() => {
+      setAuthenticated(true);
+      console.log(authenticated);
       setLoggedIn(true);
     });
   };
 
-  if (loggedIn) return <Redirect to="/profile"></Redirect>;
+  if (loggedIn)
+    return (
+      <Redirect
+        to={{ pathname: '/profile', state: { isAuth: true } }}
+      ></Redirect>
+    );
   return (
     <>
       <main css={homeMain}>
@@ -59,6 +68,7 @@ export const Login: React.FC<FormValues> = () => {
             );
           }}
         </Formik>
+        Don't have an account? <a href="/register">Sign up</a>
       </main>
     </>
   );

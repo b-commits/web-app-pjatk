@@ -2,6 +2,8 @@ const User = require('../models/User');
 const express = require('express');
 const bcrypt = require('bcrypt');
 const passport = require('passport');
+const { EMAIL_TAKEN, USERNAME_TAKEN, ADDED } = require('./errorConsts');
+const { CREATED, SERVER_ERROR, BAD_REQUEST } = require('./errorConsts');
 const { isAuthenticated } = require('../middleware/authentication');
 const router = express.Router();
 
@@ -13,15 +15,22 @@ const router = express.Router();
 router.post('/', async (req, res) => {
   const salt = await bcrypt.genSalt();
   const hashedPassword = await bcrypt.hash(req.body.password, salt);
+  let emailTaken = false;
   try {
+    await User.query()
+      .where({ email: req.body.email })
+      .then((data) => {
+        if (data[0]) emailTaken = true;
+      });
     await User.query().insert({
       nickname: req.body.nickname,
       email: req.body.email,
       password: hashedPassword,
     });
-    res.status(200).json({ msg: 'User added' });
+    res.status(CREATED).json({ msg: ADDED });
   } catch (error) {
-    res.status(500).json({ msg: 'Server Error' });
+    if (emailTaken) res.status(SERVER_ERROR).json({ msg: EMAIL_TAKEN });
+    else res.status(SERVER_ERROR).json({ msg: USERNAME_TAKEN });
   }
 });
 
@@ -55,9 +64,17 @@ router.post('/login', passport.authenticate('local'), (req, res, next) => {
               which delets the passport user header from the request. 
     @access   Public.
 */
-router.get('/logout', (req, res, next) => {
+router.post('/logout', (req, res, next) => {
   req.logout();
   res.status(200).json({ msg: 'Sucessfully logged out' });
+});
+
+/*
+  @route   GET api/users/currentUser
+*/
+router.get('/currentUser', (req, res, next) => {
+  console.log('hits');
+  res.status(200).json({ msg: req.body.email });
 });
 
 /*

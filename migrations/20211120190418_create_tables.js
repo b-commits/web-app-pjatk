@@ -17,7 +17,7 @@ exports.up = function (knex) {
   return knex.schema
     .createTable('user', (table) => {
       table.increments();
-      table.string('nickname').notNullable();
+      table.string('nickname').notNullable().unique();
       table.string('email').notNullable().unique();
       table.string('password').notNullable();
       table.string('profilePicSrc');

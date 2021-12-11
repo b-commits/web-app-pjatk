@@ -39,19 +39,20 @@ router.post('/', async (req, res) => {
     @desc     Get user by id.
     @access   Public.
 */
-router.get('/:id', async (req, res, next) => {
+router.get('/:id(d+)', async (req, res, next) => {
   try {
     const { id } = req.params;
     const user = await User.query().findById(id);
     res.json(user);
   } catch (err) {
-    res.status(400).json({ msg: 'Bad request' });
+    res.status(400).json({ msg: BAD_REQUEST });
   }
 });
 
 /*
     @route    POST api/users/login
-    @desc     Log in a user using Passport.js local strategy config. 
+    @desc     Log in a user using Passport.js local strategy config.
+              Passport adds user information to the HTTP requests. 
     @access   Public.
 */
 router.post('/login', passport.authenticate('local'), (req, res, next) => {
@@ -59,7 +60,7 @@ router.post('/login', passport.authenticate('local'), (req, res, next) => {
 });
 
 /*
-    @route    GET api/users/logout
+    @route    POST api/users/logout
     @desc     Logs out a user using Passport.js logout() function
               which delets the passport user header from the request. 
     @access   Public.
@@ -70,11 +71,19 @@ router.post('/logout', (req, res, next) => {
 });
 
 /*
-  @route   GET api/users/currentUser
+  @route      GET api/users/currentUser
+  @desc       Returns an object of a user who is currently authenticated.
+  @access     Public.
 */
-router.get('/currentUser', (req, res, next) => {
-  console.log('hits');
-  res.status(200).json({ msg: req.body.email });
+router.get('/currentUser', async (req, res, next) => {
+  try {
+    const currentUser = await User.query().where({
+      id: req.session.passport.user,
+    });
+    res.status(200).json({ currentUser: currentUser });
+  } catch (err) {
+    res.status(400).json({ msg: 'Not logged in' });
+  }
 });
 
 /*

@@ -1,11 +1,11 @@
 /** @jsxImportSource @emotion/react */
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { Formik, Form } from 'formik';
 import FormikField from '../Register/FormikField';
 import { Button } from '@material-ui/core';
 import { homeMain } from '../Register/Register.style';
 import { validationSchema } from './LoginValidationSchema';
-import { loginUser } from './ApiCalls';
+import { getCurrentUser, loginUser } from './ApiCalls';
 import { Redirect } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 
@@ -22,23 +22,19 @@ const initialValues: FormValues = {
 };
 
 export const Login: React.FC<FormValues> = () => {
-  const { authenticated, setAuthenticated } = useContext(AuthContext);
-  const [loggedIn, setLoggedIn] = useState(false);
+  const { authenticated, setAuthenticated, setCurrentUser } =
+    useContext(AuthContext);
 
-  const handleLogin = (values: FormValues) => {
-    loginUser(values).then(() => {
+  const handleLogin = async (values: FormValues) => {
+    await loginUser(values).then(() => {
       setAuthenticated(true);
-      console.log(authenticated);
-      setLoggedIn(true);
     });
+    console.log('handle login');
+    const currentUser = await getCurrentUser();
+    setCurrentUser(currentUser.currentUser);
   };
 
-  if (loggedIn)
-    return (
-      <Redirect
-        to={{ pathname: '/profile', state: { isAuth: true } }}
-      ></Redirect>
-    );
+  if (authenticated) return <Redirect to={{ pathname: '/profile' }}></Redirect>;
   return (
     <>
       <main css={homeMain}>
@@ -68,7 +64,7 @@ export const Login: React.FC<FormValues> = () => {
             );
           }}
         </Formik>
-        Don't have an account? <a href="/register">Sign up</a>
+        Don't have an account yet? <a href="/register">Sign up</a>
       </main>
     </>
   );

@@ -1,13 +1,22 @@
 /** @jsxImportSource @emotion/react */
 import React, { useContext } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import { navContainer, navMain, navList } from './Navbar.style';
+import { logoutUser } from './ApiCalls';
+import { Button } from '@material-ui/core';
+import { HOME } from '../../utils/URL';
 
 export const Navbar: React.FC = () => {
-  const { authenticated } = useContext(AuthContext);
+  const { authenticated, setAuthenticated } = useContext(AuthContext);
+  const history = useHistory();
 
-  const handleLogout = () => {};
+  const handleLogout = () => {
+    logoutUser().then(() => {
+      setAuthenticated(false);
+      history.push(HOME);
+    });
+  };
 
   return (
     <div css={navContainer}>
@@ -35,14 +44,14 @@ export const Navbar: React.FC = () => {
           </li>
           <li>
             {authenticated ? (
-              <button>Sig nout</button>
+              <Button onClick={handleLogout}>Sign out</Button>
             ) : (
               <NavLink
                 className="navLink"
                 activeClassName="activeNavLink"
-                to="/home"
+                to="/login"
               >
-                Sign out
+                Sign in
               </NavLink>
             )}
           </li>

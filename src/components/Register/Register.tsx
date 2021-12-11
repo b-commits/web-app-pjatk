@@ -8,7 +8,7 @@ import { RegisterBanner } from './RegisterBanner';
 import { homeMain } from './Register.style';
 import { validationSchema } from './RegistrationValidationSchema';
 import { Redirect } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { postUser } from './ApiCalls';
 
 interface FormValues {

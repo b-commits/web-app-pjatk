@@ -14,10 +14,13 @@ import { useState } from 'react';
 
 export const App = () => {
   const [authenticated, setAuthenticated] = useState(false);
+  const [currentUser, setCurrentUser] = useState(null);
 
   return (
     <Router>
-      <AuthContext.Provider value={{ authenticated, setAuthenticated }}>
+      <AuthContext.Provider
+        value={{ authenticated, setAuthenticated, currentUser, setCurrentUser }}
+      >
         <Navbar />
         <div className="App" css={appStyle}>
           <Switch>

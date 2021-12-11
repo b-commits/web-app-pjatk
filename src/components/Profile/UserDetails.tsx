@@ -72,7 +72,7 @@ const UserInfo: React.FC = () => {
       <div css={userInfoWrap}>
         <UserInfoWrapItem number={237316} value={'Profile Views'} />
         <UserInfoWrapItem number={137} value={'Games'} />
-        <UserInfoWrapItem number={34} value={'Achivments'} />
+        <UserInfoWrapItem number={34} value={'Achievements'} />
         <UserInfoWrapItem number={12} value={'Games Played'} />
         <UserInfoWrapItem number={7} value={'Friends'} />
 

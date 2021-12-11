@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
-import React from 'react';
+import React, { useContext } from 'react';
+import { AuthContext } from '../../context/AuthContext';
 import {
   userDetailsWrap,
   userDetailsData,
@@ -14,6 +15,7 @@ import {
 export const UserDetails: React.FC<{ isUserOnline: boolean }> = ({
   isUserOnline,
 }) => {
+  const { currentUser } = useContext(AuthContext);
   return (
     <>
       <div
@@ -27,7 +29,7 @@ export const UserDetails: React.FC<{ isUserOnline: boolean }> = ({
         <div css={userDetailsData}>
           <UserAvatar
             avatarURL="http://bluepito.webd.pro/logopjatk.gif"
-            nickName="PJATK"
+            nickName={currentUser.nickname}
             isUserOnline={isUserOnline}
           />
         </div>

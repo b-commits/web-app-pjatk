@@ -19,11 +19,8 @@ export const loginUser = async (User: FormValues): Promise<any> => {
     .catch((err) => console.log(err));
 };
 
-export const getCurrentUser = async (): Promise<any> => {
-  console.log('runs...');
-  await axios({
-    method: 'GET',
+export const getCurrentUser = (): any => {
+  return axios.get('http://localhost:5000/api/users/currentUser', {
     withCredentials: true,
-    url: 'http://localhost:5000/api/users/currentUser',
-  }).then((res) => console.log(res.data.currentUser[0]));
+  });
 };

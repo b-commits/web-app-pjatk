@@ -9,7 +9,8 @@ interface ProfileProps {}
 
 //all graphics url-s are temporary
 export const Profile: React.FC<ProfileProps> = () => {
-  const authContext = useContext(AuthContext);
+  const { currentUser } = useContext(AuthContext);
+
   return (
     <>
       <div css={profileWrap}>

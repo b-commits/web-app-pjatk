@@ -22,19 +22,20 @@ const initialValues: FormValues = {
 };
 
 export const Login: React.FC<FormValues> = () => {
-  const { authenticated, setAuthenticated, setCurrentUser } =
+  const { authenticated, setAuthenticated, currentUser, setCurrentUser } =
     useContext(AuthContext);
 
   const handleLogin = async (values: FormValues) => {
-    await loginUser(values).then(() => {
+    await loginUser(values).then(async () => {
+      await getCurrentUser().then((res: any) =>
+        setCurrentUser(res.data.currentUser[0])
+      );
       setAuthenticated(true);
     });
-    console.log('handle login');
-    const currentUser = await getCurrentUser();
-    setCurrentUser(currentUser.currentUser);
   };
 
   if (authenticated) return <Redirect to={{ pathname: '/profile' }}></Redirect>;
+
   return (
     <>
       <main css={homeMain}>

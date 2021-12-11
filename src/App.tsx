@@ -9,6 +9,7 @@ import { Register } from './components/Register/Register';
 import { Login } from './components/Login/Login';
 import { Profile } from './components/Profile/Profile';
 import { Dashboard } from './components/Dashboard/Dashboard';
+import { ErrorPage } from './components/Error/ErrorPage';
 import { AuthContext } from './context/AuthContext';
 import { useState } from 'react';
 
@@ -30,6 +31,7 @@ export const App = () => {
             <Route path="/login" component={Login} />
             <Route path="/profile" component={Profile} />
             <Route path="/dashboard" component={Dashboard} />
+            <Route path="*" exact={true} component={ErrorPage} />
           </Switch>
         </div>
         <Footer />

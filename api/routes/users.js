@@ -1,4 +1,5 @@
 const User = require('../models/User');
+const Listing = require('../models/Listing');
 const express = require('express');
 const bcrypt = require('bcrypt');
 const passport = require('passport');
@@ -7,7 +8,7 @@ const { CREATED, SERVER_ERROR, BAD_REQUEST } = require('./errorConsts');
 const { isAuthenticated } = require('../middleware/authentication');
 const router = express.Router();
 
-/*
+/**
     @route    POST api/users
     @desc     Register a user.
     @access   Public.
@@ -34,7 +35,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-/*
+/**
     @route    GET api/users/:id
     @desc     Get user by id.
     @access   Public.
@@ -49,7 +50,7 @@ router.get('/:id(d+)', async (req, res, next) => {
   }
 });
 
-/*
+/**
     @route    POST api/users/login
     @desc     Log in a user using Passport.js local strategy config.
               Passport adds user information to the HTTP requests. 
@@ -59,7 +60,7 @@ router.post('/login', passport.authenticate('local'), (req, res, next) => {
   res.status(200).json({ msg: 'Sucessfully authenticated' });
 });
 
-/*
+/**
     @route    POST api/users/logout
     @desc     Logs out a user using Passport.js logout() function
               which delets the passport user header from the request. 
@@ -70,7 +71,7 @@ router.post('/logout', (req, res, next) => {
   res.status(200).json({ msg: 'Sucessfully logged out' });
 });
 
-/*
+/**
   @route      GET api/users/currentUser
   @desc       Returns an object of a user who is currently authenticated.
   @access     Public.
@@ -86,7 +87,23 @@ router.get('/currentUser', async (req, res, next) => {
   }
 });
 
-/*
+/** 
+  @route      GET api/users/:id/listings
+  @desc       Returns an array of listings created by a given user.
+  @access     Public.
+*/
+router.get('/:id/listings', async (req, res, next) => {
+  try {
+    const userListings = await Listing.query().where({
+      creator: req.params.id,
+    });
+    res.status(200).json({ userListings: userListings });
+  } catch (err) {
+    // res.status(400).json({ msg: 'Not logged in' });
+  }
+});
+
+/**
     @route    GET api/users/messages
     @desc     Gets user private messages.
     @access   Protected.
@@ -95,7 +112,7 @@ router.get('/messages', isAuthenticated, (req, res, next) => {
   res.send('Placeholder...');
 });
 
-/*
+/**
     @route    GET api/users
     @desc     Get all users.
     @access   Public.

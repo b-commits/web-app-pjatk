@@ -34,7 +34,7 @@ export const Register: React.FC = () => {
       .then(() => {
         setAuthorized(true);
       })
-      .catch((error) => {
+      .catch(() => {
         setErrors(true);
       });
   };

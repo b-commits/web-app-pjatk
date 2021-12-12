@@ -1,7 +1,8 @@
 /** @jsxImportSource @emotion/react */
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Formik, Form } from 'formik';
 import FormikField from '../Register/FormikField';
+import Alert from '@material-ui/lab/Alert';
 import { Button } from '@material-ui/core';
 import { homeMain } from '../Register/Register.style';
 import { validationSchema } from './LoginValidationSchema';
@@ -22,16 +23,21 @@ const initialValues: FormValues = {
 };
 
 export const Login: React.FC<FormValues> = () => {
+  const [hasErrors, setErrors] = useState(false);
   const { authenticated, setAuthenticated, currentUser, setCurrentUser } =
     useContext(AuthContext);
 
   const handleLogin = async (values: FormValues) => {
-    await loginUser(values).then(async () => {
-      await getCurrentUser().then((res: any) =>
-        setCurrentUser(res.data.currentUser[0])
-      );
-      setAuthenticated(true);
-    });
+    await loginUser(values)
+      .then(async () => {
+        await getCurrentUser().then((res: any) =>
+          setCurrentUser(res.data.currentUser[0])
+        );
+        setAuthenticated(true);
+      })
+      .catch(() => {
+        setErrors(true);
+      });
   };
 
   if (authenticated) return <Redirect to={{ pathname: '/profile' }}></Redirect>;
@@ -66,6 +72,11 @@ export const Login: React.FC<FormValues> = () => {
           }}
         </Formik>
         Don't have an account yet? <a href="/register">Sign up</a>
+        {hasErrors && (
+          <Alert severity="error">
+            Either your password is wrong or you haven't registered yet.
+          </Alert>
+        )}
       </main>
     </>
   );

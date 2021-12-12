@@ -3,6 +3,7 @@ import React from 'react';
 import { userListings, listing, listingButton } from './Profile.style';
 
 export const UserListings: React.FC = () => {
+  const [userListing, setUserListings] = useState(null);
   return (
     <div css={userListings}>
       <Listing

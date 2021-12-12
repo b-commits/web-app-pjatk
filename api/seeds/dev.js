@@ -2,16 +2,22 @@
   Inserts fake data to the migrated tables.
   Run "npm run seed" from the root directory to populate the tables.
 */
-const { lorem } = require('faker');
 const faker = require('faker');
 
 exports.seed = async (knex) => {
   const users = [];
-  const numUsers = 50;
-  for (let i = 0; i < numUsers; i++) {
+  const profilePageComments = [];
+  const listings = [];
+
+  const numEntries = 50;
+  for (let i = 0; i < numEntries; i++) {
     users.push(createUser());
+    profilePageComments.push(createProfilePageComment());
+    listings.push(createListing());
   }
   await knex('user').insert(users);
+  await knex('profilePageComment').insert(profilePageComments);
+  await knex('listing').insert(listings);
 };
 
 const createUser = () => ({
@@ -23,14 +29,19 @@ const createUser = () => ({
   age: 25,
 });
 
-const createMessage = () => ({
-  title: faker.lorem.words(10),
-  content: faker.lorem.content(75),
-  userId: faker.datatype.number({
-    min: 1,
+const createProfilePageComment = () => ({
+  content: faker.lorem.words(10),
+  commentSender: faker.datatype.number({
+    min: 5,
+    max: 50,
+  }),
+  commentReceiver: faker.datatype.number({
+    min: 5,
     max: 50,
   }),
 });
+
+const createPrivateMessage = () => ({});
 
 const createFriendship = () => ({
   user: faker.datatype.number({ min: 1, max: 50 }),
@@ -54,5 +65,9 @@ const createGameRank = () => ({
 });
 
 const createListing = () => ({
-  message: faker.lorem.words(30),
+  status: 1,
+  message: faker.lorem.words(15),
+  maxNumberOfPlayers: faker.datatype.number({ min: 1, max: 5 }),
+  creator: faker.datatype.number({ min: 1, max: 50 }),
+  listingGame: null,
 });

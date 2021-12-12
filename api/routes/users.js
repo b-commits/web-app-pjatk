@@ -36,11 +36,11 @@ router.post('/', async (req, res) => {
 });
 
 /**
-    @route    GET api/users/:id
+    @route    GET api/users/user/:id
     @desc     Get user by id.
     @access   Public.
 */
-router.get('/:id(d+)', async (req, res, next) => {
+router.get('/user/:id', async (req, res, next) => {
   try {
     const { id } = req.params;
     const user = await User.query().findById(id);

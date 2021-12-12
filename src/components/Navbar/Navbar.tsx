@@ -4,7 +4,6 @@ import { NavLink, useHistory } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import { navContainer, navMain, navList } from './Navbar.style';
 import { logoutUser } from './ApiCalls';
-import { Button } from '@material-ui/core';
 import { HOME } from '../../utils/URL';
 
 export const Navbar: React.FC = () => {
@@ -44,7 +43,9 @@ export const Navbar: React.FC = () => {
           </li>
           <li>
             {authenticated ? (
-              <Button onClick={handleLogout}>Sign out</Button>
+              <NavLink to="/" onClick={handleLogout}>
+                Sign out
+              </NavLink>
             ) : (
               <NavLink
                 className="navLink"

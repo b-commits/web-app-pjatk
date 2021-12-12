@@ -1,9 +1,16 @@
 /** @jsxImportSource @emotion/react */
-import React from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { userListings, listing, listingButton } from './Profile.style';
+import { getUserListings } from './ApiCalls';
+import { AuthContext } from '../../context/AuthContext';
 
 export const UserListings: React.FC = () => {
   const [userListing, setUserListings] = useState(null);
+
+  // useEffect(() => {
+  //   getUserListings();
+  // });
+
   return (
     <div css={userListings}>
       <Listing

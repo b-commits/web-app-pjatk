@@ -40,6 +40,7 @@ export const Login: React.FC<FormValues> = () => {
       });
   };
 
+  // todo add redirect to specific user from context
   if (authenticated) return <Redirect to={{ pathname: '/profile' }}></Redirect>;
 
   return (

@@ -1,5 +1,7 @@
 /** @jsxImportSource @emotion/react */
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { getUserByID } from './ApiCalls';
+import { useParams } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import {
   userDetailsWrap,
@@ -12,31 +14,47 @@ import {
   userActionsButton,
 } from './Profile.style';
 
+interface RouteParams {
+  id: string;
+}
+
 export const UserDetails: React.FC<{ isUserOnline: boolean }> = ({
   isUserOnline,
 }) => {
+  const { id } = useParams<RouteParams>();
+  const [user, setUser] = useState<any>({});
   const { currentUser } = useContext(AuthContext);
-  return (
-    <>
-      <div
-        css={userDetailsWrap}
-        style={{
-          background:
-            'url(https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ahri_0.jpg) no-repeat ',
-          backgroundSize: 'cover',
-        }}
-      >
-        <div css={userDetailsData}>
-          <UserAvatar
-            avatarURL="http://bluepito.webd.pro/logopjatk.gif"
-            nickName={currentUser.nickname}
-            isUserOnline={isUserOnline}
-          />
+
+  useEffect(() => {
+    getUserByID(id).then((user: any) => {
+      setUser(user);
+    });
+  }, [user]);
+
+  if (user.data != null) {
+    return (
+      <>
+        <p>ID to ..... {id}</p>
+        <div
+          css={userDetailsWrap}
+          style={{
+            background:
+              'url(https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ahri_0.jpg) no-repeat ',
+            backgroundSize: 'cover',
+          }}
+        >
+          <div css={userDetailsData}>
+            <UserAvatar
+              avatarURL="http://bluepito.webd.pro/logopjatk.gif"
+              nickName={user.data.nickname}
+              isUserOnline={isUserOnline}
+            />
+          </div>
         </div>
-      </div>
-      <UserInfo />
-    </>
-  );
+        <UserInfo />
+      </>
+    );
+  } else return <div>Loading.</div>;
 };
 
 const UserAvatar: React.FC<{

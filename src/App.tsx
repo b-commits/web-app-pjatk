@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 import { appStyle } from './App.style';
 import { Navbar } from './components/Navbar/Navbar';
 import { Home } from './components/Home/Home';
@@ -29,9 +29,9 @@ export const App = () => {
             <Route path="/about" component={About} />
             <Route path="/register" component={Register} />
             <Route path="/login" component={Login} />
-            <Route path="/profile" component={Profile} />
+            <Route path="/profile/:id" component={Profile} />
             <Route path="/dashboard" component={Dashboard} />
-            <Route path="*" exact={true} component={ErrorPage} />
+            <Route path="*" exact component={ErrorPage} />
           </Switch>
         </div>
         <Footer />

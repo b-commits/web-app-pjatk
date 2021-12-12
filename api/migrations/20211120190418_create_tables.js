@@ -125,8 +125,8 @@ exports.up = function (knex) {
 };
 
 /* 
-The down function should to the opposite of what the up function does.
-But since we declare all our tables in a one migration file, it just drops all tables 
+    The 'down' function should do the opposite of what the 'up' function does.
+    But since we declare all our tables in a one migration file, it just drops all tables.
 */
 exports.down = function (knex) {
   return tableNames.forEach((name) => {

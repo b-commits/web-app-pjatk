@@ -1,17 +1,23 @@
 /** @jsxImportSource @emotion/react */
-import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
-import { appStyle } from './App.style';
-import { Navbar } from './components/Navbar/Navbar';
-import { Home } from './components/Home/Home';
-import { Footer } from './components/Footer/Footer';
-import { About } from './components/About/About';
-import { Register } from './components/Register/Register';
-import { Login } from './components/Login/Login';
-import { Profile } from './components/Profile/Profile';
-import { Dashboard } from './components/Dashboard/Dashboard';
-import { ErrorPage } from './components/Error/ErrorPage';
-import { AuthContext } from './context/AuthContext';
-import { useState } from 'react';
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import { appStyle, DashboardWrap } from "./App.style";
+import { Navbar } from "./components/Navbar/Navbar";
+import { Home } from "./components/Home/Home";
+import { Footer } from "./components/Footer/Footer";
+import { About } from "./components/About/About";
+import { Register } from "./components/Register/Register";
+import { Login } from "./components/Login/Login";
+import { Profile } from "./components/Profile/Profile";
+import { ErrorPage } from "./components/Error/ErrorPage";
+import { AuthContext } from "./context/AuthContext";
+import { useState } from "react";
+import { DashboardSidebar } from "./components/Dashboard/Sidebar/DashboardSidebar";
+import { Dashboard } from "./components/Dashboard/Dashboard";
+import { FriendsDashboard } from "./components/Dashboard/FriendsDashboard";
+import { ListingDashboard } from "./components/Dashboard/ListingDashboard";
+import { FavGamesDashboard } from "./components/Dashboard/FavGamesDashboard";
+import { AdminDashboard } from "./components/Dashboard/AdminDashboard";
+import { ReportsDashboard } from "./components/Dashboard/ReportsDashboard";
 
 export const App = () => {
   const [authenticated, setAuthenticated] = useState(false);
@@ -30,9 +36,34 @@ export const App = () => {
             <Route path="/register" component={Register} />
             <Route path="/login" component={Login} />
             <Route path="/profile/:id" component={Profile} />
-            <Route path="/dashboard" component={Dashboard} />
             <Route path="*" exact component={ErrorPage} />
           </Switch>
+
+          <Route path="/dashboard">
+            <div css={DashboardWrap}>
+              <DashboardSidebar />
+              <Switch>
+                <Route exact path="/dashboard">
+                  <Dashboard />
+                </Route>
+                <Route path="/dashboard/listings">
+                  <ListingDashboard />
+                </Route>
+                <Route path="/dashboard/favgames">
+                  <FavGamesDashboard />
+                </Route>
+                <Route path="/dashboard/friends">
+                  <FriendsDashboard />
+                </Route>
+                <Route path="/dashboard/admin">
+                  <AdminDashboard />
+                </Route>
+                <Route path="/dashboard/reports">
+                  <ReportsDashboard />
+                </Route>
+              </Switch>
+            </div>
+          </Route>
         </div>
         <Footer />
       </AuthContext.Provider>

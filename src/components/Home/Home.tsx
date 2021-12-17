@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { ListingItem } from './ListingItem';
+import { getAllListings } from './ApiCalls';
 import {
   homeBanner,
   homeBannerContent,
@@ -11,9 +12,15 @@ import {
   homeMain,
 } from './Home.style';
 
-const HOMEPAGE_NUM_LISTINGS: number = 6;
-
 export const Home: React.FC = () => {
+  const [listings, setListings] = useState<Array<any>>([{}]);
+
+  useEffect(() => {
+    getAllListings().then((listings: any) => {
+      setListings(listings.data);
+    });
+  }, []);
+
   return (
     <>
       <div css={homeBanner}>
@@ -47,7 +54,15 @@ export const Home: React.FC = () => {
       </div>
 
       <main css={homeMain}>
-        {Array(HOMEPAGE_NUM_LISTINGS).fill(<ListingItem />)}
+        {listings.map((listing, index) => {
+          return (
+            <ListingItem
+              key={index}
+              id={listing.id}
+              message={listing.message}
+            />
+          );
+        })}
       </main>
     </>
   );

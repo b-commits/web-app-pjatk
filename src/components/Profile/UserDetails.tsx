@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { getUserByID } from './ApiCalls';
 import { useParams } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
+import { CircularProgress } from '@material-ui/core';
 import {
   userDetailsWrap,
   userDetailsData,
@@ -54,7 +55,8 @@ export const UserDetails: React.FC<{ isUserOnline: boolean }> = ({
         <UserInfo />
       </>
     );
-  } else return <div>Loading.</div>;
+    // todo replace with spinner animation
+  } else return <CircularProgress />;
 };
 
 const UserAvatar: React.FC<{

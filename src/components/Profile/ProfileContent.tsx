@@ -1,15 +1,16 @@
 /** @jsxImportSource @emotion/react */
-import React from 'react';
+import React from "react";
 import {
   profileContent,
   profileMain,
   profileSidebar,
   profileContentItem,
-} from './Profile.style';
-import { UserAchievements } from './UserAchievements';
-import { UserFavGames } from './UserFavGames';
-import { UserFriends } from './UserFriends';
-import { UserListings } from './UserListings';
+} from "./Profile.style";
+import { UserAchievements } from "./UserAchievements";
+import { UserFavGames } from "./UserFavGames";
+import { UserFriends } from "./UserFriends";
+import { UserListings } from "./UserListings";
+import { UserLevel } from "../Dashboard/UserLevel";
 
 export const ProfileContent: React.FC = () => {
   return (
@@ -17,28 +18,34 @@ export const ProfileContent: React.FC = () => {
       <div css={profileContent}>
         <div css={profileMain}>
           <ProfileContentItem
-            title={'Favorite Games'}
+            title={"Favorite Games"}
             contentComponent={<UserFavGames />}
           />
 
           <ProfileContentItem
-            title={'Recent listings'}
+            title={"Recent listings"}
             contentComponent={<UserListings />}
           />
         </div>
 
         <div css={profileSidebar}>
           <ProfileContentItem
-            title={'Level'}
-            contentComponent={<UserLevel lvl={15} />}
+            title={"Level"}
+            contentComponent={
+              <UserLevel
+                userLvl={52}
+                userExp={770}
+                progressBarWidthPercentage={50}
+              />
+            }
           />
           <ProfileContentItem
-            title={'Friends'}
+            title={"Friends"}
             contentComponent={<UserFriends />}
           />
 
           <ProfileContentItem
-            title={'Achievements'}
+            title={"Achievements"}
             contentComponent={<UserAchievements />}
           />
         </div>
@@ -55,16 +62,6 @@ const ProfileContentItem: React.FC<{
     <div css={profileContentItem}>
       <h1>{title}</h1>
       {contentComponent}
-    </div>
-  );
-};
-
-const UserLevel: React.FC<{
-  lvl: number;
-}> = ({ lvl }) => {
-  return (
-    <div style={{ textAlign: 'center' }}>
-      <h2>{lvl}</h2>
     </div>
   );
 };

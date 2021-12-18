@@ -30,12 +30,11 @@ export const UserDetails: React.FC<{ isUserOnline: boolean }> = ({
     getUserByID(id).then((user: any) => {
       setUser(user);
     });
-  }, [user]);
+  }, []);
 
   if (user.data != null) {
     return (
       <>
-        <p>ID to ..... {id}</p>
         <div
           css={userDetailsWrap}
           style={{
@@ -55,7 +54,6 @@ export const UserDetails: React.FC<{ isUserOnline: boolean }> = ({
         <UserInfo />
       </>
     );
-    // todo replace with spinner animation
   } else return <CircularProgress />;
 };
 

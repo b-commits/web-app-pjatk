@@ -11,3 +11,9 @@ export const getUserByID = (userId: string): any => {
     withCredentials: true,
   });
 };
+
+export const getUserProfilePageComments = (userId: string): any => {
+  return axios.get(`http://localhost:5000/api/profilePageComments/${userId}`, {
+    withCredentials: true,
+  });
+};

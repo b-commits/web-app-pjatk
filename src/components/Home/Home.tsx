@@ -10,14 +10,14 @@ import {
   bannerConentHeader,
   bannerConentDesc,
   blueText,
-  smallText,
   homeMain,
   muiPagination,
   muiSearchBar,
   muiSearchBarWrapper,
 } from './Home.style';
+import { NavLink } from 'react-router-dom';
 
-const LISTINGS_PER_PAGE: number = 9;
+const LISTINGS_PER_PAGE: number = 12;
 const DEFAULT_CURRENT_PAGE: number = 1;
 
 export const Home: React.FC = () => {
@@ -39,7 +39,7 @@ export const Home: React.FC = () => {
 
   const handleSearch = (event: any) => {
     const filteredListings = listings.filter((listing) =>
-      listing.message.toLowerCase().includes(event.target.value)
+      listing.message.toLowerCase().trim().includes(event.target.value)
     );
     setFilteredListings(filteredListings);
   };
@@ -56,14 +56,21 @@ export const Home: React.FC = () => {
       <div css={homeBanner}>
         <div css={homeBannerContent}>
           <div css={bannerConentHeader}>
-            <span css={smallText}>LOOK FOR A GROUP</span>
+            <span css={blueText}>find a group</span>
             <h1>
               and spend <span css={blueText}>less time in queue</span>.
             </h1>
           </div>
           <div css={bannerConentDesc}>
             <div>
-              <button>SIGN UP NOW</button>
+              <NavLink
+                className="navLink"
+                activeClassName="activeNavLink"
+                exact
+                to="/register"
+              >
+                <button>SIGN UP NOW</button>
+              </NavLink>
             </div>
             <div>
               <p>
@@ -89,7 +96,7 @@ export const Home: React.FC = () => {
       <Pagination
         size="large"
         onChange={handlePageChange}
-        count={Math.round(filteredListings.length / 9)}
+        count={Math.round(filteredListings.length / LISTINGS_PER_PAGE)}
         css={muiPagination}
         color="primary"
       />

@@ -8,9 +8,6 @@ export const homeBanner = css({
   width: '100%',
   height: '300px',
   backgroundColor: 'rgba(255, 255, 255, 1)',
-  boxShadow: '0px 4px 14px -4px rgba(55, 58, 54, 1)',
-  WebkitBoxShadow: '0px 4x 14px -4px rgba(55, 58, 54, 1)',
-  MozBoxShadow: '0px 4px 14px -4px rgba(55, 58, 54, 1)',
 });
 
 export const homeBannerContent = css({

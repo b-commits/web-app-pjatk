@@ -287,3 +287,25 @@ export const listingButton = css({
   textDecoration: 'none',
   boxSizing: 'border-box',
 });
+
+export const muiPaper = css({
+  padding: '40px 20px',
+});
+
+export const commentHeader = css({
+  margin: 0,
+  textAlign: 'left',
+});
+
+export const commentParagraph = css({
+  textAlign: 'left',
+});
+
+export const commentTimestamp = css({
+  textAlign: 'left',
+  color: 'gray',
+});
+
+export const muiDivider = css({
+  margin: '30px 0',
+});

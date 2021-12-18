@@ -5,6 +5,7 @@ const setupDB = require('./config/dbSetup');
 const cors = require('cors');
 const passport = require('passport');
 const users = require('./routes/users');
+const profilePageComments = require('./routes/profilePageComments');
 const listings = require('./routes/listings');
 require('./config/passportConfig.js');
 
@@ -41,6 +42,7 @@ app.use((req, res, next) => {
 
 app.use('/api/users', users);
 app.use('/api/listings', listings);
+app.use('/api/profilePageComments', profilePageComments);
 
 app.listen(port, () => {
   console.log(`[server] listening at http://localhost:${port}.`);

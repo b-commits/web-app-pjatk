@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import React, { useState, useEffect } from 'react';
 import { ListingItem } from './ListingItem';
+import { Pagination } from '@material-ui/lab';
 import { getAllListings } from './ApiCalls';
 import {
   homeBanner,
@@ -10,10 +11,24 @@ import {
   blueText,
   smallText,
   homeMain,
+  muiPagination,
 } from './Home.style';
 
+const LISTINGS_PER_PAGE: number = 9;
+const DEFAULT_CURRENT_PAGE: number = 1;
+
 export const Home: React.FC = () => {
-  const [listings, setListings] = useState<Array<any>>([{}]);
+  const [listings, setListings] = useState<Array<any>>([]);
+  const [listingsPerPage, setListingsPerPage] =
+    useState<number>(LISTINGS_PER_PAGE);
+  const [currentPage, setCurrentPage] = useState<number>(DEFAULT_CURRENT_PAGE);
+  const lastListingIdx: number = currentPage * listingsPerPage;
+  const firstListingIdx: number = lastListingIdx - listingsPerPage;
+  const currentListings = listings.slice(firstListingIdx, lastListingIdx);
+
+  const handlePageChange = (event: any, value: any) => {
+    setCurrentPage(value);
+  };
 
   useEffect(() => {
     getAllListings().then((listings: any) => {
@@ -52,9 +67,16 @@ export const Home: React.FC = () => {
           </div>
         </div>
       </div>
+      <Pagination
+        size="large"
+        onChange={handlePageChange}
+        count={5}
+        css={muiPagination}
+        color="primary"
+      />
 
       <main css={homeMain}>
-        {listings.map((listing, index) => {
+        {currentListings.map((listing, index) => {
           return (
             <ListingItem
               key={index}

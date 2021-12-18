@@ -133,7 +133,17 @@ export const listingFooter = css({
 });
 
 export const muiPagination = {
-  marginTop: '15px',
+  marginTop: '40px',
   display: 'flex',
   justifyContent: 'center',
+};
+
+export const muiSearchBarWrapper = {
+  marginTop: '40px',
+  display: 'flex',
+  justifyContent: 'center',
+};
+
+export const muiSearchBar = {
+  width: '40%',
 };

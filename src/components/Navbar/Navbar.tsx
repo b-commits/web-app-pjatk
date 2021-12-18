@@ -21,7 +21,16 @@ export const Navbar: React.FC = () => {
     <div css={navContainer}>
       <nav css={navMain}>
         <ul css={navList}>
-          <li>LFG-APP</li>
+          <li>
+            <NavLink
+              className="navLink"
+              activeClassName="activeNavLink"
+              exact
+              to="/"
+            >
+              LFG-APP
+            </NavLink>
+          </li>
           <li>
             <NavLink
               className="navLink"

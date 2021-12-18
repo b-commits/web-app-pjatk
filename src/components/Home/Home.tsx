@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { ListingItem } from './ListingItem';
 import { Pagination } from '@material-ui/lab';
+import { TextField } from '@material-ui/core';
 import { getAllListings } from './ApiCalls';
 import {
   homeBanner,
@@ -12,6 +13,8 @@ import {
   smallText,
   homeMain,
   muiPagination,
+  muiSearchBar,
+  muiSearchBarWrapper,
 } from './Home.style';
 
 const LISTINGS_PER_PAGE: number = 9;
@@ -19,20 +22,32 @@ const DEFAULT_CURRENT_PAGE: number = 1;
 
 export const Home: React.FC = () => {
   const [listings, setListings] = useState<Array<any>>([]);
-  const [listingsPerPage, setListingsPerPage] =
-    useState<number>(LISTINGS_PER_PAGE);
+  const [filteredListings, setFilteredListings] =
+    useState<Array<any>>(listings);
+  const [listingsPerPage] = useState<number>(LISTINGS_PER_PAGE);
   const [currentPage, setCurrentPage] = useState<number>(DEFAULT_CURRENT_PAGE);
   const lastListingIdx: number = currentPage * listingsPerPage;
   const firstListingIdx: number = lastListingIdx - listingsPerPage;
-  const currentListings = listings.slice(firstListingIdx, lastListingIdx);
+  const currentListings = filteredListings.slice(
+    firstListingIdx,
+    lastListingIdx
+  );
 
-  const handlePageChange = (event: any, value: any) => {
+  const handlePageChange = (_event: any, value: any) => {
     setCurrentPage(value);
+  };
+
+  const handleSearch = (event: any) => {
+    const filteredListings = listings.filter((listing) =>
+      listing.message.toLowerCase().includes(event.target.value)
+    );
+    setFilteredListings(filteredListings);
   };
 
   useEffect(() => {
     getAllListings().then((listings: any) => {
       setListings(listings.data);
+      setFilteredListings(listings.data);
     });
   }, []);
 
@@ -67,10 +82,14 @@ export const Home: React.FC = () => {
           </div>
         </div>
       </div>
+
+      <div css={muiSearchBarWrapper}>
+        <TextField onChange={handleSearch} type="search" css={muiSearchBar} />
+      </div>
       <Pagination
         size="large"
         onChange={handlePageChange}
-        count={5}
+        count={Math.round(filteredListings.length / 9)}
         css={muiPagination}
         color="primary"
       />

@@ -1,9 +1,6 @@
 const ProfilePageComment = require('../models/ProfilePageComment');
-const User = require('../models/User');
 const express = require('express');
-const { BAD_REQUEST } = require('./errorConsts');
-const { useScrollTrigger } = require('@material-ui/core');
-const { knex } = require('../models/ProfilePageComment');
+const { BAD_REQUEST, SERVER_ERROR, ADDED } = require('./errorConsts');
 const router = express.Router();
 
 /** 
@@ -29,6 +26,24 @@ router.get('/:profileId', async (req, res, next) => {
     res.status(200).json(comments);
   } catch (err) {
     res.status(400).json({ msg: BAD_REQUEST });
+  }
+});
+
+/**
+ * @route   POST /api/profilePageComments/
+ * @desc    Posts a profile page comment.
+ * @access  Protected.
+ */
+router.post('/', async (req, res) => {
+  try {
+    await ProfilePageComment.query().insert({
+      content: req.body.content,
+      commentSender: req.body.commentSender,
+      commentReceiver: req.body.commentReceiver,
+    });
+    res.status(200).json({ msg: ADDED });
+  } catch (error) {
+    res.status(SERVER_ERROR).json({ msg: error.message });
   }
 });
 

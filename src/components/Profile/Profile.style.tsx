@@ -309,3 +309,7 @@ export const commentTimestamp = css({
 export const muiDivider = css({
   margin: '30px 0',
 });
+
+export const muiCommentArea = css({
+  width: '100%',
+});

@@ -130,12 +130,17 @@ const UserActions: React.FC = () => {
   );
 };
 
-const ProfileActionButton: React.FC<{
+export const ProfileActionButton: React.FC<{
   color: string;
   value: string;
-}> = ({ color, value }) => {
+  handleClick?: any;
+}> = ({ color, value, handleClick }) => {
   return (
-    <button css={userActionsButton} style={{ backgroundColor: color }}>
+    <button
+      onClick={handleClick}
+      css={userActionsButton}
+      style={{ backgroundColor: color }}
+    >
       {value}
     </button>
   );

@@ -13,8 +13,7 @@ export const sidebar = css({
   backgroundColor: "#FFFFFF",
   width: "20%",
   minHeight: "1000px",
-  padding: "8px",
-  borderRight: "1px dashed #000",
+  padding: "8px 16px 8px 8px",
   boxSizing: "border-box",
 
   "& h1": {
@@ -60,7 +59,7 @@ export const hrSidebarBreaker = css({
 export const sidebarMenu = css({
   listStyleType: "none",
   margin: 0,
-  marginTop: "10px",
+  marginTop: "15px",
   marginLeft: "-15px",
   padding: 0,
   width: "100%",
@@ -68,4 +67,17 @@ export const sidebarMenu = css({
 
 export const sidebarMenuItem = css({
   width: "100%",
+});
+
+export const userDetailsWrap = css({
+  color: "#000",
+  display: "flex",
+  flexDirection: "row",
+  flexWrap: "wrap",
+  justifyContent: "space-around",
+  alignItems: "center",
+  width: "100%",
+  padding: "8px",
+  minHeight: "150px",
+  boxSizing: "border-box",
 });

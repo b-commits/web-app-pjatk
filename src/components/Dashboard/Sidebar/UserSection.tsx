@@ -1,6 +1,10 @@
 /** @jsxImportSource @emotion/react */
 import React, { FC } from "react";
-import { userAvatar, userStatusDot } from "../css/DashboardSidebar.style";
+import {
+  userAvatar,
+  userStatusDot,
+  userDetailsWrap,
+} from "../css/DashboardSidebar.style";
 
 // Props Interfaces
 
@@ -11,27 +15,33 @@ type UserSectionProps = {
 };
 
 // USER SECTION
-export const UserSection: FC<UserSectionProps> = (props) => {
+export const UserSection: FC<UserSectionProps> = ({
+  avatarURL,
+  nickName,
+  isUserOnline,
+}) => {
   return (
     <>
-      <img
-        css={userAvatar}
-        src={props.avatarURL}
-        alt={"Avatar użytkowniak: " + props.nickName}
-      />
-      <h1>
-        <span
-          css={userStatusDot}
-          style={
-            props.isUserOnline
-              ? { backgroundColor: "#64a338" }
-              : { backgroundColor: "#e03b24" }
-          }
-        >
-          {" "}
-        </span>
-        {props.nickName}
-      </h1>
+      <div css={userDetailsWrap}>
+        <img
+          css={userAvatar}
+          src={avatarURL}
+          alt={"Avatar użytkowniak: " + nickName}
+        />
+        <h1>
+          <span
+            css={userStatusDot}
+            style={
+              isUserOnline
+                ? { backgroundColor: "#64a338" }
+                : { backgroundColor: "#e03b24" }
+            }
+          >
+            {" "}
+          </span>
+          {nickName}
+        </h1>
+      </div>
     </>
   );
 };

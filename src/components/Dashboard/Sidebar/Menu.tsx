@@ -7,8 +7,8 @@ import { sidebarMenu, hrSidebarBreaker } from "../css/DashboardSidebar.style";
 export const Menu: FC = () => {
   return (
     <>
-      <hr css={hrSidebarBreaker} />
       <ul css={sidebarMenu}>
+        <h3>Menu</h3>
         <MenuItem title={"Home"} href={"/dashboard"} />
 
         <MenuItem title={"Listings"} href={"/dashboard/listings"} />

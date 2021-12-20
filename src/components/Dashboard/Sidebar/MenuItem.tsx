@@ -2,6 +2,7 @@
 import React, { FC } from "react";
 import { NavLink } from "react-router-dom";
 import { sidebarMenuItem } from "../css/DashboardSidebar.style";
+import "../css/MenuNavLinkStyles.css";
 
 // Props Interfaces
 
@@ -11,11 +12,16 @@ type MenuItemProps = {
 };
 
 //MENU ITEM
-export const MenuItem: FC<MenuItemProps> = (props) => {
+export const MenuItem: FC<MenuItemProps> = ({ title, href }) => {
   return (
     <li css={sidebarMenuItem}>
-      <NavLink className={""} activeClassName={""} exact to={props.href}>
-        {props.title}
+      <NavLink
+        className="dashboardMenuItem"
+        activeClassName="dashboardMenuItemActive"
+        exact
+        to={href}
+      >
+        {title}
       </NavLink>
     </li>
   );

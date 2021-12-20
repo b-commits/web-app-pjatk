@@ -68,14 +68,4 @@ export const sidebarMenu = css({
 
 export const sidebarMenuItem = css({
   width: "100%",
-  "& a": {
-    width: "100%",
-    display: "block",
-    padding: "8px 16px",
-    textDecoration: "none",
-  },
-  "& a:hover": {
-    color: "#FFF",
-    backgroundColor: "#000",
-  },
 });

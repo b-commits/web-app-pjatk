@@ -6,7 +6,6 @@ export const DashboardWrap = css({
   justifyContent: "space-between",
   width: "1280px",
   margin: "auto",
-  marginTop: "15px",
   boxSizing: "border-box",
 });
 

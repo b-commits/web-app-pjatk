@@ -1,0 +1,31 @@
+.dashboardMenuItem {
+  color: #000;
+  width: 100%;
+  display: block;
+  padding: 8px 16px;
+  border-left: 4px solid #fff;
+  text-decoration: none;
+  transition: 0.7s;
+}
+
+.dashboardMenuItem:hover {
+  color: #fff;
+  background: rgb(37, 31, 255);
+  background: linear-gradient(
+    180deg,
+    rgba(37, 31, 255, 1) 0%,
+    rgba(78, 74, 198, 1) 100%,
+    rgba(0, 212, 255, 1) 100%
+  );
+}
+
+.dashboardMenuItemActive {
+  color: rgba(78, 74, 198);
+  border-color: rgb(37, 31, 255);
+  border-color: linear-gradient(
+    180deg,
+    rgba(37, 31, 255, 1) 0%,
+    rgba(78, 74, 198, 1) 100%,
+    rgba(0, 212, 255, 1) 100%
+  );
+}

@@ -2,9 +2,10 @@
 import React, { useContext } from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
-import { navContainer, navMain, navList } from './Navbar.style';
+import { navContainer, navMain, navList, navLogo } from './Navbar.style';
 import { logoutUser } from './ApiCalls';
 import { HOME } from '../../utils/URL';
+import logo from '../../logo.png';
 
 export const Navbar: React.FC = () => {
   const { authenticated, setAuthenticated } = useContext(AuthContext);
@@ -28,7 +29,7 @@ export const Navbar: React.FC = () => {
               exact
               to="/"
             >
-              LFG-APP
+              <img css={navLogo} src={logo} />
             </NavLink>
           </li>
           <li>

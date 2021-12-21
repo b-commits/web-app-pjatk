@@ -31,20 +31,26 @@ export const ProfileCommentBox: React.FC = () => {
   const { currentUser } = useContext(AuthContext);
 
   useEffect(() => {
-    getUserProfilePageComments(id).then((listings: any) => {
-      setProfileComments(listings.data);
+    getUserProfilePageComments(id).then((comments: any) => {
+      setProfileComments(comments.data.reverse());
     });
   }, []);
 
   const handleProfileComment = async (values: ProfilePageComment) => {
-    console.log(values);
-    await postComment({
+    const newComment = {
       content: values.content,
+      nickname: currentUser.nickname,
       commentReceiver: parseInt(id),
       commentSender: currentUser.id,
+      created_at: new Date().toLocaleTimeString().substring(0, 5),
+    };
+    await postComment({
+      content: newComment.content,
+      commentReceiver: newComment.commentReceiver,
+      commentSender: newComment.commentSender,
     })
-      .then(async () => {
-        console.log('sent');
+      .then(() => {
+        setProfileComments([newComment, ...profileComments]);
       })
       .catch((error) => {
         console.log(error);

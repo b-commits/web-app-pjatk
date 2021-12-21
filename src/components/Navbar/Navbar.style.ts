@@ -33,7 +33,7 @@ export const navList = css({
   },
 });
 
-export const lfgLogo = css({
-  height: "80px",
-  marginTop: "-38px",
-});
+export const navLogo = css({
+  height: '5rem',
+  marginTop: '-26px'
+})

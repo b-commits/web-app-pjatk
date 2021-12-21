@@ -33,6 +33,7 @@ router.get("/:profileId", async (req, res, next) => {
  * @route   POST /api/profilePageComments/
  * @desc    Posts a profile page comment.
  * @access  Protected.
+ * @todo    auth() middleware to the pipeline and make sure that works
  */
 router.post("/", async (req, res) => {
   try {

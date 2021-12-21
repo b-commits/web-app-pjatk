@@ -31,8 +31,8 @@ export const ProfileCommentBox: React.FC = () => {
   const { currentUser } = useContext(AuthContext);
 
   useEffect(() => {
-    getUserProfilePageComments(id).then((listings: any) => {
-      setProfileComments(listings.data);
+    getUserProfilePageComments(id).then((comments: any) => {
+      setProfileComments(comments.data.reverse());
     });
   }, []);
 
@@ -50,7 +50,7 @@ export const ProfileCommentBox: React.FC = () => {
       commentSender: newComment.commentSender,
     })
       .then(() => {
-        setProfileComments([...profileComments, newComment]);
+        setProfileComments([newComment, ...profileComments]);
       })
       .catch((error) => {
         console.log(error);

@@ -91,7 +91,12 @@ export const Home: React.FC = () => {
       </div>
 
       <div css={muiSearchBarWrapper}>
-        <TextField onChange={handleSearch} type="search" css={muiSearchBar} />
+        <TextField
+          placeholder="Search listings..."
+          onChange={handleSearch}
+          type="search"
+          css={muiSearchBar}
+        />
       </div>
       <Pagination
         size="large"

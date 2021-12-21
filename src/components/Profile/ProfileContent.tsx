@@ -10,7 +10,7 @@ import { UserAchievements } from "./UserAchievements";
 import { UserFavGames } from "./UserFavGames";
 import { UserFriends } from "./UserFriends";
 import { UserListings } from "./UserListings";
-import { UserLevel } from "../Dashboard/UserLevel";
+import { UserLevel } from "../Misc/UserLevel";
 
 export const ProfileContent: React.FC = () => {
   return (

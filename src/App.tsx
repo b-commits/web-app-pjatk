@@ -27,7 +27,7 @@ import { useState } from "react";
 import { DashboardSidebar } from "./components/Dashboard/Sidebar/DashboardSidebar";
 import { Dashboard } from "./components/Dashboard/Dashboard";
 import { FriendsDashboard } from "./components/Dashboard/FriendsDashboard";
-import { ListingDashboard } from "./components/Dashboard/ListingDashboard";
+import { ListingDashboard } from "./components/Dashboard/Listings/ListingDashboard";
 import { FavGamesDashboard } from "./components/Dashboard/FavGamesDashboard";
 import { AdminDashboard } from "./components/Dashboard/AdminDashboard";
 import { ReportsDashboard } from "./components/Dashboard/ReportsDashboard";

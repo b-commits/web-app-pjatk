@@ -51,19 +51,3 @@ export const listing = css({
     marginTop: "0px",
   },
 });
-
-export const listingButton = css({
-  fontSize: "12px",
-  color: "#ffffff",
-  height: "30px",
-  width: "100px",
-  marginBottom: "10px",
-  alignContent: "center",
-  alignSelf: "center",
-  borderRadius: "8px",
-  border: "none",
-  cursor: "pointer",
-  padding: "10px 20px",
-  textDecoration: "none",
-  boxSizing: "border-box",
-});

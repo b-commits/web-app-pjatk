@@ -1,22 +1,18 @@
 /** @jsxImportSource @emotion/react */
 import React, { FC } from "react";
-import { UserLevel } from "./UserLevel";
-import { DashboardSection } from "./DashboardSection";
+import { UserLevel } from "../Misc/UserLevel";
+import { SectionDashboard } from "./SectionDashboard";
+
 export const Dashboard: FC = () => {
+  const userLevelComponent = (
+    <UserLevel userLvl={17} userExp={330} progressBarWidthPercentage={35} />
+  );
+
   return (
     <>
       <h1> Home </h1>
       <div>
-        <DashboardSection
-          title={"Your level"}
-          component={
-            <UserLevel
-              userLvl={17}
-              userExp={330}
-              progressBarWidthPercentage={35}
-            />
-          }
-        />
+        <SectionDashboard title={"Your level"} component={userLevelComponent} />
       </div>
 
       <div>

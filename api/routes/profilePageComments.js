@@ -8,20 +8,20 @@ const router = express.Router();
     @desc     Gets all profile comments for a given user.
     @access   Public.
 */
-router.get('/:profileId', async (req, res, next) => {
+router.get("/:profileId", async (req, res, next) => {
   try {
     const { profileId } = req.params;
     const comments = await ProfilePageComment.query()
-      .join('user', {
-        'user.id': 'commentSender',
+      .join("user", {
+        "user.id": "commentSender",
       })
       .where({ commentReceiver: profileId })
       .select(
-        'content',
-        'nickname',
-        'commentSender',
-        'commentReceiver',
-        'profilePageComment.created_at'
+        "content",
+        "nickname",
+        "commentSender",
+        "commentReceiver",
+        "profilePageComment.created_at"
       );
     res.status(200).json(comments);
   } catch (err) {
@@ -34,7 +34,7 @@ router.get('/:profileId', async (req, res, next) => {
  * @desc    Posts a profile page comment.
  * @access  Protected.
  */
-router.post('/', async (req, res) => {
+router.post("/", async (req, res) => {
   try {
     await ProfilePageComment.query().insert({
       content: req.body.content,

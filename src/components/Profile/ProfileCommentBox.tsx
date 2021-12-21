@@ -37,14 +37,20 @@ export const ProfileCommentBox: React.FC = () => {
   }, []);
 
   const handleProfileComment = async (values: ProfilePageComment) => {
-    console.log(values);
-    await postComment({
+    const newComment = {
       content: values.content,
+      nickname: currentUser.nickname,
       commentReceiver: parseInt(id),
       commentSender: currentUser.id,
+      created_at: new Date().toLocaleTimeString().substring(0, 5),
+    };
+    await postComment({
+      content: newComment.content,
+      commentReceiver: newComment.commentReceiver,
+      commentSender: newComment.commentSender,
     })
-      .then(async () => {
-        console.log('sent');
+      .then(() => {
+        setProfileComments([...profileComments, newComment]);
       })
       .catch((error) => {
         console.log(error);

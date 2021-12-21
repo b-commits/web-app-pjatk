@@ -19,11 +19,20 @@ interface ProfileCommentProps {
   created_at: Date;
 }
 
+const PROP_TIME_LENGTH: number = 5;
+const DB_TIME_STR_START: number = 11;
+const DB_TIME_STR_END: number = 16;
+
 export const ProfileComment: React.FC<ProfileCommentProps | any> = (
   comment: ProfileCommentProps | any
 ) => {
   const getTime = () => {
-    return comment.ProfileCommentProps.created_at.substring(11, 16);
+    if (comment.ProfileCommentProps.created_at.length == PROP_TIME_LENGTH)
+      return comment.ProfileCommentProps.created_at;
+    return comment.ProfileCommentProps.created_at.substring(
+      DB_TIME_STR_START,
+      DB_TIME_STR_END
+    );
   };
 
   return (

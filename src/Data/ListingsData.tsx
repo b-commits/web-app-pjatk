@@ -12,7 +12,7 @@ export const LISTING_DATA_SET = [
     id: 2,
     title: "Destiny 2 raids only",
     url: "",
-    desc: "Join and lets race together in forza horizon. Want just to discus? Join anyway, every fun of forza is welcome here ;) P.S. We are newbies too, dont laught at us :D",
+    desc: "Quisque suscipit ipsum eget convallis faucibus. In pellentesque pretium nisl, nec luctus arcu. Nunc fermentum tellus est, et gravida lacus finibus a. Nunc lacinia lorem et lectus.",
     gameName: "Destiny 2",
     gameImgUrl: "https://bigbaddice.pl/wp-content/uploads/2018/07/warmind2.jpg",
   },

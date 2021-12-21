@@ -1,5 +1,7 @@
+/** @jsxImportSource @emotion/react */
 import React, { FC } from "react";
 import { Listing } from "./Listing";
+import { listingListStyle } from "./css/ListingList.style";
 //----------
 export const PROFILE_VIEW = "PROFILEVIEW";
 export const DASHBOARD_VIEW = "DASHBOARD";
@@ -35,6 +37,8 @@ export const ListingList: FC<ListingListProps> = ({ type, dataSet }) => {
   }
   const listings = dataSet.map((listing) => (
     <Listing
+      key={listing.id}
+      id={listing.id}
       title={listing.title}
       url={listing.url}
       desc={listing.desc}
@@ -48,6 +52,6 @@ export const ListingList: FC<ListingListProps> = ({ type, dataSet }) => {
   return (
     // klasa listujaca css
 
-    <div>{listings}</div>
+    <div css={listingListStyle}>{listings}</div>
   );
 };

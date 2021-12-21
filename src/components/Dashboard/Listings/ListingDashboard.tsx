@@ -1,6 +1,5 @@
 /** @jsxImportSource @emotion/react */
 import React, { FC } from "react";
-import { userListings, listing } from "../css/Dashboard.style";
 import { SectionDashboard } from "../SectionDashboard";
 import { AddListingForm } from "./AddListingForm";
 import { ListingList, DASHBOARD_VIEW } from "../../Misc/ListingList";

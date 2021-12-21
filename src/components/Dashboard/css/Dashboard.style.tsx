@@ -1,14 +1,5 @@
 import { css } from "@emotion/react";
 
-export const DashboardWrap = css({
-  display: "flex",
-  flexDirection: "row",
-  justifyContent: "space-between",
-  width: "1280px",
-  margin: "auto",
-  boxSizing: "border-box",
-});
-
 /*
 ----------------------------
 ----------------------------
@@ -16,12 +7,12 @@ export const DashboardWrap = css({
 ----------------------------
 ----------------------------
 */
-export const Main = css({
+export const main = css({
   display: "flex",
   flexDirection: "column",
   backgroundColor: "#FFFFFF",
   width: "80%",
-  minHeight: "1000px",
+  minHeight: "100vh",
   padding: "8px",
   boxSizing: "border-box",
 });

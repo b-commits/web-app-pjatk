@@ -1,39 +1,32 @@
 /** @jsxImportSource @emotion/react */
 import React, { FC } from "react";
-import {
-  Main,
-  userListings,
-  listing,
-  listingButton,
-} from "./css/Dashboard.style";
+import { userListings, listing, listingButton } from "./css/Dashboard.style";
 
 export const ListingDashboard: FC = () => {
   return (
     <>
-      <div css={Main}>
-        <h1> [TODO] </h1>
-        <div>
-          <h1>Create New Listing</h1>
-          <form>
-            <label htmlFor="">
-              Title
-              <input type="text" />
-            </label>
-            <label htmlFor="">
-              Game
-              <input type="text" />
-            </label>
-            <label htmlFor="">
-              Advance level
-              <input type="text" />
-            </label>
-            <input type={"submit"} />
-          </form>
-        </div>
-        <div>
-          <h1>Menage Your Listings</h1>
-          <UserListings />
-        </div>
+      <h1>Listings</h1>
+      <div>
+        <h1>Create New Listing</h1>
+        <form>
+          <label htmlFor="">
+            Title
+            <input type="text" />
+          </label>
+          <label htmlFor="">
+            Game
+            <input type="text" />
+          </label>
+          <label htmlFor="">
+            Advance level
+            <input type="text" />
+          </label>
+          <input type={"submit"} />
+        </form>
+      </div>
+      <div>
+        <h1>Menage Your Listings</h1>
+        <UserListings />
       </div>
     </>
   );

@@ -12,7 +12,6 @@ export const ProgressBar: FC<UserLevelProps> = ({
   progressPercentage,
   userExp,
 }) => {
-  const nextLevelPercent = (userExp / 1000) * 100;
   return (
     <>
       <div css={ProgressBarWrap} style={{ width: `${generalWidthAsPercent}%` }}>

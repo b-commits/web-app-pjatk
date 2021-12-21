@@ -6,24 +6,6 @@ import { css } from "@emotion/react";
 ----------------------------
 ----------------------------
 */
-export const sidebar = css({
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  backgroundColor: "#FFFFFF",
-  width: "20%",
-  minHeight: "1000px",
-  padding: "8px 16px 8px 8px",
-  boxSizing: "border-box",
-
-  "& h1": {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    fontSize: "1.5em",
-  },
-});
 
 export const userAvatar = css({
   width: "100px",
@@ -74,7 +56,7 @@ export const userDetailsWrap = css({
   display: "flex",
   flexDirection: "row",
   flexWrap: "wrap",
-  justifyContent: "space-around",
+  justifyContent: "center",
   alignItems: "center",
   width: "100%",
   padding: "8px",

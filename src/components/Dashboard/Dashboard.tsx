@@ -1,15 +1,14 @@
 /** @jsxImportSource @emotion/react */
 import React, { FC } from "react";
-import { Main } from "./css/Dashboard.style";
+import { main } from "./css/Dashboard.style";
 import { UserLevel } from "./UserLevel";
 
 export const Dashboard: FC = () => {
   return (
     <>
-      <div css={Main}>
-        <h1> [TODO] </h1>
+      <div css={main}>
+        <h1> Home </h1>
         <div>
-          <h1>Your Level</h1>
           <UserLevel
             userLvl={17}
             userExp={330}

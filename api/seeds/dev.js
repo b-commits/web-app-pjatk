@@ -8,16 +8,19 @@ exports.seed = async (knex) => {
   const users = [];
   const profilePageComments = [];
   const listings = [];
-
+  const listingComments = [];
   const numEntries = 50;
+
   for (let i = 0; i < numEntries; i++) {
     users.push(createUser());
     profilePageComments.push(createProfilePageComment());
     listings.push(createListing());
+    listingComments.push(createListingComment());
   }
-  await knex('user').insert(users);
-  await knex('profilePageComment').insert(profilePageComments);
-  await knex('listing').insert(listings);
+  // await knex('user').insert(users);
+  // await knex('profilePageComment').insert(profilePageComments);
+  // await knex('listing').insert(listings);
+  await knex('listingComment').insert(listingComments);
 };
 
 const createUser = () => ({
@@ -70,4 +73,10 @@ const createListing = () => ({
   maxNumberOfPlayers: faker.datatype.number({ min: 1, max: 5 }),
   creator: faker.datatype.number({ min: 1, max: 50 }),
   listingGame: null,
+});
+
+const createListingComment = () => ({
+  content: faker.lorem.words(25),
+  commentListing: faker.datatype.number({ min: 2, max: 25 }),
+  commentSender: faker.datatype.number({ min: 2, max: 25 }),
 });

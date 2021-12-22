@@ -2,16 +2,16 @@
 import React from 'react';
 import { Divider, Avatar, Grid, Paper } from '@material-ui/core';
 import {
-  muiDivider,
   muiPaper,
   commentHeader,
   commentParagraph,
   commentTimestamp,
-} from './Profile.style';
+  muiDivider,
+} from '../Profile/Profile.style';
 
 const imgLink = 'http://bluepito.webd.pro/logopjatk.gif';
 
-interface ProfileCommentProps {
+interface ListingCommentProps {
   content: string;
   nickname: string;
   commentReceiver: number;
@@ -23,8 +23,8 @@ const PROP_TIME_LENGTH: number = 5;
 const DB_TIME_STR_START: number = 11;
 const DB_TIME_STR_END: number = 16;
 
-export const ProfileComment: React.FC<ProfileCommentProps | any> = (
-  comment: ProfileCommentProps | any
+export const ListingComment: React.FC<ListingCommentProps | any> = (
+  comment: ListingCommentProps | any
 ) => {
   const getTime = () => {
     if (comment.ProfileCommentProps.created_at.length == PROP_TIME_LENGTH)
@@ -42,9 +42,9 @@ export const ProfileComment: React.FC<ProfileCommentProps | any> = (
           <Avatar src={imgLink} />
         </Grid>
         <Grid item xs zeroMinWidth>
-          <h4 css={commentHeader}>{comment.ProfileCommentProps.nickname}</h4>
-          <p css={commentParagraph}>{comment.ProfileCommentProps.content}</p>
-          <p css={commentTimestamp}>{getTime()}</p>
+          <h4 css={commentHeader}>NICKNAME</h4>
+          <p css={commentParagraph}>CONTENT</p>
+          <p css={commentTimestamp}>{() => {}}</p>
         </Grid>
       </Grid>
       <Divider variant="fullWidth" css={muiDivider} />

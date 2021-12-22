@@ -108,7 +108,7 @@ export const listingImg = css({
   height: '220px',
   width: '100%',
   textAlign: 'center',
-  backgroundColor: '#cfcfcf',
+  backgroundColor: '#FAF9F6',
   '& img': {
     height: '220px',
     width: '80%',
@@ -144,3 +144,31 @@ export const muiSearchBarWrapper = {
 export const muiSearchBar = {
   width: '40%',
 };
+
+export const modalImg = {
+  width: '400px',
+};
+
+export const modalStyle = {
+  position: 'absolute',
+  display: 'flex',
+  flexDirection: 'column',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 500,
+  height: 800,
+  bgcolor: 'background.paper',
+  overflowY: 'auto',
+  border: '3px solid',
+  boxShadow: 10,
+  p: 3,
+  justifyContent: 'center',
+};
+
+export const muiField = {
+  width: '100%',
+  marginTop: '50px',
+};
+
+export const imgStyle = {};

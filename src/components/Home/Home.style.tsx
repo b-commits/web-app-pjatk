@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import { findByLabelText } from '@testing-library/dom';
 
 export const homeBanner = css({
   display: 'flex',
@@ -145,10 +144,6 @@ export const muiSearchBar = {
   width: '40%',
 };
 
-export const modalImg = {
-  width: '400px',
-};
-
 export const modalStyle = {
   position: 'absolute',
   display: 'flex',
@@ -162,13 +157,13 @@ export const modalStyle = {
   overflowY: 'auto',
   border: '3px solid',
   boxShadow: 10,
-  p: 3,
-  justifyContent: 'center',
+  p: 4,
 };
 
 export const muiField = {
   width: '100%',
-  marginTop: '50px',
 };
 
-export const imgStyle = {};
+export const imgStyle = {
+  width: '100%',
+};

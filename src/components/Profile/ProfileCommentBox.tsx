@@ -1,13 +1,12 @@
 /** @jsxImportSource @emotion/react */
 import React, { useEffect, useState, useContext } from 'react';
-import { getUserProfilePageComments } from './ApiCalls';
+import { getUserProfilePageComments, postComment } from './ApiCalls';
 import { Formik, Form, Field } from 'formik';
 import { AuthContext } from '../../context/AuthContext';
 import { useParams } from 'react-router-dom';
 import { TextField, Button } from '@material-ui/core';
 import { ProfileComment } from './ProfileComment';
 import { muiCommentArea } from './Profile.style';
-import { postComment } from './ApiCalls';
 
 interface RouteParams {
   id: string;

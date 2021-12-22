@@ -1,6 +1,7 @@
 const Listing = require('../models/Listing');
+const ListingComment = require('../models/ListingComment');
 const express = require('express');
-const { BAD_REQUEST } = require('./errorConsts');
+const { BAD_REQUEST, SERVER_ERROR, ADDED } = require('./errorConsts');
 const router = express.Router();
 
 /** 
@@ -29,6 +30,58 @@ router.get('/', async (req, res, next) => {
     res.status(200).json(listings);
   } catch (err) {
     res.status(400).json({ msg: 'Bad request' });
+  }
+});
+
+/**
+ * @route   GET api/listings/comments/:listingId
+ * @desc    Gets all comments for a given listing.
+ * @access  Public.
+ */
+router.get('/comments/:listingId', async (req, res, next) => {
+  try {
+    const { listingId } = req.params;
+    const listingComments = await Listing.query()
+      .join('listingComment', {
+        'listing.id': 'commentListing',
+      })
+      .join('user', {
+        'user.id': 'commentSender',
+      })
+      .where({ commentListing: listingId })
+      .select(
+        'listingComment.created_at',
+        'listing.id',
+        'status',
+        'creator',
+        'user.nickname',
+        'listingGame',
+        'content',
+        'commentSender'
+      );
+    res.status(200).json(listingComments);
+  } catch (err) {
+    res.status(400).json({ msg: BAD_REQUEST });
+  }
+});
+
+/**
+ * @route   POST /api/listings/comments
+ * @desc    Posts a listing comment.
+ * @access  Protected.
+ */
+router.post('/comments', async (req, res) => {
+  try {
+    console.log('api hit');
+    await ListingComment.query().insert({
+      content: req.body.content,
+      commentListing: req.body.commentListing,
+      commentSender: req.body.commentSender,
+    });
+    res.status(200).json({ msg: ADDED });
+  } catch (error) {
+    console.log(error.message);
+    res.status(SERVER_ERROR).json({ errorMsg: error.message });
   }
 });
 

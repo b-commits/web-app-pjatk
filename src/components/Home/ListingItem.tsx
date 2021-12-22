@@ -1,15 +1,10 @@
 /** @jsxImportSource @emotion/react */
-import React from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { AuthContext } from '../../context/AuthContext';
 import { ListingComment } from './ListingComment';
 import { Formik, Form, Field } from 'formik';
-import {
-  Modal,
-  Box,
-  Typography,
-  Backdrop,
-  Button,
-  TextField,
-} from '@material-ui/core';
+import { getAllListingComments, postListingComment } from './ApiCalls';
+import { Modal, Box, Typography, Button, TextField } from '@material-ui/core';
 import {
   blueText,
   listingItem,
@@ -31,7 +26,18 @@ interface ListingProps {
   status: boolean;
 }
 
-const handleProfileComment = async () => {};
+interface ListingCommentProps {
+  content: string;
+  nickname: string;
+  commentSender?: number;
+  createdAt?: Date;
+}
+
+const initialCommentValues: ListingCommentProps = {
+  content: ' ',
+  commentSender: 0,
+  nickname: '',
+};
 
 export const ListingItem: React.FC<any> = ({
   id,
@@ -40,9 +46,37 @@ export const ListingItem: React.FC<any> = ({
   createdAt,
   status,
 }: ListingProps) => {
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const [open, setOpen] = useState<boolean>(false);
+  const handleModalOpen = () => setOpen(true);
+  const handleModalClose = () => setOpen(false);
+  const [listingComments, setListingComments] = useState<any>([]);
+  const { currentUser } = useContext(AuthContext);
+
+  const handleListingComment = async (values: ListingCommentProps) => {
+    const newComment = {
+      content: values.content,
+      nickname: currentUser.nickname,
+      commentListing: currentUser.id,
+      created_at: new Date().toLocaleTimeString().substring(0, 5),
+    };
+    await postListingComment({
+      content: newComment.content,
+      commentSender: currentUser.id,
+      commentListing: id,
+    })
+      .then(() => {
+        setListingComments([newComment, ...listingComments]);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    getAllListingComments(id).then((listingComments: any) => {
+      setListingComments(listingComments.data.reverse());
+    });
+  }, []);
 
   return (
     <div css={listingItem}>
@@ -65,27 +99,24 @@ export const ListingItem: React.FC<any> = ({
       <div css={listingFooter}>
         <span css={blueText}>
           <Button
-            onClick={handleOpen}
+            onClick={handleModalOpen}
             type="submit"
             color="primary"
             variant="contained"
           >
             Details
           </Button>
+
           <Modal
             aria-labelledby="transition-modal-title"
             aria-describedby="transition-modal-description"
             open={open}
-            onClose={handleClose}
+            onClose={handleModalClose}
             closeAfterTransition
-            BackdropComponent={Backdrop}
-            BackdropProps={{
-              timeout: 2000,
-            }}
           >
             <Box sx={modalStyle}>
               <Typography id="modal-modal-title" variant="h6" component="h2">
-                Listing!
+                {id}
               </Typography>
               <img
                 css={imgStyle}
@@ -108,7 +139,10 @@ export const ListingItem: React.FC<any> = ({
                 Comments:
               </Typography>
 
-              <Formik onSubmit={handleProfileComment} initialValues={{}}>
+              <Formik
+                onSubmit={handleListingComment}
+                initialValues={initialCommentValues}
+              >
                 {() => {
                   return (
                     <Form>
@@ -118,26 +152,38 @@ export const ListingItem: React.FC<any> = ({
                         as={TextField}
                         name="content"
                         multiline
-                        rows={2}
+                        minRows={2}
                         maxRows={4}
                       />
                       <br />
                       <br />
+                      <Button
+                        type="submit"
+                        color="secondary"
+                        variant="contained"
+                      >
+                        Send comment
+                      </Button>
                     </Form>
                   );
                 }}
               </Formik>
-              <Button type="submit" color="secondary" variant="contained">
-                Send comment
-              </Button>
-              <ListingComment />
+
+              {listingComments.map((listingComment: any, index: any) => {
+                return (
+                  <ListingComment
+                    ListingCommentProps={listingComment}
+                    key={index}
+                  />
+                );
+              })}
             </Box>
           </Modal>
         </span>
         <span>&ensp;&ensp;&ensp;&ensp;&ensp;</span>
         <span css={blueText}>
           <Button
-            onClick={handleOpen}
+            onClick={handleModalOpen}
             type="submit"
             color="secondary"
             variant="contained"

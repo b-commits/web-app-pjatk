@@ -1,4 +1,4 @@
-import { css } from "@emotion/react";
+import { css } from '@emotion/react';
 /*
 ----------------------------
 ----------------------------
@@ -8,28 +8,28 @@ import { css } from "@emotion/react";
 */
 
 export const userAvatar = css({
-  width: "100px",
-  height: "100px",
-  borderRadius: "50%",
+  width: '100px',
+  height: '100px',
+  borderRadius: '50%',
 });
 
 export const userStatusDot = css({
-  height: "15px",
-  width: "15px",
-  marginRight: "10px",
-  backgroundColor: "#64a338",
-  borderRadius: "50%",
-  boxShadow: "",
-  boxSizing: "border-box",
+  height: '15px',
+  width: '15px',
+  marginRight: '10px',
+  backgroundColor: '#64a338',
+  borderRadius: '50%',
+  boxShadow: '',
+  boxSizing: 'border-box',
 });
 
 export const hrSidebarBreaker = css({
   margin: 0,
-  marginLeft: "-15px",
-  marginRight: "-15px",
+  marginLeft: '-15px',
+  marginRight: '-15px',
   padding: 0,
-  width: "100%",
-  border: "1px solid #000",
+  width: '100%',
+  border: '1px solid #000',
 });
 /*
 ----------------------------
@@ -39,27 +39,27 @@ export const hrSidebarBreaker = css({
 ----------------------------
 */
 export const sidebarMenu = css({
-  listStyleType: "none",
+  listStyleType: 'none',
   margin: 0,
-  marginTop: "15px",
-  marginLeft: "-15px",
+  marginTop: '15px',
+  marginLeft: '-15px',
   padding: 0,
-  width: "100%",
+  width: '100%',
 });
 
 export const sidebarMenuItem = css({
-  width: "100%",
+  width: '100%',
 });
 
 export const userDetailsWrap = css({
-  color: "#000",
-  display: "flex",
-  flexDirection: "row",
-  flexWrap: "wrap",
-  justifyContent: "center",
-  alignItems: "center",
-  width: "100%",
-  padding: "8px",
-  minHeight: "150px",
-  boxSizing: "border-box",
+  color: '#000',
+  display: 'flex',
+  flexDirection: 'row',
+  flexWrap: 'wrap',
+  justifyContent: 'center',
+  alignItems: 'center',
+  width: '100%',
+  padding: '8px',
+  minHeight: '150px',
+  boxSizing: 'border-box',
 });

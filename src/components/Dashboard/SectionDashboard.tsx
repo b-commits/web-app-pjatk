@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
-import React, { FC } from "react";
-import { section, sectionHeader } from "./css/DashboardSection.style";
+import React, { FC } from 'react';
+import { section, sectionHeader } from './css/DashboardSection.style';
 
 interface SectionProps {
   title: string;

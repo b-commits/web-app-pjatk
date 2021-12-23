@@ -86,7 +86,7 @@ const Listing: React.FC<{
   return (
     <>
       <div css={listing}>
-        <img alt="gameImage" src={gameImgUrl} />
+        <img alt='gameImage' src={gameImgUrl} />
         <div style={{ width: '500px' }}>
           <h3>{listingName}</h3>
           {listingDesc}

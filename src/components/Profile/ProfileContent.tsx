@@ -1,16 +1,16 @@
 /** @jsxImportSource @emotion/react */
-import React from "react";
+import React from 'react';
 import {
   profileContent,
   profileMain,
   profileSidebar,
   profileContentItem,
-} from "./Profile.style";
-import { UserAchievements } from "./UserAchievements";
-import { UserFavGames } from "./UserFavGames";
-import { UserFriends } from "./UserFriends";
-import { UserListings } from "./UserListings";
-import { UserLevel } from "../Misc/UserLevel";
+} from './Profile.style';
+import { UserAchievements } from './UserAchievements';
+import { UserFavGames } from './UserFavGames';
+import { UserFriends } from './UserFriends';
+import { UserListings } from './UserListings';
+import { UserLevel } from '../Misc/UserLevel';
 
 export const ProfileContent: React.FC = () => {
   return (
@@ -18,19 +18,19 @@ export const ProfileContent: React.FC = () => {
       <div css={profileContent}>
         <div css={profileMain}>
           <ProfileContentItem
-            title={"Favorite Games"}
+            title={'Favorite Games'}
             contentComponent={<UserFavGames />}
           />
 
           <ProfileContentItem
-            title={"Recent listings"}
+            title={'Recent listings'}
             contentComponent={<UserListings />}
           />
         </div>
 
         <div css={profileSidebar}>
           <ProfileContentItem
-            title={"Level"}
+            title={'Level'}
             contentComponent={
               <UserLevel
                 userLvl={52}
@@ -40,12 +40,12 @@ export const ProfileContent: React.FC = () => {
             }
           />
           <ProfileContentItem
-            title={"Friends"}
+            title={'Friends'}
             contentComponent={<UserFriends />}
           />
 
           <ProfileContentItem
-            title={"Achievements"}
+            title={'Achievements'}
             contentComponent={<UserAchievements />}
           />
         </div>

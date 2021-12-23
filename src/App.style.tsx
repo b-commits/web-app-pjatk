@@ -1,4 +1,24 @@
 import { css } from '@emotion/react';
+import { red } from '@material-ui/core/colors';
+
+/*
+----------------------------
+----------------------------
+      MEDIA QUERIES
+----------------------------
+----------------------------
+*/
+const breakpoints = [320, 769, 1024, 1440];
+
+// mq => media query
+const mq = breakpoints.map((bp) => `@media (min-width: ${bp}px)`);
+/*
+----------------------------
+----------------------------
+      MEDIA QUERIES
+----------------------------
+----------------------------
+*/
 
 export const appStyle = css({
   fontFamily: 'Roboto',
@@ -26,16 +46,19 @@ export const dashboardWrap = css({
   boxShadow: '0px 4px 14px -4px rgba(55, 58, 54, 1)',
   WebkitBoxShadow: '0px 4x 14px -4px rgba(55, 58, 54, 1)',
   MozBoxShadow: '0px 4px 14px -4px rgba(55, 58, 54, 1)',
-});
 
-export const dashboardMain = css({
-  display: 'flex',
-  flexDirection: 'column',
-  backgroundColor: '#FFFFFF',
-  width: '80%',
-  minHeight: '100vh',
-  padding: '8px',
-  boxSizing: 'border-box',
+  [mq[0]]: {
+    flexDirection: 'column',
+  },
+  [mq[1]]: {
+    flexDirection: 'row',
+  },
+  [mq[2]]: {
+    flexDirection: 'row',
+  },
+  [mq[2]]: {
+    flexDirection: 'row',
+  },
 });
 
 export const dashboardSidebar = css({
@@ -55,128 +78,39 @@ export const dashboardSidebar = css({
     alignItems: 'center',
     fontSize: '1.5em',
   },
-});
 
-//Mobile
-
-export const dashboardMainMobile = css({
-  display: 'flex',
-  flexDirection: 'column',
-  backgroundColor: '#FFFFFF',
-  width: '100%',
-  minHeight: '100vh',
-  padding: '8px',
-  boxSizing: 'border-box',
-});
-
-export const dashboardSidebarMobile = css({
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  backgroundColor: '#FFFFFF',
-  width: '100%',
-  minHeight: '100vh',
-  padding: '8px 16px 8px 8px',
-  boxSizing: 'border-box',
-
-  '& h1': {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    fontSize: '1.5em',
+  [mq[0]]: {
+    width: '100%',
+  },
+  [mq[1]]: {
+    width: '40%',
+  },
+  [mq[2]]: {
+    width: '35%',
+  },
+  [mq[2]]: {
+    width: '25%',
   },
 });
-
-//Tablet
-
-export const dashboardMainTablet = css({
+export const dashboardMain = css({
   display: 'flex',
-  flexDirection: 'row',
+  flexDirection: 'column',
   backgroundColor: '#FFFFFF',
-  width: '60%',
+  width: '80%',
   minHeight: '100vh',
   padding: '8px',
   boxSizing: 'border-box',
-});
 
-export const dashboardSidebarTablet = css({
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  backgroundColor: '#FFFFFF',
-  width: '40%',
-  minHeight: '100vh',
-  padding: '8px 16px 8px 8px',
-  boxSizing: 'border-box',
-
-  '& h1': {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    fontSize: '1em',
+  [mq[0]]: {
+    width: '100%',
   },
-});
-
-//Laptop
-
-export const dashboardMainLaptop = css({
-  display: 'flex',
-  flexDirection: 'column',
-  backgroundColor: '#FFFFFF',
-  width: '65%',
-  minHeight: '100vh',
-  padding: '8px',
-  boxSizing: 'border-box',
-});
-
-export const dashboardSidebarLaptop = css({
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  backgroundColor: '#FFFFFF',
-  width: '35%',
-  minHeight: '100vh',
-  padding: '8px 16px 8px 8px',
-  boxSizing: 'border-box',
-
-  '& h1': {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    fontSize: '1em',
+  [mq[1]]: {
+    width: '60%',
   },
-});
-
-//Desktop
-
-export const dashboardMainDesktop = css({
-  display: 'flex',
-  flexDirection: 'column',
-  backgroundColor: '#FFFFFF',
-  width: '75%',
-  minHeight: '100vh',
-  padding: '8px',
-  boxSizing: 'border-box',
-});
-
-export const dashboardSidebarDesktop = css({
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  backgroundColor: '#FFFFFF',
-  width: '25%',
-  minHeight: '100vh',
-  padding: '8px 16px 8px 8px',
-  boxSizing: 'border-box',
-
-  '& h1': {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    fontSize: '1em',
+  [mq[2]]: {
+    width: '65%',
+  },
+  [mq[2]]: {
+    width: '75%',
   },
 });

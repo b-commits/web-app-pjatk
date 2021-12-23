@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import React, { FC } from "react";
+import React, { FC } from 'react';
 
 export const AdminDashboard: FC = () => {
   return (

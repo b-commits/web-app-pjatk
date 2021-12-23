@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
-import React, { FC } from "react";
-import { ProgressBarWrap, ProgressBarPercent } from "./css/ProgressBar.style";
+import React, { FC } from 'react';
+import { ProgressBarWrap, ProgressBarPercent } from './css/ProgressBar.style';
 
 interface UserLevelProps {
   generalWidthAsPercent: number;

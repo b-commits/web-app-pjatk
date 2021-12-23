@@ -45,7 +45,7 @@ export const UserDetails: React.FC<{ isUserOnline: boolean }> = ({
         >
           <div css={userDetailsData}>
             <UserAvatar
-              avatarURL="http://bluepito.webd.pro/logopjatk.gif"
+              avatarURL='http://bluepito.webd.pro/logopjatk.gif'
               nickName={user.data.nickname}
               isUserOnline={isUserOnline}
             />

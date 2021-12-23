@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
-import React, { FC } from "react";
-import { Button, DANGER, INFO, SUCCES } from "./Button";
+import React, { FC } from 'react';
+import { Button, DANGER, INFO, SUCCES } from './Button';
 import {
   listingStyle,
   gameImgStyle,
@@ -9,7 +9,7 @@ import {
   descStyle,
   gameBox,
   buttonsWrap,
-} from "./css/Listing.style";
+} from './css/Listing.style';
 interface ListingProps {
   id: number;
   title: string;
@@ -26,9 +26,9 @@ export const Listing: FC<ListingProps> = ({
   gameName,
   gameImgUrl,
 }) => {
-  const description = desc.length > 80 ? desc.slice(0, 90) + "..." : desc;
+  const description = desc.length > 70 ? desc.slice(0, 70) + '...' : desc;
   const gameNameSlice =
-    gameName.length > 80 ? gameName.slice(0, 90) + "..." : gameName;
+    gameName.length > 80 ? gameName.slice(0, 90) + '...' : gameName;
 
   return (
     <div css={listingStyle}>
@@ -40,24 +40,24 @@ export const Listing: FC<ListingProps> = ({
       <p css={descStyle}>{description}</p>
       <div>
         <Button
-          title="Delete"
+          title='Delete'
           type={DANGER}
           onCLick={() => {
-            console.log("klik");
+            console.log('klik');
           }}
-        />{" "}
+        />{' '}
         <Button
-          title="Open"
+          title='Open'
           type={SUCCES}
           onCLick={() => {
-            console.log("klik");
+            console.log('klik');
           }}
-        />{" "}
+        />{' '}
         <Button
-          title="Edit"
+          title='Edit'
           type={INFO}
           onCLick={() => {
-            console.log("klik");
+            console.log('klik');
           }}
         />
       </div>

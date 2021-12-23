@@ -1,24 +1,24 @@
 /** @jsxImportSource @emotion/react */
-import React, { FC } from "react";
-import {} from "../css/Dashboard.style";
+import React, { FC } from 'react';
+import {} from '../css/Dashboard.style';
 
 export const AddListingForm: FC = () => {
   return (
     <>
       <form>
-        <label htmlFor="">
+        <label htmlFor=''>
           Title
-          <input type="text" />
+          <input type='text' />
         </label>
-        <label htmlFor="">
+        <label htmlFor=''>
           Game
-          <input type="text" />
+          <input type='text' />
         </label>
-        <label htmlFor="">
+        <label htmlFor=''>
           Advance level
-          <input type="text" />
+          <input type='text' />
         </label>
-        <input type={"submit"} />
+        <input type={'submit'} />
       </form>
     </>
   );

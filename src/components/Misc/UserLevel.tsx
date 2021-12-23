@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
-import React, { FC } from "react";
-import { UserLevelWrap, Badge, userLevelExp } from "./css/UserLevel.style";
-import { ProgressBar } from "./ProgressBar";
+import React, { FC } from 'react';
+import { UserLevelWrap, Badge, userLevelExp } from './css/UserLevel.style';
+import { ProgressBar } from './ProgressBar';
 
 interface UserLevelProps {
   progressBarWidthPercentage: number;

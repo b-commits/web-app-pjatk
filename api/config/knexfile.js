@@ -2,7 +2,6 @@ const { knexSnakeCaseMappers } = require('objection');
 const dotenv = require('dotenv').config({
   path: '../../.env',
 });
-console.log(dotenv);
 
 /**
  * knexfile.js is a standard file that contains all of the configuration for the database.

@@ -50,6 +50,7 @@ export const ListingItem: React.FC<any> = ({
   const handleModalOpen = () => setOpen(true);
   const handleModalClose = () => setOpen(false);
   const [listingComments, setListingComments] = useState<any>([]);
+  const { authenticated, setAuthenticated } = useContext(AuthContext);
   const { currentUser } = useContext(AuthContext);
 
   const handleListingComment = async (values: ListingCommentProps) => {
@@ -139,35 +140,39 @@ export const ListingItem: React.FC<any> = ({
                 Comments:
               </Typography>
 
-              <Formik
-                onSubmit={handleListingComment}
-                initialValues={initialCommentValues}
-              >
-                {() => {
-                  return (
-                    <Form>
-                      <Field
-                        placeholder="Leave a comment..."
-                        css={muiField}
-                        as={TextField}
-                        name="content"
-                        multiline
-                        minRows={2}
-                        maxRows={4}
-                      />
-                      <br />
-                      <br />
-                      <Button
-                        type="submit"
-                        color="secondary"
-                        variant="contained"
-                      >
-                        Send comment
-                      </Button>
-                    </Form>
-                  );
-                }}
-              </Formik>
+              {authenticated ? (
+                <Formik
+                  onSubmit={handleListingComment}
+                  initialValues={initialCommentValues}
+                >
+                  {() => {
+                    return (
+                      <Form>
+                        <Field
+                          placeholder="Leave a comment..."
+                          css={muiField}
+                          as={TextField}
+                          name="content"
+                          multiline
+                          minRows={2}
+                          maxRows={4}
+                        />
+                        <br />
+                        <br />
+                        <Button
+                          type="submit"
+                          color="secondary"
+                          variant="contained"
+                        >
+                          Send comment
+                        </Button>
+                      </Form>
+                    );
+                  }}
+                </Formik>
+              ) : (
+                <div>Log in to add a comment</div>
+              )}
 
               {listingComments.map((listingComment: any, index: any) => {
                 return (

@@ -126,4 +126,23 @@ router.get('/', async (req, res, next) => {
   }
 });
 
+/**
+    @route    GET api/users/search/:userQueryString
+    @desc     Get users whose nicknames matches the query string.
+    @access   Public.
+*/
+router.get('/search/:userQueryString', async (req, res, next) => {
+  try {
+    const filteredUsers = await User.query().where(
+      'nickname',
+      'like',
+      '%' + req.params.userQueryString + '%'
+    );
+    console.log(filteredUsers);
+    res.status(200).json(filteredUsers);
+  } catch (err) {
+    res.status(400).json({ msg: 'Bad request ' });
+  }
+});
+
 module.exports = router;

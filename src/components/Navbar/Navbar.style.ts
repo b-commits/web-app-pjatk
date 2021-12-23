@@ -6,8 +6,7 @@ export const navContainer = css({
   top: 0,
   marginTop: 0,
   boxShadow: "3px 3px 5px -1px rgba(55, 58, 54, 1)",
-  // WebkitBoxShadow: "8px 8px 14px -4px rgba(55, 58, 54, 1)",
-  // MozBoxShadow: "8px 8px 14px -4px rgba(55, 58, 54, 1)",
+  height: '125px',
 });
 
 export const navMain = css({
@@ -35,5 +34,21 @@ export const navList = css({
 
 export const navLogo = css({
   height: '5rem',
-  marginTop: '-26px'
+  marginTop: '-29px'
+})
+
+export const muiSearchbar = css({
+  width: '100%',
+  paddingBottom: '70px !important',
+  marginTop: '-10px !important'
+})
+
+export const buttonSearch = css({
+  marginTop: '-11px !important',
+  marginLeft: '10px !important',
+  height: '50px',
+})
+
+export const formikForm = css({
+  display: 'flex',
 })

@@ -27,7 +27,7 @@ const initialCommentValues: ProfilePageComment = {
 export const ProfileCommentBox: React.FC = () => {
   const { id } = useParams<RouteParams>();
   const [profileComments, setProfileComments] = useState<any>([]);
-  const { currentUser } = useContext(AuthContext);
+  const { currentUser, authenticated } = useContext(AuthContext);
 
   useEffect(() => {
     getUserProfilePageComments(id).then((comments: any) => {
@@ -67,19 +67,25 @@ export const ProfileCommentBox: React.FC = () => {
         {() => {
           return (
             <Form>
-              <Field
-                as={TextField}
-                name="content"
-                css={muiCommentArea}
-                multiline
-                rows={2}
-                maxRows={4}
-              />
-              <br />
-              <br />
-              <Button type="submit" color="secondary" variant="contained">
-                Send comment
-              </Button>
+              {authenticated ? (
+                <>
+                  <Field
+                    as={TextField}
+                    name="content"
+                    css={muiCommentArea}
+                    multiline
+                    rows={2}
+                    maxRows={4}
+                  />
+                  <br />
+                  <br />
+                  <Button type="submit" color="secondary" variant="contained">
+                    Send comment
+                  </Button>
+                </>
+              ) : (
+                <div>Log in to leave a comment.</div>
+              )}
             </Form>
           );
         }}

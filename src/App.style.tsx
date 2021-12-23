@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import { red } from '@material-ui/core/colors';
 
 /*
 ----------------------------
@@ -12,6 +11,24 @@ const breakpoints = [320, 769, 1024, 1440];
 
 // mq => media query
 const mq = breakpoints.map((bp) => `@media (min-width: ${bp}px)`);
+
+/* 
+for copy paste
+
+  [mq[0]]: {
+    flexDirection: 'column',
+  },
+  [mq[1]]: {
+    flexDirection: 'row',
+  },
+  [mq[2]]: {
+    flexDirection: 'row',
+  },
+  [mq[3]]: {
+    flexDirection: 'row',
+  },
+
+*/
 /*
 ----------------------------
 ----------------------------
@@ -56,7 +73,7 @@ export const dashboardWrap = css({
   [mq[2]]: {
     flexDirection: 'row',
   },
-  [mq[2]]: {
+  [mq[3]]: {
     flexDirection: 'row',
   },
 });
@@ -88,7 +105,7 @@ export const dashboardSidebar = css({
   [mq[2]]: {
     width: '35%',
   },
-  [mq[2]]: {
+  [mq[3]]: {
     width: '25%',
   },
 });
@@ -110,7 +127,7 @@ export const dashboardMain = css({
   [mq[2]]: {
     width: '65%',
   },
-  [mq[2]]: {
+  [mq[3]]: {
     width: '75%',
   },
 });

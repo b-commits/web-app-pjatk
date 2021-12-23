@@ -5,7 +5,14 @@ import Alert from '@material-ui/lab/Alert';
 import { Formik, Form } from 'formik';
 import { Button, Checkbox } from '@material-ui/core';
 import { RegisterBanner } from './RegisterBanner';
-import { homeMain } from './Register.style';
+import {
+  registerImage,
+  registerWrap,
+  registerFormWrap,
+  registerInputsWrap,
+  registerInput,
+  registerFormSubmit,
+} from './Register.style';
 import { validationSchema } from './RegistrationValidationSchema';
 import { Redirect } from 'react-router-dom';
 import { useState } from 'react';
@@ -39,53 +46,70 @@ export const Register: React.FC = () => {
       });
   };
 
-  if (authorized) return <Redirect to="/login"></Redirect>;
+  if (authorized) return <Redirect to='/login'></Redirect>;
   else
     return (
       <>
         <RegisterBanner />
-        <main css={homeMain}>
-          <Formik
-            initialValues={initialValues}
-            validationSchema={validationSchema}
-            onSubmit={(values) => handleRegistration(values)}
-          >
-            {({ dirty, isValid }) => {
-              return (
-                <Form>
-                  <FormikField name="nickname" label="Nickname" required />
-                  <FormikField name="email" label="E-mail" required />
-                  <FormikField
-                    name="password"
-                    label="Password"
-                    type="password"
-                    required
-                  />
-                  <FormikField
-                    name="passwordConfirm"
-                    label="Confirm Password"
-                    type="password"
-                    required
-                  />
-                  <Checkbox color="primary" />{' '}
-                  <label>I want to receive a monthly newsletter.</label>
-                  <br />
-                  <Checkbox color="primary" />
-                  <label>I agree to terms and conditions.</label>
-                  <br />
-                  <Button
-                    color="primary"
-                    disabled={!dirty || !isValid}
-                    type="submit"
-                  >
-                    Submit
-                  </Button>
-                </Form>
-              );
-            }}
-          </Formik>
+        <main css={registerWrap}>
+          <div css={registerFormWrap}>
+            <div css={registerImage}></div>
+            <div css={registerInputsWrap}>
+              <h1>Register</h1>
+              <Formik
+                initialValues={initialValues}
+                validationSchema={validationSchema}
+                onSubmit={(values) => handleRegistration(values)}
+              >
+                {({ dirty, isValid }) => {
+                  return (
+                    <Form>
+                      <FormikField name='nickname' label='Nickname' required />
+                      <FormikField name='email' label='E-mail' required />
+                      <FormikField
+                        name='password'
+                        label='Password'
+                        type='password'
+                        required
+                      />
+                      <FormikField
+                        name='passwordConfirm'
+                        label='Confirm Password'
+                        type='password'
+                        required
+                      />
+                      <div>
+                        <Checkbox color='primary' />{' '}
+                        <label>I want to receive a monthly newsletter.</label>
+                      </div>
+                      <div>
+                        <Checkbox color='primary' />
+                        <label>I agree to terms and conditions.</label>
+                      </div>
+                      <button
+                        css={registerFormSubmit}
+                        disabled={!dirty || !isValid}
+                        type='submit'
+                      >
+                        Submit
+                      </button>
+                      {/*
+                      <Button
+                        color='primary'
+                        disabled={!dirty || !isValid}
+                        type='submit'
+                      >
+                        Submit
+                      </Button>
+                      */}
+                    </Form>
+                  );
+                }}
+              </Formik>
+            </div>
+          </div>
           {hasErrors && (
-            <Alert severity="error">
+            <Alert severity='error'>
               That email or password is already taken.
             </Alert>
           )}

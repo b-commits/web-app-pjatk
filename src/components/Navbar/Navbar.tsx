@@ -48,10 +48,10 @@ export const Navbar: React.FC = () => {
         <ul css={navList}>
           <li>
             <NavLink
-              className="navLink"
-              activeClassName="activeNavLink"
+              className='navLink'
+              activeClassName='activeNavLink'
               exact
-              to="/"
+              to='/'
             >
               <img css={navLogo} src={logo} />
             </NavLink>
@@ -87,33 +87,33 @@ export const Navbar: React.FC = () => {
           ) : null}
           <li>
             <NavLink
-              className="navLink"
-              activeClassName="activeNavLink"
+              className='navLink'
+              activeClassName='activeNavLink'
               exact
-              to="/"
+              to='/'
             >
               Listings
             </NavLink>
           </li>
           <li>
             <NavLink
-              className="navLink"
-              activeClassName="activeNavLink"
-              to="/about"
+              className='navLink'
+              activeClassName='activeNavLink'
+              to='/about'
             >
               About
             </NavLink>
           </li>
           <li>
             {authenticated ? (
-              <NavLink to="/" onClick={handleLogout}>
+              <NavLink to='/' onClick={handleLogout}>
                 Sign out
               </NavLink>
             ) : (
               <NavLink
-                className="navLink"
-                activeClassName="activeNavLink"
-                to="/login"
+                className='navLink'
+                activeClassName='activeNavLink'
+                to='/login'
               >
                 Sign in
               </NavLink>

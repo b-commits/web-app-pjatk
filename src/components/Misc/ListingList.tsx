@@ -1,11 +1,11 @@
 /** @jsxImportSource @emotion/react */
-import React, { FC } from "react";
-import { Listing } from "./Listing";
-import { listingListStyle } from "./css/ListingList.style";
+import React, { FC } from 'react';
+import { Listing } from './Listing';
+import { listingListStyle } from './css/ListingList.style';
 //----------
-export const PROFILE_VIEW = "PROFILEVIEW";
-export const DASHBOARD_VIEW = "DASHBOARD";
-export const HOMEPAGE_VIEW = "HOMPAGE";
+export const PROFILE_VIEW = 'PROFILEVIEW';
+export const DASHBOARD_VIEW = 'DASHBOARD';
+export const HOMEPAGE_VIEW = 'HOMPAGE';
 //----------
 
 interface ListingListProps {

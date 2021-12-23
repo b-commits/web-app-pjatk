@@ -35,7 +35,7 @@ export const ListingComment: React.FC<ListingCommentProps | any> = (
 
   return (
     <Paper css={muiPaper}>
-      <Grid container wrap="nowrap" spacing={2}>
+      <Grid container wrap='nowrap' spacing={2}>
         <Grid item>
           <Avatar src={imgLink} />
         </Grid>
@@ -45,7 +45,7 @@ export const ListingComment: React.FC<ListingCommentProps | any> = (
           <p css={commentTimestamp}>{getTime()}</p>
         </Grid>
       </Grid>
-      <Divider variant="fullWidth" css={muiDivider} />
+      <Divider variant='fullWidth' css={muiDivider} />
     </Paper>
   );
 };

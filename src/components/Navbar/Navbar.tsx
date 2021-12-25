@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import React, { useContext } from 'react';
 import { Formik, Form, Field } from 'formik';
-import { NavLink, useHistory } from 'react-router-dom';
+import { NavLink, useHistory, useLocation } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import { TextField, Button } from '@material-ui/core';
 import {
@@ -20,6 +20,7 @@ import logo from '../../logo.png';
 export const Navbar: React.FC = () => {
   const { authenticated, setAuthenticated } = useContext(AuthContext);
   const history = useHistory();
+  const location = useLocation();
 
   interface FormikSearchValues {
     search: string;
@@ -29,6 +30,7 @@ export const Navbar: React.FC = () => {
     logoutUser().then(() => {
       setAuthenticated(false);
       history.push(HOME);
+      history.go(0);
     });
   };
 
@@ -40,6 +42,17 @@ export const Navbar: React.FC = () => {
         queryString: query,
       },
     });
+    if (location.pathname === '/search') {
+      history.replace('/reload');
+      setTimeout(() => {
+        history.push({
+          pathname: '/search',
+          state: {
+            queryString: query,
+          },
+        });
+      });
+    }
   };
 
   return (

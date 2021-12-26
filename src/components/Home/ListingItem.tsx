@@ -50,7 +50,7 @@ export const ListingItem: React.FC<any> = ({
   const handleModalOpen = () => setOpen(true);
   const handleModalClose = () => setOpen(false);
   const [listingComments, setListingComments] = useState<any>([]);
-  const { authenticated, setAuthenticated } = useContext(AuthContext);
+  const { authenticated } = useContext(AuthContext);
   const { currentUser } = useContext(AuthContext);
 
   const handleListingComment = async (values: ListingCommentProps) => {
@@ -77,7 +77,7 @@ export const ListingItem: React.FC<any> = ({
     getAllListingComments(id).then((listingComments: any) => {
       setListingComments(listingComments.data.reverse());
     });
-  }, []);
+  }, [id]);
 
   return (
     <div css={listingItem}>

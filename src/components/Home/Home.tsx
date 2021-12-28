@@ -108,7 +108,6 @@ export const Home: React.FC = () => {
 
       <main css={homeMain}>
         {currentListings.map((listing, index) => {
-          console.log(listing);
           return (
             <ListingItem
               key={index}

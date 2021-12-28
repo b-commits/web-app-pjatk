@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
-import React, { FC } from "react";
-import { MenuItem } from "./MenuItem";
-import { sidebarMenu, hrSidebarBreaker } from "../css/DashboardSidebar.style";
+import React, { FC } from 'react';
+import { MenuItem } from './MenuItem';
+import { sidebarMenu, hrSidebarBreaker } from '../css/DashboardSidebar.style';
 
 //MENU SECTION
 export const Menu: FC = () => {
@@ -9,17 +9,18 @@ export const Menu: FC = () => {
     <>
       <ul css={sidebarMenu}>
         <h3>Menu</h3>
-        <MenuItem title={"Home"} href={"/dashboard"} />
+        <MenuItem title={'Home'} href={'/dashboard'} />
+        <MenuItem title={'User Settings'} href={'/dashboard/settings'} />
 
-        <MenuItem title={"Listings"} href={"/dashboard/listings"} />
+        <MenuItem title={'Listings'} href={'/dashboard/listings'} />
 
-        <MenuItem title={"Friends"} href={"/dashboard/friends"} />
+        <MenuItem title={'Friends'} href={'/dashboard/friends'} />
 
-        <MenuItem title={"Favorite Games"} href={"/dashboard/favgames"} />
+        <MenuItem title={'Favorite Games'} href={'/dashboard/favgames'} />
 
-        <MenuItem title={"Admin"} href={"/dashboard/admin"} />
+        <MenuItem title={'Admin'} href={'/dashboard/admin'} />
 
-        <MenuItem title={"Reports"} href={"/dashboard/reports"} />
+        <MenuItem title={'Reports'} href={'/dashboard/reports'} />
       </ul>
     </>
   );

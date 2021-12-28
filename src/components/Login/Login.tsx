@@ -8,7 +8,6 @@ import {
   loginWrap,
   loginFormWrap,
   loginInputsWrap,
-  loginInput,
   loginFormSubmit,
   linkClass,
 } from './Login.style';

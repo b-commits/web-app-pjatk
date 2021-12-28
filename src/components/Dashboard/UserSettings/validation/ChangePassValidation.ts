@@ -13,14 +13,9 @@ import {
   the exact same fields names as those specified in the [name=""] prop in <FormikField/> component.
 */
 export const validationSchema = Yup.object().shape({
-  nickname: Yup.string()
+  currentPassword: Yup.string()
     .matches(REG_NO_WHITESPACE, 'No whitespaces, please.')
-    .max(
-      NICK_MAX_CHARS,
-      `Nickname must be ${NICK_MAX_CHARS} characters or less.`
-    )
     .required('Required'),
-  email: Yup.string().email('E-mail must be valid.').required('Required'),
   password: Yup.string()
     .matches(REG_NO_WHITESPACE, 'No whitespaces, please.')
     .matches(REG_INC_NUMERIC, 'Must include a numeric character')

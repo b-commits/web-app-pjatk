@@ -10,7 +10,6 @@ import {
   registerWrap,
   registerFormWrap,
   registerInputsWrap,
-  registerInput,
   registerFormSubmit,
 } from './Register.style';
 import { validationSchema } from './RegistrationValidationSchema';

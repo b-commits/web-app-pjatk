@@ -2,13 +2,14 @@
 import React, { FC } from 'react';
 import { Button, DANGER, INFO, SUCCES } from './Button';
 import {
-  listingStyle,
-  gameImgStyle,
-  titleStyle,
-  gameNameStyle,
-  descStyle,
+  listingItemWrap,
+  listingHeader,
+  listingTitle,
   gameBox,
-  buttonsWrap,
+  gameImgStyle,
+  gameNameStyle,
+  listingDesc,
+  listingFooter,
 } from './css/Listing.style';
 interface ListingProps {
   id: number;
@@ -26,19 +27,29 @@ export const Listing: FC<ListingProps> = ({
   gameName,
   gameImgUrl,
 }) => {
+  const titleSliced = title.length > 40 ? desc.slice(0, 40) + '...' : title;
   const description = desc.length > 70 ? desc.slice(0, 70) + '...' : desc;
   const gameNameSlice =
     gameName.length > 80 ? gameName.slice(0, 90) + '...' : gameName;
 
   return (
-    <div css={listingStyle}>
+    <div css={listingItemWrap}>
+      <div css={listingHeader}>
+        <i className='fas fa-users'></i>
+
+        <h1 title={title} css={listingTitle}>
+          {titleSliced}
+        </h1>
+        <i className='fas fa-share'></i>
+      </div>
       <div css={gameBox}>
         <img css={gameImgStyle} src={gameImgUrl} alt={gameName} />
         <span css={gameNameStyle}>{gameNameSlice}</span>
       </div>
-      <h1 css={titleStyle}>{title}</h1>
-      <p css={descStyle}>{description}</p>
-      <div>
+      <div css={listingDesc}>
+        <p>{description}</p>
+      </div>
+      <div css={listingFooter}>
         <Button
           title='Delete'
           type={DANGER}
@@ -47,15 +58,15 @@ export const Listing: FC<ListingProps> = ({
           }}
         />{' '}
         <Button
-          title='Open'
-          type={SUCCES}
+          title='Menge'
+          type={INFO}
           onCLick={() => {
             console.log('klik');
           }}
         />{' '}
         <Button
-          title='Edit'
-          type={INFO}
+          title='Open'
+          type={SUCCES}
           onCLick={() => {
             console.log('klik');
           }}

@@ -1,6 +1,4 @@
 import { css } from '@emotion/react';
-import { NONAME } from 'dns';
-
 /*
 ----------------------------
 ----------------------------

@@ -1,10 +1,11 @@
 import { css } from '@emotion/react';
 
 export const buttonStyle = css({
-  fontSize: '12px',
+  fontSize: '0.8em',
+  fontWeight: 'bold',
   color: '#ffffff',
-  height: '30px',
   width: '100px',
+  verticalAlign: 'center',
   marginBottom: '10px',
   alignContent: 'center',
   alignSelf: 'center',

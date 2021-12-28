@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import React, { FC } from 'react';
 import { UserLevel } from '../Misc/UserLevel';
+import { UserAchivmentsDashboard } from './UserAchivments';
 import { SectionDashboard } from './SectionDashboard';
 
 export const Dashboard: FC = () => {
@@ -10,18 +11,11 @@ export const Dashboard: FC = () => {
 
   return (
     <>
-      <h1> Home </h1>
-      <div>
-        <SectionDashboard title={'Your level'} component={userLevelComponent} />
-      </div>
-
-      <div>
-        <h1>Rewards</h1>
-      </div>
-
-      <div>
-        <h1>Achivments</h1>
-      </div>
+      <SectionDashboard title={'Your level'} component={userLevelComponent} />
+      <SectionDashboard
+        title={'Your Achivments'}
+        component={<UserAchivmentsDashboard />}
+      />
     </>
   );
 };

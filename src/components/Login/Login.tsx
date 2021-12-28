@@ -3,11 +3,18 @@ import React, { useContext, useState } from 'react';
 import { Formik, Form } from 'formik';
 import FormikField from '../Register/FormikField';
 import Alert from '@material-ui/lab/Alert';
-import { Button } from '@material-ui/core';
-import { homeMain } from '../Register/Register.style';
+import {
+  loginImage,
+  loginWrap,
+  loginFormWrap,
+  loginInputsWrap,
+  loginInput,
+  loginFormSubmit,
+  linkClass,
+} from './Login.style';
 import { validationSchema } from './LoginValidationSchema';
 import { getCurrentUser, loginUser } from './ApiCalls';
-import { Redirect } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 
 interface FormValues {
@@ -48,36 +55,48 @@ export const Login: React.FC<FormValues> = () => {
 
   return (
     <>
-      <main css={homeMain}>
-        <Formik
-          initialValues={initialValues}
-          validationSchema={validationSchema}
-          onSubmit={handleLogin}
-        >
-          {({ dirty, isValid }) => {
-            return (
-              <Form>
-                <FormikField name="email" label="E-mail" required />
-                <FormikField
-                  name="password"
-                  label="Password"
-                  type="password"
-                  required
-                />
-                <Button
-                  color="primary"
-                  disabled={!dirty || !isValid}
-                  type="submit"
-                >
-                  Submit
-                </Button>
-              </Form>
-            );
-          }}
-        </Formik>
-        Don't have an account yet? <a href="/register">Sign up</a>
+      <main css={loginWrap}>
+        <div css={loginFormWrap}>
+          <div css={loginImage}></div>
+          <div css={loginInputsWrap}>
+            <h1>Log in</h1>
+            <Formik
+              initialValues={initialValues}
+              validationSchema={validationSchema}
+              onSubmit={handleLogin}
+            >
+              {({ dirty, isValid }) => {
+                return (
+                  <Form>
+                    <FormikField name='email' label='E-mail' required />
+                    <FormikField
+                      name='password'
+                      label='Password'
+                      type='password'
+                      required
+                    />
+
+                    <button
+                      css={loginFormSubmit}
+                      disabled={!dirty || !isValid}
+                      type='submit'
+                    >
+                      Submit
+                    </button>
+                  </Form>
+                );
+              }}
+            </Formik>
+            <p>
+              Don't have an account yet?{' '}
+              <Link css={linkClass} to='/register'>
+                Sign up
+              </Link>
+            </p>
+          </div>
+        </div>
         {hasErrors && (
-          <Alert severity="error">
+          <Alert severity='error'>
             Either your password is wrong or you haven't registered yet.
           </Alert>
         )}

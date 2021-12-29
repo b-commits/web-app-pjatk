@@ -6,6 +6,7 @@ const cors = require('cors');
 const passport = require('passport');
 const users = require('./routes/users');
 const profilePageComments = require('./routes/profilePageComments');
+const adminReports = require('./routes/adminReports');
 const privateMessages = require('./routes/privateMessages');
 const listings = require('./routes/listings');
 require('./config/passportConfig.js');
@@ -45,6 +46,7 @@ app.use('/api/users', users);
 app.use('/api/listings', listings);
 app.use('/api/profilePageComments', profilePageComments);
 app.use('/api/privateMessages', privateMessages);
+app.use('/api/adminReports', adminReports);
 
 app.listen(port, () => {
   console.log(`[server] listening at http://localhost:${port}.`);

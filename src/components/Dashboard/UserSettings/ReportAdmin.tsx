@@ -1,52 +1,58 @@
 /** @jsxImportSource @emotion/react */
-import React, { FC, useState } from 'react';
-import { Redirect } from 'react-router';
+import React, { FC, useState, useContext } from 'react';
 import Alert from '@material-ui/lab/Alert';
 import { Formik, Form } from 'formik';
 import { submitButton } from '../css/UserSettingsDashboard.style';
-import { validationSchema } from './validation/ChangePassValidation';
+import { AuthContext } from '../../../context/AuthContext';
+import { postAdminReport } from '../ApiCalls';
 import FormikField from './FormikField';
 
 interface FormValues {
-  report: string;
+  content: string;
+  reporter: number;
 }
 
-const initialValues: FormValues = {
-  report: '',
-};
-
 export const ReportAdmin: FC = () => {
-  const [authorized, setAuthorized] = useState(false);
-  const [hasErrors, setErrors] = useState(false);
+  const [sentSucess, setSentSuccess] = useState<boolean>(false);
+  const { currentUser } = useContext(AuthContext);
+
+  const initialValues: FormValues = {
+    content: '',
+    reporter: currentUser.id,
+  };
+
+  const handleReport = async (values: FormValues) => {
+    postAdminReport(values).then((res: any) => {
+      if (res == 200) {
+        setSentSuccess(true);
+      }
+    });
+  };
+
   return (
     <>
       <Formik
         initialValues={initialValues}
-        validationSchema={validationSchema}
-        onSubmit={(values) => console.log(values)}
+        onSubmit={(values) => handleReport(values)}
       >
-        {({ dirty, isValid }) => {
+        {() => {
           return (
             <Form>
               <FormikField
-                name='report'
-                label='report'
-                type='textarea'
+                name="content"
+                label="Enter your report..."
+                type="textarea"
                 required
               />
-              <button
-                css={submitButton}
-                disabled={!dirty || !isValid}
-                type='submit'
-              >
+              <button css={submitButton} type="submit">
                 Submit
               </button>
             </Form>
           );
         }}
       </Formik>
-      {hasErrors && (
-        <Alert severity='error'>That email or password is already taken.</Alert>
+      {sentSucess && (
+        <Alert severity="info">We have received your report. Thank you!</Alert>
       )}
     </>
   );

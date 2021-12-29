@@ -1,0 +1,2 @@
+cd /api/config
+npx knex migrate:make [MIGRATION_NAME] 

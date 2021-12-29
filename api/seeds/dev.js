@@ -9,6 +9,7 @@ exports.seed = async (knex) => {
   const profilePageComments = [];
   const listings = [];
   const listingComments = [];
+  const privateMessages = [];
   const numEntries = 50;
 
   for (let i = 0; i < numEntries; i++) {
@@ -16,11 +17,13 @@ exports.seed = async (knex) => {
     profilePageComments.push(createProfilePageComment());
     listings.push(createListing());
     listingComments.push(createListingComment());
+    privateMessages.push(createPrivateMessage());
   }
   // await knex('user').insert(users);
   // await knex('profilePageComment').insert(profilePageComments);
   // await knex('listing').insert(listings);
-  await knex('listingComment').insert(listingComments);
+  // await knex('listingComment').insert(listingComments);
+  await knex('privateMessage').insert(privateMessages);
 };
 
 const createUser = () => ({
@@ -44,7 +47,11 @@ const createProfilePageComment = () => ({
   }),
 });
 
-const createPrivateMessage = () => ({});
+const createPrivateMessage = () => ({
+  content: faker.lorem.words(20),
+  messageSender: faker.datatype.number({ min: 2, max: 25 }),
+  messageReceiver: faker.datatype.number({ min: 2, max: 25 }),
+});
 
 const createFriendship = () => ({
   user: faker.datatype.number({ min: 1, max: 50 }),

@@ -6,9 +6,11 @@ import {
   dashboardSidebar,
   dashboardMain,
 } from './App.style';
+import { useState } from 'react';
 import { SearchResults } from './components/Search/SearchResults';
 import { Navbar } from './components/Navbar/Navbar';
 import { Home } from './components/Home/Home';
+import { SendForm } from './components/PrivateMessage/SendForm';
 import { Footer } from './components/Footer/Footer';
 import { About } from './components/About/About';
 import { Register } from './components/Register/Register';
@@ -16,7 +18,6 @@ import { Login } from './components/Login/Login';
 import { Profile } from './components/Profile/Profile';
 import { ErrorPage } from './components/Error/ErrorPage';
 import { AuthContext } from './context/AuthContext';
-import { useState } from 'react';
 import { DashboardSidebar } from './components/Dashboard/Sidebar/DashboardSidebar';
 import { Dashboard } from './components/Dashboard/Dashboard';
 import { FriendsDashboard } from './components/Dashboard/FriendsDashboard';
@@ -36,47 +37,48 @@ export const App = () => {
         value={{ authenticated, setAuthenticated, currentUser, setCurrentUser }}
       >
         <Navbar />
-        <div className='App' css={appStyle}>
+        <div className="App" css={appStyle}>
           <Switch>
-            <Route path='/' exact component={Home} />
-            <Route path='/search' component={SearchResults} />
-            <Route path='/about' component={About} />
-            <Route path='/register' component={Register} />
-            <Route path='/login' component={Login} />
-            <Route path='/dashboard'>
+            <Route path="/" exact component={Home} />
+            <Route path="/search" component={SearchResults} />
+            <Route path="/about" component={About} />
+            <Route path="/register" component={Register} />
+            <Route path="/login" component={Login} />
+            <Route path="/message" component={SendForm} />
+            <Route path="/dashboard">
               <div css={dashboardWrap}>
                 <div css={dashboardSidebar}>
                   <DashboardSidebar />
                 </div>
                 <div css={dashboardMain}>
                   <Switch>
-                    <Route exact path='/dashboard'>
+                    <Route exact path="/dashboard">
                       <Dashboard />
                     </Route>
-                    <Route path='/dashboard/settings'>
+                    <Route path="/dashboard/settings">
                       <UserSettingsDashboard />
                     </Route>
-                    <Route path='/dashboard/listings'>
+                    <Route path="/dashboard/listings">
                       <ListingDashboard />
                     </Route>
-                    <Route path='/dashboard/favgames'>
+                    <Route path="/dashboard/favgames">
                       <FavGamesDashboard />
                     </Route>
-                    <Route path='/dashboard/friends'>
+                    <Route path="/dashboard/friends">
                       <FriendsDashboard />
                     </Route>
-                    <Route path='/dashboard/admin'>
+                    <Route path="/dashboard/admin">
                       <AdminDashboard />
                     </Route>
-                    <Route path='/dashboard/reports'>
+                    <Route path="/dashboard/reports">
                       <ReportsDashboard />
                     </Route>
                   </Switch>
                 </div>
               </div>
             </Route>
-            <Route path='/profile/:id' component={Profile} />
-            <Route path='*' exact component={ErrorPage} />
+            <Route path="/profile/:id" component={Profile} />
+            <Route path="*" exact component={ErrorPage} />
           </Switch>
         </div>
         <Footer />

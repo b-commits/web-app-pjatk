@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import React, { useContext, useEffect, useState } from 'react';
 import { getUserByID } from './ApiCalls';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import { CircularProgress } from '@material-ui/core';
 import {
@@ -45,7 +45,7 @@ export const UserDetails: React.FC<{ isUserOnline: boolean }> = ({
         >
           <div css={userDetailsData}>
             <UserAvatar
-              avatarURL='http://bluepito.webd.pro/logopjatk.gif'
+              avatarURL="http://bluepito.webd.pro/logopjatk.gif"
               nickName={user.data.nickname}
               isUserOnline={isUserOnline}
             />
@@ -119,11 +119,27 @@ const UserInfoWrapItem: React.FC<{
 };
 
 const UserActions: React.FC = () => {
+  const history = useHistory();
+  const { id } = useParams<RouteParams>();
+
+  const handleMessageRedirect = () => {
+    history.push({
+      pathname: '/message',
+      state: {
+        receiverId: id,
+      },
+    });
+  };
+
   return (
     <>
       <div css={userActions}>
         <ProfileActionButton color={'#44c767'} value={'Add friend'} />
-        <ProfileActionButton color={'#eeb44f'} value={'Reward'} />
+        <ProfileActionButton
+          color={'#eeb44f'}
+          value={'Message'}
+          handleClick={handleMessageRedirect}
+        />
         <ProfileActionButton color={'#f24437'} value={'Report'} />
       </div>
     </>

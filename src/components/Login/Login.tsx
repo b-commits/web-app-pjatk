@@ -46,7 +46,6 @@ export const Login: React.FC<FormValues> = () => {
       });
   };
 
-  // todo add redirect to specific user from context
   if (authenticated)
     return (
       <Redirect to={{ pathname: `/profile/${currentUser.id}` }}></Redirect>
@@ -67,18 +66,18 @@ export const Login: React.FC<FormValues> = () => {
               {({ dirty, isValid }) => {
                 return (
                   <Form>
-                    <FormikField name='email' label='E-mail' required />
+                    <FormikField name="email" label="E-mail" required />
                     <FormikField
-                      name='password'
-                      label='Password'
-                      type='password'
+                      name="password"
+                      label="Password"
+                      type="password"
                       required
                     />
 
                     <button
                       css={loginFormSubmit}
                       disabled={!dirty || !isValid}
-                      type='submit'
+                      type="submit"
                     >
                       Submit
                     </button>
@@ -88,14 +87,14 @@ export const Login: React.FC<FormValues> = () => {
             </Formik>
             <p>
               Don't have an account yet?{' '}
-              <Link css={linkClass} to='/register'>
+              <Link css={linkClass} to="/register">
                 Sign up
               </Link>
             </p>
           </div>
         </div>
         {hasErrors && (
-          <Alert severity='error'>
+          <Alert severity="error">
             Either your password is wrong or you haven't registered yet.
           </Alert>
         )}

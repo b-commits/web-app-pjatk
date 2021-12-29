@@ -29,6 +29,7 @@ export const messageWrapper = css({
   });
 
   export const formWrap = css({
+    textAlign: 'center',
     borderRadius: '10px',
     width: '100%',
     display: ' table',
@@ -43,4 +44,13 @@ export const messageWrapper = css({
 
   export const sendButton = css({
     width: '100%'
+  })
+
+  export const receiverStyle = css({
+    color: '#3f50b5',
+  })
+
+  export const goBack = css({
+    color: '#3f50b5',
+    cursor: 'pointer',
   })

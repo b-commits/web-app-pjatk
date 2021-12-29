@@ -6,7 +6,23 @@ import { AuthContext } from '../../context/AuthContext';
 import { TextField, Button } from '@material-ui/core';
 import { muiCommentArea } from '../../components/Profile/Profile.style';
 import { getUserByID } from '../../components/Profile/ApiCalls';
-import { messageWrapper, formWrap, sendButton } from './PrivateMessage.style';
+import { sendPrivateMessage } from './ApiCalls';
+import {
+  messageWrapper,
+  formWrap,
+  sendButton,
+  receiverStyle,
+} from './PrivateMessage.style';
+
+interface Receiver {
+  id: number;
+  nickname: string;
+}
+
+const initialValues = {
+  id: 0,
+  nickname: '',
+};
 
 interface PrivateMessage {
   title: string;
@@ -24,23 +40,50 @@ const initialMessageValues: PrivateMessage = {
 
 export const SendForm: React.FC = () => {
   const { currentUser, authenticated } = useContext(AuthContext);
-  const [receiverNickname, setReceiverNickname] = useState<string>(' ');
+  const [receiver, setReceiver] = useState<Receiver>(initialValues);
   const location = useLocation<any>();
+  const history = useHistory();
+
+  const handleMessage = async (values: PrivateMessage) => {
+    const newComment = {
+      content: values.content,
+      nickname: currentUser.nickname,
+      messageReceiver: receiver.id,
+      messageSender: currentUser.id,
+    };
+    await sendPrivateMessage({
+      content: newComment.content,
+      messageReceiver: newComment.messageReceiver,
+      messageSender: newComment.messageSender,
+    })
+      .then(() => {
+        history.push('/success');
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   useEffect(() => {
     console.log(location.state.receiverId);
     getUserByID(location.state.receiverId).then((user: any) => {
-      console.log(user.data.nickname);
-      setReceiverNickname(user.data.nickname);
+      const receiver = {
+        id: user.data.id,
+        nickname: user.data.nickname,
+      };
+      setReceiver(receiver);
     });
-  });
-
-  const handleMessage = () => {};
+  }, []);
 
   return (
     <div css={messageWrapper}>
       <div css={formWrap}>
-        <h1>Sending a private message to: {receiverNickname}</h1>
+        <div>
+          <h1>
+            Sending a private message to:{' '}
+            <span css={receiverStyle}>{receiver.nickname}</span>
+          </h1>
+        </div>
         <Formik onSubmit={handleMessage} initialValues={initialMessageValues}>
           {() => {
             return (

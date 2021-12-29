@@ -26,6 +26,9 @@ import { FavGamesDashboard } from './components/Dashboard/FavGamesDashboard';
 import { AdminDashboard } from './components/Dashboard/AdminDashboard';
 import { ReportsDashboard } from './components/Dashboard/ReportsDashboard';
 import { UserSettingsDashboard } from './components/Dashboard/UserSettings/UserSettingsDashboard';
+import { Success } from './components/PrivateMessage/Success';
+import { Inbox } from './components/PrivateMessage/Inbox';
+import { InboxDashboard } from './components/Dashboard/InboxDashboard';
 
 export const App = () => {
   const [authenticated, setAuthenticated] = useState(false);
@@ -45,6 +48,8 @@ export const App = () => {
             <Route path="/register" component={Register} />
             <Route path="/login" component={Login} />
             <Route path="/message" component={SendForm} />
+            <Route path="/success" component={Success} />
+            <Route path="/success" component={Inbox} />
             <Route path="/dashboard">
               <div css={dashboardWrap}>
                 <div css={dashboardSidebar}>
@@ -60,6 +65,9 @@ export const App = () => {
                     </Route>
                     <Route path="/dashboard/listings">
                       <ListingDashboard />
+                    </Route>
+                    <Route path="/dashboard/inbox">
+                      <InboxDashboard />
                     </Route>
                     <Route path="/dashboard/favgames">
                       <FavGamesDashboard />

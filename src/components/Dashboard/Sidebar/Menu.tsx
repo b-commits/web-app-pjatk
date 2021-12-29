@@ -10,6 +10,9 @@ export const Menu: FC = () => {
       <ul css={sidebarMenu}>
         <h3>Menu</h3>
         <MenuItem title={'Home'} href={'/dashboard'} />
+
+        <MenuItem title={'Inbox'} href={'/dashboard/inbox'} />
+
         <MenuItem title={'User Settings'} href={'/dashboard/settings'} />
 
         <MenuItem title={'Listings'} href={'/dashboard/listings'} />

@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useHistory } from 'react-router-dom';
 import { getUsersByNickname } from '../Navbar/ApiCalls';
 import {
   searchList,
@@ -15,6 +15,7 @@ const imgLink = 'http://bluepito.webd.pro/logopjatk.gif';
 
 export const SearchResults: React.FC<any> = () => {
   const location: any = useLocation();
+  const history = useHistory();
   const [filteredUsers, setFilteredUsers] = useState<Array<any>>([]);
 
   useEffect(() => {
@@ -22,6 +23,10 @@ export const SearchResults: React.FC<any> = () => {
       setFilteredUsers(users.data);
     });
   }, []);
+
+  const navigateToProfile = (id: any) => {
+    history.push(`/profile/${id}`);
+  };
 
   return (
     <div css={searchWrapper}>
@@ -34,7 +39,13 @@ export const SearchResults: React.FC<any> = () => {
               <li css={listItem}>
                 <Avatar css={avatar} src={imgLink} />
                 <p css={nickname}>{user.nickname}</p>
-                <Button>View profile</Button>
+                <Button
+                  onClick={() => {
+                    navigateToProfile(user.id);
+                  }}
+                >
+                  View profile
+                </Button>
                 <Button>Follow</Button>
               </li>
               <Divider />

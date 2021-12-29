@@ -1,5 +1,7 @@
 const User = require('../models/User');
 const Listing = require('../models/Listing');
+const PrivateMessage = require('../models/PrivateMessage');
+const ProfilePageComment = require('../models/ProfilePageComment');
 const express = require('express');
 const bcrypt = require('bcrypt');
 const passport = require('passport');
@@ -47,6 +49,26 @@ router.get('/user/:id', async (req, res, next) => {
     res.json(user);
   } catch (err) {
     res.status(400).json({ msg: BAD_REQUEST });
+  }
+});
+
+/**
+    @route    DELETE api/users/delete/:id
+    @desc     Get user by id.
+    @access   Public.
+*/
+router.delete('/delete/:id', async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    await Listing.query().where({ creator: id }).delete();
+    await PrivateMessage.query().where({ messageSender: id }).delete();
+    await PrivateMessage.query().where({ messageSender: id }).delete();
+    await ProfilePageComment.query().where({ commentSender: id }).delete();
+    await ProfilePageComment.query().where({ commentReceiver: id }).delete();
+    await User.query().deleteById(id);
+    res.json({ msg: `User ${id} deleted.` });
+  } catch (err) {
+    res.status(400).json({ msg: err.message });
   }
 });
 

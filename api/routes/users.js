@@ -1,5 +1,6 @@
 const User = require('../models/User');
 const Listing = require('../models/Listing');
+const ListingComment = require('../models/ListingComment');
 const PrivateMessage = require('../models/PrivateMessage');
 const ProfilePageComment = require('../models/ProfilePageComment');
 const express = require('express');
@@ -61,7 +62,8 @@ router.delete('/delete/:id', async (req, res, next) => {
   try {
     const { id } = req.params;
     await Listing.query().where({ creator: id }).delete();
-    await PrivateMessage.query().where({ messageSender: id }).delete();
+    await ListingComment.query().where({ commentSender: id }).delete();
+    await PrivateMessage.query().where({ messageReceiver: id }).delete();
     await PrivateMessage.query().where({ messageSender: id }).delete();
     await ProfilePageComment.query().where({ commentSender: id }).delete();
     await ProfilePageComment.query().where({ commentReceiver: id }).delete();

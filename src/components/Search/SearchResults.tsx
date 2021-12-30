@@ -22,7 +22,7 @@ export const SearchResults: React.FC<any> = () => {
     getUsersByNickname(location.state.queryString).then((users: any) => {
       setFilteredUsers(users.data);
     });
-  }, []);
+  }, [location.state.queryString]);
 
   const navigateToProfile = (id: any) => {
     history.push(`/profile/${id}`);

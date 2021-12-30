@@ -30,7 +30,7 @@ export const UserDetails: React.FC<{ isUserOnline: boolean }> = ({
     getUserByID(id).then((user: any) => {
       setUser(user);
     });
-  }, []);
+  }, [id]);
 
   if (user.data != null) {
     return (

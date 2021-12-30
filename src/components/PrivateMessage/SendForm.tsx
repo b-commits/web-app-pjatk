@@ -65,7 +65,6 @@ export const SendForm: React.FC = () => {
   };
 
   useEffect(() => {
-    console.log(location.state.receiverId);
     getUserByID(location.state.receiverId).then((user: any) => {
       const receiver = {
         id: user.data.id,
@@ -73,7 +72,7 @@ export const SendForm: React.FC = () => {
       };
       setReceiver(receiver);
     });
-  }, []);
+  }, [location.state.receiverId]);
 
   return (
     <div css={messageWrapper}>
@@ -96,7 +95,7 @@ export const SendForm: React.FC = () => {
                       name="content"
                       css={muiCommentArea}
                       multiline
-                      rows={2}
+                      minRows={2}
                       maxRows={4}
                     />
                     <br />

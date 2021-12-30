@@ -5,6 +5,11 @@ interface AdminReport {
   reporter: number;
 }
 
+interface FormValues {
+  id: number;
+  nickname: string;
+}
+
 export const getUserPrivateMessages = (userId: number): any => {
   return axios.get(`http://localhost:5000/api/privateMessages/${userId}`, {
     withCredentials: true,
@@ -29,4 +34,20 @@ export const postAdminReport = (report: AdminReport): any => {
   })
     .then((res) => res.status)
     .catch((err) => console.log(err));
+};
+
+export const changeUsername = (formValues: FormValues): any => {
+  return axios({
+    method: 'PATCH',
+    withCredentials: true,
+    url: 'http://localhost:5000/api/users',
+    data: {
+      nickname: formValues.nickname,
+      id: formValues.id,
+    },
+  })
+    .then((res) => res.status)
+    .catch((err) => {
+      const mute = err;
+    });
 };

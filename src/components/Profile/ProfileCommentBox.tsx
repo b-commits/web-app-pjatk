@@ -33,7 +33,7 @@ export const ProfileCommentBox: React.FC = () => {
     getUserProfilePageComments(id).then((comments: any) => {
       setProfileComments(comments.data.reverse());
     });
-  }, []);
+  }, [id]);
 
   const handleProfileComment = async (values: ProfilePageComment) => {
     const newComment = {
@@ -74,7 +74,7 @@ export const ProfileCommentBox: React.FC = () => {
                     name="content"
                     css={muiCommentArea}
                     multiline
-                    rows={2}
+                    minRows={2}
                     maxRows={4}
                   />
                   <br />

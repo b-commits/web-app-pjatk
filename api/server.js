@@ -38,7 +38,7 @@ app.use(passport.session());
 app.use((req, res, next) => {
   console.log(req.session);
   console.log(req.body);
-  console.log(req.sessionID);
+  console.log(`SESSID: ${req.sessionID}`);
   next();
 });
 

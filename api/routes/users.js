@@ -162,10 +162,48 @@ router.get('/search/:userQueryString', async (req, res, next) => {
       'like',
       '%' + req.params.userQueryString + '%'
     );
-    console.log(filteredUsers);
     res.status(200).json(filteredUsers);
   } catch (err) {
     res.status(400).json({ msg: 'Bad request ' });
+  }
+});
+
+/**
+    @route    PATCH api/users/
+    @desc     Updates the username.
+    @access   Protected.
+*/
+router.patch('/', async (req, res) => {
+  try {
+    const nickanameAlreadyExists = await User.query().where({
+      nickname: req.body.nickname,
+    });
+    if (nickanameAlreadyExists.length == 0) {
+      await User.query()
+        .where({ id: req.body.id })
+        .update({ nickname: req.body.nickname });
+      res.status(200).json({ msg: 'Updated' });
+    } else res.status(400).json({ msg: 'Nickname already taken' });
+  } catch (error) {
+    res.status(SERVER_ERROR).json({ msg: error.message });
+  }
+});
+
+/**
+    @route    PATCH api/users/changePassword
+    @desc     Updates the user password.
+    @access   Protected.
+*/
+router.patch('/changePassword', async (req, res) => {
+  try {
+    const salt = await bcrypt.genSalt();
+    const hashedPassword = await bcrypt.hash(req.body.password, salt);
+    await User.query()
+      .where({ id: req.body.id })
+      .update({ password: hashedPassword });
+    res.status(200).json({ msg: 'Updated' });
+  } catch (error) {
+    res.status(BAD_REQUEST).json({ msg: error.message });
   }
 });
 

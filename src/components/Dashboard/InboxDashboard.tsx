@@ -24,7 +24,7 @@ export const InboxDashboard: FC = () => {
         setPrivateMessages(messages.data.reverse());
       });
     }
-  }, []);
+  }, [currentUser.id]);
 
   //todo add a table warpper for MQ
   return (
@@ -45,7 +45,7 @@ export const InboxDashboard: FC = () => {
 
               <TableBody>
                 {privateMessages.map((message: any, index: any) => (
-                  <TableRow>
+                  <TableRow key={index}>
                     <TableCell component="th" scope="row">
                       {message.content}
                     </TableCell>

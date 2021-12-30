@@ -1,14 +1,17 @@
 /** @jsxImportSource @emotion/react */
-import React, { FC } from "react";
-import { Menu } from "./Menu";
-import { UserSection } from "./UserSection";
+import { FC, useContext } from 'react';
+import { AuthContext } from '../../../context/AuthContext';
+import { Menu } from './Menu';
+import { UserSection } from './UserSection';
 
 export const DashboardSidebar: FC = () => {
+  const { currentUser } = useContext(AuthContext);
+
   return (
     <>
       <UserSection
-        avatarURL={"http://bluepito.webd.pro/logopjatk.gif"}
-        nickName={"PJATK"}
+        avatarURL={'http://bluepito.webd.pro/logopjatk.gif'}
+        nickName={currentUser.nickname}
         isUserOnline={true}
       />
       <Menu />

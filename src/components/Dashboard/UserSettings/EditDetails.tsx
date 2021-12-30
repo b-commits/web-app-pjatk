@@ -1,55 +1,67 @@
 /** @jsxImportSource @emotion/react */
-import React, { FC, useState } from 'react';
-import { Redirect } from 'react-router';
+import { FC, useState, useContext } from 'react';
 import Alert from '@material-ui/lab/Alert';
 import { Formik, Form } from 'formik';
 import { submitButton } from '../css/UserSettingsDashboard.style';
 import { validationSchema } from './validation/ChangePassValidation';
 import FormikField from './FormikField';
+import { AuthContext } from '../../../context/AuthContext';
+import { changeUsername } from '../ApiCalls';
 
 interface FormValues {
-  name: string;
-  email: string;
+  id: number;
+  nickname: string;
 }
 
-const initialValues: FormValues = {
-  name: 'testuser',
-  email: 'example@example.com',
-};
-
 export const EditDetails: FC = () => {
-  const [hasErrors, setErrors] = useState(false);
+  const { currentUser } = useContext(AuthContext);
+  const [success, isSuccess] = useState<boolean>(false);
+  const [taken, isTaken] = useState<boolean>(false);
+
+  const initialValues = {
+    id: currentUser.id,
+    nickname: '',
+  };
+
+  const handleNicknameChange = (values: FormValues) => {
+    changeUsername(values)
+      .then((res: any) => {
+        res === 200 ? isSuccess(true) : isTaken(true);
+      })
+      .catch((error: any) => {
+        const mute = error;
+      });
+  };
 
   return (
     <>
       <Formik
         initialValues={initialValues}
-        validationSchema={validationSchema}
-        onSubmit={(values) => console.log(values)}
+        onSubmit={(values) => handleNicknameChange(values)}
       >
-        {({ dirty, isValid }) => {
+        {() => {
           return (
             <Form>
-              <FormikField name='name' label='New Name' type='text' required />
               <FormikField
-                name='email'
-                label='New email'
-                type='email'
+                name="nickname"
+                label="New Name"
+                type="text"
                 required
               />
-              <button
-                css={submitButton}
-                // disabled={!dirty || !isValid}
-                type='submit'
-              >
+              <button css={submitButton} type="submit">
                 Submit
               </button>
             </Form>
           );
         }}
       </Formik>
-      {hasErrors && (
-        <Alert severity='error'>That email or password is already taken.</Alert>
+      {success && (
+        <Alert severity="info">
+          Your username has been changed! The change will be visible soon.
+        </Alert>
+      )}
+      {taken && (
+        <Alert severity="error">Sorry, this username is already taken!</Alert>
       )}
     </>
   );

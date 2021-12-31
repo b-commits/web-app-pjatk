@@ -5,9 +5,14 @@ interface AdminReport {
   reporter: number;
 }
 
-interface FormValues {
+interface UsernameFormValues {
   id: number;
   nickname: string;
+}
+
+interface PasswordFormValues {
+  id: number;
+  newPassword: string;
 }
 
 export const getUserPrivateMessages = (userId: number): any => {
@@ -36,7 +41,7 @@ export const postAdminReport = (report: AdminReport): any => {
     .catch((err) => console.log(err));
 };
 
-export const changeUsername = (formValues: FormValues): any => {
+export const changeUsername = (formValues: UsernameFormValues): any => {
   return axios({
     method: 'PATCH',
     withCredentials: true,
@@ -47,7 +52,19 @@ export const changeUsername = (formValues: FormValues): any => {
     },
   })
     .then((res) => res.status)
-    .catch((err) => {
-      const mute = err;
-    });
+    .catch((err) => {});
+};
+
+export const changePassword = (formValues: PasswordFormValues): any => {
+  return axios({
+    method: 'PATCH',
+    withCredentials: true,
+    url: 'http://localhost:5000/api/users/changePassword',
+    data: {
+      id: formValues.id,
+      newPassword: formValues.newPassword,
+    },
+  })
+    .then((res) => res.status)
+    .catch((err) => {});
 };

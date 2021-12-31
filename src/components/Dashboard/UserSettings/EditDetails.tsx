@@ -28,9 +28,7 @@ export const EditDetails: FC = () => {
       .then((res: any) => {
         res === 200 ? isSuccess(true) : isTaken(true);
       })
-      .catch((error: any) => {
-        const mute = error;
-      });
+      .catch((error: any) => {});
   };
 
   return (

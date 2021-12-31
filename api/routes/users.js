@@ -197,13 +197,13 @@ router.patch('/', async (req, res) => {
 router.patch('/changePassword', async (req, res) => {
   try {
     const salt = await bcrypt.genSalt();
-    const hashedPassword = await bcrypt.hash(req.body.password, salt);
+    const hashedPassword = await bcrypt.hash(req.body.newPassword, salt);
     await User.query()
       .where({ id: req.body.id })
       .update({ password: hashedPassword });
     res.status(200).json({ msg: 'Updated' });
   } catch (error) {
-    res.status(BAD_REQUEST).json({ msg: error.message });
+    res.status(SERVER_ERROR).json({ msg: error.message });
   }
 });
 

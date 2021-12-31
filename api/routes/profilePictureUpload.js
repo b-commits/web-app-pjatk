@@ -7,10 +7,12 @@ const router = express.Router();
     @access   Public (for now)
 */
 router.post('/', (req, res) => {
+
   if (!req.files || Object.keys(req.files).length === 0) {
     return res.status(400).json({ msg: 'No files were uploaded.' });
   }
 
+  console.log(req.files.myImage);
   myImage = req.files.myImage;
   let path = '../public/profilePics/' + myImage.name;
 

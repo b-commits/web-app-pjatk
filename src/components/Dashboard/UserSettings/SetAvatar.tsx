@@ -1,10 +1,12 @@
 /** @jsxImportSource @emotion/react */
-import { FC, useState } from 'react';
+import { useContext, useState } from 'react';
 import axios from 'axios';
+import { AuthContext } from '../../../context/AuthContext';
 
 export const SetAvatar: any = () => {
   const [file, setFile] = useState('');
-  const [fileName, setFileName] = useState('Choose file');
+  const [_fileName, setFileName] = useState('Choose file');
+  const { currentUser } = useContext(AuthContext)
 
   const onChange = (e: any) => {
     setFile(e.target.files[0]);
@@ -14,7 +16,7 @@ export const SetAvatar: any = () => {
   const onSubmit = async (e: any) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append('myImage', file);
+    formData.append('myImage', file, currentUser.nickname + '.jpg');
     axios({
       method: 'POST',
       withCredentials: true,
@@ -27,15 +29,13 @@ export const SetAvatar: any = () => {
 
   return (
     <form onSubmit={onSubmit}>
-      <div className="custom-file mb-4">
+      <div>
         <input
           type="file"
-          className="custom-file-input"
-          id="customFile"
           onChange={onChange}
           name="myImage"
         />
-        <button type="submit" className="btn btn-primary mt-4">
+        <button type="submit">
           Upload
         </button>
       </div>

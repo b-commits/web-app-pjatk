@@ -1,4 +1,5 @@
 const dotenv = require('dotenv').config({ path: '../.env' });
+const fileUpload = require('express-fileupload');
 const express = require('express');
 const session = require('express-session');
 const setupDB = require('./config/dbSetup');
@@ -6,6 +7,7 @@ const cors = require('cors');
 const passport = require('passport');
 const users = require('./routes/users');
 const profilePageComments = require('./routes/profilePageComments');
+const profilePictureUpload = require('./routes/profilePictureUpload');
 const adminReports = require('./routes/adminReports');
 const privateMessages = require('./routes/privateMessages');
 const listings = require('./routes/listings');
@@ -15,6 +17,7 @@ const app = express();
 const port = process.env.SERVER_PORT;
 
 setupDB();
+app.use(express.static('public'));
 app.use(cors({ origin: true, credentials: true }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -35,6 +38,7 @@ app.use(
 );
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(fileUpload({ debug: true }));
 app.use((req, res, next) => {
   console.log(req.session);
   console.log(req.body);
@@ -47,6 +51,7 @@ app.use('/api/listings', listings);
 app.use('/api/profilePageComments', profilePageComments);
 app.use('/api/privateMessages', privateMessages);
 app.use('/api/adminReports', adminReports);
+app.use('/api/profilePictureUpload', profilePictureUpload);
 
 app.listen(port, () => {
   console.log(`[server] listening at http://localhost:${port}.`);

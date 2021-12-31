@@ -1,15 +1,20 @@
 /** @jsxImportSource @emotion/react */
-import React, { FC } from 'react';
+import React, { FC, useContext } from 'react';
 import { MenuItem } from './MenuItem';
 import { sidebarMenu, hrSidebarBreaker } from '../css/DashboardSidebar.style';
+import { AuthContext } from '../../../context/AuthContext';
 
 //MENU SECTION
 export const Menu: FC = () => {
+  const { currentUser } = useContext(AuthContext);
   return (
     <>
       <ul css={sidebarMenu}>
         <h3>Menu</h3>
+
         <MenuItem title={'Home'} href={'/dashboard'} />
+
+        <MenuItem title={'Profile'} href={`/profile/${currentUser.id}`}/>
 
         <MenuItem title={'Inbox'} href={'/dashboard/inbox'} />
 
@@ -24,7 +29,8 @@ export const Menu: FC = () => {
         <MenuItem title={'Admin'} href={'/dashboard/admin'} />
 
         <MenuItem title={'Reports'} href={'/dashboard/reports'} />
-      </ul>
+
+       </ul>
     </>
   );
 };

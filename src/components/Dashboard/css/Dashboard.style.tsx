@@ -51,3 +51,9 @@ export const listing = css({
     marginTop: '0px',
   },
 });
+
+export const uploadLabelWrap = css({
+    display: 'inline-block',
+    padding: '6px 12px',
+    cursor: 'pointer'
+})

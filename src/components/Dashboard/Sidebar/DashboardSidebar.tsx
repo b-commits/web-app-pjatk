@@ -10,7 +10,7 @@ export const DashboardSidebar: FC = () => {
   return (
     <>
       <UserSection
-        avatarURL={'http://bluepito.webd.pro/logopjatk.gif'}
+        avatarURL={`profilePics/${currentUser.nickname}.jpg`}
         nickName={currentUser.nickname}
         isUserOnline={true}
       />

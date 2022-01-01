@@ -34,25 +34,26 @@ import axios from "axios";
 export const App = () => {
   const [authenticated, setAuthenticated] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
-  const [logged, setlogged] = useState(false);
 
   useEffect(() => {
-    console.log("use effect runs");
     axios
       .get("http://localhost:5000/api/users/currentUser", {
         withCredentials: true,
       })
       .then((res) => {
+        /**
+         * I'm not sure if I even have to set the currentUser here.
+         * Also, have to double check if the putting the currentUser in the dependency array
+         * doesn't break anything.
+         */
         setCurrentUser(res.data.currentUser[0]);
         setAuthenticated(true);
-        setlogged(true);
       })
       .catch((err) => {
         console.log(err);
       });
   }, [currentUser]);
 
-  if (!currentUser) return <div>Not logged in</div>;
   return (
     <Router>
       <AuthContext.Provider

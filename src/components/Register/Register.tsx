@@ -1,34 +1,36 @@
 /** @jsxImportSource @emotion/react */
-import React from 'react';
-import FormikField from './FormikField';
-import Alert from '@material-ui/lab/Alert';
-import { Formik, Form } from 'formik';
-import { Button, Checkbox } from '@material-ui/core';
-import { RegisterBanner } from './RegisterBanner';
+import React from "react";
+import FormikField from "./FormikField";
+import Alert from "@material-ui/lab/Alert";
+import { Formik, Form, Field } from "formik";
+import { Button, Checkbox } from "@material-ui/core";
+import { RegisterBanner } from "./RegisterBanner";
 import {
   registerImage,
   registerWrap,
   registerFormWrap,
   registerInputsWrap,
   registerFormSubmit,
-} from './Register.style';
-import { validationSchema } from './RegistrationValidationSchema';
-import { Redirect } from 'react-router-dom';
-import { useState } from 'react';
-import { postUser } from './ApiCalls';
+} from "./Register.style";
+import { validationSchema } from "./RegistrationValidationSchema";
+import { Redirect } from "react-router-dom";
+import { useState } from "react";
+import { postUser } from "./ApiCalls";
 
 interface FormValues {
   nickname: string;
   email: string;
   password: string;
   passwordConfirm: string;
+  newsletter: boolean;
 }
 
 const initialValues: FormValues = {
-  nickname: '',
-  email: '',
-  password: '',
-  passwordConfirm: '',
+  nickname: "",
+  email: "",
+  password: "",
+  passwordConfirm: "",
+  newsletter: false,
 };
 
 export const Register: React.FC = () => {
@@ -45,7 +47,7 @@ export const Register: React.FC = () => {
       });
   };
 
-  if (authorized) return <Redirect to='/login'></Redirect>;
+  if (authorized) return <Redirect to="/login"></Redirect>;
   else
     return (
       <>
@@ -63,32 +65,35 @@ export const Register: React.FC = () => {
                 {({ dirty, isValid }) => {
                   return (
                     <Form>
-                      <FormikField name='nickname' label='Nickname' required />
-                      <FormikField name='email' label='E-mail' required />
+                      <FormikField name="nickname" label="Nickname" required />
+                      <FormikField name="email" label="E-mail" required />
                       <FormikField
-                        name='password'
-                        label='Password'
-                        type='password'
+                        name="password"
+                        label="Password"
+                        type="password"
                         required
                       />
                       <FormikField
-                        name='passwordConfirm'
-                        label='Confirm Password'
-                        type='password'
+                        name="passwordConfirm"
+                        label="Confirm Password"
+                        type="password"
                         required
                       />
                       <div>
-                        <Checkbox color='primary' />{' '}
+                        <Field name="newsletter" type="checkbox" as={Checkbox}>
+                          I want to sign up for a newsletter
+                        </Field>
+                        {/* <Checkbox name="newsletter" color="primary" />{" "} */}
                         <label>I want to receive a monthly newsletter.</label>
                       </div>
                       <div>
-                        <Checkbox color='primary' />
+                        <Checkbox color="primary" />
                         <label>I agree to terms and conditions.</label>
                       </div>
                       <button
                         css={registerFormSubmit}
                         disabled={!dirty || !isValid}
-                        type='submit'
+                        type="submit"
                       >
                         Submit
                       </button>
@@ -108,7 +113,7 @@ export const Register: React.FC = () => {
             </div>
           </div>
           {hasErrors && (
-            <Alert severity='error'>
+            <Alert severity="error">
               That email or password is already taken.
             </Alert>
           )}

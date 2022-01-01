@@ -1,8 +1,8 @@
 /** @jsxImportSource @emotion/react */
-import React, { useContext, useState } from 'react';
-import { Formik, Form } from 'formik';
-import FormikField from '../Register/FormikField';
-import Alert from '@material-ui/lab/Alert';
+import React, { useContext, useState } from "react";
+import { Formik, Form } from "formik";
+import FormikField from "../Register/FormikField";
+import Alert from "@material-ui/lab/Alert";
 import {
   loginImage,
   loginWrap,
@@ -10,11 +10,12 @@ import {
   loginInputsWrap,
   loginFormSubmit,
   linkClass,
-} from './Login.style';
-import { validationSchema } from './LoginValidationSchema';
-import { getCurrentUser, loginUser } from './ApiCalls';
-import { Link, Redirect } from 'react-router-dom';
-import { AuthContext } from '../../context/AuthContext';
+} from "./Login.style";
+import { validationSchema } from "./LoginValidationSchema";
+import { getCurrentUser, loginUser } from "./ApiCalls";
+import { Link, Redirect } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
+import { CircularProgress } from "@material-ui/core";
 
 interface FormValues {
   email: string;
@@ -23,22 +24,25 @@ interface FormValues {
 }
 
 const initialValues: FormValues = {
-  email: '',
-  password: '',
+  email: "",
+  password: "",
   isRedirect: false,
 };
 
 export const Login: React.FC<FormValues> = () => {
   const [hasErrors, setErrors] = useState(false);
+  const [loading, setLoading] = useState(false);
   const { authenticated, setAuthenticated, currentUser, setCurrentUser } =
     useContext(AuthContext);
 
   const handleLogin = async (values: FormValues) => {
+    setLoading(true);
     await loginUser(values)
       .then(async () => {
         await getCurrentUser().then((res: any) =>
           setCurrentUser(res.data.currentUser[0])
         );
+        setLoading(false);
         setAuthenticated(true);
       })
       .catch(() => {
@@ -73,20 +77,23 @@ export const Login: React.FC<FormValues> = () => {
                       type="password"
                       required
                     />
-
-                    <button
-                      css={loginFormSubmit}
-                      disabled={!dirty || !isValid}
-                      type="submit"
-                    >
-                      Submit
-                    </button>
+                    {loading ? (
+                      <CircularProgress />
+                    ) : (
+                      <button
+                        css={loginFormSubmit}
+                        disabled={!dirty || !isValid}
+                        type="submit"
+                      >
+                        Submit
+                      </button>
+                    )}
                   </Form>
                 );
               }}
             </Formik>
             <p>
-              Don't have an account yet?{' '}
+              Don't have an account yet?{" "}
               <Link css={linkClass} to="/register">
                 Sign up
               </Link>

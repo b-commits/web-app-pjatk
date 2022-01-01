@@ -35,9 +35,22 @@ router.post("/", async (req, res) => {
       email: req.body.email,
       password: hashedPassword,
     });
-    req.body.newsletter && sendWelcomeEmail();
+    if (req.body.newsletter) {
+      let options = {
+        from: "pjatklfgapp@gmail.com",
+        to: req.body.email,
+        subject: "LFGAPP",
+        text: "Thank you for signing up for our monthly newsletter! Please log in to your account to discover what lfg-app has to offer",
+      };
+      newsletterTransporter.sendMail(options, (err, data) => {
+        if (err) {
+          console.log(err);
+        }
+      });
+    }
     res.status(CREATED).json({ msg: ADDED });
   } catch (error) {
+    console.log(error);
     if (emailTaken) res.status(SERVER_ERROR).json({ msg: EMAIL_TAKEN });
     else res.status(SERVER_ERROR).json({ msg: USERNAME_TAKEN });
   }
@@ -217,26 +230,11 @@ router.patch("/changePassword", async (req, res) => {
  * will likely end up in a spam folder. If we want to fix this in the future, we should
  * set up a secure SMTP service (and probably test it with Mailhog at some point).
  */
-const sendWelcomeEmail = () => {
-  let newsletterTransporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-      user: process.env.MAIL_ACC,
-      pass: process.env.MAIL_PASS,
-    },
-  });
-
-  let options = {
-    from: "pjatklfgapp@gmail.com",
-    to: req.body.email,
-    subject: "LFGAPP",
-    text: "Thank you for signing up for our monthly newsletter! Please log in to your account to discover what lfg-app has to offer",
-  };
-  newsletterTransporter.sendMail(options, (err, data) => {
-    if (err) {
-      console.log(err);
-    }
-  });
-};
-
+let newsletterTransporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: process.env.MAIL_ACC,
+    pass: process.env.MAIL_PASS,
+  },
+});
 module.exports = router;

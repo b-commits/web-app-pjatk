@@ -5,6 +5,7 @@ import Alert from "@material-ui/lab/Alert";
 import { Formik, Form, Field } from "formik";
 import { Button, Checkbox } from "@material-ui/core";
 import { RegisterBanner } from "./RegisterBanner";
+import { CircularProgress } from "@material-ui/core";
 import {
   registerImage,
   registerWrap,
@@ -36,13 +37,16 @@ const initialValues: FormValues = {
 export const Register: React.FC = () => {
   const [authorized, setAuthorized] = useState(false);
   const [hasErrors, setErrors] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleRegistration = (values: FormValues) => {
+    setLoading(true);
     postUser(values)
       .then(() => {
         setAuthorized(true);
+        setLoading(false);
       })
-      .catch(() => {
+      .catch((err) => {
         setErrors(true);
       });
   };
@@ -90,13 +94,18 @@ export const Register: React.FC = () => {
                         <Checkbox color="primary" />
                         <label>I agree to terms and conditions.</label>
                       </div>
-                      <button
-                        css={registerFormSubmit}
-                        disabled={!dirty || !isValid}
-                        type="submit"
-                      >
-                        Submit
-                      </button>
+                      {loading ? (
+                        <CircularProgress />
+                      ) : (
+                        <button
+                          css={registerFormSubmit}
+                          disabled={!dirty || !isValid}
+                          type="submit"
+                        >
+                          Submit
+                        </button>
+                      )}
+
                       {/*
                       <Button
                         color='primary'
@@ -114,7 +123,7 @@ export const Register: React.FC = () => {
           </div>
           {hasErrors && (
             <Alert severity="error">
-              That email or password is already taken.
+              That email or nickname is already taken.
             </Alert>
           )}
         </main>

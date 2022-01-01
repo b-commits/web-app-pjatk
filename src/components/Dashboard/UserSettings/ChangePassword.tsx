@@ -1,12 +1,13 @@
 /** @jsxImportSource @emotion/react */
-import { FC, useState, useContext } from 'react';
-import { Formik, Form } from 'formik';
-import { submitButton } from '../css/UserSettingsDashboard.style';
-import { validationSchema } from './validation/ChangePassValidation';
-import { changePassword } from '../ApiCalls';
-import Alert from '@material-ui/lab/Alert';
-import FormikField from './FormikField';
-import { AuthContext } from '../../../context/AuthContext';
+import { FC, useState, useContext } from "react";
+import { Formik, Form } from "formik";
+import { submitButton } from "../css/UserSettingsDashboard.style";
+import { validationSchema } from "./validation/ChangePassValidation";
+import { changePassword } from "../ApiCalls";
+import Alert from "@material-ui/lab/Alert";
+import FormikField from "./FormikField";
+import { AuthContext } from "../../../context/AuthContext";
+import { CircularProgress } from "@material-ui/core";
 
 interface FormValues {
   newPassword: string;
@@ -15,18 +16,21 @@ interface FormValues {
 
 export const ChangePassword: FC = () => {
   const [success, setSuccess] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [error, hasError] = useState(false);
   const { currentUser } = useContext(AuthContext);
 
   const initialValues: FormValues = {
-    newPassword: '',
-    newPasswordConfirm: '',
+    newPassword: "",
+    newPasswordConfirm: "",
   };
 
   const handlePasswordChange = (values: FormValues) => {
+    setLoading(true);
     changePassword({ id: currentUser.id, newPassword: values.newPassword })
       .then((res: any) => {
         res === 200 ? setSuccess(true) : hasError(true);
+        setLoading(false);
       })
       .catch((error: any) => {});
   };
@@ -53,9 +57,13 @@ export const ChangePassword: FC = () => {
                 type="password"
                 required
               />
-              <button css={submitButton} type="submit">
-                Submit
-              </button>
+              {loading ? (
+                <CircularProgress />
+              ) : (
+                <button css={submitButton} type="submit">
+                  Submit
+                </button>
+              )}
             </Form>
           );
         }}

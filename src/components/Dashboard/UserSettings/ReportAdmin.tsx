@@ -1,11 +1,12 @@
 /** @jsxImportSource @emotion/react */
-import React, { FC, useState, useContext } from 'react';
-import Alert from '@material-ui/lab/Alert';
-import { Formik, Form } from 'formik';
-import { submitButton } from '../css/UserSettingsDashboard.style';
-import { AuthContext } from '../../../context/AuthContext';
-import { postAdminReport } from '../ApiCalls';
-import FormikField from './FormikField';
+import React, { FC, useState, useContext } from "react";
+import Alert from "@material-ui/lab/Alert";
+import { Formik, Form } from "formik";
+import { submitButton } from "../css/UserSettingsDashboard.style";
+import { AuthContext } from "../../../context/AuthContext";
+import { postAdminReport } from "../ApiCalls";
+import FormikField from "./FormikField";
+import { CircularProgress } from "@material-ui/core";
 
 interface FormValues {
   content: string;
@@ -13,18 +14,21 @@ interface FormValues {
 }
 
 export const ReportAdmin: FC = () => {
+  const [loading, setLoading] = useState<boolean>(false);
   const [sentSucess, setSentSuccess] = useState<boolean>(false);
   const { currentUser } = useContext(AuthContext);
 
   const initialValues: FormValues = {
-    content: '',
+    content: "",
     reporter: currentUser.id,
   };
 
   const handleReport = async (values: FormValues) => {
+    setLoading(true);
     postAdminReport(values).then((res: any) => {
       if (res == 200) {
         setSentSuccess(true);
+        setLoading(false);
       }
     });
   };
@@ -44,9 +48,13 @@ export const ReportAdmin: FC = () => {
                 type="textarea"
                 required
               />
-              <button css={submitButton} type="submit">
-                Submit
-              </button>
+              {loading ? (
+                <CircularProgress />
+              ) : (
+                <button css={submitButton} type="submit">
+                  Submit
+                </button>
+              )}
             </Form>
           );
         }}

@@ -13,10 +13,10 @@ export const Success: React.FC = () => {
         <a
           css={goBack}
           onClick={() => {
-            history.push('/');
+            history.push('/dashboard');
           }}
         >
-          Go back to home page.
+          Back to dashboard.
         </a>
       </div>
     </div>

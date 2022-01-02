@@ -12,7 +12,7 @@ const KEYBOARD_ENTHUSIAST = 2;
 /**@desc Follow one person */
 const STALKER = 3;
 
-/**@desc Join one listing comment */
+/**@desc Join one listing */
 const ENLISTED = 4;
 
 /**@desc Upload custom profile picture */

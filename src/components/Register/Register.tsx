@@ -1,22 +1,22 @@
 /** @jsxImportSource @emotion/react */
-import React from "react";
-import FormikField from "./FormikField";
-import Alert from "@material-ui/lab/Alert";
-import { Formik, Form, Field } from "formik";
-import { Button, Checkbox } from "@material-ui/core";
-import { RegisterBanner } from "./RegisterBanner";
-import { CircularProgress } from "@material-ui/core";
+import React from 'react';
+import FormikField from './FormikField';
+import Alert from '@material-ui/lab/Alert';
+import { Formik, Form, Field } from 'formik';
+import { Button, Checkbox } from '@material-ui/core';
+import { RegisterBanner } from './RegisterBanner';
+import { CircularProgress } from '@material-ui/core';
 import {
   registerImage,
   registerWrap,
   registerFormWrap,
   registerInputsWrap,
   registerFormSubmit,
-} from "./Register.style";
-import { validationSchema } from "./RegistrationValidationSchema";
-import { Redirect } from "react-router-dom";
-import { useState } from "react";
-import { postUser } from "./ApiCalls";
+} from './Register.style';
+import { validationSchema } from './RegistrationValidationSchema';
+import { Redirect } from 'react-router-dom';
+import { useState } from 'react';
+import { postUser } from './ApiCalls';
 
 interface FormValues {
   nickname: string;
@@ -27,10 +27,10 @@ interface FormValues {
 }
 
 const initialValues: FormValues = {
-  nickname: "",
-  email: "",
-  password: "",
-  passwordConfirm: "",
+  nickname: '',
+  email: '',
+  password: '',
+  passwordConfirm: '',
   newsletter: false,
 };
 
@@ -55,7 +55,6 @@ export const Register: React.FC = () => {
   else
     return (
       <>
-        <RegisterBanner />
         <main css={registerWrap}>
           <div css={registerFormWrap}>
             <div css={registerImage}></div>

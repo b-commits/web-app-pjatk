@@ -40,3 +40,40 @@ export const postComment = async (
     .then((res) => res.status)
     .catch((err) => console.log(err));
 };
+
+export const followUser = async (
+  followingUser: number,
+  followedUser: number
+) => {
+  await axios({
+    method: 'POST',
+    withCredentials: true,
+    url: 'http://localhost:5000/api/followings',
+    data: {
+      followingUser: followingUser,
+      followedUser: followedUser,
+    },
+  })
+    .then((res) => res.status)
+    .catch((err) => console.log(err));
+};
+
+export const unfollowUser = async (follower: number, unfollowId: number) => {
+  await axios({
+    method: 'DELETE',
+    withCredentials: true,
+    url: 'http://localhost:5000/api/followings',
+    data: {
+      follower: follower,
+      unfollowId: unfollowId,
+    },
+  })
+    .then((res) => res.status)
+    .catch((err) => console.log(err));
+};
+
+export const getFollowedUsers = async (profileId: number) => {
+  return axios.get(`http://localhost:5000/api/followings/${profileId}`, {
+    withCredentials: true,
+  });
+};

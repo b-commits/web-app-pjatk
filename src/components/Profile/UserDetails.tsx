@@ -1,9 +1,10 @@
 /** @jsxImportSource @emotion/react */
 import React, { useContext, useEffect, useState } from 'react';
-import { getUserByID } from './ApiCalls';
+import { getFollowedUsers, getUserByID, unfollowUser } from './ApiCalls';
 import { useParams, useHistory } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import { CircularProgress } from '@material-ui/core';
+import { followUser } from './ApiCalls';
 import {
   userDetailsWrap,
   userDetailsData,
@@ -121,6 +122,21 @@ const UserInfoWrapItem: React.FC<{
 const UserActions: React.FC = () => {
   const history = useHistory();
   const { id } = useParams<RouteParams>();
+  const { currentUser } = useContext(AuthContext);
+  const [isFollowing, setFollowing] = useState<boolean>(false);
+  const [loading, isLoading] = useState<boolean>(false);
+
+  // Check if user is followed to rerender the button:
+  useEffect(() => {
+    getFollowedUsers(parseInt(currentUser.id)).then((res) => {
+      if (
+        res.data.filter((followed: any) => followed.followedUser == id).length >
+        0
+      ) {
+        setFollowing(true);
+      }
+    });
+  }, [id]);
 
   const handleMessageRedirect = () => {
     history.push({
@@ -131,10 +147,49 @@ const UserActions: React.FC = () => {
     });
   };
 
+  const handleFollow = () => {
+    isLoading(true);
+    followUser(currentUser.id, parseInt(id)).then(() => {
+      isLoading(false);
+      setFollowing(true);
+    });
+  };
+
+  const handleUnfollow = () => {
+    isLoading(true);
+    unfollowUser(currentUser.id, parseInt(id))
+      .then(() => {
+        isLoading(false);
+        setFollowing(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <>
       <div css={userActions}>
-        <ProfileActionButton color={'#44c767'} value={'Add friend'} />
+        {loading ? (
+          <CircularProgress />
+        ) : (
+          [
+            isFollowing ? (
+              <ProfileActionButton
+                color={'orange'}
+                value={'Unfollow   '}
+                handleClick={handleUnfollow}
+              />
+            ) : (
+              <ProfileActionButton
+                color={'#44c767'}
+                value={'Follow   '}
+                handleClick={handleFollow}
+              />
+            ),
+          ]
+        )}
+
         <ProfileActionButton
           color={'#eeb44f'}
           value={'Message'}

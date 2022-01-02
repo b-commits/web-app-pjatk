@@ -16,7 +16,7 @@ router.get('/:profileId', async (req, res, next) => {
         'user.id': 'followedUser',
       })
       .where({ followingUser: profileId })
-      .select('user.id', 'nickname');
+      .select('followedUser', 'nickname');
     res.status(200).json(followedUsers);
   } catch (err) {
     res.status(400).json({ msg: err.message });

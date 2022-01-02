@@ -46,7 +46,6 @@ export const SearchResults: React.FC<any> = () => {
                 >
                   View profile
                 </Button>
-                <Button>Follow</Button>
               </li>
               <Divider />
             </div>

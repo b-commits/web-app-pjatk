@@ -7,6 +7,9 @@ import { UserSection } from './UserSection';
 export const DashboardSidebar: FC = () => {
   const { currentUser } = useContext(AuthContext);
 
+  if (!currentUser) {
+    return <div>No user...</div>;
+  }
   return (
     <>
       <UserSection

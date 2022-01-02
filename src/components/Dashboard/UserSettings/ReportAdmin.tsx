@@ -1,12 +1,12 @@
 /** @jsxImportSource @emotion/react */
-import React, { FC, useState, useContext } from "react";
-import Alert from "@material-ui/lab/Alert";
-import { Formik, Form } from "formik";
-import { submitButton } from "../css/UserSettingsDashboard.style";
-import { AuthContext } from "../../../context/AuthContext";
-import { postAdminReport } from "../ApiCalls";
-import FormikField from "./FormikField";
-import { CircularProgress } from "@material-ui/core";
+import React, { FC, useState, useContext } from 'react';
+import Alert from '@material-ui/lab/Alert';
+import { Formik, Form } from 'formik';
+import { submitButton } from '../css/UserSettingsDashboard.style';
+import { AuthContext } from '../../../context/AuthContext';
+import { postAdminReport } from '../ApiCalls';
+import FormikField from './FormikField';
+import { CircularProgress } from '@material-ui/core';
 
 interface FormValues {
   content: string;
@@ -19,8 +19,8 @@ export const ReportAdmin: FC = () => {
   const { currentUser } = useContext(AuthContext);
 
   const initialValues: FormValues = {
-    content: "",
-    reporter: currentUser.id,
+    content: '',
+    reporter: 0,
   };
 
   const handleReport = async (values: FormValues) => {

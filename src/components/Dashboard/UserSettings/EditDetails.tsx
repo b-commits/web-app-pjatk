@@ -1,13 +1,13 @@
 /** @jsxImportSource @emotion/react */
-import { FC, useState, useContext } from "react";
-import Alert from "@material-ui/lab/Alert";
-import { Formik, Form } from "formik";
-import { submitButton } from "../css/UserSettingsDashboard.style";
-import { validationSchema } from "./validation/ChangePassValidation";
-import FormikField from "./FormikField";
-import { AuthContext } from "../../../context/AuthContext";
-import { changeUsername } from "../ApiCalls";
-import { CircularProgress } from "@material-ui/core";
+import { FC, useState, useContext } from 'react';
+import Alert from '@material-ui/lab/Alert';
+import { Formik, Form } from 'formik';
+import { submitButton } from '../css/UserSettingsDashboard.style';
+import { validationSchema } from './validation/ChangePassValidation';
+import FormikField from './FormikField';
+import { AuthContext } from '../../../context/AuthContext';
+import { changeUsername } from '../ApiCalls';
+import { CircularProgress } from '@material-ui/core';
 
 interface FormValues {
   id: number;
@@ -21,8 +21,8 @@ export const EditDetails: FC = () => {
   const [taken, isTaken] = useState<boolean>(false);
 
   const initialValues = {
-    id: currentUser.id,
-    nickname: "",
+    id: 0,
+    nickname: '',
   };
 
   const handleNicknameChange = (values: FormValues) => {

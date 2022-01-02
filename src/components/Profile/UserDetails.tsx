@@ -95,8 +95,7 @@ const UserInfo: React.FC = () => {
         <UserInfoWrapItem number={137} value={'Games'} />
         <UserInfoWrapItem number={34} value={'Achievements'} />
         <UserInfoWrapItem number={12} value={'Games Played'} />
-        <UserInfoWrapItem number={7} value={'Friends'} />
-
+        <UserInfoWrapItem number={7} value={'Friends'} />s
         <UserActions />
       </div>
     </>
@@ -136,7 +135,7 @@ const UserActions: React.FC = () => {
         setFollowing(true);
       }
     });
-  }, [id]);
+  }, [currentUser.id]);
 
   const handleMessageRedirect = () => {
     history.push({

@@ -5,6 +5,8 @@ interface AuthContextProps {
   setAuthenticated: any;
   currentUser: any;
   setCurrentUser: any;
+  loadingContext?: boolean;
+  setLoadingContext?: any;
 }
 
 const defaultContext = {
@@ -12,6 +14,8 @@ const defaultContext = {
   setAuthenticated: (authenticated: boolean) => {},
   currentUser: null,
   setCurrentUser: (user: any) => {},
+  loadingContext: false,
+  setLoadingContext: () => {},
 };
 
 export const AuthContext = createContext<AuthContextProps>(defaultContext);

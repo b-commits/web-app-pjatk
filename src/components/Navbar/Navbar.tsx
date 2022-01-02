@@ -18,7 +18,7 @@ import { HOME } from '../../utils/URL';
 import logo from '../../logo.png';
 
 export const Navbar: React.FC = () => {
-  const { setCurrentUser, authenticated, setAuthenticated } =
+  const { setCurrentUser, authenticated, setAuthenticated, setLoadingContext } =
     useContext(AuthContext);
   const history = useHistory();
   const location = useLocation();
@@ -31,8 +31,10 @@ export const Navbar: React.FC = () => {
     logoutUser().then(() => {
       setCurrentUser(null);
       setAuthenticated(false);
+      setLoadingContext(false);
       history.push(HOME);
       history.go(0);
+      setLoadingContext(false);
     });
   };
 

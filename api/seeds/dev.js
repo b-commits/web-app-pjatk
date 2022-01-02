@@ -10,6 +10,7 @@ exports.seed = async (knex) => {
   const listings = [];
   const listingComments = [];
   const privateMessages = [];
+  const userAchievements = [];
   const numEntries = 50;
 
   for (let i = 0; i < numEntries; i++) {
@@ -18,6 +19,7 @@ exports.seed = async (knex) => {
     listings.push(createListing());
     listingComments.push(createListingComment());
     privateMessages.push(createPrivateMessage());
+    userAchievements.push(createUserAchievement());
   }
   // await knex('user').insert(users);
   // await knex('profilePageComment').insert(profilePageComments);

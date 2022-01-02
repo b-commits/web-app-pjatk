@@ -30,7 +30,7 @@ export const SetAvatar: any = () => {
       url: "http://localhost:5000/api/profilePictureUpload",
       data: formData,
     })
-      .then((res) => {
+      .then(() => {
         setSuccess(true);
         setLoading(false);
       })

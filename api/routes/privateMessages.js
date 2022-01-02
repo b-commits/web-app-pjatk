@@ -1,6 +1,9 @@
 const PrivateMessage = require('../models/PrivateMessage');
+const User = require('../models/User');
+const UserAchievement = require('../models/UserAchievement');
 const express = require('express');
 const { BAD_REQUEST, SERVER_ERROR, ADDED } = require('./errorConsts');
+const { EPISTOLOGRAPHY } = require('./utils/achievementCodes');
 const router = express.Router();
 
 /** 
@@ -43,8 +46,25 @@ router.post('/', async (req, res) => {
       messageSender: req.body.messageSender,
       messageReceiver: req.body.messageReceiver,
     });
+    // Update private message count for an achievement:
+    await User.query()
+      .findById(req.body.messageSender)
+      .increment('numPrivateMessagesSent', 1);
+    // Check if achievement requirements have been met:
+    const numMessages = await User.query()
+      .findById(req.body.messageSender)
+      .select('numPrivateMessagesSent');
+    // Unlock achievement:
+    if (numMessages.numPrivateMessagesSent == 10) {
+      console.log('Requirements met');
+      await UserAchievement.query().insert({
+        unlockedBy: req.body.messageSender,
+        achievement: EPISTOLOGRAPHY,
+      });
+    }
     res.status(200).json({ msg: ADDED });
   } catch (error) {
+    console.log(error.message);
     res.status(SERVER_ERROR).json({ msg: error.message });
   }
 });

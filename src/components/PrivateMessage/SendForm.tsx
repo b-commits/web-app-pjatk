@@ -77,6 +77,7 @@ export const SendForm: React.FC = () => {
   return (
     <div css={messageWrapper}>
       <div css={formWrap}>
+        <a href="/dashboard">Back to dashboard</a>
         <div>
           <h1>
             Sending a private message to:{' '}

@@ -107,6 +107,7 @@ export const userActions = css({
 });
 
 export const userActionsButton = css({
+  textAlign: 'center',
   fontSize: '18px',
   color: '#ffffff',
   height: '40px',
@@ -118,6 +119,7 @@ export const userActionsButton = css({
   textDecoration: 'none',
   boxSizing: 'border-box',
   alignItems: 'center',
+  width: '110px',
 });
 
 export const profileContent = css({

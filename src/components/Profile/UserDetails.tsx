@@ -78,9 +78,7 @@ const UserAvatar: React.FC<{
               ? { backgroundColor: '#64a338' }
               : { backgroundColor: '#e03b24' }
           }
-        >
-          {' '}
-        </span>
+        ></span>
         {nickName}
       </h1>
     </>
@@ -95,7 +93,7 @@ const UserInfo: React.FC = () => {
         <UserInfoWrapItem number={137} value={'Games'} />
         <UserInfoWrapItem number={34} value={'Achievements'} />
         <UserInfoWrapItem number={12} value={'Games Played'} />
-        <UserInfoWrapItem number={7} value={'Friends'} />s
+        <UserInfoWrapItem number={7} value={'Friends'} />
         <UserActions />
       </div>
     </>
@@ -166,6 +164,17 @@ const UserActions: React.FC = () => {
       });
   };
 
+  if (currentUser.id == id) {
+    return (
+      <ProfileActionButton
+        color={'#3f51b5'}
+        value={'Home'}
+        handleClick={() => {
+          history.push('/');
+        }}
+      />
+    );
+  }
   return (
     <>
       <div css={userActions}>

@@ -1,35 +1,32 @@
 /** @jsxImportSource @emotion/react */
-import React from 'react';
+import React, { useEffect, useState, useContext } from 'react';
+import { AuthContext } from '../../context/AuthContext';
+import { getLikedGames } from '../Dashboard/ApiCalls';
 import { favoriteGames, favoriteGamesItem } from './Profile.style';
 
 export const UserFavGames: React.FC = () => {
+  const { currentUser } = useContext(AuthContext);
+  const [likedGames, setLikedGames] = useState<any>([]);
+
+  useEffect(() => {
+    if (!currentUser) return;
+    getLikedGames(currentUser.id).then((res) => {
+      setLikedGames(res.data);
+    });
+    console.log(likedGames);
+  }, []);
+
   return (
     <div css={favoriteGames}>
-      <UserFavGamesItem
-        gameImgUrl={'http://bluepito.webd.pro/inztmpimg/lol.jpg'}
-        gameName={'League of Legends'}
-        gameUrl={''}
-      />
-      <UserFavGamesItem
-        gameImgUrl={'http://bluepito.webd.pro/inztmpimg/over.jpg'}
-        gameName={'Overwatch'}
-        gameUrl={''}
-      />
-      <UserFavGamesItem
-        gameImgUrl={'http://bluepito.webd.pro/inztmpimg/genshin.jpg'}
-        gameName={'Genshin Impact'}
-        gameUrl={''}
-      />
-      <UserFavGamesItem
-        gameImgUrl={'http://bluepito.webd.pro/inztmpimg/bf2042.jpg'}
-        gameName={'Battlefield 2042'}
-        gameUrl={''}
-      />
-      <UserFavGamesItem
-        gameImgUrl={'http://bluepito.webd.pro/inztmpimg/csgo.jpg'}
-        gameName={'Counter Strike: Global Offensive'}
-        gameUrl={''}
-      />
+      {likedGames.map((game: any) => {
+        return (
+          <UserFavGamesItem
+            gameImgUrl={`/gamePics/${game.id}.jpeg`}
+            gameName={game.title}
+            gameUrl={''}
+          />
+        );
+      })}
     </div>
   );
 };

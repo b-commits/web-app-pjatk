@@ -21,6 +21,12 @@ export const getUserPrivateMessages = (userId: number): any => {
   });
 };
 
+export const getFriends = (userId: number): any => {
+  return axios.get(`http://localhost:5000/api/followings/${userId}`, {
+    withCredentials: true,
+  });
+};
+
 export const deleteAccount = (userId: number): any => {
   return axios.delete(`http://localhost:5000/api/users/delete/${userId}`, {
     withCredentials: true,

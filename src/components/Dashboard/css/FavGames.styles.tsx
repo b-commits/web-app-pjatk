@@ -15,3 +15,10 @@ export const galleryGame = css({
 export const muiAlert = css({
   marginBottom: '15px',
 });
+
+export const friendElement = css({
+  display: 'flex',
+  justifyContent: 'space-between',
+  marginBottom: '15px',
+  marginRight: '15%',
+});

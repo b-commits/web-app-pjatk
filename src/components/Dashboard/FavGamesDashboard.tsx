@@ -42,7 +42,7 @@ export const FavGamesDashboard: FC = () => {
       unlikeGame(currentUser.id, parseInt(event.target.id) + 1).then(() => {});
       temp[event.target.id] = !temp[event.target.id];
     } else {
-      if (likes.filter((value) => value == true).length <= 3) {
+      if (likes.filter((value) => value == true).length <= 4) {
         likeGame(currentUser.id, parseInt(event.target.id) + 1).then(() => {});
         temp[event.target.id] = !temp[event.target.id];
       } else setError(true);

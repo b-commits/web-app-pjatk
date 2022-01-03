@@ -13,6 +13,7 @@ const privateMessages = require('./routes/privateMessages');
 const followings = require('./routes/followings');
 const listings = require('./routes/listings');
 const achievements = require('./routes/achievements');
+const games = require('./routes/games');
 const { clearPicIfExists } = require('./middleware/profileImageReplace');
 require('./config/passportConfig.js');
 
@@ -57,6 +58,7 @@ app.use('/api/adminReports', adminReports);
 app.use('/api/profilePictureUpload', profilePictureUpload);
 app.use('/api/achievements', achievements);
 app.use('/api/followings', followings);
+app.use('/api/games', games);
 
 app.listen(port, () => {
   console.log(`[server] listening at http://localhost:${port}.`);

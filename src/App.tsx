@@ -30,6 +30,7 @@ import { Success } from './components/PrivateMessage/Success';
 import { Inbox } from './components/PrivateMessage/Inbox';
 import { InboxDashboard } from './components/Dashboard/InboxDashboard';
 import axios from 'axios';
+import { CircularProgress } from '@material-ui/core';
 
 export const App = () => {
   const [authenticated, setAuthenticated] = useState(false);
@@ -59,7 +60,7 @@ export const App = () => {
       });
   }, [authenticated]);
 
-  if (loadingContext) return <div>Waiting...</div>;
+  if (loadingContext) return <CircularProgress />;
   return (
     <Router>
       <AuthContext.Provider

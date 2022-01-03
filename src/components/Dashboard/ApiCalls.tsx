@@ -68,3 +68,37 @@ export const changePassword = (formValues: PasswordFormValues): any => {
     .then((res) => res.status)
     .catch((err) => {});
 };
+
+export const likeGame = async (likedBy: number, gameLiked: number) => {
+  await axios({
+    method: 'POST',
+    withCredentials: true,
+    url: 'http://localhost:5000/api/games',
+    data: {
+      likedBy: likedBy,
+      gameLiked: gameLiked,
+    },
+  })
+    .then((res) => res.status)
+    .catch((err) => console.log(err));
+};
+
+export const unlikeGame = async (likedBy: number, gameLiked: number) => {
+  await axios({
+    method: 'DELETE',
+    withCredentials: true,
+    url: 'http://localhost:5000/api/games',
+    data: {
+      likedBy: likedBy,
+      gameLiked: gameLiked,
+    },
+  })
+    .then((res) => res.status)
+    .catch((err) => console.log(err));
+};
+
+export const getLikedGames = async (profileId: number) => {
+  return axios.get(`http://localhost:5000/api/games/${profileId}`, {
+    withCredentials: true,
+  });
+};

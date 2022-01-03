@@ -11,3 +11,7 @@ export const galleryItem = css({
 export const galleryGame = css({
   width: '90%',
 });
+
+export const muiAlert = css({
+  marginBottom: '15px',
+});

@@ -55,7 +55,7 @@ router.get('/:profileId', async (req, res, next) => {
         'game.id': 'gameLiked',
       })
       .where({ likedBy: profileId })
-      .select('title', 'nickname');
+      .select('title', 'nickname', 'game.id');
     res.status(200).json(likedGames);
   } catch (err) {
     res.status(400).json({ msg: err.message });

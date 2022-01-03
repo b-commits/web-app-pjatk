@@ -24,7 +24,7 @@ export const InboxDashboard: FC = () => {
         setPrivateMessages(messages.data.reverse());
       });
     }
-  }, [currentUser.id]);
+  }, []);
 
   //todo add a table warpper for MQ
   return (

@@ -15,7 +15,6 @@ interface FormValues {
 }
 
 export const EditDetails: FC = () => {
-  const { currentUser } = useContext(AuthContext);
   const [loading, setLoading] = useState<boolean>(false);
   const [success, isSuccess] = useState<boolean>(false);
   const [taken, isTaken] = useState<boolean>(false);

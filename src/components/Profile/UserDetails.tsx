@@ -166,13 +166,15 @@ const UserActions: React.FC = () => {
 
   if (currentUser.id == id) {
     return (
-      <ProfileActionButton
-        color={'#3f51b5'}
-        value={'Home'}
-        handleClick={() => {
-          history.push('/');
-        }}
-      />
+      <>
+        <ProfileActionButton
+          color={'#3f51b5'}
+          value={'Home'}
+          handleClick={() => {
+            history.push('/');
+          }}
+        />
+      </>
     );
   }
   return (

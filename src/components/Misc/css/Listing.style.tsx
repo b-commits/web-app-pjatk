@@ -69,6 +69,35 @@ export const listingItemWrap = css({
   },
 });
 
+export const listingItemWrapHomePage = css({
+  display: 'flex',
+  backgroundColor: '#FFFFFF',
+  flexDirection: 'column',
+  justifyContent: 'center',
+  marginTop: '30px',
+  width: '30%',
+  boxSizing: 'border-box',
+  boxShadow: '0px 4px 14px -4px rgba(55, 58, 54, 1)',
+  WebkitBoxShadow: '0px 4x 14px -4px rgba(55, 58, 54, 1)',
+  MozBoxShadow: '0px 4px 14px -4px rgba(55, 58, 54, 1)',
+
+  [mq[0]]: {
+    width: '100%',
+  },
+  [mq[1]]: {
+    width: '100%',
+  },
+  [mq[2]]: {
+    width: '100%',
+  },
+  [mq[3]]: {
+    width: '30%',
+  },
+  [mq[4]]: {
+    width: '30%',
+  },
+});
+
 export const listingHeader = css({
   display: 'flex',
   flexDirection: 'row',
@@ -78,7 +107,9 @@ export const listingHeader = css({
   padding: '20px 10px',
   backgroundColor: '#ffffff',
   width: '100%',
+  height: '60px',
   boxSizing: 'border-box',
+  overflow: 'hidden',
   '& i': {
     fontSize: '20px',
     opacity: '0.6',
@@ -86,18 +117,23 @@ export const listingHeader = css({
 
   [mq[0]]: {
     flexDirection: 'column',
+    height: '120px',
   },
   [mq[1]]: {
     flexDirection: 'row',
+    height: '80px',
   },
   [mq[2]]: {
     flexDirection: 'row',
+    height: '80px',
   },
   [mq[3]]: {
     flexDirection: 'row',
+    height: '60px',
   },
   [mq[4]]: {
     flexDirection: 'row',
+    height: '60px',
   },
 });
 

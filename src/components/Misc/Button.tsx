@@ -8,11 +8,12 @@ export const INFO = 'INFO';
 
 interface ButtonProps {
   title: string;
+  isSubmit?: boolean;
   type: string; //succes -  green, warn - yellow,  danger - red, info|default - blue,
   onCLick: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
-export const Button: FC<ButtonProps> = ({ title, type, onCLick }) => {
+export const Button: FC<ButtonProps> = ({ title, isSubmit, type, onCLick }) => {
   let backgroundColor = { backgroundColor: '#000' };
   const test = buttonStyle;
   switch (type) {
@@ -37,7 +38,12 @@ export const Button: FC<ButtonProps> = ({ title, type, onCLick }) => {
     }
   }
   return (
-    <button css={buttonStyle} style={backgroundColor} onClick={onCLick}>
+    <button
+      type={isSubmit ? 'submit' : 'button'}
+      css={buttonStyle}
+      style={backgroundColor}
+      onClick={onCLick}
+    >
       {title}
     </button>
   );

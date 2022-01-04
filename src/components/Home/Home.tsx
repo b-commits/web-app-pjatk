@@ -1,10 +1,11 @@
 /** @jsxImportSource @emotion/react */
-import React, { useState, useEffect } from "react";
-import { ListingItem } from "./ListingItem";
-import { Pagination } from "@material-ui/lab";
-import { TextField } from "@material-ui/core";
-import { getAllListings } from "./ApiCalls";
-import { Skeleton } from "@material-ui/lab";
+import React, { useState, useEffect } from 'react';
+import { NavLink } from 'react-router-dom';
+import { HOMEPAGE_VIEW, Listing as ListingItem } from '../Misc/Listing';
+import { Pagination } from '@material-ui/lab';
+import { TextField } from '@material-ui/core';
+import { getAllListings } from './ApiCalls';
+import { Skeleton } from '@material-ui/lab';
 import {
   homeBanner,
   homeBannerContent,
@@ -15,8 +16,8 @@ import {
   muiPagination,
   muiSearchBar,
   muiSearchBarWrapper,
-} from "./Home.style";
-import { NavLink } from "react-router-dom";
+} from './Home.style';
+import { listingListStyle } from '../Misc/css/ListingList.style';
 
 const LISTINGS_PER_PAGE: number = 12;
 const DEFAULT_CURRENT_PAGE: number = 1;
@@ -68,10 +69,10 @@ export const Home: React.FC = () => {
           <div css={bannerConentDesc}>
             <div>
               <NavLink
-                className="navLink"
-                activeClassName="activeNavLink"
+                className='navLink'
+                activeClassName='activeNavLink'
                 exact
-                to="/register"
+                to='/register'
               >
                 <button>SIGN UP NOW</button>
               </NavLink>
@@ -81,7 +82,7 @@ export const Home: React.FC = () => {
                 <span css={blueText}>lfg-app</span> allows you to find teammates
                 for <span css={blueText}>any</span> online game out there. Sign
                 up now to browse through
-                <span css={blueText}> multiple listings</span> and connect with{" "}
+                <span css={blueText}> multiple listings</span> and connect with{' '}
                 <span css={blueText}>other people</span>.
               </p>
               <p>
@@ -96,33 +97,44 @@ export const Home: React.FC = () => {
 
       <div css={muiSearchBarWrapper}>
         <TextField
-          placeholder="Search listings..."
+          placeholder='Search listings...'
           onChange={handleSearch}
-          type="search"
+          type='search'
           css={muiSearchBar}
         />
       </div>
       <Pagination
-        size="large"
+        size='large'
         onChange={handlePageChange}
         count={Math.round(filteredListings.length / LISTINGS_PER_PAGE)}
         css={muiPagination}
-        color="primary"
+        color='primary'
       />
       <main css={homeMain}>
-        {loading ? (
-          <Skeleton width="100%" height="450px" />
-        ) : (
-          currentListings.map((listing, index) => {
-            return (
-              <ListingItem
-                key={index}
-                id={listing.id}
-                message={listing.message}
-              />
-            );
-          })
-        )}
+        <div css={listingListStyle}>
+          {loading ? (
+            <Skeleton width='100%' height='450px' />
+          ) : (
+            currentListings.map((listing, index) => {
+              return (
+                <ListingItem
+                  key={index}
+                  id={listing.id}
+                  title={listing.message}
+                  url={''}
+                  desc={listing.message}
+                  gameName={''}
+                  gameImgUrl={
+                    'https://sm.ign.com/t/ign_pl/screenshot/default/5353_ypqg.1280.jpg'
+                  }
+                  createdAt={listing.created_at}
+                  status={listing.status}
+                  activeView={HOMEPAGE_VIEW}
+                />
+              );
+            })
+          )}
+        </div>
       </main>
     </>
   );

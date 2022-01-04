@@ -1,5 +1,41 @@
 import { css } from '@emotion/react';
 
+/*
+----------------------------
+----------------------------
+      MEDIA QUERIES
+----------------------------
+----------------------------
+*/
+const breakpoints = [320, 769, 1024, 1440, 2560];
+
+// mq => media query
+const mq = breakpoints.map((bp) => `@media (min-width: ${bp}px)`);
+
+/* 
+for copy paste
+
+  [mq[0]]: {
+    flexDirection: 'column',
+  },
+  [mq[1]]: {
+    flexDirection: 'row',
+  },
+  [mq[2]]: {
+    flexDirection: 'row',
+  },
+  [mq[3]]: {
+    flexDirection: 'row',
+  },
+
+*/
+/*
+----------------------------
+----------------------------
+      MEDIA QUERIES
+----------------------------
+----------------------------
+*/
 export const profileWrap = css({
   width: '1280px',
   margin: 'auto',
@@ -33,6 +69,19 @@ export const userDetailsData = css({
   top: 300,
   padding: '8px',
   boxSizing: 'border-box',
+
+  [mq[0]]: {
+    top: 515,
+  },
+  [mq[1]]: {
+    top: 480,
+  },
+  [mq[2]]: {
+    top: 380,
+  },
+  [mq[3]]: {
+    top: 300,
+  },
 
   '& h1': {
     display: 'flex',

@@ -1,12 +1,55 @@
 import { css } from '@emotion/react';
 
+/*
+----------------------------
+----------------------------
+      MEDIA QUERIES
+----------------------------
+----------------------------
+*/
+const breakpoints = [320, 769, 1024, 1440, 2560];
+
+// mq => media query
+const mq = breakpoints.map((bp) => `@media (min-width: ${bp}px)`);
+
+/* 
+for copy paste
+
+  [mq[0]]: {
+    flexDirection: 'column',
+  },
+  [mq[1]]: {
+    flexDirection: 'row',
+  },
+  [mq[2]]: {
+    flexDirection: 'row',
+  },
+  [mq[3]]: {
+    flexDirection: 'row',
+  },
+
+*/
+/*
+----------------------------
+----------------------------
+      MEDIA QUERIES
+----------------------------
+----------------------------
+*/
+
 export const homeBanner = css({
   display: 'flex',
+  flexDirection: 'column',
   justifyContent: 'center',
   alignItems: 'center',
   width: '100%',
   height: '300px',
   backgroundColor: 'rgba(255, 255, 255, 1)',
+
+  [mq[0]]: {},
+  [mq[1]]: {},
+  [mq[2]]: {},
+  [mq[3]]: {},
 });
 
 export const homeBannerContent = css({
@@ -17,6 +60,19 @@ export const homeBannerContent = css({
   alignContent: 'flex-start',
   fontWeight: 'bold',
   width: '40%',
+
+  [mq[0]]: {
+    width: '80%',
+  },
+  [mq[1]]: {
+    width: '70%',
+  },
+  [mq[2]]: {
+    width: '60%',
+  },
+  [mq[3]]: {
+    width: '50%',
+  },
 
   '& div': { marginTop: '10px' },
 
@@ -53,6 +109,21 @@ export const bannerConentHeader = css({
 export const bannerConentDesc = css({
   display: 'flex',
   flexDirection: 'row',
+
+  [mq[0]]: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'column',
+  },
+  [mq[1]]: {
+    flexDirection: 'row',
+  },
+  [mq[2]]: {
+    flexDirection: 'row',
+  },
+  [mq[3]]: {
+    flexDirection: 'row',
+  },
 });
 
 export const blueText = css({
@@ -71,61 +142,6 @@ export const homeMain = css({
   width: '80%',
   margin: 'auto',
   marginTop: '30px',
-});
-
-export const listingItem = css({
-  display: 'flex',
-  flexDirection: 'column',
-  backgroundColor: '#FFFFFF',
-  width: '30%',
-  marginTop: '30px',
-  boxShadow: '0px 4px 14px -4px rgba(55, 58, 54, 1)',
-  WebkitBoxShadow: '0px 4x 14px -4px rgba(55, 58, 54, 1)',
-  MozBoxShadow: '0px 4px 14px -4px rgba(55, 58, 54, 1)',
-});
-
-export const listingHeader = css({
-  display: 'flex',
-  flexDirection: 'row',
-  justifyContent: 'space-between',
-  alignItems: 'center',
-  alignContent: 'center',
-  padding: '10px',
-  boxSizing: 'border-box',
-
-  '& i': {
-    fontSize: '20px',
-    opacity: '0.6',
-  },
-});
-
-export const listingHeaderTitle = css({
-  width: '80%',
-});
-
-export const listingImg = css({
-  height: '220px',
-  width: '100%',
-  textAlign: 'center',
-  backgroundColor: '#FAF9F6',
-  '& img': {
-    height: '220px',
-    width: '80%',
-  },
-});
-
-export const listingDesc = css({
-  padding: '10px',
-  boxSizing: 'border-box',
-});
-
-export const listingFooter = css({
-  padding: '10px',
-  boxSizing: 'border-box',
-
-  '& span': {
-    fontSize: '15px',
-  },
 });
 
 export const muiPagination = {

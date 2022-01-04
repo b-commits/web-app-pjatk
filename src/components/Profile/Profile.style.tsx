@@ -7,7 +7,7 @@ import { css } from '@emotion/react';
 ----------------------------
 ----------------------------
 */
-const breakpoints = [320, 769, 1024, 1440, 2560];
+const breakpoints = [320, 768, 1024, 1440, 2560];
 
 // mq => media query
 const mq = breakpoints.map((bp) => `@media (min-width: ${bp}px)`);
@@ -37,14 +37,14 @@ for copy paste
 ----------------------------
 */
 export const profileWrap = css({
-  width: '1280px',
+  maxWidth: '1280px',
   margin: 'auto',
   marginTop: '15px',
   boxSizing: 'border-box',
 });
 
 export const profileHeader = css({
-  width: '1280px',
+  width: '100%',
   margin: 'auto',
   padding: '8px',
   backgroundColor: 'rgba(255, 255, 255, 1)',
@@ -53,11 +53,24 @@ export const profileHeader = css({
 
 export const userDetailsWrap = css({
   display: 'flex',
+  justifyContent: 'left',
   alignItems: 'center',
   width: '100%',
   padding: '8px',
   height: '300px',
   boxSizing: 'border-box',
+  [mq[0]]: {
+    justifyContent: 'center',
+  },
+  [mq[1]]: {
+    justifyContent: 'left',
+  },
+  [mq[2]]: {
+    justifyContent: 'left',
+  },
+  [mq[3]]: {
+    justifyContent: 'left',
+  },
 });
 
 export const userDetailsData = css({
@@ -71,15 +84,19 @@ export const userDetailsData = css({
   boxSizing: 'border-box',
 
   [mq[0]]: {
+    flexDirection: 'column',
     top: 515,
   },
   [mq[1]]: {
-    top: 480,
+    flexDirection: 'row',
+    top: 515,
   },
   [mq[2]]: {
+    flexDirection: 'row',
     top: 380,
   },
   [mq[3]]: {
+    flexDirection: 'row',
     top: 300,
   },
 
@@ -91,6 +108,23 @@ export const userDetailsData = css({
     color: '#FFFFFF',
     fontSize: '42px',
     marginLeft: '10px',
+
+    [mq[0]]: {
+      color: '#000',
+      fontSize: '24px',
+    },
+    [mq[1]]: {
+      color: '#FFFFFF',
+      fontSize: '42px',
+    },
+    [mq[2]]: {
+      color: '#FFFFFF',
+      fontSize: '42px',
+    },
+    [mq[3]]: {
+      color: '#FFFFFF',
+      fontSize: '42px',
+    },
   },
 });
 
@@ -114,11 +148,37 @@ export const userStatusDot = css({
 export const userInfoWrap = css({
   display: 'flex',
   flexDirection: 'row',
+  flexWrap: 'wrap',
+  width: '100%',
   alignItems: 'center',
   marginLeft: '180px',
   marginTop: '8px',
   boxSizing: 'border-box',
 
+  [mq[0]]: {
+    flexDirection: 'column',
+    marginTop: '130px',
+    marginLeft: '0px',
+    justifyContent: 'center',
+  },
+  [mq[1]]: {
+    flexDirection: 'column',
+    marginTop: '50px',
+    marginLeft: '0px',
+    justifyContent: 'center',
+  },
+  [mq[2]]: {
+    flexDirection: 'row',
+    marginTop: '8px',
+    marginLeft: '80px',
+    justifyContent: 'center',
+  },
+  [mq[3]]: {
+    flexDirection: 'row',
+    marginTop: '8px',
+    marginLeft: '180px',
+    justifyContent: 'flex-start',
+  },
   '& i': {
     borderLeft: '2px solid #cfcfcf',
     height: '50px',
@@ -140,6 +200,14 @@ export const userInfoWrapItem = css({
     fontSize: '22px',
     fontWeight: 'bold',
   },
+});
+
+export const userInfoStats = css({
+  display: 'flex',
+  flexDirection: 'row',
+  justifyContent: 'center',
+  flexWrap: 'wrap',
+  boxSizing: 'border-box',
 });
 
 export const userActions = css({

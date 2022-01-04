@@ -19,6 +19,7 @@ import {
   userInfoWrapItem,
   userActions,
   userActionsButton,
+  userInfoStats,
 } from './Profile.style';
 
 interface RouteParams {
@@ -51,7 +52,7 @@ export const UserDetails: React.FC<{ isUserOnline: boolean }> = ({
         >
           <div css={userDetailsData}>
             <UserAvatar
-              avatarURL="http://bluepito.webd.pro/logopjatk.gif"
+              avatarURL='http://bluepito.webd.pro/logopjatk.gif'
               nickName={user.data.nickname}
               isUserOnline={isUserOnline}
             />
@@ -108,14 +109,16 @@ const UserInfo: React.FC = () => {
   return (
     <>
       <div css={userInfoWrap}>
-        <UserInfoWrapItem number={userDetails.numExp} value={'Experience'} />
-        <UserInfoWrapItem number={userDetails.numFavGames} value={'Games'} />
-        <UserInfoWrapItem
-          number={userDetails.numAchivements}
-          value={'Achievements'}
-        />
-        <UserInfoWrapItem number={0} value={'Games Played'} />
-        <UserInfoWrapItem number={userDetails.numFriends} value={'Friends'} />
+        <div css={userInfoStats}>
+          <UserInfoWrapItem number={userDetails.numExp} value={'Experience'} />
+          <UserInfoWrapItem number={userDetails.numFavGames} value={'Games'} />
+          <UserInfoWrapItem
+            number={userDetails.numAchivements}
+            value={'Achievements'}
+          />
+          <UserInfoWrapItem number={0} value={'Games Played'} />
+          <UserInfoWrapItem number={userDetails.numFriends} value={'Friends'} />
+        </div>
         <UserActions />
       </div>
     </>

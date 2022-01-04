@@ -125,6 +125,7 @@ const UserActions: React.FC = () => {
 
   // Check if user is followed to rerender the button:
   useEffect(() => {
+    if (!currentUser) return;
     getFollowedUsers(parseInt(currentUser.id)).then((res) => {
       if (
         res.data.filter((followed: any) => followed.followedUser == id).length >
@@ -133,7 +134,7 @@ const UserActions: React.FC = () => {
         setFollowing(true);
       }
     });
-  }, [currentUser.id]);
+  }, []);
 
   const handleMessageRedirect = () => {
     history.push({
@@ -164,7 +165,7 @@ const UserActions: React.FC = () => {
       });
   };
 
-  if (currentUser.id == id) {
+  if (currentUser) {
     return (
       <>
         <ProfileActionButton

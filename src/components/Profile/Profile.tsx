@@ -13,9 +13,6 @@ interface ProfileProps {}
 export const Profile: React.FC<ProfileProps> = () => {
   const { currentUser } = useContext(AuthContext);
 
-  if (!currentUser) {
-    return <Redirect to="/login"></Redirect>;
-  }
   return (
     <>
       <div css={profileWrap}>

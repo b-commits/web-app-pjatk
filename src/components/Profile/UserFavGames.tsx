@@ -1,16 +1,22 @@
 /** @jsxImportSource @emotion/react */
 import React, { useEffect, useState, useContext } from 'react';
+import { useParams } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import { getLikedGames } from '../Dashboard/ApiCalls';
 import { favoriteGames, favoriteGamesItem } from './Profile.style';
 
+interface RouteParams {
+  id: string;
+}
+
 export const UserFavGames: React.FC = () => {
   const { currentUser } = useContext(AuthContext);
+  const { id } = useParams<RouteParams>();
+
   const [likedGames, setLikedGames] = useState<any>([]);
 
   useEffect(() => {
-    if (!currentUser) return;
-    getLikedGames(currentUser.id).then((res) => {
+    getLikedGames(parseInt(id)).then((res) => {
       setLikedGames(res.data);
     });
     console.log(likedGames);

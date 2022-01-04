@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
+import { Button } from '@material-ui/core';
 import React, { useEffect, useState, useContext } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import { getLikedGames } from '../Dashboard/ApiCalls';
 import { favoriteGames, favoriteGamesItem } from './Profile.style';
@@ -11,6 +12,7 @@ interface RouteParams {
 
 export const UserFavGames: React.FC = () => {
   const { currentUser } = useContext(AuthContext);
+  const history = useHistory();
   const { id } = useParams<RouteParams>();
 
   const [likedGames, setLikedGames] = useState<any>([]);
@@ -24,15 +26,25 @@ export const UserFavGames: React.FC = () => {
 
   return (
     <div css={favoriteGames}>
-      {likedGames.map((game: any) => {
-        return (
-          <UserFavGamesItem
-            gameImgUrl={`/gamePics/${game.id}.jpeg`}
-            gameName={game.title}
-            gameUrl={''}
-          />
-        );
-      })}
+      {likedGames.length > 0
+        ? likedGames.map((game: any) => {
+            return (
+              <UserFavGamesItem
+                gameImgUrl={`/gamePics/${game.id}.jpeg`}
+                gameName={game.title}
+                gameUrl={''}
+              />
+            );
+          })
+        : [
+            currentUser.id == id ? (
+              <Button onClick={() => history.push('/dashboard/favgames')}>
+                + Select your favourite games
+              </Button>
+            ) : (
+              <div>This user has no favourite games.</div>
+            ),
+          ]}
     </div>
   );
 };

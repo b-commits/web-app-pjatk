@@ -12,8 +12,8 @@ export const ListingDashboard: FC = () => {
   );
   return (
     <>
-      <SectionDashboard title='Add new listing' component={addListingForm} />
-      <SectionDashboard title='Menage your listings' component={userListings} />
+      <SectionDashboard title="Add new listing" component={addListingForm} />
+      <SectionDashboard title="Manage your listings" component={userListings} />
     </>
   );
 };

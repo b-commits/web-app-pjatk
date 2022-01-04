@@ -21,6 +21,9 @@ export const FriendsDashboard: FC = () => {
   return (
     <div>
       <h1>Your friends:</h1>
+      {friends.length == 0 ? (
+        <div>You haven't added any friends yet.</div>
+      ) : null}
       {friends.map((friend: any) => {
         return (
           <div css={friendElement}>

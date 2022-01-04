@@ -38,6 +38,8 @@ router.post('/', async (req, res) => {
       email: req.body.email,
       password: hashedPassword,
     });
+    const id = User.query().where({ nickname: req.body.nickname }).select('id');
+    await UserAchievement.query().insert({ unlockedBy: id, achievement: 6 });
     if (req.body.newsletter) {
       let options = {
         from: 'pjatklfgapp@gmail.com',
@@ -45,7 +47,7 @@ router.post('/', async (req, res) => {
         subject: 'LFGAPP',
         text: 'Thank you for signing up for our monthly newsletter! Please log in to your account to discover what lfg-app has to offer',
       };
-      newsletterTransporter.sendMail(options, (err, data) => {
+      newsletterTransporter.sendMail(options, (err, _data) => {
         if (err) {
           console.log(err);
         }
@@ -53,7 +55,6 @@ router.post('/', async (req, res) => {
     }
     res.status(CREATED).json({ msg: ADDED });
   } catch (error) {
-    console.log(error);
     if (emailTaken) res.status(SERVER_ERROR).json({ msg: EMAIL_TAKEN });
     else res.status(SERVER_ERROR).json({ msg: USERNAME_TAKEN });
   }

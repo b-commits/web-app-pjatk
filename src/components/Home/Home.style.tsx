@@ -43,13 +43,8 @@ export const homeBanner = css({
   justifyContent: 'center',
   alignItems: 'center',
   width: '100%',
-  height: '300px',
+  minHeight: '300px',
   backgroundColor: 'rgba(255, 255, 255, 1)',
-
-  [mq[0]]: {},
-  [mq[1]]: {},
-  [mq[2]]: {},
-  [mq[3]]: {},
 });
 
 export const homeBannerContent = css({

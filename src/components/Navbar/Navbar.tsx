@@ -62,52 +62,48 @@ export const Navbar: React.FC = () => {
   return (
     <div css={navContainer}>
       <nav css={navMain}>
+        <NavLink
+          className='navLink'
+          activeClassName='activeNavLink'
+          exact
+          to='/'
+        >
+          <img css={navLogo} src={logo} />
+        </NavLink>
+
+        {authenticated ? (
+          <>
+            <Formik onSubmit={handleUserSearch} initialValues={{ search: '' }}>
+              <Form css={formikForm}>
+                <Field
+                  as={TextField}
+                  name='search'
+                  css={muiSearchbar}
+                  color='primary'
+                  id='filled-basic'
+                  label='Find users...'
+                  variant='filled'
+                  size='small'
+                />
+                <Button
+                  variant='contained'
+                  css={buttonSearch}
+                  color='primary'
+                  type='submit'
+                >
+                  Search
+                </Button>
+              </Form>
+            </Formik>
+          </>
+        ) : null}
         <ul css={navList}>
           <li>
             <NavLink
-              className="navLink"
-              activeClassName="activeNavLink"
+              className='navLink'
+              activeClassName='activeNavLink'
               exact
-              to="/"
-            >
-              <img css={navLogo} src={logo} />
-            </NavLink>
-          </li>
-          {authenticated ? (
-            <>
-              <Formik
-                onSubmit={handleUserSearch}
-                initialValues={{ search: '' }}
-              >
-                <Form css={formikForm}>
-                  <Field
-                    as={TextField}
-                    name="search"
-                    css={muiSearchbar}
-                    color="primary"
-                    id="filled-basic"
-                    label="Find users..."
-                    variant="filled"
-                    size="small"
-                  />
-                  <Button
-                    variant="contained"
-                    css={buttonSearch}
-                    color="primary"
-                    type="submit"
-                  >
-                    Search
-                  </Button>
-                </Form>
-              </Formik>
-            </>
-          ) : null}
-          <li>
-            <NavLink
-              className="navLink"
-              activeClassName="activeNavLink"
-              exact
-              to="/"
+              to='/'
             >
               Listings
             </NavLink>
@@ -115,17 +111,17 @@ export const Navbar: React.FC = () => {
           <li>
             {authenticated ? (
               <NavLink
-                className="navLink"
-                activeClassName="activeNavLink"
-                to="/dashboard"
+                className='navLink'
+                activeClassName='activeNavLink'
+                to='/dashboard'
               >
                 Dashboard
               </NavLink>
             ) : (
               <NavLink
-                className="navLink"
-                activeClassName="activeNavLink"
-                to="/about"
+                className='navLink'
+                activeClassName='activeNavLink'
+                to='/about'
               >
                 About
               </NavLink>
@@ -133,14 +129,14 @@ export const Navbar: React.FC = () => {
           </li>
           <li>
             {authenticated ? (
-              <NavLink to="/" onClick={handleLogout}>
+              <NavLink to='/' onClick={handleLogout}>
                 Sign out
               </NavLink>
             ) : (
               <NavLink
-                className="navLink"
-                activeClassName="activeNavLink"
-                to="/login"
+                className='navLink'
+                activeClassName='activeNavLink'
+                to='/login'
               >
                 Sign in
               </NavLink>

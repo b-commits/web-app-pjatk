@@ -39,6 +39,18 @@ for copy paste
 
 export const appStyle = css({
   fontFamily: 'Roboto',
+  [mq[0]]: {
+    marginTop: '10px',
+  },
+  [mq[1]]: {
+    marginTop: '10px',
+  },
+  [mq[2]]: {
+    marginTop: '180px',
+  },
+  [mq[3]]: {
+    marginTop: '100px',
+  },
 });
 
 /*
@@ -72,9 +84,11 @@ export const dashboardWrap = css({
   },
   [mq[2]]: {
     flexDirection: 'row',
+    marginTop: '230px',
   },
   [mq[3]]: {
     flexDirection: 'row',
+    marginTop: '150px',
   },
 });
 

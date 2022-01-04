@@ -30,7 +30,7 @@ export const userDetailsData = css({
   justifyContent: 'center',
   alignItems: 'center',
   position: 'absolute',
-  top: 340,
+  top: 300,
   padding: '8px',
   boxSizing: 'border-box',
 

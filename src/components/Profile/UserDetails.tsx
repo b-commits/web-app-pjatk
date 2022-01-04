@@ -1,6 +1,11 @@
 /** @jsxImportSource @emotion/react */
 import React, { useContext, useEffect, useState } from 'react';
-import { getFollowedUsers, getUserByID, unfollowUser } from './ApiCalls';
+import {
+  getFollowedUsers,
+  getUserByID,
+  getUserDetails,
+  unfollowUser,
+} from './ApiCalls';
 import { useParams, useHistory } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import { CircularProgress } from '@material-ui/core';
@@ -86,14 +91,31 @@ const UserAvatar: React.FC<{
 };
 
 const UserInfo: React.FC = () => {
+  /**
+    @desc Ideally, the calls should only be made in the UserDetails component and the user
+    object should be passed down as a props.
+  */
+  const { id } = useParams<RouteParams>();
+  const [userDetails, setUserDetails] = useState<any>({});
+  const { currentUser } = useContext(AuthContext);
+
+  useEffect(() => {
+    getUserDetails(id).then((res: any) => {
+      setUserDetails(res.data);
+    });
+  }, [id]);
+
   return (
     <>
       <div css={userInfoWrap}>
-        <UserInfoWrapItem number={237316} value={'Profile Views'} />
-        <UserInfoWrapItem number={137} value={'Games'} />
-        <UserInfoWrapItem number={34} value={'Achievements'} />
-        <UserInfoWrapItem number={12} value={'Games Played'} />
-        <UserInfoWrapItem number={7} value={'Friends'} />
+        <UserInfoWrapItem number={userDetails.numExp} value={'Experience'} />
+        <UserInfoWrapItem number={userDetails.numFavGames} value={'Games'} />
+        <UserInfoWrapItem
+          number={userDetails.numAchivements}
+          value={'Achievements'}
+        />
+        <UserInfoWrapItem number={0} value={'Games Played'} />
+        <UserInfoWrapItem number={userDetails.numFriends} value={'Friends'} />
         <UserActions />
       </div>
     </>
@@ -110,7 +132,6 @@ const UserInfoWrapItem: React.FC<{
         <span>{number}</span>
         {value}
       </div>
-
       <i></i>
     </>
   );
@@ -165,7 +186,7 @@ const UserActions: React.FC = () => {
       });
   };
 
-  if (currentUser) {
+  if (currentUser.id == id) {
     return (
       <>
         <ProfileActionButton

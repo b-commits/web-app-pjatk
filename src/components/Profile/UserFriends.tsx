@@ -1,73 +1,42 @@
 /** @jsxImportSource @emotion/react */
-import React from 'react';
+import React, { useState, useContext, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { AuthContext } from '../../context/AuthContext';
 import { friends, friendsItem } from './Profile.style';
+import { getFriends } from '../Dashboard/ApiCalls';
+
+interface RouteParams {
+  id: string;
+}
 
 export const UserFriends: React.FC = () => {
+  const { id } = useParams<RouteParams>();
+  const [friendList, setFriendList] = useState<any>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const { currentUser } = useContext(AuthContext);
+
+  useEffect(() => {
+    setLoading(true);
+    getFriends(parseInt(id)).then((res: any) => {
+      setFriendList(res.data);
+      setLoading(false);
+    });
+  }, []);
+
+  if (!friendList) return <></>;
   return (
     <div css={friends}>
-      <UserFriendsItem
-        userProfileUrl={'#'}
-        userName={'User_1'}
-        userAvatarUrl={
-          'https://opgg-static.akamaized.net/images/profile_icons/profileIcon4293.jpg'
-        }
-      />
-      <UserFriendsItem
-        userProfileUrl={'#'}
-        userName={'User_2'}
-        userAvatarUrl={
-          'https://opgg-static.akamaized.net/images/lol/champion/Galio.png'
-        }
-      />
-      <UserFriendsItem
-        userProfileUrl={'#'}
-        userName={'User_3'}
-        userAvatarUrl={
-          'https://opgg-static.akamaized.net/images/lol/champion/Jax.png'
-        }
-      />
-      <UserFriendsItem
-        userProfileUrl={'#'}
-        userName={'User_4'}
-        userAvatarUrl={
-          'https://opgg-static.akamaized.net/images/lol/champion/Malphite.png'
-        }
-      />
-      <UserFriendsItem
-        userProfileUrl={'#'}
-        userName={'User_5'}
-        userAvatarUrl={
-          'https://opgg-static.akamaized.net/images/profile_icons/profileIcon4086.jpg'
-        }
-      />
-      <UserFriendsItem
-        userProfileUrl={'#'}
-        userName={'User_6'}
-        userAvatarUrl={
-          'https://static.wikia.nocookie.net/gensin-impact/images/0/02/Character_Diluc_Thumb.png'
-        }
-      />
-      <UserFriendsItem
-        userProfileUrl={'#'}
-        userName={'User_7'}
-        userAvatarUrl={
-          'https://opgg-static.akamaized.net/images/profile_icons/profileIcon4970.jpg'
-        }
-      />
-      <UserFriendsItem
-        userProfileUrl={'#'}
-        userName={'User_8'}
-        userAvatarUrl={
-          'https://opgg-static.akamaized.net/images/profile_icons/profileIcon3156.jpg'
-        }
-      />
-      <UserFriendsItem
-        userProfileUrl={'#'}
-        userName={'User_9'}
-        userAvatarUrl={
-          'https://opgg-static.akamaized.net/images/profile_icons/profileIcon4893.jpg'
-        }
-      />
+      {friendList.map((friend: any) => {
+        return (
+          <UserFriendsItem
+            userProfileUrl={`/profile/${friend.id}`}
+            userName={friend.nickname}
+            userAvatarUrl={
+              'https://opgg-static.akamaized.net/images/profile_icons/profileIcon4293.jpg'
+            }
+          ></UserFriendsItem>
+        );
+      })}
     </div>
   );
 };

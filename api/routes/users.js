@@ -1,18 +1,21 @@
-const User = require("../models/User");
-const Listing = require("../models/Listing");
-const ListingComment = require("../models/ListingComment");
-const PrivateMessage = require("../models/PrivateMessage");
-const ProfilePageComment = require("../models/ProfilePageComment");
-const express = require("express");
-const bcrypt = require("bcrypt");
-const passport = require("passport");
-const { EMAIL_TAKEN, USERNAME_TAKEN, ADDED } = require("./errorConsts");
-const { CREATED, SERVER_ERROR, BAD_REQUEST } = require("./errorConsts");
-const { isAuthenticated } = require("../middleware/authentication");
+const User = require('../models/User');
+const Listing = require('../models/Listing');
+const ListingComment = require('../models/ListingComment');
+const PrivateMessage = require('../models/PrivateMessage');
+const ProfilePageComment = require('../models/ProfilePageComment');
+const LikeGame = require('../models/LikeGame');
+const Following = require('../models/Following');
+const express = require('express');
+const bcrypt = require('bcrypt');
+const passport = require('passport');
+const { EMAIL_TAKEN, USERNAME_TAKEN, ADDED } = require('./errorConsts');
+const { CREATED, SERVER_ERROR, BAD_REQUEST } = require('./errorConsts');
+const { isAuthenticated } = require('../middleware/authentication');
 const router = express.Router();
-const nodemailer = require("nodemailer");
-const dotenv = require("dotenv").config({
-  path: "../../.env",
+const nodemailer = require('nodemailer');
+const UserAchievement = require('../models/UserAchievement');
+const dotenv = require('dotenv').config({
+  path: '../../.env',
 });
 
 /**
@@ -20,7 +23,7 @@ const dotenv = require("dotenv").config({
     @desc     Register a user.
     @access   Public.
 */
-router.post("/", async (req, res) => {
+router.post('/', async (req, res) => {
   const salt = await bcrypt.genSalt();
   const hashedPassword = await bcrypt.hash(req.body.password, salt);
   let emailTaken = false;
@@ -37,10 +40,10 @@ router.post("/", async (req, res) => {
     });
     if (req.body.newsletter) {
       let options = {
-        from: "pjatklfgapp@gmail.com",
+        from: 'pjatklfgapp@gmail.com',
         to: req.body.email,
-        subject: "LFGAPP",
-        text: "Thank you for signing up for our monthly newsletter! Please log in to your account to discover what lfg-app has to offer",
+        subject: 'LFGAPP',
+        text: 'Thank you for signing up for our monthly newsletter! Please log in to your account to discover what lfg-app has to offer',
       };
       newsletterTransporter.sendMail(options, (err, data) => {
         if (err) {
@@ -61,7 +64,7 @@ router.post("/", async (req, res) => {
     @desc     Get user by id.
     @access   Public.
 */
-router.get("/user/:id", async (req, res, next) => {
+router.get('/user/:id', async (req, res, next) => {
   try {
     const { id } = req.params;
     const user = await User.query().findById(id);
@@ -72,11 +75,38 @@ router.get("/user/:id", async (req, res, next) => {
 });
 
 /**
+    @route    GET api/users/user/:id
+    @desc     Gets all necessary information to populate user details bar.
+              Experience, number of favourited games, number of achievements, number of games played
+              and a number of friends.
+    @access   Public.
+*/
+router.get('/details/:id', async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const numExp = await User.query().findById(id).select('experience');
+    const numFavGames = await LikeGame.query().where({ likedBy: id });
+    const numFriends = await Following.query().where({ followingUser: id });
+    const numAchivements = await UserAchievement.query().where({
+      unlockedBy: id,
+    });
+    res.json({
+      numExp: numExp.experience,
+      numFavGames: numFavGames.length,
+      numFriends: numFriends.length,
+      numAchivements: numAchivements.length,
+    });
+  } catch (err) {
+    res.status(400).json({ msg: err.message });
+  }
+});
+
+/**
     @route    DELETE api/users/delete/:id
     @desc     Get user by id.
     @access   Public.
 */
-router.delete("/delete/:id", async (req, res, next) => {
+router.delete('/delete/:id', async (req, res, next) => {
   try {
     const { id } = req.params;
     await Listing.query().where({ creator: id }).delete();
@@ -98,8 +128,8 @@ router.delete("/delete/:id", async (req, res, next) => {
               Passport adds user information to the HTTP requests. 
     @access   Public.
 */
-router.post("/login", passport.authenticate("local"), (req, res, next) => {
-  res.status(200).json({ msg: "Sucessfully authenticated" });
+router.post('/login', passport.authenticate('local'), (req, res, next) => {
+  res.status(200).json({ msg: 'Sucessfully authenticated' });
 });
 
 /**
@@ -108,9 +138,9 @@ router.post("/login", passport.authenticate("local"), (req, res, next) => {
               which delets the passport user header from the request. 
     @access   Public.
 */
-router.post("/logout", (req, res, next) => {
+router.post('/logout', (req, res, next) => {
   req.logout();
-  res.status(200).json({ msg: "Sucessfully logged out" });
+  res.status(200).json({ msg: 'Sucessfully logged out' });
 });
 
 /**
@@ -118,14 +148,14 @@ router.post("/logout", (req, res, next) => {
   @desc       Returns an object of a user who is currently authenticated.
   @access     Public.
 */
-router.get("/currentUser", async (req, res, next) => {
+router.get('/currentUser', async (req, res, next) => {
   try {
     const currentUser = await User.query().where({
       id: req.session.passport.user,
     });
     res.status(200).json({ currentUser: currentUser });
   } catch (err) {
-    res.status(400).json({ msg: "Not logged in" });
+    res.status(400).json({ msg: 'Not logged in' });
   }
 });
 
@@ -134,7 +164,7 @@ router.get("/currentUser", async (req, res, next) => {
   @desc       Returns an array of listings created by a given user.
   @access     Public.
 */
-router.get("/:id/listings", async (req, res, next) => {
+router.get('/:id/listings', async (req, res, next) => {
   try {
     const userListings = await Listing.query().where({
       creator: req.params.id,
@@ -150,8 +180,8 @@ router.get("/:id/listings", async (req, res, next) => {
     @desc     Gets user private messages.
     @access   Protected.
 */
-router.get("/messages", isAuthenticated, (req, res, next) => {
-  res.send("Placeholder...");
+router.get('/messages', isAuthenticated, (req, res, next) => {
+  res.send('Placeholder...');
 });
 
 /**
@@ -159,12 +189,12 @@ router.get("/messages", isAuthenticated, (req, res, next) => {
     @desc     Get all users.
     @access   Public.
 */
-router.get("/", async (req, res, next) => {
+router.get('/', async (req, res, next) => {
   try {
     const users = await User.query();
     res.json(users);
   } catch (err) {
-    res.status(400).json({ msg: "Bad request" });
+    res.status(400).json({ msg: 'Bad request' });
   }
 });
 
@@ -173,16 +203,16 @@ router.get("/", async (req, res, next) => {
     @desc     Get users whose nicknames matches the query string.
     @access   Public.
 */
-router.get("/search/:userQueryString", async (req, res, next) => {
+router.get('/search/:userQueryString', async (req, res, next) => {
   try {
     const filteredUsers = await User.query().where(
-      "nickname",
-      "like",
-      "%" + req.params.userQueryString + "%"
+      'nickname',
+      'like',
+      '%' + req.params.userQueryString + '%'
     );
     res.status(200).json(filteredUsers);
   } catch (err) {
-    res.status(400).json({ msg: "Bad request " });
+    res.status(400).json({ msg: 'Bad request ' });
   }
 });
 
@@ -191,7 +221,7 @@ router.get("/search/:userQueryString", async (req, res, next) => {
     @desc     Updates the username.
     @access   Protected.
 */
-router.patch("/", async (req, res) => {
+router.patch('/', async (req, res) => {
   try {
     const nickanameAlreadyExists = await User.query().where({
       nickname: req.body.nickname,
@@ -200,8 +230,8 @@ router.patch("/", async (req, res) => {
       await User.query()
         .where({ id: req.body.id })
         .update({ nickname: req.body.nickname });
-      res.status(200).json({ msg: "Updated" });
-    } else res.status(400).json({ msg: "Nickname already taken" });
+      res.status(200).json({ msg: 'Updated' });
+    } else res.status(400).json({ msg: 'Nickname already taken' });
   } catch (error) {
     res.status(SERVER_ERROR).json({ msg: error.message });
   }
@@ -212,14 +242,14 @@ router.patch("/", async (req, res) => {
     @desc     Updates the user password.
     @access   Protected.
 */
-router.patch("/changePassword", async (req, res) => {
+router.patch('/changePassword', async (req, res) => {
   try {
     const salt = await bcrypt.genSalt();
     const hashedPassword = await bcrypt.hash(req.body.newPassword, salt);
     await User.query()
       .where({ id: req.body.id })
       .update({ password: hashedPassword });
-    res.status(200).json({ msg: "Updated" });
+    res.status(200).json({ msg: 'Updated' });
   } catch (error) {
     res.status(SERVER_ERROR).json({ msg: error.message });
   }
@@ -231,7 +261,7 @@ router.patch("/changePassword", async (req, res) => {
  * set up a secure SMTP service (and probably test it with Mailhog at some point).
  */
 let newsletterTransporter = nodemailer.createTransport({
-  service: "gmail",
+  service: 'gmail',
   auth: {
     user: process.env.MAIL_ACC,
     pass: process.env.MAIL_PASS,

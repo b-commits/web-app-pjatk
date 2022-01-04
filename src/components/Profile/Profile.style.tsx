@@ -214,16 +214,19 @@ export const profileContentItem = css({
 
 export const favoriteGames = css({
   width: '100%',
-  display: 'flex',
-  flexDirection: 'row',
+  display: 'grid',
+  gridTemplateColumns: 'repeat(auto-fill, 280px);',
+  gridGap: '5px',
   justifyContent: 'space-between',
 });
 
 export const favoriteGamesItem = css({
   '& img': {
-    height: '280px',
-    width: '160px',
+    height: '160px',
+    width: '280px',
     borderRadius: '8px',
+    marginTop: '5px',
+    objectFit: 'cover',
     transition: '3s',
   },
 

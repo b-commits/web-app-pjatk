@@ -142,7 +142,7 @@ const UserInfoWrapItem: React.FC<{
   );
 };
 
-const UserActions: React.FC = () => {
+const UserActions: any = () => {
   const history = useHistory();
   const { id } = useParams<RouteParams>();
   const { currentUser } = useContext(AuthContext);
@@ -191,51 +191,59 @@ const UserActions: React.FC = () => {
       });
   };
 
-  if (currentUser.id == id) {
+  if (currentUser) {
+    if (currentUser.id == id) {
+      return (
+        <>
+          <ProfileActionButton
+            color={'#3f51b5'}
+            value={'Home'}
+            handleClick={() => {
+              history.push('/');
+            }}
+          />
+        </>
+      );
+    } else {
+      return (
+        <>
+          <div css={userActions}>
+            {loading ? (
+              <CircularProgress />
+            ) : (
+              [
+                isFollowing ? (
+                  <ProfileActionButton
+                    color={'orange'}
+                    value={'Unfollow   '}
+                    handleClick={handleUnfollow}
+                  />
+                ) : (
+                  <ProfileActionButton
+                    color={'#44c767'}
+                    value={'Follow   '}
+                    handleClick={handleFollow}
+                  />
+                ),
+              ]
+            )}
+            <ProfileActionButton
+              color={'#eeb44f'}
+              value={'Message'}
+              handleClick={handleMessageRedirect}
+            />
+            <ProfileActionButton color={'#f24437'} value={'Report'} />
+          </div>
+        </>
+      );
+    }
+  }
+  if (!currentUser)
     return (
       <>
-        <ProfileActionButton
-          color={'#3f51b5'}
-          value={'Home'}
-          handleClick={() => {
-            history.push('/');
-          }}
-        />
+        <div css={userActions}></div>
       </>
     );
-  }
-  return (
-    <>
-      <div css={userActions}>
-        {loading ? (
-          <CircularProgress />
-        ) : (
-          [
-            isFollowing ? (
-              <ProfileActionButton
-                color={'orange'}
-                value={'Unfollow   '}
-                handleClick={handleUnfollow}
-              />
-            ) : (
-              <ProfileActionButton
-                color={'#44c767'}
-                value={'Follow   '}
-                handleClick={handleFollow}
-              />
-            ),
-          ]
-        )}
-
-        <ProfileActionButton
-          color={'#eeb44f'}
-          value={'Message'}
-          handleClick={handleMessageRedirect}
-        />
-        <ProfileActionButton color={'#f24437'} value={'Report'} />
-      </div>
-    </>
-  );
 };
 
 export const ProfileActionButton: React.FC<{

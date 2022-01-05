@@ -21,10 +21,25 @@ export const UserFavGames: React.FC = () => {
     getLikedGames(parseInt(id)).then((res) => {
       setLikedGames(res.data);
     });
-    console.log(likedGames);
   }, []);
 
-  if (!currentUser) return <CircularProgress />;
+  if (!currentUser) {
+    return (
+      <div css={favoriteGames}>
+        {likedGames.map((game: any) => {
+          return (
+            <UserFavGamesItem
+              gameImgUrl={`/gamePics/${game.id}.jpeg`}
+              gameName={game.title}
+              gameUrl={''}
+            />
+          );
+        })}
+        ;
+      </div>
+    );
+  }
+
   return (
     <div css={favoriteGames}>
       {likedGames.length > 0

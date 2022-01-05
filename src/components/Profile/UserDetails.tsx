@@ -31,7 +31,6 @@ export const UserDetails: React.FC<{ isUserOnline: boolean }> = ({
 }) => {
   const { id } = useParams<RouteParams>();
   const [user, setUser] = useState<any>({});
-  const { currentUser } = useContext(AuthContext);
 
   useEffect(() => {
     getUserByID(id).then((user: any) => {
@@ -52,7 +51,7 @@ export const UserDetails: React.FC<{ isUserOnline: boolean }> = ({
         >
           <div css={userDetailsData}>
             <UserAvatar
-              avatarURL='http://bluepito.webd.pro/logopjatk.gif'
+              avatarURL="http://bluepito.webd.pro/logopjatk.gif"
               nickName={user.data.nickname}
               isUserOnline={isUserOnline}
             />
@@ -98,14 +97,17 @@ const UserInfo: React.FC = () => {
   */
   const { id } = useParams<RouteParams>();
   const [userDetails, setUserDetails] = useState<any>({});
-  const { currentUser } = useContext(AuthContext);
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
+    setLoading(true);
     getUserDetails(id).then((res: any) => {
       setUserDetails(res.data);
+      setLoading(false);
     });
   }, [id]);
 
+  if (loading) return <CircularProgress />;
   return (
     <>
       <div css={userInfoWrap}>

@@ -18,6 +18,10 @@ export const InboxDashboard: FC = () => {
   const { currentUser, authenticated } = useContext(AuthContext);
   const history = useHistory();
 
+  const trimDate = (unformatted: string) => {
+    return unformatted.substring(0, 10);
+  };
+
   useEffect(() => {
     if (authenticated) {
       getUserPrivateMessages(currentUser.id).then((messages: any) => {
@@ -53,7 +57,7 @@ export const InboxDashboard: FC = () => {
                       {message.nickname}
                     </TableCell>
                     <TableCell component="th" scope="row">
-                      {message.created_at}
+                      {trimDate(message.created_at)}
                     </TableCell>
                     <TableCell component="th" scope="row">
                       <Button

@@ -5,6 +5,7 @@ const mq = breakpoints.map((bp) => `@media (min-width: ${bp}px)`);
 
 export const messageWrapper = css({
   display: 'flex',
+  height: '250px',
   justifyContent: 'center',
   width: '30%',
   margin: '0 auto',

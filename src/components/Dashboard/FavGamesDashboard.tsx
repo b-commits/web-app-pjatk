@@ -3,13 +3,25 @@ import { FC, useEffect, useState, useContext } from 'react';
 import {
   gameGallery,
   galleryItem,
-  galleryGame,
+  galleryGameImg,
+  galleryGameTitle,
   muiAlert,
 } from './css/FavGames.styles';
 import { Checkbox, LinearProgress } from '@material-ui/core';
 import { getLikedGames, likeGame, unlikeGame } from './ApiCalls';
 import { AuthContext } from '../../context/AuthContext';
 import { Alert } from '@material-ui/lab';
+import { withStyles } from '@material-ui/core/styles';
+
+const CustomColorCheckbox = withStyles({
+  root: {
+    color: '#ffffff',
+    '&$checked': {
+      color: '#f50057',
+    },
+  },
+  checked: {},
+})((props: any) => <Checkbox color='default' {...props} />);
 
 export const FavGamesDashboard: FC = () => {
   const { currentUser } = useContext(AuthContext);
@@ -58,63 +70,119 @@ export const FavGamesDashboard: FC = () => {
         Your favourite games will be displayed first when you're browsing
         through listings.
       </h4>
-      {loading && <LinearProgress color="primary" />}
+      {loading && <LinearProgress color='primary' />}
       {error && (
-        <Alert severity="warning" css={muiAlert}>
+        <Alert severity='warning' css={muiAlert}>
           Sorry, you can only favourite a maximum of five games.
         </Alert>
       )}
 
       <div css={gameGallery}>
         <div css={galleryItem}>
-          <img css={galleryGame} src="/gamePics/1.jpeg"></img>
-          <Checkbox id="0" checked={likes[0]} onChange={handleChange} />
-          <label>Apex Legends</label>
+          <img css={galleryGameImg} src='/gamePics/1.jpeg' alt='Apex'></img>
+          <div css={galleryGameTitle}>
+            <label>Apex Legends</label>
+            <CustomColorCheckbox
+              id='0'
+              checked={likes[0]}
+              onChange={handleChange}
+            />
+          </div>
         </div>
         <div css={galleryItem}>
-          <img css={galleryGame} src="/gamePics/2.jpeg"></img>
-          <Checkbox id="1" checked={likes[1]} onChange={handleChange} />
-          <label>Counter Strike: Global Offensive</label>
+          <img css={galleryGameImg} src='/gamePics/2.jpeg'></img>
+          <div css={galleryGameTitle}>
+            <label>Counter Strike: Global Offensive</label>
+            <CustomColorCheckbox
+              id='1'
+              checked={likes[1]}
+              onChange={handleChange}
+            />
+          </div>
         </div>
         <div css={galleryItem}>
-          <img css={galleryGame} src="/gamePics/3.jpeg"></img>
-          <Checkbox id="2" checked={likes[2]} onChange={handleChange} />
-          <label>Dota 2</label>
+          <img css={galleryGameImg} src='/gamePics/3.jpeg'></img>
+          <div css={galleryGameTitle}>
+            <label>Dota 2</label>
+            <CustomColorCheckbox
+              id='2'
+              checked={likes[2]}
+              onChange={handleChange}
+            />
+          </div>
         </div>
         <div css={galleryItem}>
-          <img css={galleryGame} src="/gamePics/4.jpeg"></img>
-          <Checkbox id="3" checked={likes[3]} onChange={handleChange} />
-          <label>Ready or Not</label>
+          <img css={galleryGameImg} src='/gamePics/4.jpeg'></img>
+          <div css={galleryGameTitle}>
+            <label>Ready or Not</label>
+            <CustomColorCheckbox
+              id='3'
+              checked={likes[3]}
+              onChange={handleChange}
+            />
+          </div>
         </div>
         <div css={galleryItem}>
-          <img css={galleryGame} src="/gamePics/5.jpeg"></img>
-          <Checkbox id="4" checked={likes[4]} onChange={handleChange} />
-          <label>Rainbow Six: Siege</label>
+          <img css={galleryGameImg} src='/gamePics/5.jpeg'></img>
+          <div css={galleryGameTitle}>
+            <label>Rainbow Six: Siege</label>
+            <CustomColorCheckbox
+              id='4'
+              checked={likes[4]}
+              onChange={handleChange}
+            />
+          </div>
         </div>
         <div css={galleryItem}>
-          <img css={galleryGame} src="/gamePics/6.jpeg"></img>
-          <Checkbox id="5" checked={likes[5]} onChange={handleChange} />
-          <label>Stardew Valley</label>
+          <img css={galleryGameImg} src='/gamePics/6.jpeg'></img>
+          <div css={galleryGameTitle}>
+            <label>Stardew Valley</label>
+            <CustomColorCheckbox
+              id='5'
+              checked={likes[5]}
+              onChange={handleChange}
+            />
+          </div>
         </div>
         <div css={galleryItem}>
-          <img css={galleryGame} src="/gamePics/7.jpeg"></img>
-          <Checkbox id="6" checked={likes[6]} onChange={handleChange} />
-          <label>It Takes Two</label>
+          <img css={galleryGameImg} src='/gamePics/7.jpeg'></img>
+          <div css={galleryGameTitle}>
+            <label>It Takes Two</label>
+            <CustomColorCheckbox
+              id='6'
+              checked={likes[6]}
+              onChange={handleChange}
+            />
+          </div>
         </div>
         <div css={galleryItem}>
-          <img css={galleryGame} src="/gamePics/8.jpeg"></img>
-          <Checkbox id="7" checked={likes[7]} onChange={handleChange} />
-          <label>Terraria</label>
+          <img css={galleryGameImg} src='/gamePics/8.jpeg'></img>
+          <div css={galleryGameTitle}>
+            <label>Terraria</label>
+            <CustomColorCheckbox
+              id='7'
+              checked={likes[7]}
+              onChange={handleChange}
+            />
+          </div>
         </div>
         <div css={galleryItem}>
-          <img css={galleryGame} src="/gamePics/9.jpeg"></img>
-          <Checkbox id="8" checked={likes[8]} onChange={handleChange} />
-          <label>Valheim</label>
+          <img css={galleryGameImg} src='/gamePics/9.jpeg'></img>
+          <div css={galleryGameTitle}>
+            <label>Valheim</label>
+            <CustomColorCheckbox
+              id='8'
+              checked={likes[8]}
+              onChange={handleChange}
+            />
+          </div>
         </div>
         <div css={galleryItem}>
-          <img css={galleryGame} src="/gamePics/10.jpeg"></img>
-          <Checkbox id="9" checked={likes[9]} onChange={handleChange} />
-          <label>World of Warships</label>
+          <img css={galleryGameImg} src='/gamePics/10.jpeg'></img>
+          <div css={galleryGameTitle}>
+            <label>World of Warships</label>
+            <Checkbox id='9' checked={likes[9]} onChange={handleChange} />
+          </div>
         </div>
       </div>
     </>

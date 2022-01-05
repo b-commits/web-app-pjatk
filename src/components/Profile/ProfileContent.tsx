@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import React from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import {
   profileContent,
   profileMain,
@@ -7,10 +7,13 @@ import {
   profileContentItem,
 } from './Profile.style';
 import { UserAchievements } from './UserAchievements';
+import { useParams } from 'react-router-dom';
 import { UserFavGames } from './UserFavGames';
 import { UserFriends } from './UserFriends';
 import { UserListings } from './UserListings';
 import { UserLevel } from '../Misc/UserLevel';
+import { getUserAchievments } from '../Dashboard/ApiCalls';
+import { AuthContext } from '../../context/AuthContext';
 
 export const ProfileContent: React.FC = () => {
   return (
@@ -33,8 +36,8 @@ export const ProfileContent: React.FC = () => {
             title={'Level'}
             contentComponent={
               <UserLevel
-                userLvl={52}
-                userExp={770}
+                userLvl={4}
+                userExp={4}
                 progressBarWidthPercentage={50}
               />
             }

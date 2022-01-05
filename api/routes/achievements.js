@@ -8,12 +8,12 @@ const router = express.Router();
     @desc     Get all achievements of a given user.
     @access   Public.
 */
-router.get('/:id(d+)', async (req, res, next) => {
+router.get('/:profileId', async (req, res, next) => {
   try {
     const { profileId } = req.params;
     const achievements = await UserAchievement.query()
       .join('achievement', {
-        'achievement.id': 'unlockedBy',
+        'achievement.id': 'achievement',
       })
       .where({ unlockedBy: profileId })
       .select(
@@ -24,6 +24,7 @@ router.get('/:id(d+)', async (req, res, next) => {
       );
     res.status(200).json(achievements);
   } catch (err) {
+    console.log(err.message);
     res.status(400).json({ msg: BAD_REQUEST });
   }
 });

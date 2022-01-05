@@ -1,27 +1,35 @@
 /** @jsxImportSource @emotion/react */
-import React from 'react';
+import React, { useContext, useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { userAchievements, userAchievementsItem } from './Profile.style';
+import { AuthContext } from '../../context/AuthContext';
+import { getUserAchievments } from '../Dashboard/ApiCalls';
 
 export const UserAchievements: React.FC = () => {
+  interface RouteParams {
+    id: string;
+  }
+  const { id } = useParams<RouteParams>();
+  const [userAchievements, setUserAchievements] = useState<any>([]);
+
+  useEffect(() => {
+    getUserAchievments(parseInt(id)).then((res: any) => {
+      setUserAchievements(res.data);
+    });
+  }, []);
+
+  if (!userAchievements || userAchievements.length == 0)
+    return <div>This user hasn't unlocked any achievements yet.</div>;
   return (
     <div css={userAchievements}>
-      <UserAchievementsItem
-        achievementName={'2 years account'}
-        achievementUrl={''}
-      />
-      <UserAchievementsItem
-        achievementName={'Made 10 listings'}
-        achievementUrl={''}
-      />
-      <UserAchievementsItem
-        achievementName={'Awarded 100 times'}
-        achievementUrl={''}
-      />
-      <UserAchievementsItem
-        achievementName={'Community leader'}
-        achievementUrl={''}
-      />
-      <UserAchievementsItem achievementName={'Gamer'} achievementUrl={''} />
+      {userAchievements.map((ach: any) => {
+        return (
+          <UserAchievementsItem
+            achievementName={ach.title}
+            achievementUrl={'/dashboard'}
+          />
+        );
+      })}
     </div>
   );
 };

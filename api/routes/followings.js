@@ -1,6 +1,9 @@
 const express = require('express');
 const { BAD_REQUEST, OK } = require('./errorConsts');
 const Following = require('../models/Following');
+const UserAchievement = require('../models/UserAchievement');
+const { STALKER } = require('./utils/achievementCodes');
+const User = require('../models/User');
 const router = express.Router();
 
 /** 
@@ -34,8 +37,22 @@ router.post('/', async (req, res, next) => {
       followingUser: req.body.followingUser,
       followedUser: req.body.followedUser,
     });
+    await User.query()
+      .findById(req.body.followingUser)
+      .increment('numFollowing', 1);
+    const numFollowing = await User.query()
+      .findById(req.body.followingUser)
+      .select('numFollowing');
+    if (numFollowing.numFollowing == 5) {
+      console.log('IN IF');
+      await UserAchievement.query().insert({
+        unlockedBy: req.body.followingUser,
+        achievement: STALKER,
+      });
+    }
     res.status(200).json(following);
   } catch (err) {
+    console.log(err.message);
     res.status(400).json({ msg: err.message });
   }
 });

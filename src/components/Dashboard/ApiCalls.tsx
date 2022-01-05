@@ -108,3 +108,9 @@ export const getLikedGames = async (profileId: number) => {
     withCredentials: true,
   });
 };
+
+export const getUserAchievments = (userId: number): any => {
+  return axios.get(`http://localhost:5000/api/achievements/${userId}`, {
+    withCredentials: true,
+  });
+};

@@ -14,12 +14,12 @@ export const UserLevel: FC<UserLevelProps> = ({
   userLvl,
   userExp,
 }) => {
-  const nextLevelPercent = (userExp / 1000) * 100;
+  const nextLevelPercent = (userExp / 10) * 100;
   return (
     <>
       <div css={UserLevelWrap}>
         <span css={Badge}>{userLvl}</span>
-        <span css={userLevelExp}>{userExp}/1000</span>
+        <span css={userLevelExp}>{userExp}/10</span>
         <ProgressBar
           generalWidthAsPercent={progressBarWidthPercentage}
           progressPercentage={nextLevelPercent}

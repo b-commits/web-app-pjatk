@@ -6,10 +6,10 @@
 /**@desc Leave one listing comment */
 const INITIATION = 1;
 
-/**@desc Leave five profile page comments */
+/**@desc Leave five profile page comments - DONE */
 const KEYBOARD_ENTHUSIAST = 2;
 
-/**@desc Follow one person */
+/**@desc Follow five people - DONE */
 const STALKER = 3;
 
 /**@desc Join one listing */
@@ -18,10 +18,10 @@ const ENLISTED = 4;
 /**@desc Upload custom profile picture */
 const ART_ENTHUSIAST = 5;
 
-/**@desc Granted on registration */
+/**@desc Granted on registration for "real" users - DONE */
 const RECRUIT = 6;
 
-/**@desc Send ten private messages */
+/**@desc Send ten private messages - DONE */
 const EPISTOLOGRAPHY = 7;
 
 module.exports = {

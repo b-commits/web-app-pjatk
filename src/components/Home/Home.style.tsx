@@ -178,3 +178,7 @@ export const muiField = {
 export const imgStyle = {
   width: '100%',
 };
+
+export const skeletonWrapper = {
+  marginTop: '-100px',
+};

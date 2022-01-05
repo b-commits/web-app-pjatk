@@ -2,8 +2,9 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
-import { friends, friendsItem } from './Profile.style';
+import { friends, friendsItem, userAvatar } from './Profile.style';
 import { getFriends } from '../Dashboard/ApiCalls';
+import haha from '../../../public/gamePics/haha.jpg';
 
 interface RouteParams {
   id: string;
@@ -11,7 +12,7 @@ interface RouteParams {
 
 export const UserFriends: React.FC = () => {
   const { id } = useParams<RouteParams>();
-  const [friendList, setFriendList] = useState<any>([]);
+  const [friendList, setFriendList] = useState<any>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const { currentUser } = useContext(AuthContext);
 
@@ -29,11 +30,9 @@ export const UserFriends: React.FC = () => {
       {friendList.map((friend: any) => {
         return (
           <UserFriendsItem
-            userProfileUrl={`/profile/${friend.id}`}
+            userProfileUrl={`/profile/${friend.followedUser}`}
             userName={friend.nickname}
-            userAvatarUrl={
-              'https://opgg-static.akamaized.net/images/profile_icons/profileIcon4293.jpg'
-            }
+            userAvatarUrl={`/profilePics/${friend.nickname}.jpg`}
           ></UserFriendsItem>
         );
       })}
@@ -50,7 +49,14 @@ const UserFriendsItem: React.FC<{
     <>
       <div css={friendsItem}>
         <a href={userProfileUrl} title={userName}>
-          <img src={userAvatarUrl} alt={userName} />
+          <img
+            src={userAvatarUrl}
+            alt={userName}
+            onError={({ currentTarget }) => {
+              currentTarget.onerror = null; // prevents looping
+              currentTarget.src = 'http://bluepito.webd.pro/logopjatk.gif';
+            }}
+          />
         </a>
       </div>
     </>

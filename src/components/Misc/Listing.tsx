@@ -123,12 +123,12 @@ export const Listing: FC<ListingProps> = ({
   return (
     <div css={listingItemWrapCSS}>
       <div css={listingHeader}>
-        <i className='fas fa-users'></i>
+        <i className="fas fa-users"></i>
 
         <h1 title={title} css={listingTitle}>
           {titleSliced}
         </h1>
-        <i className='fas fa-share'></i>
+        <i className="fas fa-share"></i>
       </div>
       <div css={gameBox}>
         <img css={gameImgStyle} src={gameImgUrl} alt={gameName} />
@@ -139,15 +139,15 @@ export const Listing: FC<ListingProps> = ({
       </div>
       <div css={listingFooter}>
         <Button
-          title='Menge'
+          title="Manage"
           type={INFO}
           onCLick={() => {
             console.log('Menage Listing Button');
           }}
         />{' '}
-        <Button title='Details' type={SUCCES} onCLick={handleModalOpen} />
+        <Button title="Details" type={SUCCES} onCLick={handleModalOpen} />
         <Button
-          title='Delete'
+          title="Delete"
           type={DANGER}
           onCLick={() => {
             console.log('Delete listing Button');
@@ -156,38 +156,38 @@ export const Listing: FC<ListingProps> = ({
       </div>
 
       <Modal
-        aria-labelledby='transition-modal-title'
-        aria-describedby='transition-modal-description'
+        aria-labelledby="transition-modal-title"
+        aria-describedby="transition-modal-description"
         open={open}
         onClose={handleModalClose}
         closeAfterTransition
       >
         <Box sx={modalStyle}>
-          <Typography id='modal-modal-title' variant='h6' component='h2'>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
             {id}
           </Typography>
           <img
             css={imgStyle}
-            alt=''
-            src='https://d-art.ppstatic.pl/kadry/k/r/1/51/a5/5e287d9223f8f_o_large.jpg'
+            alt=""
+            src="https://d-art.ppstatic.pl/kadry/k/r/1/51/a5/5e287d9223f8f_o_large.jpg"
           />
-          <Typography id='modal-modal-title' variant='h6' component='h2'>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
             Game:
           </Typography>
-          <Typography id='modal-modal-title' variant='h6' component='h2'>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
             List of players:
           </Typography>
-          <Typography id='modal-modal-title' variant='h6' component='h2'>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
             Number of players: 4/5
           </Typography>
           <Button
-            title='Join In'
+            title="Join In"
             type={SUCCES}
             onCLick={() => {
               console.log('[MODAL][BUTTON] - Join In');
             }}
           />
-          <Typography id='modal-modal-title' variant='h6' component='h2'>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
             Comments:
           </Typography>
 
@@ -200,10 +200,10 @@ export const Listing: FC<ListingProps> = ({
                 return (
                   <Form>
                     <Field
-                      placeholder='Leave a comment...'
+                      placeholder="Leave a comment..."
                       css={muiField}
                       as={TextField}
-                      name='content'
+                      name="content"
                       multiline
                       minRows={2}
                       maxRows={4}
@@ -211,7 +211,7 @@ export const Listing: FC<ListingProps> = ({
                     <br />
                     <br />
                     <Button
-                      title='Add Comment'
+                      title="Add Comment"
                       type={INFO}
                       isSubmit={true}
                       onCLick={() => {

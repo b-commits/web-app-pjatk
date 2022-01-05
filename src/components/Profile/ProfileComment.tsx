@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import React from 'react';
 import { Divider, Avatar, Grid, Paper } from '@material-ui/core';
+import { UserAvatar } from '../Profile/UserDetails';
 import {
   muiDivider,
   muiPaper,
@@ -39,7 +40,14 @@ export const ProfileComment: React.FC<ProfileCommentProps | any> = (
     <Paper css={muiPaper}>
       <Grid container wrap="nowrap" spacing={2}>
         <Grid item>
-          <Avatar src={imgLink} />
+          <Avatar
+            src={`/profilePics/${comment.ProfileCommentProps.nickname}.jpg`}
+          >
+            <img
+              className="MuiAvatar-img"
+              src="http://bluepito.webd.pro/logopjatk.gif"
+            />
+          </Avatar>
         </Grid>
         <Grid item xs zeroMinWidth>
           <h4 css={commentHeader}>{comment.ProfileCommentProps.nickname}</h4>

@@ -99,6 +99,28 @@ export const loginImage = css({
     display: 'table-cell',
   },
 });
+
+export const aboutImage = css({
+  background:
+    'url(https://images.unsplash.com/photo-1537884944318-390069bb8665?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80) no-repeat',
+  backgroundPosition: 'bottom left',
+  backgroundSize: 'cover',
+  borderTopLeftRadius: '10px',
+  borderEndStartRadius: '10px',
+  display: 'table-cell',
+  width: '50%',
+  padding: 0,
+  margin: 0,
+  boxSizing: 'inherit',
+
+  [mq[0]]: {
+    display: 'none',
+  },
+  [mq[1]]: {
+    display: 'table-cell',
+  },
+});
+
 export const loginInputsWrap = css({
   width: '50%',
   padding: '57px 65px',

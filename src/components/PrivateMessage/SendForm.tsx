@@ -12,6 +12,7 @@ import {
   formWrap,
   sendButton,
   receiverStyle,
+  backToDashboard,
 } from './PrivateMessage.style';
 
 interface Receiver {
@@ -77,7 +78,9 @@ export const SendForm: React.FC = () => {
   return (
     <div css={messageWrapper}>
       <div css={formWrap}>
-        <a href="/dashboard">Back to dashboard</a>
+        <a css={backToDashboard} href="/dashboard">
+          Back to dashboard
+        </a>
         <div>
           <h1>
             Sending a private message to:{' '}

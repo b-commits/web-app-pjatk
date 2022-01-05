@@ -5,9 +5,11 @@ import Alert from '@material-ui/lab/Alert';
 import { Formik, Form, Field } from 'formik';
 import { Button, Checkbox } from '@material-ui/core';
 import { RegisterBanner } from './RegisterBanner';
+import { useHistory } from 'react-router-dom';
 import { CircularProgress } from '@material-ui/core';
 import {
   registerImage,
+  labelAbout,
   registerWrap,
   registerFormWrap,
   registerInputsWrap,
@@ -38,6 +40,7 @@ export const Register: React.FC = () => {
   const [authorized, setAuthorized] = useState(false);
   const [hasErrors, setErrors] = useState(false);
   const [loading, setLoading] = useState(false);
+  const history = useHistory();
 
   const handleRegistration = (values: FormValues) => {
     setLoading(true);
@@ -86,12 +89,18 @@ export const Register: React.FC = () => {
                         <Field name="newsletter" type="checkbox" as={Checkbox}>
                           I want to sign up for a newsletter
                         </Field>
-                        {/* <Checkbox name="newsletter" color="primary" />{" "} */}
                         <label>I want to receive a monthly newsletter.</label>
                       </div>
                       <div>
                         <Checkbox color="primary" />
-                        <label>I agree to terms and conditions.</label>
+                        <label
+                          css={labelAbout}
+                          onClick={() => {
+                            history.push('/about');
+                          }}
+                        >
+                          I know what this is all about!
+                        </label>
                       </div>
                       {loading ? (
                         <CircularProgress />
@@ -104,16 +113,6 @@ export const Register: React.FC = () => {
                           Submit
                         </button>
                       )}
-
-                      {/*
-                      <Button
-                        color='primary'
-                        disabled={!dirty || !isValid}
-                        type='submit'
-                      >
-                        Submit
-                      </Button>
-                      */}
                     </Form>
                   );
                 }}

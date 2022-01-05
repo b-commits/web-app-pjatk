@@ -51,7 +51,7 @@ export const UserDetails: React.FC<{ isUserOnline: boolean }> = ({
         >
           <div css={userDetailsData}>
             <UserAvatar
-              avatarURL="http://bluepito.webd.pro/logopjatk.gif"
+              avatarURL={`/profilePics/${user.data.nickname}.jpg`}
               nickName={user.data.nickname}
               isUserOnline={isUserOnline}
             />
@@ -63,7 +63,7 @@ export const UserDetails: React.FC<{ isUserOnline: boolean }> = ({
   } else return <CircularProgress />;
 };
 
-const UserAvatar: React.FC<{
+export const UserAvatar: React.FC<{
   avatarURL: string;
   nickName: string;
   isUserOnline: boolean;
@@ -73,7 +73,10 @@ const UserAvatar: React.FC<{
       <img
         css={userAvatar}
         src={avatarURL}
-        alt={'Avatar użytkowniak: ' + nickName}
+        onError={({ currentTarget }) => {
+          currentTarget.onerror = null;
+          currentTarget.src = 'http://bluepito.webd.pro/logopjatk.gif';
+        }}
       />
       <h1>
         <span
@@ -232,7 +235,13 @@ const UserActions: any = () => {
               value={'Message'}
               handleClick={handleMessageRedirect}
             />
-            <ProfileActionButton color={'#f24437'} value={'Report'} />
+            <ProfileActionButton
+              color={'#f24437'}
+              value={'Report'}
+              handleClick={() => {
+                history.push('/dashboard/settings');
+              }}
+            />
           </div>
         </>
       );

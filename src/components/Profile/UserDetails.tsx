@@ -212,7 +212,11 @@ const UserActions: any = () => {
         <>
           <div css={userActions}>
             {loading ? (
-              <CircularProgress />
+              <div
+                css={{ width: '110px', height: '40px', textAlign: 'center' }}
+              >
+                <CircularProgress />
+              </div>
             ) : (
               [
                 isFollowing ? (

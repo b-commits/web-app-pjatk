@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { Button } from '@material-ui/core';
+import { Button, CircularProgress } from '@material-ui/core';
 import React, { useEffect, useState, useContext } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
@@ -24,6 +24,7 @@ export const UserFavGames: React.FC = () => {
     console.log(likedGames);
   }, []);
 
+  if (!currentUser) return <CircularProgress />;
   return (
     <div css={favoriteGames}>
       {likedGames.length > 0

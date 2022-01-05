@@ -254,3 +254,8 @@ export const checkStyle = css({
   width: '600%',
   marginRight: '100px',
 });
+
+export const labelAbout = css({
+  color: '#3f51b5',
+  cursor: 'pointer',
+});

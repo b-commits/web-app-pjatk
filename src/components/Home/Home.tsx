@@ -15,6 +15,7 @@ import {
   homeMain,
   muiPagination,
   muiSearchBar,
+  skeletonWrapper,
   muiSearchBarWrapper,
 } from './Home.style';
 import { listingListStyle } from '../Misc/css/ListingList.style';
@@ -69,10 +70,10 @@ export const Home: React.FC = () => {
           <div css={bannerConentDesc}>
             <div>
               <NavLink
-                className='navLink'
-                activeClassName='activeNavLink'
+                className="navLink"
+                activeClassName="activeNavLink"
                 exact
-                to='/register'
+                to="/register"
               >
                 <button>SIGN UP NOW</button>
               </NavLink>
@@ -97,23 +98,25 @@ export const Home: React.FC = () => {
 
       <div css={muiSearchBarWrapper}>
         <TextField
-          placeholder='Search listings...'
+          placeholder="Search listings..."
           onChange={handleSearch}
-          type='search'
+          type="search"
           css={muiSearchBar}
         />
       </div>
       <Pagination
-        size='large'
+        size="large"
         onChange={handlePageChange}
         count={Math.round(filteredListings.length / LISTINGS_PER_PAGE)}
         css={muiPagination}
-        color='primary'
+        color="primary"
       />
       <main css={homeMain}>
         <div css={listingListStyle}>
           {loading ? (
-            <Skeleton width='100%' height='450px' />
+            <div css={skeletonWrapper}>
+              <Skeleton width="76.5vw" height="450px" />
+            </div>
           ) : (
             currentListings.map((listing, index) => {
               return (

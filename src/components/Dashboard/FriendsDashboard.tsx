@@ -27,7 +27,12 @@ export const FriendsDashboard: FC = () => {
       {friends.map((friend: any) => {
         return (
           <div css={friendElement}>
-            <Avatar src={`/profilePics/${friend.nickname}.jpg`} />
+            <Avatar src={`/profilePics/${friend.nickname}.jpg`}>
+              <img
+                className="MuiAvatar-img"
+                src="http://bluepito.webd.pro/logopjatk.gif"
+              />
+            </Avatar>
             {friend.nickname}
             <i
               className="fas fa-envelope-open-text"

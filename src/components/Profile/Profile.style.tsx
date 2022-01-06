@@ -284,7 +284,7 @@ export const favoriteGames = css({
   width: '100%',
   display: 'grid',
   gridTemplateColumns: 'repeat(auto-fill, 280px);',
-  gridGap: '5px',
+  gridGap: '1px',
   justifyContent: 'space-between',
 });
 
@@ -309,10 +309,10 @@ export const favoriteGamesItem = css({
 
 export const friends = css({
   width: '100%',
-  display: 'flex',
-  flexDirection: 'row',
+  display: 'grid',
+  gridTemplateColumns: 'repeat(auto-fill, 62px);',
+  gridGap: '1px',
   justifyContent: 'space-between',
-  flexWrap: 'wrap',
 });
 
 export const friendsItem = css({

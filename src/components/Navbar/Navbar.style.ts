@@ -44,7 +44,7 @@ export const navContainer = css({
   top: 0,
   marginTop: 0,
   boxShadow: '3px 3px 5px -1px rgba(55, 58, 54, 1)',
-  zIndex: 9999,
+  zIndex: 1200,
   [mq[0]]: {
     height: '300px',
     position: 'static',

@@ -1,16 +1,16 @@
 /** @jsxImportSource @emotion/react */
-import { useContext, useState } from "react";
-import axios from "axios";
-import { AuthContext } from "../../../context/AuthContext";
-import { submitButton } from "../css/UserSettingsDashboard.style";
-import { uploadLabelWrap } from "../css/Dashboard.style";
-import { Alert } from "@material-ui/lab";
-import { CircularProgress } from "@material-ui/core";
+import { useContext, useState } from 'react';
+import axios from 'axios';
+import { AuthContext } from '../../../context/AuthContext';
+import { submitButton } from '../css/UserSettingsDashboard.style';
+import { uploadLabelWrap } from '../css/Dashboard.style';
+import { Alert } from '@material-ui/lab';
+import { CircularProgress } from '@material-ui/core';
 
 export const SetAvatar: any = () => {
   const [loading, setLoading] = useState<boolean>(false);
-  const [file, setFile] = useState("");
-  const [_fileName, setFileName] = useState("Choose file");
+  const [file, setFile] = useState('');
+  const [_fileName, setFileName] = useState('Choose file');
   const [success, setSuccess] = useState<boolean>(false);
   const { currentUser } = useContext(AuthContext);
 
@@ -23,16 +23,17 @@ export const SetAvatar: any = () => {
     setLoading(true);
     e.preventDefault();
     const formData = new FormData();
-    formData.append("myImage", file, currentUser.nickname + ".jpg");
+    formData.append('myImage', file, currentUser.nickname + '.jpg');
     axios({
-      method: "POST",
+      method: 'POST',
       withCredentials: true,
-      url: "http://localhost:5000/api/profilePictureUpload",
+      url: 'http://localhost:5000/api/profilePictureUpload',
       data: formData,
     })
       .then(() => {
         setSuccess(true);
         setLoading(false);
+        window.location.replace(`/dashboard`);
       })
       .catch((err) => console.log(err));
   };

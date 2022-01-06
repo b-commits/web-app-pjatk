@@ -9,8 +9,6 @@ import { CircularProgress } from '@material-ui/core';
 export const Dashboard: FC = () => {
   const { currentUser } = useContext(AuthContext);
 
-  console.log(currentUser);
-
   const calculateLevel = (exp: number) => {
     if (exp < 10) return 1;
     if (exp < 20) return 2;

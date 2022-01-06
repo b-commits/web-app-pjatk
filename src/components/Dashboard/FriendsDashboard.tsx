@@ -25,26 +25,57 @@ export const FriendsDashboard: FC = () => {
         <div>You haven't added any friends yet.</div>
       ) : null}
       {friends.map((friend: any) => {
+        console.log(friend);
         return (
           <div css={friendElement}>
-            <Avatar src={`/profilePics/${friend.nickname}.jpg`}>
-              <img
-                className="MuiAvatar-img"
-                src="http://bluepito.webd.pro/logopjatk.gif"
-              />
-            </Avatar>
-            {friend.nickname}
-            <i
-              className="fas fa-envelope-open-text"
+            <div
+              style={{ cursor: 'pointer' }}
+              title={`Visit ${friend.nickname} profile`}
               onClick={() => {
                 history.push({
-                  pathname: '/message',
+                  pathname: `/profile/${friend.followedUser}`,
                   state: {
                     receiverId: friend.followedUser,
                   },
                 });
               }}
-            />
+            >
+              <Avatar src={`/profilePics/${friend.nickname}.jpg`}>
+                <img
+                  className='MuiAvatar-img'
+                  src='http://bluepito.webd.pro/logopjatk.gif'
+                />
+              </Avatar>
+            </div>
+            {friend.nickname}
+            <div>
+              <i
+                className='far fa-id-card'
+                style={{ cursor: 'pointer', marginRight: '30px' }}
+                title={`Visit ${friend.nickname} profile`}
+                onClick={() => {
+                  history.push({
+                    pathname: `/profile/${friend.followedUser}`,
+                    state: {
+                      receiverId: friend.followedUser,
+                    },
+                  });
+                }}
+              />
+              <i
+                className='fas fa-envelope-open-text'
+                style={{ cursor: 'pointer' }}
+                title={`Write Message to ${friend.nickname}`}
+                onClick={() => {
+                  history.push({
+                    pathname: '/message',
+                    state: {
+                      receiverId: friend.followedUser,
+                    },
+                  });
+                }}
+              />
+            </div>
           </div>
         );
       })}

@@ -7,6 +7,7 @@ export const searchWrapper = css({
 });
 
 export const searchList = css({
+  minHeight: '400px',
   display: 'flex',
   flexDirection: 'column',
   width: '100%',

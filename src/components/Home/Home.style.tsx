@@ -156,7 +156,7 @@ export const muiSearchBar = {
 };
 
 export const modalStyle = {
-  position: 'absolute',
+  position: 'fixed',
   display: 'flex',
   flexDirection: 'column',
   top: '50%',

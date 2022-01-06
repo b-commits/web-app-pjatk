@@ -286,6 +286,19 @@ export const favoriteGames = css({
   gridTemplateColumns: 'repeat(auto-fill, 280px);',
   gridGap: '1px',
   justifyContent: 'space-between',
+
+  [mq[0]]: {
+    gridTemplateColumns: 'repeat(auto-fill, 260px);',
+  },
+  [mq[1]]: {
+    gridTemplateColumns: 'repeat(auto-fill, 260px);',
+  },
+  [mq[2]]: {
+    gridTemplateColumns: 'repeat(auto-fill, 260px);',
+  },
+  [mq[3]]: {
+    gridTemplateColumns: 'repeat(auto-fill, 280px);',
+  },
 });
 
 export const favoriteGamesItem = css({
@@ -296,6 +309,23 @@ export const favoriteGamesItem = css({
     marginTop: '5px',
     objectFit: 'cover',
     transition: '3s',
+
+    [mq[0]]: {
+      height: '160px',
+      width: '260px',
+    },
+    [mq[1]]: {
+      height: '160px',
+      width: '260px',
+    },
+    [mq[2]]: {
+      height: '160px',
+      width: '260px',
+    },
+    [mq[3]]: {
+      height: '160px',
+      width: '280px',
+    },
   },
 
   '& img:hover': {

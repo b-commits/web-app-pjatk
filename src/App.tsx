@@ -31,6 +31,7 @@ import { Inbox } from './components/PrivateMessage/Inbox';
 import { InboxDashboard } from './components/Dashboard/InboxDashboard';
 import axios from 'axios';
 import { CircularProgress } from '@material-ui/core';
+import ScrollToTop from './components/Misc/ScrollToTop';
 
 export const App = () => {
   const [authenticated, setAuthenticated] = useState(false);
@@ -63,6 +64,7 @@ export const App = () => {
   if (loadingContext) return <CircularProgress />;
   return (
     <Router>
+      <ScrollToTop />
       <AuthContext.Provider
         value={{
           authenticated,
@@ -74,53 +76,53 @@ export const App = () => {
         }}
       >
         <Navbar />
-        <div className="App" css={appStyle}>
+        <div className='App' css={appStyle}>
           <Switch>
-            <Route path="/" exact component={Home} />
-            <Route path="/search" component={SearchResults} />
-            <Route path="/about" component={About} />
-            <Route path="/register" component={Register} />
-            <Route path="/login" component={Login} />
-            <Route path="/message" component={SendForm} />
-            <Route path="/success" component={Success} />
-            <Route path="/success" component={Inbox} />
-            <Route path="/dashboard">
+            <Route path='/' exact component={Home} />
+            <Route path='/search' component={SearchResults} />
+            <Route path='/about' component={About} />
+            <Route path='/register' component={Register} />
+            <Route path='/login' component={Login} />
+            <Route path='/message' component={SendForm} />
+            <Route path='/success' component={Success} />
+            <Route path='/success' component={Inbox} />
+            <Route path='/dashboard'>
               <div css={dashboardWrap}>
                 <div css={dashboardSidebar}>
                   <DashboardSidebar />
                 </div>
                 <div css={dashboardMain}>
                   <Switch>
-                    <Route exact path="/dashboard">
+                    <Route exact path='/dashboard'>
                       <Dashboard />
                     </Route>
-                    <Route path="/dashboard/settings">
+                    <Route path='/dashboard/settings'>
                       <UserSettingsDashboard />
                     </Route>
-                    <Route path="/dashboard/listings">
+                    <Route path='/dashboard/listings'>
                       <ListingDashboard />
                     </Route>
-                    <Route path="/dashboard/inbox">
+                    <Route path='/dashboard/inbox'>
                       <InboxDashboard />
                     </Route>
-                    <Route path="/dashboard/favgames">
+                    <Route path='/dashboard/favgames'>
                       <FavGamesDashboard />
                     </Route>
-                    <Route path="/dashboard/friends">
+                    <Route path='/dashboard/friends'>
                       <FriendsDashboard />
                     </Route>
-                    <Route path="/dashboard/admin">
+                    <Route path='/dashboard/admin'>
                       <AdminDashboard />
                     </Route>
-                    <Route path="/dashboard/reports">
+                    <Route path='/dashboard/reports'>
                       <ReportsDashboard />
                     </Route>
                   </Switch>
                 </div>
               </div>
             </Route>
-            <Route path="/profile/:id" component={Profile} />
-            <Route path="*" exact component={ErrorPage} />
+            <Route path='/profile/:id' component={Profile} />
+            <Route path='*' exact component={ErrorPage} />
           </Switch>
         </div>
         <Footer />

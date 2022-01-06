@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { listing } from '../Profile/Profile.style';
 
 interface AdminReport {
   content: string;
@@ -13,6 +14,13 @@ interface UsernameFormValues {
 interface PasswordFormValues {
   id: number;
   newPassword: string;
+}
+
+interface ListingData {
+  description: string;
+  game: number;
+  maxPlayers: number;
+  creator: number;
 }
 
 export const getUserPrivateMessages = (userId: number): any => {
@@ -41,6 +49,22 @@ export const postAdminReport = (report: AdminReport): any => {
     data: {
       content: report.content,
       reporter: report.reporter,
+    },
+  })
+    .then((res) => res.status)
+    .catch((err) => console.log(err));
+};
+
+export const postListing = (listingData: ListingData): any => {
+  return axios({
+    method: 'POST',
+    withCredentials: true,
+    url: 'http://localhost:5000/api/listings',
+    data: {
+      message: listingData.description,
+      maxNumOfPlayers: listingData.maxPlayers,
+      creator: listingData.creator,
+      listingGame: listingData.game,
     },
   })
     .then((res) => res.status)

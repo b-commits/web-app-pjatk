@@ -72,7 +72,6 @@ router.get('/comments/:listingId', async (req, res, next) => {
  */
 router.post('/comments', async (req, res) => {
   try {
-    console.log('api hit');
     await ListingComment.query().insert({
       content: req.body.content,
       commentListing: req.body.commentListing,
@@ -81,6 +80,25 @@ router.post('/comments', async (req, res) => {
     res.status(200).json({ msg: ADDED });
   } catch (error) {
     console.log(error.message);
+    res.status(SERVER_ERROR).json({ errorMsg: error.message });
+  }
+});
+
+/**
+ * @route   POST /api/listings
+ * @desc    Adds a listing.
+ * @access  Protected.
+ */
+router.post('/', async (req, res) => {
+  try {
+    await Listing.query().insert({
+      message: req.body.message,
+      maxNumberOfPlayers: req.body.maxNumOfPlayers,
+      listingGame: req.body.listingGame,
+      creator: req.body.creator,
+    });
+    res.status(200).json({ msg: ADDED });
+  } catch (error) {
     res.status(SERVER_ERROR).json({ errorMsg: error.message });
   }
 });

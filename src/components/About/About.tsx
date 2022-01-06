@@ -1,13 +1,16 @@
 /** @jsxImportSource @emotion/react */
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import {
   loginWrap,
   loginFormWrap,
   aboutImage,
   loginInputsWrap,
 } from '../Login/Login.style';
+import { Button } from '@material-ui/core';
 
 export const About: React.FC = () => {
+  const history = useHistory();
   return (
     <>
       <main css={loginWrap}>
@@ -31,6 +34,15 @@ export const About: React.FC = () => {
             </p>
             <p>anyways, that's that! </p>
             <p>cheers!</p>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => {
+                history.push('/register');
+              }}
+            >
+              Sign up now!
+            </Button>
           </div>
         </div>
       </main>

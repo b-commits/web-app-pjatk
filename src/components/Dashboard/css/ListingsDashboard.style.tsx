@@ -7,7 +7,6 @@ export const selectField = css({
   width: '100%',
   height: '50px',
   fontSize: '1.1em',
-  marginLeft: '-5px',
   border: 'none',
   borderBottom: '1px solid #aaaaaa',
   outline: 'none',

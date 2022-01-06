@@ -175,9 +175,6 @@ export const gameBox = css({
   textAlign: 'center',
   width: '100%',
   margin: '0 auto',
-  backgroundColor: 'rgb(37,31,255)',
-  background:
-    'linear-gradient(180deg, rgba(37,31,255,1) 0%, rgba(78,74,198,1) 100%, rgba(0,212,255,1) 100%)',
   boxSizing: 'border-box',
   overflow: 'hidden',
 });

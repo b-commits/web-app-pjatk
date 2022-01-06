@@ -21,7 +21,6 @@ import {
   userActionsButton,
   userInfoStats,
 } from './Profile.style';
-import { HistoryTwoTone } from '@mui/icons-material';
 
 interface RouteParams {
   id: string;

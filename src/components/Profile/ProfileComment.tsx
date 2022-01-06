@@ -2,6 +2,7 @@
 import React from 'react';
 import { Divider, Avatar, Grid, Paper } from '@material-ui/core';
 import { UserAvatar } from '../Profile/UserDetails';
+import { useHistory } from 'react-router-dom';
 import {
   muiDivider,
   muiPaper,
@@ -27,6 +28,7 @@ const DB_TIME_STR_END: number = 16;
 export const ProfileComment: React.FC<ProfileCommentProps | any> = (
   comment: ProfileCommentProps | any
 ) => {
+  const history = useHistory();
   const getTime = () => {
     if (comment.ProfileCommentProps.created_at.length == PROP_TIME_LENGTH)
       return comment.ProfileCommentProps.created_at;
@@ -38,24 +40,38 @@ export const ProfileComment: React.FC<ProfileCommentProps | any> = (
 
   return (
     <Paper css={muiPaper}>
-      <Grid container wrap="nowrap" spacing={2}>
+      <Grid container wrap='nowrap' spacing={2}>
         <Grid item>
           <Avatar
             src={`/profilePics/${comment.ProfileCommentProps.nickname}.jpg`}
           >
             <img
-              className="MuiAvatar-img"
-              src="http://bluepito.webd.pro/logopjatk.gif"
+              className='MuiAvatar-img'
+              src='http://bluepito.webd.pro/logopjatk.gif'
             />
           </Avatar>
         </Grid>
         <Grid item xs zeroMinWidth>
-          <h4 css={commentHeader}>{comment.ProfileCommentProps.nickname}</h4>
+          <h4
+            css={commentHeader}
+            style={{ cursor: 'pointer', marginRight: '30px' }}
+            title={`Visit ${comment.ProfileCommentProps.nickname} profile`}
+            onClick={() => {
+              history.push({
+                pathname: `/profile/${comment.ProfileCommentProps.commentSender}`,
+                state: {
+                  receiverId: comment.ProfileCommentProps.commentSender,
+                },
+              });
+            }}
+          >
+            {comment.ProfileCommentProps.nickname}
+          </h4>
           <p css={commentParagraph}>{comment.ProfileCommentProps.content}</p>
           <p css={commentTimestamp}>{getTime()}</p>
         </Grid>
       </Grid>
-      <Divider variant="fullWidth" css={muiDivider} />
+      <Divider variant='fullWidth' css={muiDivider} />
     </Paper>
   );
 };

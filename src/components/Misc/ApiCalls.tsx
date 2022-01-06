@@ -18,6 +18,12 @@ export const getAllListingComments = (listingId: number) => {
   });
 };
 
+export const getAllParticipators = (listingId: number) => {
+  return axios.get(`http://localhost:5000/api/participations/${listingId}`, {
+    withCredentials: true,
+  });
+};
+
 export const postListingComment = async (
   comment: ListingCommentProps
 ): Promise<any> => {
@@ -29,6 +35,27 @@ export const postListingComment = async (
       content: comment.content,
       commentListing: comment.commentListing,
       commentSender: comment.commentSender,
+    },
+  })
+    .then((res) => res.status)
+    .catch((err) => console.log(err));
+};
+
+export const postRating = async (
+  listingId: number,
+  userId: number,
+  rating: number,
+  rater: number
+): Promise<any> => {
+  await axios({
+    method: 'POST',
+    withCredentials: true,
+    url: 'http://localhost:5000/api/participations/ratings',
+    data: {
+      listingId: listingId,
+      userId: userId,
+      rating: rating,
+      rater: rater,
     },
   })
     .then((res) => res.status)

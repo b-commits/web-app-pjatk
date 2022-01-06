@@ -1,10 +1,15 @@
 /** @jsxImportSource @emotion/react */
-import React, { FC, useState, useEffect, useContext } from 'react';
+import { FC, useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import { ListingComment } from './ListingComment';
 import { Formik, Form, Field } from 'formik';
-import { getAllListingComments, postListingComment } from './ApiCalls';
+import {
+  getAllListingComments,
+  getAllParticipators,
+  postListingComment,
+} from './ApiCalls';
 import { Modal, Box, Typography, TextField } from '@material-ui/core';
+import { UserParticipationRating } from './UserParticipationRating';
 import { Button, DANGER, INFO, SUCCES } from './Button';
 import {
   listingItemWrap,
@@ -67,6 +72,7 @@ export const Listing: FC<ListingProps> = ({
   const handleModalOpen = () => setOpen(true);
   const handleModalClose = () => setOpen(false);
   const [listingComments, setListingComments] = useState<any>([]);
+  const [participators, setParticipators] = useState<any>([]);
   const { authenticated } = useContext(AuthContext);
   const { currentUser } = useContext(AuthContext);
 
@@ -93,6 +99,9 @@ export const Listing: FC<ListingProps> = ({
   useEffect(() => {
     getAllListingComments(id).then((listingComments: any) => {
       setListingComments(listingComments.data.reverse());
+    });
+    getAllParticipators(id).then((res: any) => {
+      setParticipators(res.data);
     });
   }, [id]);
 
@@ -142,7 +151,7 @@ export const Listing: FC<ListingProps> = ({
           title="Manage"
           type={INFO}
           onCLick={() => {
-            console.log('Menage Listing Button');
+            console.log('Manage Listing Button');
           }}
         />{' '}
         <Button title="Details" type={SUCCES} onCLick={handleModalOpen} />
@@ -176,6 +185,15 @@ export const Listing: FC<ListingProps> = ({
           </Typography>
           <Typography id="modal-modal-title" variant="h6" component="h2">
             List of players:
+            {participators.map((participator: any) => {
+              return (
+                <UserParticipationRating
+                  nickname={participator.nickname}
+                  participatorId={participator.id}
+                  listingId={id}
+                />
+              );
+            })}
           </Typography>
           <Typography id="modal-modal-title" variant="h6" component="h2">
             Number of players: 4/5

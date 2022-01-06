@@ -1,24 +1,25 @@
 const Participation = require('../models/Participation');
+const Rating = require('../models/Rating');
 const express = require('express');
 const { OK } = require('./errorConsts');
 const router = express.Router();
 
 /** 
-    @route    GET /api/participations
+    @route    GET /api/participations/:id
     @desc     Get all users participating in a given listing.
     @access   Public.
     @param    listingId - a listing for which to get a list of users
 */
-router.get('/', async (req, res, next) => {
+router.get('/:id', async (req, res, next) => {
   try {
     const participations = await Participation.query()
       .join('user', {
         'user.id': 'userId',
       })
       .where({
-        listingId: req.body.listingId,
+        listingId: req.params.id,
       })
-      .select('user.id', 'nickname');
+      .select('user.id', 'nickname', 'listingId');
     res.status(200).json(participations);
   } catch (err) {
     res.status(400).json({ msg: err.message });
@@ -97,13 +98,29 @@ router.delete('/', async (req, res, next) => {
     @route    POST /api/participations/ratings
     @desc     Rate a co-participator.
     @access   Public.
+    @param    listingId
+    @param    userId
 */
-router.post('/', async (req, res, next) => {
+router.post('/ratings', async (req, res, next) => {
   try {
-    await Rating.query().insert({
-      participationId: req.body.participationId,
-      rating: req.body.rating,
+    console.log(req.body.rating);
+    const participationId = await Participation.query()
+      .findOne({
+        listingId: req.body.listingId,
+        userId: req.body.userId,
+      })
+      .select('id');
+    const alreadyExists = await Rating.query().where({
+      participationId: participationId.id,
+      rater: req.body.rater,
     });
+    if (alreadyExists.length == 0) {
+      await Rating.query().insert({
+        participationId: participationId.id,
+        rating: req.body.rating,
+        rater: req.body.rater,
+      });
+    }
     res.status(200).json(OK);
   } catch (err) {
     res.status(400).json({ msg: err.message });

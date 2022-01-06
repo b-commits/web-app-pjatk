@@ -121,6 +121,28 @@ export const aboutImage = css({
   },
 });
 
+export const errorImage = css({
+  background:
+    'url(https://images.unsplash.com/photo-1623018035782-b269248df916?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80) no-repeat',
+  backgroundPosition: 'bottom left',
+  backgroundSize: 'cover',
+  borderTopLeftRadius: '10px',
+  borderEndStartRadius: '10px',
+  display: 'table-cell',
+  width: '50%',
+  padding: 0,
+  margin: 0,
+  boxSizing: 'inherit',
+  height: '400px',
+
+  [mq[0]]: {
+    display: 'none',
+  },
+  [mq[1]]: {
+    display: 'table-cell',
+  },
+});
+
 export const loginInputsWrap = css({
   width: '50%',
   padding: '57px 65px',

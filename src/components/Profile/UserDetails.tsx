@@ -21,6 +21,7 @@ import {
   userActionsButton,
   userInfoStats,
 } from './Profile.style';
+import { HistoryTwoTone } from '@mui/icons-material';
 
 interface RouteParams {
   id: string;
@@ -31,8 +32,12 @@ export const UserDetails: React.FC<{ isUserOnline: boolean }> = ({
 }) => {
   const { id } = useParams<RouteParams>();
   const [user, setUser] = useState<any>({});
+  const history = useHistory();
 
   useEffect(() => {
+    if (isNaN(parseInt(id))) {
+      history.push('/404');
+    }
     getUserByID(id).then((user: any) => {
       setUser(user);
     });

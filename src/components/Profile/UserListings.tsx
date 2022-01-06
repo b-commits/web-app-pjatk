@@ -1,6 +1,12 @@
 /** @jsxImportSource @emotion/react */
 import React, { useState, useEffect, useContext } from 'react';
-import { userListings, listing, listingButton } from './Profile.style';
+import {
+  userListings,
+  listing,
+  listingInfo,
+  listingButtonsWrap,
+  listingButton,
+} from './Profile.style';
 import { getUserListings } from './ApiCalls';
 import { AuthContext } from '../../context/AuthContext';
 
@@ -87,12 +93,12 @@ const Listing: React.FC<{
     <>
       <div css={listing}>
         <img alt='gameImage' src={gameImgUrl} />
-        <div style={{ width: '500px' }}>
+        <div css={listingInfo}>
           <h3>{listingName}</h3>
           {listingDesc}
           <br />
         </div>
-        <div style={{ width: '100px' }}>
+        <div css={listingButtonsWrap}>
           <UserListingsButton
             listingUrl={''}
             color={'#44c767'}

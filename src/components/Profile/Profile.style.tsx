@@ -246,22 +246,58 @@ export const profileContent = css({
   alignItems: 'flex-start',
   width: '100%',
   marginTop: '15px',
+  [mq[0]]: {
+    flexDirection: 'column',
+  },
+  [mq[1]]: {
+    flexDirection: 'column',
+  },
+  [mq[2]]: {
+    flexDirection: 'row',
+  },
+  [mq[3]]: {
+    flexDirection: 'row',
+  },
 });
 
 export const profileMain = css({
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'space-between',
-  width: '885px',
+  width: '70%',
   boxSizing: 'border-box',
+  [mq[0]]: {
+    width: '100%',
+  },
+  [mq[1]]: {
+    width: '100%',
+  },
+  [mq[2]]: {
+    width: '70%',
+  },
+  [mq[3]]: {
+    width: '70%',
+  },
 });
 
 export const profileSidebar = css({
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'space-between',
-  width: '375px',
+  width: '28%',
   boxSizing: 'border-box',
+  [mq[0]]: {
+    width: '100%',
+  },
+  [mq[1]]: {
+    width: '100%',
+  },
+  [mq[2]]: {
+    width: '28%',
+  },
+  [mq[3]]: {
+    width: '28%',
+  },
 });
 
 export const profileContentItem = css({
@@ -288,16 +324,16 @@ export const favoriteGames = css({
   justifyContent: 'space-between',
 
   [mq[0]]: {
-    gridTemplateColumns: 'repeat(auto-fill, 260px);',
+    gridTemplateColumns: 'repeat(auto-fill, 99%);',
   },
   [mq[1]]: {
-    gridTemplateColumns: 'repeat(auto-fill, 260px);',
+    gridTemplateColumns: 'repeat(auto-fill, 32%);',
   },
   [mq[2]]: {
-    gridTemplateColumns: 'repeat(auto-fill, 260px);',
+    gridTemplateColumns: 'repeat(auto-fill, 32%);',
   },
   [mq[3]]: {
-    gridTemplateColumns: 'repeat(auto-fill, 280px);',
+    gridTemplateColumns: 'repeat(auto-fill, 32%);',
   },
 });
 
@@ -311,20 +347,20 @@ export const favoriteGamesItem = css({
     transition: '3s',
 
     [mq[0]]: {
-      height: '160px',
-      width: '260px',
+      height: '200px',
+      width: '100%',
     },
     [mq[1]]: {
       height: '160px',
-      width: '260px',
+      width: '100%',
     },
     [mq[2]]: {
-      height: '160px',
-      width: '260px',
+      height: '140px',
+      width: '100%',
     },
     [mq[3]]: {
       height: '160px',
-      width: '280px',
+      width: '100%',
     },
   },
 
@@ -411,6 +447,25 @@ export const listing = css({
   borderBottom: '1px dashed #cfcfcf',
   paddingBottom: '10px',
   boxSizing: 'border-box',
+
+  [mq[0]]: {
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  [mq[1]]: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  [mq[2]]: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  [mq[3]]: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+
   '& img': {
     height: '120px',
     width: '210px',
@@ -418,8 +473,80 @@ export const listing = css({
     backgroundColor: '#cfcfcf',
     borderRadius: '8px',
     marginRight: '10px',
+
+    [mq[0]]: {
+      height: '80%',
+      width: '80%',
+    },
+    [mq[1]]: {
+      height: '120px',
+      width: '210px',
+    },
+    [mq[2]]: {
+      height: '120px',
+      width: '210px',
+    },
+    [mq[3]]: {
+      height: '120px',
+      width: '210px',
+    },
   },
   '& h3': {
+    marginTop: '0px',
+  },
+});
+
+export const listingInfo = css({
+  width: '100%',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'space-between',
+  padding: '0px 20px',
+  marginTop: '0px',
+  boxSizing: 'border-box',
+
+  [mq[0]]: {
+    marginTop: '10px',
+  },
+  [mq[1]]: {
+    marginTop: '0px',
+  },
+  [mq[2]]: {
+    marginTop: '0px',
+  },
+  [mq[3]]: {
+    marginTop: '0px',
+  },
+});
+
+export const listingButtonsWrap = css({
+  marginTop: '0px',
+  display: 'flex',
+  flexDirection: 'row',
+  width: '100px',
+
+  [mq[0]]: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '100%',
+    marginTop: '10px',
+  },
+  [mq[1]]: {
+    flexDirection: 'column',
+    justifyContent: 'center',
+    width: '100px',
+    marginTop: '0px',
+  },
+  [mq[2]]: {
+    flexDirection: 'column',
+    justifyContent: 'center',
+    width: '100px',
+    marginTop: '0px',
+  },
+  [mq[3]]: {
+    flexDirection: 'column',
+    justifyContent: 'center',
+    width: '100px',
     marginTop: '0px',
   },
 });

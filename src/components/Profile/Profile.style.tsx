@@ -568,6 +568,7 @@ export const listingButton = css({
 });
 
 export const muiPaper = css({
+  marginTop: '10px',
   padding: '40px 20px',
 });
 

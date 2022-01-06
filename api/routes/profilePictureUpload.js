@@ -26,6 +26,8 @@ router.post('/', clearPicIfExists, async (req, res) => {
     achievement: ART_ENTHUSIAST,
   });
 
+  await User.query().findById(user.id).increment('experience', 5);
+
   let path = '../public/profilePics/' + myImage.name;
 
   myImage.mv(path, (err) => {

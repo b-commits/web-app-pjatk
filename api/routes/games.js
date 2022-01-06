@@ -1,6 +1,7 @@
 const express = require('express');
 const { BAD_REQUEST, OK } = require('./errorConsts');
 const LikeGame = require('../models/LikeGame');
+const User = require('../models/User');
 const router = express.Router();
 
 /** 
@@ -10,6 +11,7 @@ const router = express.Router();
 */
 router.post('/', async (req, res, next) => {
   try {
+    await User.query().findById(req.body.likedBy).increment('experience', 1);
     const like = await LikeGame.query().insert({
       likedBy: req.body.likedBy,
       gameLiked: req.body.gameLiked,

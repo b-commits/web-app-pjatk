@@ -50,6 +50,9 @@ router.post('/', async (req, res) => {
     await User.query()
       .findById(req.body.messageSender)
       .increment('numPrivateMessagesSent', 1);
+    await User.query()
+      .findById(req.body.messageSender)
+      .increment('experience', 1);
     // Check if achievement requirements have been met:
     const numMessages = await User.query()
       .findById(req.body.messageSender)

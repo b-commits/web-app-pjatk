@@ -5,11 +5,11 @@ import {
   getUserByID,
   getUserDetails,
   unfollowUser,
+  followUser,
 } from './ApiCalls';
 import { useParams, useHistory } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import { CircularProgress } from '@material-ui/core';
-import { followUser } from './ApiCalls';
 import {
   userDetailsWrap,
   userDetailsData,

@@ -39,6 +39,9 @@ router.post('/', async (req, res, next) => {
     });
     await User.query()
       .findById(req.body.followingUser)
+      .increment('experience', 1);
+    await User.query()
+      .findById(req.body.followingUser)
       .increment('numFollowing', 1);
     const numFollowing = await User.query()
       .findById(req.body.followingUser)

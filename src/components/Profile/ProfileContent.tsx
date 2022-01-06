@@ -7,15 +7,36 @@ import {
   profileContentItem,
 } from './Profile.style';
 import { UserAchievements } from './UserAchievements';
+import { getUserByID } from './ApiCalls';
 import { useParams } from 'react-router-dom';
 import { UserFavGames } from './UserFavGames';
 import { UserFriends } from './UserFriends';
 import { UserListings } from './UserListings';
 import { UserLevel } from '../Misc/UserLevel';
-import { getUserAchievments } from '../Dashboard/ApiCalls';
-import { AuthContext } from '../../context/AuthContext';
+
+interface RouteParams {
+  id: string;
+}
 
 export const ProfileContent: React.FC = () => {
+  const { id } = useParams<RouteParams>();
+  const [userExp, setUserExp] = useState<number>(0);
+
+  useEffect(() => {
+    getUserByID(id).then((res: any) => {
+      setUserExp(res.data.experience);
+    });
+  });
+
+  const calculateLevel = (exp: number) => {
+    if (exp < 10) return 1;
+    if (exp < 20) return 2;
+    if (exp < 30) return 3;
+    if (exp < 40) return 4;
+    if (exp >= 40) return 5;
+    return 0;
+  };
+
   return (
     <>
       <div css={profileContent}>
@@ -36,8 +57,8 @@ export const ProfileContent: React.FC = () => {
             title={'Level'}
             contentComponent={
               <UserLevel
-                userLvl={4}
-                userExp={4}
+                userLvl={calculateLevel(userExp)}
+                userExp={userExp}
                 progressBarWidthPercentage={50}
               />
             }

@@ -47,6 +47,9 @@ router.post('/', async (req, res) => {
     });
     await User.query()
       .findById(req.body.commentSender)
+      .increment('experience', 1);
+    await User.query()
+      .findById(req.body.commentSender)
       .increment('numProfileComments', 1);
     const numComments = await User.query()
       .findById(req.body.commentSender)

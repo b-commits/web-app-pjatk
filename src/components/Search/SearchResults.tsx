@@ -37,7 +37,12 @@ export const SearchResults: React.FC<any> = () => {
           return (
             <div key={index}>
               <li css={listItem}>
-                <Avatar css={avatar} src={imgLink} />
+                <Avatar css={avatar} src={`/profilePics/${user.nickname}.jpg`}>
+                  <img
+                    className="MuiAvatar-img"
+                    src="http://bluepito.webd.pro/logopjatk.gif"
+                  />
+                </Avatar>
                 <p css={nickname}>{user.nickname}</p>
                 <Button
                   onClick={() => {

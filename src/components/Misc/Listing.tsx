@@ -78,7 +78,6 @@ export const Listing: FC<ListingProps> = ({
   const [participators, setParticipators] = useState<any>([]);
   const { authenticated } = useContext(AuthContext);
   const { currentUser } = useContext(AuthContext);
-  const titleSliced = title.length > 35 ? desc.slice(0, 35) + '...' : title;
   const description = desc.length > 70 ? desc.slice(0, 70) + '...' : desc;
 
   let listingItemWrapCSS;
@@ -99,6 +98,31 @@ export const Listing: FC<ListingProps> = ({
       listingItemWrapCSS = listingItemWrap;
     }
   }
+
+  const getGameName = (id: number) => {
+    switch (id) {
+      case 1:
+        return 'Apex Legends';
+      case 2:
+        return 'CS: GO';
+      case 3:
+        return 'DOTA 2';
+      case 4:
+        return 'Ready or Not';
+      case 5:
+        return 'Rainbow Six: Siege';
+      case 6:
+        return 'Stardew Valley';
+      case 7:
+        return 'It Takes Two';
+      case 8:
+        return 'Terraria';
+      case 9:
+        return 'Valheim';
+      case 10:
+        return 'World of Warships';
+    }
+  };
 
   const handleJoin = () => {
     joinListing(currentUser.id, id)
@@ -154,12 +178,18 @@ export const Listing: FC<ListingProps> = ({
   return (
     <div css={listingItemWrapCSS}>
       <div css={listingHeader}>
-        <i className="fas fa-users"></i>
-
+        <i className="fas fa-users">
+          {'  '}
+          {participators.length}/{maxNumberOfPlayers}
+        </i>
         <h1 title={title} css={listingTitle}>
-          {titleSliced}
+          {getGameName(parseInt(gameName))}
         </h1>
-        <i className="fas fa-share"></i>
+        {participators.includes(currentUser) ? (
+          <i onClick={handleLeave} className="fas fa-user-minus"></i>
+        ) : (
+          <i onClick={handleJoin} className="fas fa-user-plus"></i>
+        )}
       </div>
       <div css={gameBox}>
         <img css={gameImgStyle} src={gameImgUrl} alt={gameName} />
@@ -169,19 +199,12 @@ export const Listing: FC<ListingProps> = ({
         <p>{description}</p>
       </div>
       <div css={listingFooter}>
+        <Button title="Details" type={SUCCES} onCLick={handleModalOpen} />
         <Button
           title="Manage"
           type={INFO}
           onCLick={() => {
             console.log('Manage Listing Button');
-          }}
-        />{' '}
-        <Button title="Details" type={SUCCES} onCLick={handleModalOpen} />
-        <Button
-          title="Delete"
-          type={DANGER}
-          onCLick={() => {
-            console.log('Delete listing Button');
           }}
         />{' '}
       </div>
@@ -195,7 +218,7 @@ export const Listing: FC<ListingProps> = ({
       >
         <Box sx={modalStyle}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            {id}
+            Listing #{id}
           </Typography>
           <UserFavGamesItem
             gameImgUrl={`/gamePics/${gameName}.jpeg`}

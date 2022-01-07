@@ -4,7 +4,6 @@ import { Rating } from '@material-ui/lab';
 import { AuthContext } from '../../context/AuthContext';
 import { postRating } from './ApiCalls';
 import axios from 'axios';
-import { CircularProgress } from '@material-ui/core';
 
 interface UserLevelProps {
   nickname: string;
@@ -39,7 +38,25 @@ export const UserParticipationRating: FC<UserLevelProps> = ({
 
   if (!currentUser || currentUser.nickname === nickname)
     return <div>{currentUser.nickname}</div>;
-  if (!currentRating) return <div>TWT</div>;
+  if (!currentRating)
+    return (
+      <div>
+        {nickname}{' '}
+        <Rating
+          defaultValue={currentRating}
+          onChange={(_event, newValue: any) => {
+            setCurrentRating(newValue);
+            postRating(listingId, participatorId, newValue, currentUser.id)
+              .then(() => {
+                setCurrentRating(newValue);
+              })
+              .catch((error: any) => {
+                console.log(error);
+              });
+          }}
+        />
+      </div>
+    );
   return (
     <>
       <div>{nickname}</div>

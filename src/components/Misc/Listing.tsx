@@ -27,6 +27,7 @@ import {
   listingDesc,
   listingFooter,
   buttonLine,
+  wrapButton,
 } from './css/Listing.style';
 
 import { modalStyle, muiField, imgStyle } from '../Home/Home.style';
@@ -204,7 +205,9 @@ export const Listing: FC<ListingProps> = ({
       <div css={listingFooter}>
         {currentUser ? (
           <div css={buttonLine}>
-            <Button title="Details" type={SUCCES} onCLick={handleModalOpen} />
+            <div css={wrapButton}>
+              <Button title="Details" type={SUCCES} onCLick={handleModalOpen} />
+            </div>
             <Button
               title="Manage"
               type={INFO}
@@ -264,12 +267,16 @@ export const Listing: FC<ListingProps> = ({
             [
               participators.length >= maxNumberOfPlayers ? (
                 <div>
-                  <Alert severity="info">This listing is full.</Alert>
-                  <Button
-                    onCLick={() => handleLeave()}
-                    title="Leave"
-                    type={DANGER}
-                  />
+                  <Alert severity="info">
+                    Sorry, this listing is already full.
+                  </Alert>
+                  {participators.includes(currentUser) ? (
+                    <Button
+                      onCLick={() => handleLeave()}
+                      title="Leave"
+                      type={DANGER}
+                    />
+                  ) : null}
                 </div>
               ) : (
                 [

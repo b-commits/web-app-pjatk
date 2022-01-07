@@ -228,5 +228,9 @@ export const listingFooter = css({
 
 export const buttonLine = css({
   display: 'flex',
-  justifyContent: 'center',
+  justifyContent: 'space-between',
+});
+
+export const wrapButton = css({
+  marginRight: '118px',
 });

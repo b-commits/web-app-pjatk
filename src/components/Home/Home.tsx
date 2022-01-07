@@ -128,9 +128,7 @@ export const Home: React.FC = () => {
                   url={''}
                   desc={listing.message}
                   gameName={listing.listingGame}
-                  gameImgUrl={
-                    'https://sm.ign.com/t/ign_pl/screenshot/default/5353_ypqg.1280.jpg'
-                  }
+                  gameImgUrl={`/gamePics/${listing.listingGame}.jpeg`}
                   createdAt={listing.created_at}
                   status={listing.status}
                   activeView={HOMEPAGE_VIEW}

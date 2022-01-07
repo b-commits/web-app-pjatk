@@ -11,7 +11,9 @@ import {
   postListingComment,
 } from './ApiCalls';
 import { Modal, Box, Typography, TextField } from '@material-ui/core';
+import { Alert } from '@material-ui/lab';
 import { UserParticipationRating } from './UserParticipationRating';
+import { UserFavGamesItem } from '../Profile/UserFavGames';
 import { Button, DANGER, INFO, SUCCES } from './Button';
 import {
   listingItemWrap,
@@ -195,14 +197,11 @@ export const Listing: FC<ListingProps> = ({
           <Typography id="modal-modal-title" variant="h6" component="h2">
             {id}
           </Typography>
-          <img
-            css={imgStyle}
-            alt=""
-            src="https://d-art.ppstatic.pl/kadry/k/r/1/51/a5/5e287d9223f8f_o_large.jpg"
+          <UserFavGamesItem
+            gameImgUrl={`/gamePics/${gameName}.jpeg`}
+            gameName={gameName}
+            gameUrl={'/'}
           />
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Game: {gameName}
-          </Typography>
           <Typography id="modal-modal-title" variant="h6" component="h2">
             List of players:
             {participators.map((participator: any, index: number) => {
@@ -223,18 +222,31 @@ export const Listing: FC<ListingProps> = ({
             <p>Log in to join a listing</p>
           ) : (
             [
-              participators.includes(currentUser) ? (
-                <Button
-                  onCLick={() => handleLeave()}
-                  title="Leave"
-                  type={DANGER}
-                />
+              participators.length >= maxNumberOfPlayers ? (
+                <div>
+                  <Alert severity="info">This listing is full.</Alert>
+                  <Button
+                    onCLick={() => handleLeave()}
+                    title="Leave"
+                    type={DANGER}
+                  />
+                </div>
               ) : (
-                <Button
-                  title="Join In"
-                  type={SUCCES}
-                  onCLick={() => handleJoin()}
-                />
+                [
+                  participators.includes(currentUser) ? (
+                    <Button
+                      onCLick={() => handleLeave()}
+                      title="Leave"
+                      type={DANGER}
+                    />
+                  ) : (
+                    <Button
+                      title="Join In"
+                      type={SUCCES}
+                      onCLick={() => handleJoin()}
+                    />
+                  ),
+                ]
               ),
             ]
           )}

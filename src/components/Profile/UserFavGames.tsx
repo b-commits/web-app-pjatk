@@ -93,12 +93,12 @@ export const UserFavGames: React.FC = () => {
   );
 };
 
-const UserFavGamesItem: React.FC<{
+export const UserFavGamesItem: React.FC<{
   gameImgUrl: string;
   gameName: string;
   gameUrl: string | undefined;
 }> = ({ gameImgUrl, gameName, gameUrl }) => {
-  console.log('got nothing' + gameUrl);
+  console.log(gameImgUrl);
   return (
     <>
       <div css={favoriteGamesItem}>

@@ -6,6 +6,8 @@ import { Formik, Form, Field } from 'formik';
 import {
   getAllListingComments,
   getAllParticipators,
+  joinListing,
+  leaveListing,
   postListingComment,
 } from './ApiCalls';
 import { Modal, Box, Typography, TextField } from '@material-ui/core';
@@ -76,6 +78,25 @@ export const Listing: FC<ListingProps> = ({
   const { authenticated } = useContext(AuthContext);
   const { currentUser } = useContext(AuthContext);
 
+  const handleJoin = () => {
+    joinListing(currentUser.id, id)
+      .then(() => {
+        setParticipators([...participators, currentUser]);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const handleLeave = () => {
+    leaveListing(currentUser.id, id)
+      .then(() => {
+        const removed = participators.filter(
+          (participator: any) => participator != currentUser
+        );
+        setParticipators(removed);
+      })
+      .catch((err) => console.log(err));
+  };
+
   const handleListingComment = async (values: ListingCommentProps) => {
     const newComment = {
       content: values.content,
@@ -100,16 +121,19 @@ export const Listing: FC<ListingProps> = ({
     getAllListingComments(id).then((listingComments: any) => {
       setListingComments(listingComments.data.reverse());
     });
+  }, [id]);
+
+  useEffect(() => {
     getAllParticipators(id).then((res: any) => {
       setParticipators(res.data);
     });
-  }, [id]);
+  }, []);
 
   //Vars
   const titleSliced = title.length > 35 ? desc.slice(0, 35) + '...' : title;
   const description = desc.length > 70 ? desc.slice(0, 70) + '...' : desc;
-  const gameNameSlice =
-    gameName.length > 80 ? gameName.slice(0, 90) + '...' : gameName;
+  // const gameNameSlice =
+  //   gameName.length > 80 ? gameName.slice(0, 90) + '...' : gameName;
 
   let listingItemWrapCSS;
   switch (activeView) {
@@ -141,7 +165,7 @@ export const Listing: FC<ListingProps> = ({
       </div>
       <div css={gameBox}>
         <img css={gameImgStyle} src={gameImgUrl} alt={gameName} />
-        <span css={gameNameStyle}>{gameNameSlice}</span>
+        <span css={gameNameStyle}></span>
       </div>
       <div css={listingDesc}>
         <p>{description}</p>
@@ -181,16 +205,17 @@ export const Listing: FC<ListingProps> = ({
             src="https://d-art.ppstatic.pl/kadry/k/r/1/51/a5/5e287d9223f8f_o_large.jpg"
           />
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            Game:
+            Game: {gameName}
           </Typography>
           <Typography id="modal-modal-title" variant="h6" component="h2">
             List of players:
-            {participators.map((participator: any) => {
+            {participators.map((participator: any, index: number) => {
               return (
                 <UserParticipationRating
                   nickname={participator.nickname}
                   participatorId={participator.id}
                   listingId={id}
+                  key={index}
                 />
               );
             })}
@@ -198,13 +223,25 @@ export const Listing: FC<ListingProps> = ({
           <Typography id="modal-modal-title" variant="h6" component="h2">
             Number of players: 4/5
           </Typography>
-          <Button
-            title="Join In"
-            type={SUCCES}
-            onCLick={() => {
-              console.log('[MODAL][BUTTON] - Join In');
-            }}
-          />
+          {!currentUser ? (
+            <p>Log in to join a listing</p>
+          ) : (
+            [
+              participators.includes(currentUser) ? (
+                <Button
+                  onCLick={() => handleLeave()}
+                  title="Leave"
+                  type={DANGER}
+                />
+              ) : (
+                <Button
+                  title="Join In"
+                  type={SUCCES}
+                  onCLick={() => handleJoin()}
+                />
+              ),
+            ]
+          )}
           <Typography id="modal-modal-title" variant="h6" component="h2">
             Comments:
           </Typography>

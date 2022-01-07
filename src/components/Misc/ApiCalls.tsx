@@ -61,3 +61,31 @@ export const postRating = async (
     .then((res) => res.status)
     .catch((err) => console.log(err));
 };
+
+export const joinListing = async (userId: number, listingId: number) => {
+  await axios({
+    method: 'POST',
+    withCredentials: true,
+    url: 'http://localhost:5000/api/participations/',
+    data: {
+      listingId: listingId,
+      userId: userId,
+    },
+  })
+    .then((res) => res.status)
+    .catch((err) => console.log(err));
+};
+
+export const leaveListing = async (userId: number, listingId: number) => {
+  await axios({
+    method: 'DELETE',
+    withCredentials: true,
+    url: 'http://localhost:5000/api/participations/',
+    data: {
+      listingId: listingId,
+      userId: userId,
+    },
+  })
+    .then((res) => res.status)
+    .catch((err) => console.log(err));
+};

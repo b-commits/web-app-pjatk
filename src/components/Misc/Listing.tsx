@@ -27,21 +27,20 @@ import {
 
 import { modalStyle, muiField, imgStyle } from '../Home/Home.style';
 
-//----------
 export const PROFILE_VIEW = 'PROFILEVIEW';
 export const DASHBOARD_VIEW = 'DASHBOARD';
 export const HOMEPAGE_VIEW = 'HOMPAGE';
-//----------
 
 interface ListingProps {
   id: number;
   title: string;
   url: string;
+  maxNumberOfPlayers: string;
   desc: string;
   gameName: string;
   gameImgUrl: string;
-  createdAt?: any; // UWAGA DODAC DO KONTENERA optional na potrzeby unifikacji z komponentem z home
-  status?: boolean; // UWAGA DODAC DO KONTENERA optional na potrzeby unifikacji z komponentem z home
+  createdAt?: any;
+  status?: boolean;
   activeView?: string;
 }
 
@@ -62,6 +61,7 @@ export const Listing: FC<ListingProps> = ({
   id,
   title,
   url,
+  maxNumberOfPlayers,
   desc,
   gameName,
   gameImgUrl,
@@ -69,7 +69,6 @@ export const Listing: FC<ListingProps> = ({
   status,
   activeView,
 }) => {
-  //State
   const [open, setOpen] = useState<boolean>(false);
   const handleModalOpen = () => setOpen(true);
   const handleModalClose = () => setOpen(false);
@@ -77,6 +76,27 @@ export const Listing: FC<ListingProps> = ({
   const [participators, setParticipators] = useState<any>([]);
   const { authenticated } = useContext(AuthContext);
   const { currentUser } = useContext(AuthContext);
+  const titleSliced = title.length > 35 ? desc.slice(0, 35) + '...' : title;
+  const description = desc.length > 70 ? desc.slice(0, 70) + '...' : desc;
+
+  let listingItemWrapCSS;
+  switch (activeView) {
+    case HOMEPAGE_VIEW: {
+      listingItemWrapCSS = listingItemWrapHomePage;
+      break;
+    }
+    case DASHBOARD_VIEW: {
+      listingItemWrapCSS = listingItemWrap;
+      break;
+    }
+    case PROFILE_VIEW: {
+      listingItemWrapCSS = listingItemWrap;
+      break;
+    }
+    default: {
+      listingItemWrapCSS = listingItemWrap;
+    }
+  }
 
   const handleJoin = () => {
     joinListing(currentUser.id, id)
@@ -127,32 +147,8 @@ export const Listing: FC<ListingProps> = ({
     getAllParticipators(id).then((res: any) => {
       setParticipators(res.data);
     });
-  }, []);
+  }, [id]);
 
-  //Vars
-  const titleSliced = title.length > 35 ? desc.slice(0, 35) + '...' : title;
-  const description = desc.length > 70 ? desc.slice(0, 70) + '...' : desc;
-  // const gameNameSlice =
-  //   gameName.length > 80 ? gameName.slice(0, 90) + '...' : gameName;
-
-  let listingItemWrapCSS;
-  switch (activeView) {
-    case HOMEPAGE_VIEW: {
-      listingItemWrapCSS = listingItemWrapHomePage;
-      break;
-    }
-    case DASHBOARD_VIEW: {
-      listingItemWrapCSS = listingItemWrap;
-      break;
-    }
-    case PROFILE_VIEW: {
-      listingItemWrapCSS = listingItemWrap;
-      break;
-    }
-    default: {
-      listingItemWrapCSS = listingItemWrap;
-    }
-  }
   return (
     <div css={listingItemWrapCSS}>
       <div css={listingHeader}>
@@ -221,7 +217,7 @@ export const Listing: FC<ListingProps> = ({
             })}
           </Typography>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            Number of players: 4/5
+            Number of players: {participators.length}/{maxNumberOfPlayers}
           </Typography>
           {!currentUser ? (
             <p>Log in to join a listing</p>

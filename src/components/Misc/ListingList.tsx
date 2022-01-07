@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { Listing } from './Listing';
 import { listingListStyle } from './css/ListingList.style';
 //----------
@@ -13,6 +13,7 @@ interface ListingListProps {
   dataSet: {
     id: number;
     title: string;
+    maxNumberOfPlayers?: string;
     url: string;
     desc: string;
     gameName: string;
@@ -39,6 +40,7 @@ export const ListingList: FC<ListingListProps> = ({ type, dataSet }) => {
     <Listing
       key={listing.id}
       id={listing.id}
+      maxNumberOfPlayers={'0'}
       title={listing.title}
       url={listing.url}
       desc={listing.desc}

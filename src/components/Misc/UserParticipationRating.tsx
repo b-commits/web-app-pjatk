@@ -20,18 +20,22 @@ export const UserParticipationRating: FC<UserLevelProps> = ({
   return (
     <>
       <div>{nickname}</div>
-      <Rating
-        onChange={(event, newValue: any) => {
-          setCurrentRating(newValue);
-          postRating(listingId, participatorId, newValue, currentUser.id)
-            .then(() => {
-              setCurrentRating(newValue);
-            })
-            .catch((error: any) => {
-              console.log(error);
-            });
-        }}
-      />
+      {currentUser.nickname === nickname ? (
+        <div></div>
+      ) : (
+        <Rating
+          onChange={(_event, newValue: any) => {
+            setCurrentRating(newValue);
+            postRating(listingId, participatorId, newValue, currentUser.id)
+              .then(() => {
+                setCurrentRating(newValue);
+              })
+              .catch((error: any) => {
+                console.log(error);
+              });
+          }}
+        />
+      )}
     </>
   );
 };

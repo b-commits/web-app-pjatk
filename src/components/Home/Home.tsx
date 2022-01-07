@@ -122,6 +122,7 @@ export const Home: React.FC = () => {
               return (
                 <ListingItem
                   key={index}
+                  maxNumberOfPlayers={listing.maxNumberOfPlayers}
                   id={listing.id}
                   title={listing.message}
                   url={''}

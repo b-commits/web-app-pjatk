@@ -250,6 +250,8 @@ export const Listing: FC<ListingProps> = ({
             {participators.map((participator: any, index: number) => {
               return (
                 <UserParticipationRating
+                  participators={participators}
+                  maxNumberOfPlayers={maxNumberOfPlayers}
                   nickname={participator.nickname}
                   participatorId={participator.id}
                   listingId={id}
@@ -267,9 +269,7 @@ export const Listing: FC<ListingProps> = ({
             [
               participators.length >= maxNumberOfPlayers ? (
                 <div>
-                  <Alert severity="info">
-                    Sorry, this listing is already full.
-                  </Alert>
+                  <Alert severity="info">This listing is already full.</Alert>
                   {participators.includes(currentUser) ? (
                     <Button
                       onCLick={() => handleLeave()}

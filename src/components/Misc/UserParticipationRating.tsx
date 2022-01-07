@@ -9,11 +9,15 @@ interface UserLevelProps {
   nickname: string;
   participatorId: number;
   listingId: number;
+  participators: any;
+  maxNumberOfPlayers: any;
 }
 export const UserParticipationRating: FC<UserLevelProps> = ({
   nickname,
   participatorId,
   listingId,
+  participators,
+  maxNumberOfPlayers,
 }) => {
   const { currentUser } = useContext(AuthContext);
   const [currentRating, setCurrentRating] = useState<number>();
@@ -41,20 +45,22 @@ export const UserParticipationRating: FC<UserLevelProps> = ({
   if (!currentRating)
     return (
       <div>
-        {nickname}{' '}
-        <Rating
-          defaultValue={currentRating}
-          onChange={(_event, newValue: any) => {
-            setCurrentRating(newValue);
-            postRating(listingId, participatorId, newValue, currentUser.id)
-              .then(() => {
-                setCurrentRating(newValue);
-              })
-              .catch((error: any) => {
-                console.log(error);
-              });
-          }}
-        />
+        {nickname}
+        {participators.includes(currentUser) ? (
+          <Rating
+            defaultValue={currentRating}
+            onChange={(_event, newValue: any) => {
+              setCurrentRating(newValue);
+              postRating(listingId, participatorId, newValue, currentUser.id)
+                .then(() => {
+                  setCurrentRating(newValue);
+                })
+                .catch((error: any) => {
+                  console.log(error);
+                });
+            }}
+          />
+        ) : null}
       </div>
     );
   return (

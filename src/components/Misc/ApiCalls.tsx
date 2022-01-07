@@ -89,3 +89,25 @@ export const leaveListing = async (userId: number, listingId: number) => {
     .then((res) => res.status)
     .catch((err) => console.log(err));
 };
+
+export const getRating = async (
+  listingId: number,
+  participatorId: number,
+  raterId: number
+) => {
+  console.log(listingId);
+  console.log(participatorId);
+  console.log(raterId);
+  await axios({
+    method: 'POST',
+    withCredentials: true,
+    url: 'http://localhost:5000/api/participations/ratings/perUser',
+    data: {
+      listingId: listingId,
+      participatorId: participatorId,
+      raterId: raterId,
+    },
+  })
+    .then((res) => res.data.rating)
+    .catch((err) => console.log(err));
+};

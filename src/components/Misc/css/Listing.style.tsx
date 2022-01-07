@@ -225,3 +225,8 @@ export const listingFooter = css({
     flexDirection: 'row',
   },
 });
+
+export const buttonLine = css({
+  display: 'flex',
+  justifyContent: 'center',
+});

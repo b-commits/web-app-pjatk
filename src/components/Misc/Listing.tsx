@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { FC, useState, useEffect, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import { ListingComment } from './ListingComment';
 import { Formik, Form, Field } from 'formik';
@@ -25,6 +26,7 @@ import {
   gameNameStyle,
   listingDesc,
   listingFooter,
+  buttonLine,
 } from './css/Listing.style';
 
 import { modalStyle, muiField, imgStyle } from '../Home/Home.style';
@@ -79,6 +81,7 @@ export const Listing: FC<ListingProps> = ({
   const { authenticated } = useContext(AuthContext);
   const { currentUser } = useContext(AuthContext);
   const description = desc.length > 70 ? desc.slice(0, 70) + '...' : desc;
+  const history = useHistory();
 
   let listingItemWrapCSS;
   switch (activeView) {
@@ -199,14 +202,28 @@ export const Listing: FC<ListingProps> = ({
         <p>{description}</p>
       </div>
       <div css={listingFooter}>
-        <Button title="Details" type={SUCCES} onCLick={handleModalOpen} />
-        <Button
-          title="Manage"
-          type={INFO}
-          onCLick={() => {
-            console.log('Manage Listing Button');
-          }}
-        />{' '}
+        {currentUser ? (
+          <div css={buttonLine}>
+            <Button title="Details" type={SUCCES} onCLick={handleModalOpen} />
+            <Button
+              title="Manage"
+              type={INFO}
+              onCLick={() => {
+                console.log('Manage Listing Button');
+              }}
+            />
+          </div>
+        ) : (
+          <Button
+            title="Details"
+            type={INFO}
+            onCLick={() => {
+              history.push('/login');
+            }}
+          >
+            Log in to view the details
+          </Button>
+        )}
       </div>
 
       <Modal

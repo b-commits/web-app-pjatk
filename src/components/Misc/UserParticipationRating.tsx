@@ -1,8 +1,10 @@
 /** @jsxImportSource @emotion/react */
-import { FC, useState, useContext } from 'react';
+import { FC, useState, useContext, useEffect } from 'react';
 import { Rating } from '@material-ui/lab';
 import { AuthContext } from '../../context/AuthContext';
 import { postRating } from './ApiCalls';
+import axios from 'axios';
+import { CircularProgress } from '@material-ui/core';
 
 interface UserLevelProps {
   nickname: string;
@@ -15,15 +17,35 @@ export const UserParticipationRating: FC<UserLevelProps> = ({
   listingId,
 }) => {
   const { currentUser } = useContext(AuthContext);
-  const [currentRating, setCurrentRating] = useState(0);
+  const [currentRating, setCurrentRating] = useState<number>();
 
+  useEffect(() => {
+    axios({
+      method: 'POST',
+      withCredentials: true,
+      url: 'http://localhost:5000/api/participations/ratings/perUser',
+      data: {
+        listingId: listingId,
+        participatorId: participatorId,
+        raterId: currentUser.id,
+      },
+    })
+      .then((res) => {
+        setCurrentRating(res.data.rating);
+        console.log(currentRating);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
+  if (!currentUser || currentUser.nickname === nickname)
+    return <div>{currentUser.nickname}</div>;
+  if (!currentRating) return <div>TWT</div>;
   return (
     <>
       <div>{nickname}</div>
-      {currentUser.nickname === nickname ? (
-        <div></div>
-      ) : (
+      {currentUser.nickname === nickname ? null : (
         <Rating
+          defaultValue={currentRating}
           onChange={(_event, newValue: any) => {
             setCurrentRating(newValue);
             postRating(listingId, participatorId, newValue, currentUser.id)

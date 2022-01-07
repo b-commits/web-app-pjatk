@@ -103,7 +103,6 @@ router.delete('/', async (req, res, next) => {
 */
 router.post('/ratings', async (req, res, next) => {
   try {
-    console.log(req.body.rating);
     const participationId = await Participation.query()
       .findOne({
         listingId: req.body.listingId,
@@ -120,8 +119,49 @@ router.post('/ratings', async (req, res, next) => {
         rating: req.body.rating,
         rater: req.body.rater,
       });
+    } else {
+      await Rating.query()
+        .where({
+          participationId: participationId.id,
+          rater: req.body.rater,
+        })
+        .update({ rating: req.body.rating });
     }
     res.status(200).json(OK);
+  } catch (err) {
+    res.status(400).json({ msg: err.message });
+  }
+});
+
+/** 
+    @route    POST /api/participations/ratings/perUser
+    @desc     Util route for ratings / rating for a given participation.
+    @access   Public.
+    @param    listingId
+    @param    participatorId
+    @param    raterId
+*/
+router.post('/ratings/perUser', async (req, res, next) => {
+  try {
+    // Find a participation record where the listingId and userId is this and userId is this:
+    const participationId = await Participation.query()
+      .findOne({
+        listingId: req.body.listingId,
+        userId: req.body.participatorId,
+      })
+      .select('id');
+
+    // If there's no participation like this then do nothing:
+    if (!participationId) {
+      console.log('no participation like this');
+    }
+
+    // Find rating for this participation id by a given user:
+    const rating = await Rating.query()
+      .findOne({ participationId: participationId.id, rater: req.body.raterId })
+      .select('rating');
+
+    res.status(200).json(rating);
   } catch (err) {
     res.status(400).json({ msg: err.message });
   }

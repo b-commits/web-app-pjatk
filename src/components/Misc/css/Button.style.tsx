@@ -4,7 +4,7 @@ export const buttonStyle = css({
   fontSize: '0.8em',
   fontWeight: 'bold',
   color: '#ffffff',
-  width: '100px',
+  minWidth: '100px',
   verticalAlign: 'center',
   marginBottom: '10px',
   alignContent: 'center',

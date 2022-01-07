@@ -17,9 +17,10 @@ router.get('/:profileId', async (req, res, next) => {
     const { profileId } = req.params;
     const messages = await PrivateMessage.query()
       .join('user', {
-        'user.id': 'messageSender',
+        'user.id': 'messageReceiver',
       })
       .where({ messageReceiver: profileId })
+      .orWhere({ messageSender: profileId })
       .select(
         'content',
         'nickname',

@@ -5,13 +5,14 @@ const router = express.Router();
 
 /** 
     @route    GET api/adminReports
-    @desc     Gets all private messages for a given user.
+    @desc     Gets all admin reports.
     @access   Private.
     @todo     auth() middleaware
 */
 router.get('/', async (req, res, next) => {
   try {
-    // todo
+    const reports = await AdminReports.query();
+    res.status(200).json(reports);
   } catch (err) {
     res.status(400).json({ msg: BAD_REQUEST });
   }

@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import React, { FC, useContext, useState } from 'react';
+import { FC, useContext, useState } from 'react';
 import { Formik, Form, Field } from 'formik';
 import FormikField from '../UserSettings/FormikField';
 import { validationSchema } from './validation/AddListingValdiation';
@@ -8,6 +8,7 @@ import { postListing } from '../ApiCalls';
 import { submitButton } from '../css/UserSettingsDashboard.style';
 import { selectField } from '../css/ListingsDashboard.style';
 import { AuthContext } from '../../../context/AuthContext';
+import { Alert } from '@material-ui/lab';
 
 interface FormValues {
   description: string;
@@ -30,9 +31,11 @@ export const AddListingForm: FC = () => {
   };
 
   const handlePostListing = (listing: FormValues) => {
+    setLoading(true);
     postListing(listing)
       .then(() => {
-        console.log('Listing has been added');
+        setLoading(false);
+        isSuccess(true);
       })
       .catch((err: any) => {
         console.log(err);
@@ -83,6 +86,9 @@ export const AddListingForm: FC = () => {
                 <button css={submitButton} type="submit">
                   Submit
                 </button>
+              )}
+              {success && (
+                <Alert severity="info">Your listing has been added!</Alert>
               )}
             </Form>
           );

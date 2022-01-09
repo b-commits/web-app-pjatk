@@ -183,7 +183,6 @@ export const Listing: FC<ListingProps> = ({
     <div css={listingItemWrapCSS}>
       <div css={listingHeader}>
         <i className="fas fa-users">
-          {'  '}
           {participators.length}/{maxNumberOfPlayers}
         </i>
         <h1 title={title} css={listingTitle}>
@@ -245,6 +244,8 @@ export const Listing: FC<ListingProps> = ({
             gameName={gameName}
             gameUrl={'/'}
           />
+
+          {title}
           <Typography id="modal-modal-title" variant="h6" component="h2">
             List of players:
             {participators.map((participator: any, index: number) => {

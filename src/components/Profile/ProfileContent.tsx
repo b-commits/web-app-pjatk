@@ -47,7 +47,7 @@ export const ProfileContent: React.FC = () => {
           />
 
           <ProfileContentItem
-            title={'Recent listings'}
+            title={'Your listings'}
             contentComponent={<UserListings />}
           />
         </div>

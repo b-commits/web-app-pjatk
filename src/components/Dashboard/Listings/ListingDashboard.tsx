@@ -7,13 +7,10 @@ import { LISTING_DATA_SET } from '../../../Data/ListingsData';
 
 export const ListingDashboard: FC = () => {
   const addListingForm = <AddListingForm />;
-  const userListings = (
-    <ListingList type={DASHBOARD_VIEW} dataSet={LISTING_DATA_SET} />
-  );
+
   return (
     <>
       <SectionDashboard title="Add new listing" component={addListingForm} />
-      <SectionDashboard title="Manage your listings" component={userListings} />
     </>
   );
 };

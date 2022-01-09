@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   userListings,
   listing,
@@ -7,83 +7,70 @@ import {
   listingButtonsWrap,
   listingButton,
 } from './Profile.style';
+import { useParams } from 'react-router-dom';
 import { getUserListings } from './ApiCalls';
-import { AuthContext } from '../../context/AuthContext';
+
+interface RouteParams {
+  id: string;
+}
+
+const getGameName = (id: number) => {
+  switch (id) {
+    case 1:
+      return 'Apex Legends';
+    case 2:
+      return 'CS: GO';
+    case 3:
+      return 'DOTA 2';
+    case 4:
+      return 'Ready or Not';
+    case 5:
+      return 'Rainbow Six: Siege';
+    case 6:
+      return 'Stardew Valley';
+    case 7:
+      return 'It Takes Two';
+    case 8:
+      return 'Terraria';
+    case 9:
+      return 'Valheim';
+    case 10:
+      return 'World of Warships';
+  }
+};
 
 export const UserListings: React.FC = () => {
-  const [userListing, setUserListings] = useState(null);
+  const [userListings, setUserListings] = useState([]);
+  const { id } = useParams<RouteParams>();
 
-  // useEffect(() => {
-  //   getUserListings();
-  // });
+  useEffect(() => {
+    getUserListings(parseInt(id)).then((res: any) => {
+      console.log(res.data);
+      setUserListings(res.data);
+    });
+  }, []);
 
   return (
     <div css={userListings}>
-      <Listing
-        listingName={"Let's play forza horizon"}
-        listingUrl={''}
-        listingDesc={
-          'Join and lets race together in forza horizon. Want just to discus? Join anyway, every fun of forza is welcome here ;) '
-        }
-        gameName={'Forza Horizon 5'}
-        gameImgUrl={
-          'https://sm.ign.com/t/ign_pl/screenshot/default/5353_ypqg.1280.jpg'
-        }
-      />
-
-      <Listing
-        listingName={"Let's play forza horizon"}
-        listingUrl={''}
-        listingDesc={
-          'Quisque suscipit ipsum eget convallis faucibus. In pellentesque pretium nisl, nec luctus arcu. Nunc fermentum tellus est, et gravida lacus finibus a. Nunc lacinia lorem et lectus.'
-        }
-        gameName={'Destiny 2'}
-        gameImgUrl={
-          'https://bigbaddice.pl/wp-content/uploads/2018/07/warmind2.jpg'
-        }
-      />
-
-      <Listing
-        listingName={'PayDay 2 '}
-        listingUrl={''}
-        listingDesc={
-          'Nunc volutpat et eros a fringilla. Nullam quis finibus dui. Duis gravida, libero vitae hendrerit viverra, magna elit finibus massa, quis volutpat justo dui vitae dui.'
-        }
-        gameName={'PayDay 2'}
-        gameImgUrl={
-          'https://cdn-ext.fanatical.com/production/product/1280x720/9f765b68-118f-432f-a282-c3e1cd1f976c.jpeg'
-        }
-      />
-
-      <Listing
-        listingName={'League of Legends Arams all day'}
-        listingUrl={''}
-        listingDesc={
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi blandit lacus a purus ullamcorper, non molestie eros aliquam. Nam nec finibus orci. Sed dui dui, pretium at purus id, accumsan pellentesque felis. Mauris consequat vulputate quam. Phasellus lacus libero.'
-        }
-        gameName={'League of Legends'}
-        gameImgUrl={
-          'https://www.leagueoflegends.com/static/open-graph-2e582ae9fae8b0b396ca46ff21fd47a8.jpg'
-        }
-      />
-
-      <Listing
-        listingName={'Looking for EUIV 1v1 '}
-        listingUrl={''}
-        listingDesc={
-          'Suspendisse et porta lacus. Proin ut molestie urna. Sed sodales porttitor tellus, vestibulum condimentum purus consectetur eget. Quisque rhoncus urna vitae neque tempus, at elementum massa fermentum. Maecenas semper pretium pulvinar.'
-        }
-        gameName={'Europa Universalis IV'}
-        gameImgUrl={
-          'https://cdn1.epicgames.com/salesEvent/salesEvent/EGS_EuropaUniversalisIV_ParadoxDevelopmentStudioParadoxTinto_S3_2560x1440-aa3002ec221d43dcd7e49f5458e74766'
-        }
-      />
+      {userListings.length == 0 && <p>You haven't created any listings yet.</p>}
+      {userListings.map((listing: any, index: any) => {
+        return (
+          <Listing
+            key={index}
+            listingName={getGameName(listing.listingGame)}
+            listingUrl={''}
+            listingDesc={listing.message}
+            gameName={listing.game}
+            gameImgUrl={`/gamePics/${listing.listingGame}.jpeg`}
+          />
+        );
+      })}
     </div>
   );
 };
 
 const Listing: React.FC<{
-  listingName: string;
+  listingName?: string;
   listingUrl: string;
   listingDesc: string;
   gameName: string;
@@ -92,7 +79,7 @@ const Listing: React.FC<{
   return (
     <>
       <div css={listing}>
-        <img alt='gameImage' src={gameImgUrl} />
+        <img alt="gameImage" src={gameImgUrl} />
         <div css={listingInfo}>
           <h3>{listingName}</h3>
           {listingDesc}
@@ -105,12 +92,12 @@ const Listing: React.FC<{
             value={'Open'}
           />
           <UserListingsButton
-            listingUrl={''}
+            listingUrl={'/'}
             color={'#007dc1'}
-            value={'Share'}
+            value={'Home'}
           />
           <UserListingsButton
-            listingUrl={''}
+            listingUrl={'/dashboard/settings'}
             color={'#f24437'}
             value={'Report'}
           />

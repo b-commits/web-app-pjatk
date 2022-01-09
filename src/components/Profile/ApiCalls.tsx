@@ -7,7 +7,7 @@ interface IProfilePageComment {
 }
 
 export const getUserListings = (userId: number): any => {
-  return axios.get(`http://localhost:5000/api/users/${userId}`, {
+  return axios.get(`http://localhost:5000/api/listings/${userId}`, {
     withCredentials: true,
   });
 };

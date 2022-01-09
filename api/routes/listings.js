@@ -5,14 +5,15 @@ const { BAD_REQUEST, SERVER_ERROR, ADDED } = require('./errorConsts');
 const router = express.Router();
 
 /** 
-    @route    GET api/listings/:listingId
+    @route    GET api/listings/:userId
     @desc     Gets all listings created by a given users.
     @access   Public.
 */
-router.get('/:id(d+)', async (req, res, next) => {
+router.get('/:userId', async (req, res, next) => {
+  console.log('route hit');
   try {
-    const { listingId } = req.params;
-    const listing = await Listing.query().where({ creator: listingId });
+    const { userId } = req.params;
+    const listing = await Listing.query().where({ creator: userId });
     res.status(200).json(listing);
   } catch (err) {
     res.status(400).json({ msg: BAD_REQUEST });

@@ -125,7 +125,7 @@ const UserInfo: React.FC = () => {
             number={userDetails.numAchivements}
             value={'Achievements'}
           />
-          <UserInfoWrapItem number={0} value={'Games Played'} />
+          <UserInfoWrapItem number={0} value={'Listings created'} />
           <UserInfoWrapItem number={userDetails.numFriends} value={'Friends'} />
         </div>
         <UserActions />

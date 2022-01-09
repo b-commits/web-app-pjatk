@@ -14,7 +14,7 @@ export const Menu: FC = () => {
 
         <MenuItem title={'Home'} href={'/dashboard'} />
 
-        <MenuItem title={'Profile'} href={`/profile/${currentUser.id}`}/>
+        <MenuItem title={'Profile'} href={`/profile/${currentUser.id}`} />
 
         <MenuItem title={'Inbox'} href={'/dashboard/inbox'} />
 
@@ -26,11 +26,10 @@ export const Menu: FC = () => {
 
         <MenuItem title={'Favorite Games'} href={'/dashboard/favgames'} />
 
-        <MenuItem title={'Admin'} href={'/dashboard/admin'} />
-
-        <MenuItem title={'Reports'} href={'/dashboard/reports'} />
-
-       </ul>
+        {currentUser.isAdmin ? (
+          <MenuItem title={'Admin'} href={'/dashboard/admin'} />
+        ) : null}
+      </ul>
     </>
   );
 };

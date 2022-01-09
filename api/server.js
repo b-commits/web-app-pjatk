@@ -16,6 +16,7 @@ const achievements = require('./routes/achievements');
 const participations = require('./routes/participations');
 const games = require('./routes/games');
 require('./config/passportConfig.js');
+const path = require('path');
 
 const app = express();
 const port = process.env.SERVER_PORT;
@@ -60,6 +61,13 @@ app.use('/api/achievements', achievements);
 app.use('/api/followings', followings);
 app.use('/api/games', games);
 app.use('/api/participations', participations);
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('../build'));
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '../build', 'index.html'));
+  });
+}
 
 app.listen(port, () => {
   console.log(`[server] listening at http://localhost:${port}.`);

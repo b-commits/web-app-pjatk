@@ -42,10 +42,35 @@ export const inboxWrap = css({
   width: '100%',
   display: 'flex',
   flexDirection: 'row',
+  [mq[0]]: {
+    flexDirection: 'column',
+  },
+  [mq[1]]: {
+    flexDirection: 'row',
+  },
+  [mq[2]]: {
+    flexDirection: 'row',
+  },
+  [mq[3]]: {
+    flexDirection: 'row',
+  },
 });
 
 export const inboxSidebar = css({
   width: '30%',
+
+  [mq[0]]: {
+    width: '100%',
+  },
+  [mq[1]]: {
+    width: '30%',
+  },
+  [mq[2]]: {
+    width: '30%',
+  },
+  [mq[3]]: {
+    width: '30%',
+  },
 });
 
 export const contactList = css({
@@ -56,6 +81,19 @@ export const contactList = css({
   overflowY: 'scroll',
   backgroundColor: '#eee',
   borderRadius: '12px',
+
+  [mq[0]]: {
+    borderRadius: '0px',
+  },
+  [mq[1]]: {
+    borderRadius: '12px',
+  },
+  [mq[2]]: {
+    borderRadius: '12px',
+  },
+  [mq[3]]: {
+    borderRadius: '12px',
+  },
 
   '& li': {
     display: 'flex',
@@ -96,6 +134,19 @@ export const inboxConversation = css({
   overflowY: 'scroll',
   boxSizing: 'border-box',
   backgroundColor: '#353535',
+
+  [mq[0]]: {
+    width: '100%',
+  },
+  [mq[1]]: {
+    width: '70%',
+  },
+  [mq[2]]: {
+    width: '70%',
+  },
+  [mq[3]]: {
+    width: '70%',
+  },
 });
 
 export const inboxConversationHeader = css({

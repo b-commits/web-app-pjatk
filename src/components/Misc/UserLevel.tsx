@@ -7,12 +7,14 @@ interface UserLevelProps {
   progressBarWidthPercentage: number;
   userLvl: number;
   userExp: number;
+  isUserOwner?: boolean;
 }
 
 export const UserLevel: FC<UserLevelProps> = ({
   progressBarWidthPercentage,
   userLvl,
   userExp,
+  isUserOwner,
 }) => {
   const nextLevelPercent = Math.abs(userExp - (userLvl - 1) * 10) * 10;
   if (userExp >= 40) {
@@ -21,9 +23,11 @@ export const UserLevel: FC<UserLevelProps> = ({
         <div css={UserLevelWrap}>
           <span css={Badge}>5</span>
           <span css={userLevelExp}>40/40</span>
-          <span css={userLevelExp}>
-            Congratulations, you've reached level 5!
-          </span>
+          {isUserOwner && (
+            <span css={userLevelExp}>
+              Congratulations, you've reached level 5!
+            </span>
+          )}
         </div>
       </>
     );

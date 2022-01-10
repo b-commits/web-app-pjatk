@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState, useLayoutEffect } from 'react';
+import { AuthContext } from '../../context/AuthContext';
 import {
   profileContent,
   profileMain,
@@ -20,11 +21,19 @@ interface RouteParams {
 
 export const ProfileContent: React.FC = () => {
   const { id } = useParams<RouteParams>();
+  const { currentUser } = useContext(AuthContext);
+  console.log(currentUser);
   const [userExp, setUserExp] = useState<number>(0);
+  const [isUserOwner, setIsUserOwner] = useState<boolean>(false);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     getUserByID(id).then((res: any) => {
       setUserExp(res.data.experience);
+      if (currentUser != null) {
+        setIsUserOwner(checkIfAreSame(currentUser.id, parseInt(id)));
+      } else {
+        setIsUserOwner(checkIfAreSame(0, parseInt(id)));
+      }
     });
   });
 
@@ -37,6 +46,13 @@ export const ProfileContent: React.FC = () => {
     return 0;
   };
 
+  const checkIfAreSame = (idParam: number, idData: number) => {
+    if (idParam === idData) {
+      return true;
+    } else {
+      return false;
+    }
+  };
   return (
     <>
       <div css={profileContent}>
@@ -60,6 +76,7 @@ export const ProfileContent: React.FC = () => {
                 userLvl={calculateLevel(userExp)}
                 userExp={userExp}
                 progressBarWidthPercentage={50}
+                isUserOwner={isUserOwner}
               />
             }
           />

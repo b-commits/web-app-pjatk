@@ -24,6 +24,7 @@ export const Dashboard: FC = () => {
       userLvl={calculateLevel(currentUser.experience)}
       userExp={currentUser.experience}
       progressBarWidthPercentage={50}
+      isUserOwner={true}
     />
   );
 

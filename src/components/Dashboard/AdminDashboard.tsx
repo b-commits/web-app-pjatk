@@ -33,17 +33,17 @@ export const AdminDashboard = () => {
           <TableHead>
             <TableRow>
               <TableCell>Content</TableCell>
-              <TableCell align="right">Reporter</TableCell>
+              <TableCell align='right'>Reporter</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {adminReports.map((report: any) => (
               <TableRow>
-                <TableCell component="th" scope="row">
+                <TableCell component='th' scope='row'>
                   {report.content}
                 </TableCell>
-                <TableCell align="right">
-                  <a href={`/profile/${report.reporteri}`}>{report.reporter}</a>
+                <TableCell align='right'>
+                  <a href={`/profile/${report.reporter}`}>{report.reporter}</a>
                 </TableCell>
               </TableRow>
             ))}

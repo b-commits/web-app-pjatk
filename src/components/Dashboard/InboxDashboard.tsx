@@ -36,12 +36,6 @@ export const InboxDashboard: FC = () => {
     }
   }, []);
 
-  //todo add a table warpper for MQ
-
-  //getting all msg recivers
-
-  //msgs without reply
-
   var recivers: number[] = [];
 
   for (var i in privateMessages) {

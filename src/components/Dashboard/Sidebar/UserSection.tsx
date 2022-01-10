@@ -27,6 +27,10 @@ export const UserSection: FC<UserSectionProps> = ({
           css={userAvatar}
           src={avatarURL}
           alt={'Avatar użytkowniak: ' + nickName}
+          onError={({ currentTarget }) => {
+            currentTarget.onerror = null;
+            currentTarget.src = 'http://bluepito.webd.pro/logopjatk.gif';
+          }}
         />
         <h1>
           <span

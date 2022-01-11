@@ -31,7 +31,7 @@ export const Conversation: FC<ConversationProps> = (props) => {
   for (var i in props.msgs) {
     if (props.msgs[i].messageReceiver != props.currentUser.id) {
       partnerId = props.msgs[i].messageReceiver;
-      partnerNickname = props.msgs[i].nickname;
+      partnerNickname = props.msgs[i].receiverNickname;
       break;
     }
   }
@@ -40,7 +40,7 @@ export const Conversation: FC<ConversationProps> = (props) => {
     for (var i in props.msgs) {
       if (props.msgs[i].messageSender != props.currentUser.id) {
         partnerId = props.msgs[i].messageSender;
-        partnerNickname = 'User with ID:' + props.msgs[i].messageSender;
+        partnerNickname = props.msgs[i].senderNickname;
         break;
       }
     }

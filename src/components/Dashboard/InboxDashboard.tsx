@@ -102,7 +102,7 @@ export const InboxDashboard: FC = () => {
                         for (var i in item) {
                           if (item[i].messageReceiver != currentUser.id) {
                             partnerId = item[i].messageReceiver;
-                            partnerNickname = item[i].nickname;
+                            partnerNickname = item[i].receiverNickname;
                             break;
                           }
                         }
@@ -111,8 +111,7 @@ export const InboxDashboard: FC = () => {
                           for (var i in item) {
                             if (item[i].messageSender != currentUser.id) {
                               partnerId = item[i].messageSender;
-                              partnerNickname =
-                                'User with ID:' + item[i].messageSender;
+                              partnerNickname = item[i].senderNickname;
                               break;
                             }
                           }

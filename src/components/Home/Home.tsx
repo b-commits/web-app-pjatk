@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { AuthContext } from '../../context/AuthContext';
 import { NavLink } from 'react-router-dom';
 import { HOMEPAGE_VIEW, Listing as ListingItem } from '../Misc/Listing';
 import { Pagination } from '@material-ui/lab';
@@ -19,6 +20,7 @@ import {
   muiSearchBarWrapper,
 } from './Home.style';
 import { listingListStyle } from '../Misc/css/ListingList.style';
+import { getCurrentUser } from '../Login/ApiCalls';
 
 const LISTINGS_PER_PAGE: number = 12;
 const DEFAULT_CURRENT_PAGE: number = 1;
@@ -30,6 +32,7 @@ export const Home: React.FC = () => {
     useState<Array<any>>(listings);
   const [listingsPerPage] = useState<number>(LISTINGS_PER_PAGE);
   const [currentPage, setCurrentPage] = useState<number>(DEFAULT_CURRENT_PAGE);
+  const { currentUser } = useContext(AuthContext);
   const lastListingIdx: number = currentPage * listingsPerPage;
   const firstListingIdx: number = lastListingIdx - listingsPerPage;
   const currentListings = filteredListings.slice(
@@ -59,42 +62,66 @@ export const Home: React.FC = () => {
 
   return (
     <>
-      <div css={homeBanner}>
-        <div css={homeBannerContent}>
-          <div css={bannerConentHeader}>
-            <span css={blueText}>find a group</span>
-            <h1>
-              and spend <span css={blueText}>less time in queue</span>.
-            </h1>
-          </div>
-          <div css={bannerConentDesc}>
-            <div>
-              <NavLink
-                className='navLink'
-                activeClassName='activeNavLink'
-                exact
-                to='/register'
-              >
-                <button>SIGN UP NOW</button>
-              </NavLink>
+      {!currentUser ? (
+        <div css={homeBanner}>
+          <div css={homeBannerContent}>
+            <div css={bannerConentHeader}>
+              <span css={blueText}>find a group</span>
+              <h1>
+                and spend <span css={blueText}>less time in queue</span>.
+              </h1>
             </div>
-            <div>
-              <p>
-                <span css={blueText}>lfg-app</span> allows you to find teammates
-                for <span css={blueText}>any</span> online game out there. Sign
-                up now to browse through
-                <span css={blueText}> multiple listings</span> and connect with{' '}
-                <span css={blueText}>other people</span>.
-              </p>
-              <p>
-                <span css={blueText}>lfg-app</span> is very simple to use, so we
-                are hoping you can spend some quality time playing with your new
-                buddies.
-              </p>
+            <div css={bannerConentDesc}>
+              <div>
+                <NavLink
+                  className='navLink'
+                  activeClassName='activeNavLink'
+                  exact
+                  to='/register'
+                >
+                  <button>SIGN UP NOW</button>
+                </NavLink>
+              </div>
+              <div>
+                <p>
+                  <span css={blueText}>lfg-app</span> allows you to find
+                  teammates for <span css={blueText}>any</span> online game out
+                  there. Sign up now to browse through
+                  <span css={blueText}> multiple listings</span> and connect
+                  with <span css={blueText}>other people</span>.
+                </p>
+                <p>
+                  <span css={blueText}>lfg-app</span> is very simple to use, so
+                  we are hoping you can spend some quality time playing with
+                  your new buddies.
+                </p>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      ) : (
+        <div css={homeBanner}>
+          <div css={homeBannerContent}>
+            <div css={bannerConentDesc}>
+              <div css={{ textAlign: 'center' }}>
+                <p>
+                  <span css={blueText}>lfg-app</span> allows you to find
+                  teammates for <span css={blueText}>any</span> online game out
+                  there. Browse through
+                  <span css={blueText}> multiple listings</span> and connect
+                  with <span css={blueText}>other people</span>.
+                </p>
+                <p>
+                  It's very simple to use, just{' '}
+                  <span css={blueText}>type </span>
+                  by listing
+                  <span css={blueText}> message</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       <div css={muiSearchBarWrapper}>
         <TextField

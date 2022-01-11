@@ -46,7 +46,7 @@ export const listingItemWrap = css({
   flexDirection: 'column',
   justifyContent: 'center',
   marginTop: '30px',
-  width: '30%',
+  width: '100%',
   boxSizing: 'border-box',
   boxShadow: '0px 4px 14px -4px rgba(55, 58, 54, 1)',
   WebkitBoxShadow: '0px 4x 14px -4px rgba(55, 58, 54, 1)',
@@ -75,27 +75,11 @@ export const listingItemWrapHomePage = css({
   flexDirection: 'column',
   justifyContent: 'center',
   marginTop: '30px',
-  width: '30%',
+  width: '100%',
   boxSizing: 'border-box',
   boxShadow: '0px 4px 14px -4px rgba(55, 58, 54, 1)',
   WebkitBoxShadow: '0px 4x 14px -4px rgba(55, 58, 54, 1)',
   MozBoxShadow: '0px 4px 14px -4px rgba(55, 58, 54, 1)',
-
-  [mq[0]]: {
-    width: '100%',
-  },
-  [mq[1]]: {
-    width: '100%',
-  },
-  [mq[2]]: {
-    width: '100%',
-  },
-  [mq[3]]: {
-    width: '30%',
-  },
-  [mq[4]]: {
-    width: '30%',
-  },
 });
 
 export const listingHeader = css({

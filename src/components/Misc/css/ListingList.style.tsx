@@ -38,10 +38,23 @@ for copy paste
 */
 
 export const listingListStyle = css({
-  display: 'flex',
-  flexDirection: 'row',
-  flexWrap: 'wrap',
+  display: 'grid',
+  gridTemplateColumns: 'repeat(auto-fill, 32%);',
+  gridGap: '1px',
   justifyContent: 'space-between',
   padding: '8px',
   boxSizing: 'border-box',
+  width: '100%',
+  [mq[0]]: {
+    gridTemplateColumns: 'repeat(auto-fill, 99%);',
+  },
+  [mq[1]]: {
+    gridTemplateColumns: 'repeat(auto-fill, 32%);',
+  },
+  [mq[2]]: {
+    gridTemplateColumns: 'repeat(auto-fill, 32%);',
+  },
+  [mq[3]]: {
+    gridTemplateColumns: 'repeat(auto-fill, 32%);',
+  },
 });

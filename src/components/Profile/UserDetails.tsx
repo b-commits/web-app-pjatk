@@ -111,6 +111,7 @@ const UserInfo: React.FC = () => {
     getUserDetails(id).then((res: any) => {
       setUserDetails(res.data);
       setLoading(false);
+      console.log(res.data);
     });
   }, [id]);
 
@@ -125,7 +126,10 @@ const UserInfo: React.FC = () => {
             number={userDetails.numAchivements}
             value={'Achievements'}
           />
-          <UserInfoWrapItem number={0} value={'Listings created'} />
+          <UserInfoWrapItem
+            number={userDetails.numListingsCreated}
+            value={'Listings created'}
+          />
           <UserInfoWrapItem number={userDetails.numFriends} value={'Friends'} />
         </div>
         <UserActions />

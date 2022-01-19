@@ -86,6 +86,9 @@ router.get('/details/:id', async (req, res, next) => {
   try {
     const { id } = req.params;
     const numExp = await User.query().findById(id).select('experience');
+    const numListingsCreated = await User.query()
+      .findById(id)
+      .select('numListingsCreated');
     const numFavGames = await LikeGame.query().where({ likedBy: id });
     const numFriends = await Following.query().where({ followingUser: id });
     const numAchivements = await UserAchievement.query().where({
@@ -96,6 +99,7 @@ router.get('/details/:id', async (req, res, next) => {
       numFavGames: numFavGames.length,
       numFriends: numFriends.length,
       numAchivements: numAchivements.length,
+      numListingsCreated: numListingsCreated.numListingsCreated,
     });
   } catch (err) {
     res.status(400).json({ msg: err.message });

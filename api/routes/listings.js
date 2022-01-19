@@ -111,6 +111,9 @@ router.post('/comments', async (req, res) => {
  */
 router.post('/', async (req, res) => {
   try {
+    await User.query()
+      .findById(req.body.creator)
+      .increment('numListingsCreated', 1);
     await Listing.query().insert({
       message: req.body.message,
       maxNumberOfPlayers: req.body.maxNumOfPlayers,

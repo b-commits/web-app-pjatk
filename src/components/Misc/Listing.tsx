@@ -77,6 +77,7 @@ export const Listing: FC<ListingProps> = ({
   const [open, setOpen] = useState<boolean>(false);
   const handleModalOpen = () => setOpen(true);
   const handleModalClose = () => setOpen(false);
+  const [hasJoined, setHasJoined] = useState<boolean>(false);
   const [listingComments, setListingComments] = useState<any>([]);
   const [participators, setParticipators] = useState<any>([]);
   const { authenticated } = useContext(AuthContext);
@@ -132,6 +133,7 @@ export const Listing: FC<ListingProps> = ({
     joinListing(currentUser.id, id)
       .then(() => {
         setParticipators([...participators, currentUser]);
+        setHasJoined(true);
       })
       .catch((err) => console.log(err));
   };
@@ -139,10 +141,13 @@ export const Listing: FC<ListingProps> = ({
   const handleLeave = () => {
     leaveListing(currentUser.id, id)
       .then(() => {
+        console.log(participators);
         const removed = participators.filter(
-          (participator: any) => participator != currentUser
+          (participator: any) => participator.nickname != currentUser.nickname
         );
+        setHasJoined(false);
         setParticipators(removed);
+        console.log(participators);
       })
       .catch((err) => console.log(err));
   };
@@ -176,6 +181,14 @@ export const Listing: FC<ListingProps> = ({
   useEffect(() => {
     getAllParticipators(id).then((res: any) => {
       setParticipators(res.data);
+
+      // console.warn(res.data);
+
+      res.data.forEach((user: any) => {
+        if (user.nickname == currentUser.nickname) {
+          setHasJoined(true);
+        }
+      });
     });
   }, [id]);
 
@@ -280,7 +293,7 @@ export const Listing: FC<ListingProps> = ({
                 </div>
               ) : (
                 [
-                  participators.includes(currentUser) ? (
+                  hasJoined ? (
                     <Button
                       onCLick={() => handleLeave()}
                       title="Leave"

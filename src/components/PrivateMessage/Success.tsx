@@ -13,7 +13,7 @@ export const Success: React.FC = () => {
         <a
           css={goBack}
           onClick={() => {
-            history.push('/dashboard');
+            history.push('/dashboard/inbox');
           }}
         >
           Back to dashboard.

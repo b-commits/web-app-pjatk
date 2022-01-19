@@ -78,7 +78,7 @@ export const SendForm: React.FC = () => {
   return (
     <div css={messageWrapper}>
       <div css={formWrap}>
-        <a css={backToDashboard} href="/dashboard">
+        <a css={backToDashboard} href='/dashboard/inbox'>
           Back to dashboard
         </a>
         <div>
@@ -94,9 +94,9 @@ export const SendForm: React.FC = () => {
                 {authenticated ? (
                   <>
                     <Field
-                      placeholder="Enter your message here..."
+                      placeholder='Enter your message here...'
                       as={TextField}
-                      name="content"
+                      name='content'
                       css={muiCommentArea}
                       multiline
                       minRows={2}
@@ -106,9 +106,9 @@ export const SendForm: React.FC = () => {
                     <br />
                     <Button
                       css={sendButton}
-                      type="submit"
-                      color="secondary"
-                      variant="contained"
+                      type='submit'
+                      color='secondary'
+                      variant='contained'
                     >
                       Send private message
                     </Button>

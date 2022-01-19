@@ -1,7 +1,10 @@
 const Participation = require('../models/Participation');
 const Rating = require('../models/Rating');
+const User = require('../models/User');
+const UserAchievement = require('../models/UserAchievement');
 const express = require('express');
 const { OK } = require('./errorConsts');
+const { ENLISTED } = require('./utils/achievementCodes');
 const router = express.Router();
 
 /** 
@@ -63,6 +66,21 @@ router.post('/', async (req, res, next) => {
       userid: req.body.userId,
       listingId: req.body.listingId,
     });
+    await User.query().findById(req.body.userId).increment('experience', 1);
+    await User.query()
+      .findById(req.body.userId)
+      .increment('totalListingsJoined', 1);
+    const totalListingsJoined = await User.query()
+      .findById(req.body.userId)
+      .select('totalListingsJoined');
+    console.log(totalListingsJoined);
+    if (totalListingsJoined.totalListingsJoined == 9) {
+      console.log('unlocking...');
+      await UserAchievement.query().insert({
+        unlockedBy: req.body.userId,
+        achievement: ENLISTED,
+      });
+    }
     if (alreadyExists.length <= 0) {
       await Participation.query().insert({
         userId: req.body.userId,

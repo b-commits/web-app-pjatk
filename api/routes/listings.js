@@ -1,5 +1,6 @@
 const Listing = require('../models/Listing');
 const User = require('../models/User');
+const Participation = require('../models/Participation');
 const UserAchievement = require('../models/UserAchievement');
 const ListingComment = require('../models/ListingComment');
 const express = require('express');
@@ -119,6 +120,19 @@ router.post('/', async (req, res) => {
       maxNumberOfPlayers: req.body.maxNumOfPlayers,
       listingGame: req.body.listingGame,
       creator: req.body.creator,
+    });
+    const listingId = await Listing.query()
+      .findOne({
+        message: req.body.message,
+        maxNumberOfPlayers: req.body.maxNumOfPlayers,
+        listingGame: req.body.listingGame,
+        creator: req.body.creator,
+      })
+      .select('id');
+    console.log(listingId);
+    await Participation.query().insert({
+      userId: req.body.creator,
+      listingId: listingId.id,
     });
     res.status(200).json({ msg: ADDED });
   } catch (error) {

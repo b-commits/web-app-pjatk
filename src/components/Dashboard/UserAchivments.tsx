@@ -25,7 +25,8 @@ export const UserAchivmentsDashboard: FC = () => {
     if (!currentUser) return;
     getUserAchievments(parseInt(currentUser.id)).then((res: any) => {
       setUserAchievements(res.data);
-      console.log(userAchivements);
+      console.log('User achievements');
+      console.log(res.data);
     });
   }, []);
 

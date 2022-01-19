@@ -43,13 +43,13 @@ app.use(
 );
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(fileUpload({ debug: true }));
-app.use((req, res, next) => {
-  console.log(req.session);
-  console.log(req.body);
-  console.log(`SESSID: ${req.sessionID}`);
-  next();
-});
+// app.use(fileUpload({ debug: true }));
+// app.use((req, res, next) => {
+//   console.log(req.session);
+//   console.log(req.body);
+//   console.log(`SESSID: ${req.sessionID}`);
+//   next();
+// });
 
 app.use('/api/users', users);
 app.use('/api/listings', listings);

@@ -47,7 +47,6 @@ router.post('/', async (req, res, next) => {
       .findById(req.body.followingUser)
       .select('numFollowing');
     if (numFollowing.numFollowing == 5) {
-      console.log('IN IF');
       await UserAchievement.query().insert({
         unlockedBy: req.body.followingUser,
         achievement: STALKER,

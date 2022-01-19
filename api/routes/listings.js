@@ -1,7 +1,10 @@
 const Listing = require('../models/Listing');
+const User = require('../models/User');
+const UserAchievement = require('../models/UserAchievement');
 const ListingComment = require('../models/ListingComment');
 const express = require('express');
 const { BAD_REQUEST, SERVER_ERROR, ADDED } = require('./errorConsts');
+const { INITIATION } = require('./utils/achievementCodes');
 const router = express.Router();
 
 /** 
@@ -10,7 +13,6 @@ const router = express.Router();
     @access   Public.
 */
 router.get('/:userId', async (req, res, next) => {
-  console.log('route hit');
   try {
     const { userId } = req.params;
     const listing = await Listing.query().where({ creator: userId });
@@ -78,6 +80,23 @@ router.post('/comments', async (req, res) => {
       commentListing: req.body.commentListing,
       commentSender: req.body.commentSender,
     });
+    await User.query()
+      .findById(req.body.commentSender)
+      .increment('experience', 1);
+    await User.query()
+      .findById(req.body.commentSender)
+      .increment('numListingComment', 1);
+    const numListingComments = await User.query()
+      .findById(req.body.commentSender)
+      .select('numListingComment');
+
+    console.log(numListingComments);
+    if (numListingComments.numListingComment == 1) {
+      await UserAchievement.query().insert({
+        unlockedBy: req.body.commentSender,
+        achievement: INITIATION,
+      });
+    }
     res.status(200).json({ msg: ADDED });
   } catch (error) {
     console.log(error.message);

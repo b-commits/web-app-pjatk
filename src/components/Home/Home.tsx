@@ -75,10 +75,10 @@ export const Home: React.FC = () => {
             <div css={bannerConentDesc}>
               <div>
                 <NavLink
-                  className='navLink'
-                  activeClassName='activeNavLink'
+                  className="navLink"
+                  activeClassName="activeNavLink"
                   exact
-                  to='/register'
+                  to="/register"
                 >
                   <button>SIGN UP NOW</button>
                 </NavLink>
@@ -104,9 +104,8 @@ export const Home: React.FC = () => {
         <div css={homeBanner2}>
           <h2 css={{ textAlign: 'center', width: '100%' }}>
             <span css={blueText}>lfg-app</span> is very simple to use, just{' '}
-            <span css={blueText}>type </span>
-            what
-            <span css={blueText}> you are looking for </span> and let magic
+            <span css={blueText}>type in what </span>
+            <span css={blueText}> you are looking for </span> and let the magic
             happen
           </h2>
         </div>
@@ -114,24 +113,24 @@ export const Home: React.FC = () => {
 
       <div css={muiSearchBarWrapper}>
         <TextField
-          placeholder='Search listings...'
+          placeholder="Search listings..."
           onChange={handleSearch}
-          type='search'
+          type="search"
           css={muiSearchBar}
         />
       </div>
       <Pagination
-        size='large'
+        size="large"
         onChange={handlePageChange}
         count={Math.round(filteredListings.length / LISTINGS_PER_PAGE)}
         css={muiPagination}
-        color='primary'
+        color="primary"
       />
       <main css={homeMain}>
         <div css={listingListStyle}>
           {loading ? (
             <div css={skeletonWrapper}>
-              <Skeleton width='76.5vw' height='450px' />
+              <Skeleton width="76.5vw" height="450px" />
             </div>
           ) : (
             currentListings.map((listing, index) => {

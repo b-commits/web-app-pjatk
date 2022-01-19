@@ -38,6 +38,7 @@ for copy paste
 */
 
 export const appStyle = css({
+  minHeight: '100vh',
   fontFamily: 'Roboto',
   [mq[0]]: {
     marginTop: '10px',

@@ -48,7 +48,7 @@ for copy paste
 export const registerWrap = css({
   width: '30%',
   margin: '0 auto',
-  marginTop: '50px',
+  marginTop: '150px',
   padding: '0px',
   boxSizing: 'inherit',
 

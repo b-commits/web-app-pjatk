@@ -46,7 +46,15 @@ export const homeBanner = css({
   minHeight: '300px',
   backgroundColor: 'rgba(255, 255, 255, 1)',
 });
-
+export const homeBanner2 = css({
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
+  alignItems: 'center',
+  width: '100%',
+  minHeight: '150px',
+  backgroundColor: 'rgba(255, 255, 255, 1)',
+});
 export const homeBannerContent = css({
   display: 'flex',
   justifyContent: 'center',

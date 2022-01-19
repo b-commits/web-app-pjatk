@@ -9,6 +9,7 @@ import { getAllListings } from './ApiCalls';
 import { Skeleton } from '@material-ui/lab';
 import {
   homeBanner,
+  homeBanner2,
   homeBannerContent,
   bannerConentHeader,
   bannerConentDesc,
@@ -100,26 +101,14 @@ export const Home: React.FC = () => {
           </div>
         </div>
       ) : (
-        <div css={homeBanner}>
-          <div css={homeBannerContent}>
-            <div css={bannerConentDesc}>
-              <div css={{ textAlign: 'center' }}>
-                <p>
-                  <span css={blueText}>lfg-app</span> allows you to find
-                  teammates for <span css={blueText}>any</span> online game out
-                  there. Browse through
-                  <span css={blueText}> multiple listings</span> and connect
-                  with <span css={blueText}>other people</span>.
-                </p>
-                <p>
-                  It's very simple to use, just{' '}
-                  <span css={blueText}>type </span>
-                  by listing
-                  <span css={blueText}> message</span>
-                </p>
-              </div>
-            </div>
-          </div>
+        <div css={homeBanner2}>
+          <h2 css={{ textAlign: 'center', width: '100%' }}>
+            <span css={blueText}>lfg-app</span> is very simple to use, just{' '}
+            <span css={blueText}>type </span>
+            what
+            <span css={blueText}> you are looking for </span> and let magic
+            happen
+          </h2>
         </div>
       )}
 

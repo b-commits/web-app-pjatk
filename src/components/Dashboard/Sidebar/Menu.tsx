@@ -16,6 +16,11 @@ export const Menu: FC = () => {
 
         <MenuItem title={'Profile'} href={`/profile/${currentUser.id}`} />
 
+        <MenuItem
+          title={'My participations'}
+          href={'/dashboard/participations'}
+        />
+
         <MenuItem title={'Inbox'} href={'/dashboard/inbox'} />
 
         <MenuItem title={'User Settings'} href={'/dashboard/settings'} />

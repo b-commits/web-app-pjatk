@@ -150,3 +150,17 @@ export const getUserAchievments = (userId: number): any => {
     withCredentials: true,
   });
 };
+
+export const getListingsUserJoined = (userId: number): any => {
+  console.warn(userId);
+  return axios({
+    method: 'POST',
+    withCredentials: true,
+    url: 'http://localhost:5000/api/participations/perUser/get',
+    data: {
+      userId: userId,
+    },
+  })
+    .then((res) => res)
+    .catch((err) => console.log(err));
+};

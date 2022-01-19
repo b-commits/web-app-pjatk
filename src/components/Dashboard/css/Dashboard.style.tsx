@@ -53,7 +53,11 @@ export const listing = css({
 });
 
 export const uploadLabelWrap = css({
-    display: 'inline-block',
-    padding: '6px 12px',
-    cursor: 'pointer'
-})
+  display: 'inline-block',
+  padding: '6px 12px',
+  cursor: 'pointer',
+});
+
+export const gridWrapper = css({
+  display: 'grid',
+});

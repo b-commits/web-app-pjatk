@@ -30,25 +30,22 @@ router.get('/:id', async (req, res, next) => {
 });
 
 /** 
-    @route    GET /api/participations/perUser
+    @route    POST /api/participations/perUser/get
     @desc     Get listings a given user is participating in.
     @access   Public.
     @param    userId - the id of a user for which to get all listings
               he is currently participating in 
 */
-router.get('/perUser', async (req, res, next) => {
+router.post('/perUser/get', async (req, res, next) => {
   try {
     const participations = await Participation.query()
-      .join('user', {
-        'user.id': 'userId',
-      })
       .join('listing', {
         'listing.id': 'listingId',
       })
       .where({
         userId: req.body.userId,
       })
-      .select('listingId', 'message', 'listingGame');
+      .select('*');
     res.status(200).json(participations);
   } catch (err) {
     res.status(400).json({ msg: err.message });

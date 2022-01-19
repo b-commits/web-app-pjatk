@@ -32,7 +32,7 @@ export const ParticipationsDashboard: FC = () => {
 
   return (
     <div css={gridWrapper}>
-      <h1>Your participations:</h1>
+      <h1>Your listings:</h1>
       {friends.length == 0 ? (
         <div>You haven't joined any listings just yet.</div>
       ) : null}

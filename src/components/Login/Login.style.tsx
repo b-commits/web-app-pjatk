@@ -48,6 +48,7 @@ export const loginWrap = css({
   width: '30%',
   margin: '0 auto',
   marginTop: '50px',
+  minHeight: 'calc(100vh - 500px)',
   padding: '0px',
   boxSizing: 'inherit',
 

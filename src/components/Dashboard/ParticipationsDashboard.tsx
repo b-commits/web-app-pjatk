@@ -1,10 +1,13 @@
 /** @jsxImportSource @emotion/react */
 import { FC, useEffect, useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Listing, HOMEPAGE_VIEW } from '../Misc/Listing';
+import { Listing, MY_PARTICIPATION_VIEW } from '../Misc/Listing';
 import { AuthContext } from '../../context/AuthContext';
 import { getFriends, getListingsUserJoined } from './ApiCalls';
-import { gridWrapper } from './css/Dashboard.style';
+import {
+  gridWrapper,
+  participationListingListStyle,
+} from './css/Dashboard.style';
 
 export const ParticipationsDashboard: FC = () => {
   const { currentUser } = useContext(AuthContext);
@@ -33,7 +36,7 @@ export const ParticipationsDashboard: FC = () => {
       {friends.length == 0 ? (
         <div>You haven't joined any listings just yet.</div>
       ) : null}
-      <div>
+      <div css={participationListingListStyle}>
         {userListings.map((listing: any, index: any) => {
           return (
             <Listing
@@ -47,7 +50,7 @@ export const ParticipationsDashboard: FC = () => {
               gameImgUrl={`/gamePics/${listing.listingGame}.jpeg`}
               createdAt={listing.created_at}
               status={listing.status}
-              activeView={HOMEPAGE_VIEW}
+              activeView={MY_PARTICIPATION_VIEW}
             />
           );
         })}

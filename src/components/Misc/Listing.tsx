@@ -19,6 +19,7 @@ import { Button, DANGER, INFO, SUCCES } from './Button';
 import {
   listingItemWrap,
   listingItemWrapHomePage,
+  listingItemWrapMyParticipation,
   listingHeader,
   listingTitle,
   gameBox,
@@ -35,6 +36,7 @@ import { modalStyle, muiField, imgStyle } from '../Home/Home.style';
 export const PROFILE_VIEW = 'PROFILEVIEW';
 export const DASHBOARD_VIEW = 'DASHBOARD';
 export const HOMEPAGE_VIEW = 'HOMPAGE';
+export const MY_PARTICIPATION_VIEW = 'PARTICIPATION';
 
 interface ListingProps {
   id: number;
@@ -97,6 +99,10 @@ export const Listing: FC<ListingProps> = ({
     }
     case PROFILE_VIEW: {
       listingItemWrapCSS = listingItemWrap;
+      break;
+    }
+    case MY_PARTICIPATION_VIEW: {
+      listingItemWrapCSS = listingItemWrapMyParticipation;
       break;
     }
     default: {
@@ -197,16 +203,16 @@ export const Listing: FC<ListingProps> = ({
   return (
     <div css={listingItemWrapCSS}>
       <div css={listingHeader}>
-        <i className="fas fa-users">
+        <i className='fas fa-users'>
           {participators.length}/{maxNumberOfPlayers}
         </i>
         <h1 title={title} css={listingTitle}>
           {getGameName(parseInt(gameName))}
         </h1>
         {participators.includes(currentUser) ? (
-          <i onClick={handleLeave} className="fas fa-user-minus"></i>
+          <i onClick={handleLeave} className='fas fa-user-minus'></i>
         ) : (
-          <i onClick={handleJoin} className="fas fa-user-plus"></i>
+          <i onClick={handleJoin} className='fas fa-user-plus'></i>
         )}
       </div>
       <div css={gameBox}>
@@ -218,7 +224,7 @@ export const Listing: FC<ListingProps> = ({
       </div>
       {currentUser ? (
         <div css={listingFooter}>
-          <Button title="Details" type={SUCCES} onCLick={handleModalOpen} />
+          <Button title='Details' type={SUCCES} onCLick={handleModalOpen} />
 
           {/* <Button
             title='Manage'
@@ -231,7 +237,7 @@ export const Listing: FC<ListingProps> = ({
       ) : (
         <div css={listingFooter}>
           <Button
-            title="Details"
+            title='Details'
             type={INFO}
             onCLick={() => {
               history.push('/login');
@@ -243,14 +249,14 @@ export const Listing: FC<ListingProps> = ({
       )}
 
       <Modal
-        aria-labelledby="transition-modal-title"
-        aria-describedby="transition-modal-description"
+        aria-labelledby='transition-modal-title'
+        aria-describedby='transition-modal-description'
         open={open}
         onClose={handleModalClose}
         closeAfterTransition
       >
         <Box sx={modalStyle}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
+          <Typography id='modal-modal-title' variant='h6' component='h2'>
             Listing #{id}
           </Typography>
           <UserFavGamesItem
@@ -260,7 +266,7 @@ export const Listing: FC<ListingProps> = ({
           />
 
           {title}
-          <Typography id="modal-modal-title" variant="h6" component="h2">
+          <Typography id='modal-modal-title' variant='h6' component='h2'>
             List of players:
             {participators.map((participator: any, index: number) => {
               return (
@@ -275,7 +281,7 @@ export const Listing: FC<ListingProps> = ({
               );
             })}
           </Typography>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
+          <Typography id='modal-modal-title' variant='h6' component='h2'>
             Number of players: {participators.length}/{maxNumberOfPlayers}
           </Typography>
           {!currentUser ? (
@@ -284,11 +290,11 @@ export const Listing: FC<ListingProps> = ({
             [
               participators.length >= maxNumberOfPlayers ? (
                 <div>
-                  <Alert severity="info">This listing is already full.</Alert>
+                  <Alert severity='info'>This listing is already full.</Alert>
                   {participators.includes(currentUser) ? (
                     <Button
                       onCLick={() => handleLeave()}
-                      title="Leave"
+                      title='Leave'
                       type={DANGER}
                     />
                   ) : null}
@@ -298,12 +304,12 @@ export const Listing: FC<ListingProps> = ({
                   hasJoined ? (
                     <Button
                       onCLick={() => handleLeave()}
-                      title="Leave"
+                      title='Leave'
                       type={DANGER}
                     />
                   ) : (
                     <Button
-                      title="Join In"
+                      title='Join In'
                       type={SUCCES}
                       onCLick={() => handleJoin()}
                     />
@@ -312,7 +318,7 @@ export const Listing: FC<ListingProps> = ({
               ),
             ]
           )}
-          <Typography id="modal-modal-title" variant="h6" component="h2">
+          <Typography id='modal-modal-title' variant='h6' component='h2'>
             Comments:
           </Typography>
 
@@ -325,10 +331,10 @@ export const Listing: FC<ListingProps> = ({
                 return (
                   <Form>
                     <Field
-                      placeholder="Leave a comment..."
+                      placeholder='Leave a comment...'
                       css={muiField}
                       as={TextField}
-                      name="content"
+                      name='content'
                       multiline
                       minRows={2}
                       maxRows={4}
@@ -336,7 +342,7 @@ export const Listing: FC<ListingProps> = ({
                     <br />
                     <br />
                     <Button
-                      title="Add Comment"
+                      title='Add Comment'
                       type={INFO}
                       isSubmit={true}
                       onCLick={() => {

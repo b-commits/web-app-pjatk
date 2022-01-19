@@ -184,11 +184,13 @@ export const Listing: FC<ListingProps> = ({
 
       // console.warn(res.data);
 
-      res.data.forEach((user: any) => {
-        if (user.nickname == currentUser.nickname) {
-          setHasJoined(true);
-        }
-      });
+      if (currentUser) {
+        res.data.forEach((user: any) => {
+          if (user.nickname == currentUser.nickname) {
+            setHasJoined(true);
+          }
+        });
+      }
     });
   }, [id]);
 

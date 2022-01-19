@@ -182,16 +182,16 @@ export const Listing: FC<ListingProps> = ({
   return (
     <div css={listingItemWrapCSS}>
       <div css={listingHeader}>
-        <i className='fas fa-users'>
+        <i className="fas fa-users">
           {participators.length}/{maxNumberOfPlayers}
         </i>
         <h1 title={title} css={listingTitle}>
           {getGameName(parseInt(gameName))}
         </h1>
         {participators.includes(currentUser) ? (
-          <i onClick={handleLeave} className='fas fa-user-minus'></i>
+          <i onClick={handleLeave} className="fas fa-user-minus"></i>
         ) : (
-          <i onClick={handleJoin} className='fas fa-user-plus'></i>
+          <i onClick={handleJoin} className="fas fa-user-plus"></i>
         )}
       </div>
       <div css={gameBox}>
@@ -203,20 +203,20 @@ export const Listing: FC<ListingProps> = ({
       </div>
       {currentUser ? (
         <div css={listingFooter}>
-          <Button title='Details' type={SUCCES} onCLick={handleModalOpen} />
+          <Button title="Details" type={SUCCES} onCLick={handleModalOpen} />
 
-          <Button
+          {/* <Button
             title='Manage'
             type={INFO}
             onCLick={() => {
               console.log('Manage Listing Button');
             }}
-          />
+          /> */}
         </div>
       ) : (
         <div css={listingFooter}>
           <Button
-            title='Details'
+            title="Details"
             type={INFO}
             onCLick={() => {
               history.push('/login');
@@ -228,14 +228,14 @@ export const Listing: FC<ListingProps> = ({
       )}
 
       <Modal
-        aria-labelledby='transition-modal-title'
-        aria-describedby='transition-modal-description'
+        aria-labelledby="transition-modal-title"
+        aria-describedby="transition-modal-description"
         open={open}
         onClose={handleModalClose}
         closeAfterTransition
       >
         <Box sx={modalStyle}>
-          <Typography id='modal-modal-title' variant='h6' component='h2'>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
             Listing #{id}
           </Typography>
           <UserFavGamesItem
@@ -245,7 +245,7 @@ export const Listing: FC<ListingProps> = ({
           />
 
           {title}
-          <Typography id='modal-modal-title' variant='h6' component='h2'>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
             List of players:
             {participators.map((participator: any, index: number) => {
               return (
@@ -260,7 +260,7 @@ export const Listing: FC<ListingProps> = ({
               );
             })}
           </Typography>
-          <Typography id='modal-modal-title' variant='h6' component='h2'>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
             Number of players: {participators.length}/{maxNumberOfPlayers}
           </Typography>
           {!currentUser ? (
@@ -269,11 +269,11 @@ export const Listing: FC<ListingProps> = ({
             [
               participators.length >= maxNumberOfPlayers ? (
                 <div>
-                  <Alert severity='info'>This listing is already full.</Alert>
+                  <Alert severity="info">This listing is already full.</Alert>
                   {participators.includes(currentUser) ? (
                     <Button
                       onCLick={() => handleLeave()}
-                      title='Leave'
+                      title="Leave"
                       type={DANGER}
                     />
                   ) : null}
@@ -283,12 +283,12 @@ export const Listing: FC<ListingProps> = ({
                   participators.includes(currentUser) ? (
                     <Button
                       onCLick={() => handleLeave()}
-                      title='Leave'
+                      title="Leave"
                       type={DANGER}
                     />
                   ) : (
                     <Button
-                      title='Join In'
+                      title="Join In"
                       type={SUCCES}
                       onCLick={() => handleJoin()}
                     />
@@ -297,7 +297,7 @@ export const Listing: FC<ListingProps> = ({
               ),
             ]
           )}
-          <Typography id='modal-modal-title' variant='h6' component='h2'>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
             Comments:
           </Typography>
 
@@ -310,10 +310,10 @@ export const Listing: FC<ListingProps> = ({
                 return (
                   <Form>
                     <Field
-                      placeholder='Leave a comment...'
+                      placeholder="Leave a comment..."
                       css={muiField}
                       as={TextField}
-                      name='content'
+                      name="content"
                       multiline
                       minRows={2}
                       maxRows={4}
@@ -321,7 +321,7 @@ export const Listing: FC<ListingProps> = ({
                     <br />
                     <br />
                     <Button
-                      title='Add Comment'
+                      title="Add Comment"
                       type={INFO}
                       isSubmit={true}
                       onCLick={() => {

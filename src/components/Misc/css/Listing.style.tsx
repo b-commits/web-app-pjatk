@@ -82,6 +82,19 @@ export const listingItemWrapHomePage = css({
   MozBoxShadow: '0px 4px 14px -4px rgba(55, 58, 54, 1)',
 });
 
+export const listingItemWrapOwner = css({
+  display: 'flex',
+  backgroundColor: '#FFFFFF',
+  flexDirection: 'column',
+  justifyContent: 'center',
+  marginTop: '30px',
+  width: '100%',
+  boxSizing: 'border-box',
+  boxShadow: '0px 4px 14px -4px rgba(55, 58, 54, 1)',
+  WebkitBoxShadow: '0px 4x 14px -4px rgba(55, 58, 54, 1)',
+  MozBoxShadow: '0px 4px 14px -4px rgba(55, 58, 54, 1)',
+});
+
 export const listingItemWrapMyParticipation = css({
   display: 'flex',
   backgroundColor: '#FFFFFF',

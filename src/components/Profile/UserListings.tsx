@@ -8,7 +8,13 @@ import {
   listingButton,
 } from './Profile.style';
 import { useParams } from 'react-router-dom';
+import {
+  HOMEPAGE_VIEW,
+  Listing as ListingItem,
+  OWNER_VIEW,
+} from '../Misc/Listing';
 import { getUserListings } from './ApiCalls';
+import { green } from '@material-ui/core/colors';
 
 interface RouteParams {
   id: string;
@@ -55,13 +61,18 @@ export const UserListings: React.FC = () => {
       {userListings.length == 0 && <p>You haven't created any listings yet.</p>}
       {userListings.map((listing: any, index: any) => {
         return (
-          <Listing
+          <ListingItem
             key={index}
-            listingName={getGameName(listing.listingGame)}
-            listingUrl={''}
-            listingDesc={listing.message}
-            gameName={listing.game}
+            maxNumberOfPlayers={listing.maxNumberOfPlayers}
+            id={listing.id}
+            title={listing.message}
+            url={''}
+            desc={listing.message}
+            gameName={listing.listingGame}
             gameImgUrl={`/gamePics/${listing.listingGame}.jpeg`}
+            createdAt={listing.created_at}
+            status={listing.status}
+            activeView={OWNER_VIEW}
           />
         );
       })}
@@ -69,13 +80,51 @@ export const UserListings: React.FC = () => {
   );
 };
 
-const Listing: React.FC<{
+export const Listing: React.FC<{
   listingName?: string;
-  listingUrl: string;
-  listingDesc: string;
-  gameName: string;
-  gameImgUrl: string;
-}> = ({ listingName, listingUrl, listingDesc, gameName, gameImgUrl }) => {
+  listingUrl?: string;
+  listingDesc?: string;
+  gameName?: string;
+  gameImgUrl?: string;
+  hasJoin?: boolean;
+  onClick?: any;
+}> = ({
+  listingName,
+  listingUrl,
+  listingDesc,
+  gameName,
+  gameImgUrl,
+  hasJoin,
+  onClick,
+}) => {
+  if (!hasJoin) {
+    return (
+      <>
+        <div css={listing}>
+          <img alt="gameImage" src={gameImgUrl} />
+          <div css={listingInfo}>
+            <h3>{listingName}</h3>
+            {listingDesc}
+            <br />
+          </div>
+          <div css={listingButtonsWrap}>
+            <UserListingsButton
+              listingUrl={'/'}
+              color={'#32CD32'}
+              value={'Open'}
+              fn={onClick}
+            />
+            <UserListingsButton
+              listingUrl={'/dashboard/settings'}
+              color={'#f24437'}
+              value={'Report'}
+            />
+          </div>
+        </div>
+      </>
+    );
+  }
+
   return (
     <>
       <div css={listing}>
@@ -107,16 +156,15 @@ const Listing: React.FC<{
   );
 };
 
-const UserListingsButton: React.FC<{
-  listingUrl: string;
-  color: string;
-  value: string;
-}> = ({ listingUrl, color, value }) => {
+export const UserListingsButton: React.FC<{
+  listingUrl?: string;
+  color?: string;
+  value?: string;
+  fn?: any;
+}> = ({ listingUrl, color, value, fn }) => {
   return (
-    <a href={listingUrl}>
-      <button css={listingButton} style={{ backgroundColor: color }}>
-        {value}
-      </button>
-    </a>
+    <button onClick={fn} css={listingButton} style={{ backgroundColor: color }}>
+      {value}
+    </button>
   );
 };
